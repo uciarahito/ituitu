@@ -15,7 +15,7 @@ import uci.develops.wiraenergimobile.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private Button button_main_test_login, button_main_test_register;
+    private Button button_main_test_login, button_main_test_register, button_main_test_form_customer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +30,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initializeComponent(){
         button_main_test_login = (Button)findViewById(R.id.button_main_test_login);
         button_main_test_register = (Button)findViewById(R.id.button_main_test_register);
+        button_main_test_form_customer = (Button)findViewById(R.id.button_main_test_form_customer);
 
         button_main_test_login.setOnClickListener(this);
         button_main_test_register.setOnClickListener(this);
+        button_main_test_form_customer.setOnClickListener(this);
     }
 
     @Override
@@ -69,6 +71,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent = new Intent(MainActivity.this, RegisterActivity.class);
             startActivity(intent);
             finish();
+        }
+        if(v == button_main_test_form_customer){
+            intent = new Intent(MainActivity.this, FormCustomerActivity.class);
+            startActivity(intent);
         }
     }
 }
