@@ -1,5 +1,6 @@
 package uci.develops.wiraenergimobile.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,10 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import uci.develops.wiraenergimobile.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
+    private Button button_main_test_login, button_main_test_register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,14 +24,15 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        initializeComponent();
+    }
+
+    private void initializeComponent(){
+        button_main_test_login = (Button)findViewById(R.id.button_main_test_login);
+        button_main_test_register = (Button)findViewById(R.id.button_main_test_register);
+
+        button_main_test_login.setOnClickListener(this);
+        button_main_test_register.setOnClickListener(this);
     }
 
     @Override
@@ -50,5 +55,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        if(v == button_main_test_login){
+            intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        if(v == button_main_test_register){
+            intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }
