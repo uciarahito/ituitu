@@ -15,7 +15,7 @@ import uci.develops.wiraenergimobile.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private Button button_main_test_login, button_main_test_register, button_main_test_form_customer;
+    private Button button_main_test_login, button_main_test_register, button_main_test_form_customer, button_main_test_map_coordinate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +31,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button_main_test_login = (Button)findViewById(R.id.button_main_test_login);
         button_main_test_register = (Button)findViewById(R.id.button_main_test_register);
         button_main_test_form_customer = (Button)findViewById(R.id.button_main_test_form_customer);
+        button_main_test_map_coordinate = (Button)findViewById(R.id.button_main_test_map_coordinate);
 
         button_main_test_login.setOnClickListener(this);
         button_main_test_register.setOnClickListener(this);
         button_main_test_form_customer.setOnClickListener(this);
+        button_main_test_map_coordinate.setOnClickListener(this);
     }
 
     @Override
@@ -75,6 +77,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(v == button_main_test_form_customer){
             intent = new Intent(MainActivity.this, FormCustomerActivity.class);
             startActivity(intent);
+            finish();
+        }
+        if(v == button_main_test_map_coordinate){
+            intent = new Intent(MainActivity.this, MapsCoordinateActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 }
