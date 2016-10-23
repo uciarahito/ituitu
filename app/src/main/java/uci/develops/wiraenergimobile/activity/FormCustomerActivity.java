@@ -8,8 +8,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.support.v4.app.Fragment;
 
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerCompanyInfo;
 
 public class FormCustomerActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -53,14 +55,16 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
 
         linearLayout_button_next.setOnClickListener(this);
         linearLayout_button_back.setOnClickListener(this);
-//        linearLayout_button_save.setOnClickListener(this);
-//        linearLayout_button_cancel.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         if(v == linearLayout_button_next){
             if(index_fragment < 2){
+                boolean is_not_empty = false;
+                if(index_fragment == 0){
+                    FragmentFormCustomerCompanyInfo fragmentFormCustomerCompanyInfo = (FragmentFormCustomerCompanyInfo)getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_company_info);
+                }
                 index_fragment++;
                 linearLayout_container_basic_info.setVisibility(View.GONE);
                 linearLayout_container_contact_info.setVisibility(View.GONE);

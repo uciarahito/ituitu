@@ -1,6 +1,5 @@
 package uci.develops.wiraenergimobile.fragment;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.support.v4.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import uci.develops.wiraenergimobile.R;
 /**
  * Created by user on 10/22/2016.
  */
-public class FragmentFormCustomerCompanyInfo extends Fragment{
+public class FragmentFormCustomerCompanyInfo extends Fragment {
 
     private EditText editText_id, editText_first_name, editText_address, editText_zip_code,
             editText_phone, editText_mobile, editText_fax, editText_term, editText_npwp,

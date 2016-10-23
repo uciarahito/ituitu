@@ -79,7 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <fragment
-                    android:id="@+id/fragment_form_customer_basic_info"
+                    android:id="@+id/fragment_form_customer_company_info"
                     android:name="uci.develops.wiraenergimobile.fragment.FragmentFormCustomerCompanyInfo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
