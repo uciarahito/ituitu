@@ -30,6 +30,6 @@ public interface RestInterface {
     Call<RequestListCustomerResponse> getAllRequestCustomer(@Header("Authorization") String token);
 
     @FormUrlEncoded
-    @GET("roles")
+    @GET("roleuser")
     Call<ListRoleResponse> getAllRoles(@Header("Authorization") String token);
 }
