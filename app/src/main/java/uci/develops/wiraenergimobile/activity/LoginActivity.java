@@ -99,7 +99,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             info = response.body().getInfo();
                             token = response.body().getToken();
                             activated = response.body().isActivated();
-                            Toast.makeText(LoginActivity.this, activated + "  " + token, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(LoginActivity.this, activated + "  " + token, Toast.LENGTH_SHORT).show();
+                            new SharedPreferenceManager().setPreferences(LoginActivity.this, "token", token);
                             if (activated == true){
                                 Intent intent = new Intent(LoginActivity.this, DashboardAdminActivity.class);
                                 startActivity(intent);

@@ -47,7 +47,7 @@ public class FragmentFormCustomerShippingTo extends Fragment{
         editText_map_cordinate.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Toast.makeText(getActivity().getApplicationContext(), "Map coordinate", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity().getApplicationContext(), "Map coordinate", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
