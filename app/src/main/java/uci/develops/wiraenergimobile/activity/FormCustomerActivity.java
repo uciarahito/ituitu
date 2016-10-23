@@ -1,5 +1,6 @@
 package uci.develops.wiraenergimobile.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,8 @@ import android.support.v4.app.Fragment;
 
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerCompanyInfo;
+import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerContactInfo;
+import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerShippingTo;
 
 public class FormCustomerActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -64,16 +67,34 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                 boolean is_not_empty = false;
                 if(index_fragment == 0){
                     FragmentFormCustomerCompanyInfo fragmentFormCustomerCompanyInfo = (FragmentFormCustomerCompanyInfo)getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_company_info);
+                    is_not_empty = fragmentFormCustomerCompanyInfo.isNotEmpty();
                 }
-                index_fragment++;
-                linearLayout_container_basic_info.setVisibility(View.GONE);
-                linearLayout_container_contact_info.setVisibility(View.GONE);
-                linearLayout_container_shipping_to.setVisibility(View.GONE);
-                linearLayout_tab_basic_info.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
-                linearLayout_tab_contact_info.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
-                linearLayout_tab_shipping_to.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
-                linearLayouts_tabs[index_fragment].setBackgroundResource(R.drawable.rounded_rectangle_blue);
-                linearLayouts_fragment[index_fragment].setVisibility(View.VISIBLE);
+                if(index_fragment == 1){
+                    FragmentFormCustomerContactInfo fragmentFormCustomerContactInfo = (FragmentFormCustomerContactInfo)getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_contact_info);
+                    is_not_empty = fragmentFormCustomerContactInfo.isNotEmpty();
+                }
+                if(index_fragment == 2){
+                    FragmentFormCustomerShippingTo fragmentFormCustomerShippingTo = (FragmentFormCustomerShippingTo)getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_shipping_to);
+                    is_not_empty = fragmentFormCustomerShippingTo.isNotEmpty();
+                }
+
+                if(is_not_empty) {
+                    index_fragment++;
+                    linearLayout_container_basic_info.setVisibility(View.GONE);
+                    linearLayout_container_contact_info.setVisibility(View.GONE);
+                    linearLayout_container_shipping_to.setVisibility(View.GONE);
+                    linearLayout_tab_basic_info.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
+                    linearLayout_tab_contact_info.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
+                    linearLayout_tab_shipping_to.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
+                    linearLayouts_tabs[index_fragment].setBackgroundResource(R.drawable.rounded_rectangle_blue);
+                    linearLayouts_fragment[index_fragment].setVisibility(View.VISIBLE);
+                } else {
+                    Toast.makeText(FormCustomerActivity.this, "All field are required!", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Intent intent = new Intent(FormCustomerActivity.this, DashboardCustomerActivity.class);
+                startActivity(intent);
+                finish();
             }
         } else if(v == linearLayout_button_back){
             if(index_fragment > 0){
