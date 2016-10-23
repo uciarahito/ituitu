@@ -33,8 +33,6 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
 
     private void initializeComponent(){
         linearLayout_button_back = (LinearLayout)findViewById(R.id.layout_button_back);
-        linearLayout_button_save = (LinearLayout)findViewById(R.id.layout_button_save);
-        linearLayout_button_cancel = (LinearLayout)findViewById(R.id.layout_button_cancel);
         linearLayout_button_next = (LinearLayout)findViewById(R.id.layout_button_next);
         linearLayout_container_basic_info = (LinearLayout)findViewById(R.id.layout_container_basic_info);
         linearLayout_container_contact_info = (LinearLayout)findViewById(R.id.layout_container_contact_info);

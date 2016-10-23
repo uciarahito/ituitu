@@ -15,7 +15,8 @@
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
-            <EditText
+        <EditText
+            android:id="@+id/editText_first_name"
             android:background="@drawable/rounded_rectangle_gray"
             android:layout_weight="4"
             android:layout_width="0dp"
@@ -35,6 +36,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/editText_address"
             android:background="@drawable/rounded_rectangle_gray"
             android:layout_weight="4"
             android:layout_width="0dp"
@@ -54,7 +56,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <EditText
-
+            android:id="@+id/editText_city"
             android:background="@drawable/rounded_rectangle_gray"
             android:layout_weight="4"
             android:layout_width="0dp"
@@ -74,6 +76,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/editText_province"
             android:background="@drawable/rounded_rectangle_gray"
             android:layout_weight="4"
             android:layout_width="0dp"
@@ -93,6 +96,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/editText_zip_code"
             android:background="@drawable/rounded_rectangle_gray"
             android:layout_weight="4"
             android:layout_width="0dp"
@@ -127,6 +131,7 @@
                     android:layout_height="match_parent" />
             </LinearLayout>
             <EditText
+                android:id="@+id/editText_phone"
                 android:hint="   Phone"
                 android:background="@drawable/rounded_rectangle_gray"
                 android:layout_weight="6"
@@ -163,6 +168,7 @@
                     android:layout_height="match_parent" />
             </LinearLayout>
             <EditText
+                android:id="@+id/editText_mobile"
                 android:hint="   Mobile"
                 android:background="@drawable/rounded_rectangle_gray"
                 android:layout_weight="6"
@@ -199,6 +205,7 @@
                     android:layout_height="match_parent" />
             </LinearLayout>
             <EditText
+                android:id="@+id/editText_fax"
                 android:hint="   Fax"
                 android:background="@drawable/rounded_rectangle_gray"
                 android:layout_weight="6"
@@ -220,6 +227,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/editText_term"
             android:background="@drawable/rounded_rectangle_gray"
             android:layout_weight="4"
             android:layout_width="0dp"
@@ -239,6 +247,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/editText_valuta"
             android:background="@drawable/rounded_rectangle_gray"
             android:layout_weight="4"
             android:layout_width="0dp"
@@ -258,6 +267,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/editText_npwp"
             android:background="@drawable/rounded_rectangle_gray"
             android:layout_weight="4"
             android:layout_width="0dp"
@@ -277,6 +287,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/editText_tax_ppn"
             android:background="@drawable/rounded_rectangle_gray"
             android:layout_weight="4"
             android:layout_width="0dp"
@@ -296,6 +307,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/editText_active"
             android:background="@drawable/rounded_rectangle_gray"
             android:layout_weight="4"
             android:layout_width="0dp"
@@ -315,6 +327,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/editText_email"
             android:background="@drawable/rounded_rectangle_gray"
             android:layout_weight="4"
             android:layout_width="0dp"
@@ -334,6 +347,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/editText_website"
             android:background="@drawable/rounded_rectangle_gray"
             android:layout_weight="4"
             android:layout_width="0dp"
@@ -353,6 +367,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/editText_note"
             android:background="@drawable/rounded_rectangle_gray"
             android:layout_weight="4"
             android:layout_width="0dp"
