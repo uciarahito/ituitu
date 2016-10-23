@@ -11,8 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import retrofit2.Call;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
+import uci.develops.wiraenergimobile.response.LoginResponse;
+import uci.develops.wiraenergimobile.service.RestClient;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -70,6 +73,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         startActivity(intent);
                         finish();
                     } else {
+//                        Call<LoginResponse> loginResponseCall = RestClient.getRestClient().Login(email, password);
+//                        loginResponseCall.en
                         intent = new Intent(LoginActivity.this, DashboardCustomerActivity.class);
                         startActivity(intent);
                         finish();

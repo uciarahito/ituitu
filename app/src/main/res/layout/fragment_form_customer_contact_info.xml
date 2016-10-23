@@ -140,12 +140,12 @@
             android:textStyle="bold"
             android:layout_marginRight="10dp"
             android:gravity="end"
-            android:text="Web:"
+            android:text="Jabatan:"
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <EditText
-            android:id="@+id/editText_website1"
+            android:id="@+id/editText_jabatan1"
             android:background="@drawable/rounded_rectangle_gray"
             android:layout_weight="4"
             android:layout_width="0dp"
@@ -289,12 +289,12 @@
             android:textStyle="bold"
             android:layout_marginRight="10dp"
             android:gravity="end"
-            android:text="Web:"
+            android:text="Jabatan:"
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <EditText
-            android:id="@+id/editText_website2"
+            android:id="@+id/editText_jabatan2"
             android:background="@drawable/rounded_rectangle_gray"
             android:layout_weight="4"
             android:layout_width="0dp"
@@ -438,12 +438,12 @@
             android:textStyle="bold"
             android:layout_marginRight="10dp"
             android:gravity="end"
-            android:text="Web:"
+            android:text="Jabatan:"
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <EditText
-            android:id="@+id/editText_website3"
+            android:id="@+id/editText_jabatan3"
             android:background="@drawable/rounded_rectangle_gray"
             android:layout_weight="4"
             android:layout_width="0dp"

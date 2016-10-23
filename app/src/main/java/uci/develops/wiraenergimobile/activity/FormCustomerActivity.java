@@ -53,8 +53,8 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
 
         linearLayout_button_next.setOnClickListener(this);
         linearLayout_button_back.setOnClickListener(this);
-        linearLayout_button_save.setOnClickListener(this);
-        linearLayout_button_cancel.setOnClickListener(this);
+//        linearLayout_button_save.setOnClickListener(this);
+//        linearLayout_button_cancel.setOnClickListener(this);
     }
 
     @Override
