@@ -17,6 +17,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
+import uci.develops.wiraenergimobile.model.RoleModel;
 import uci.develops.wiraenergimobile.response.ListRoleResponse;
 import uci.develops.wiraenergimobile.response.LoginResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
@@ -94,11 +95,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             String info = "";
                             String token = "";
                             boolean activated;
-                            String role = "";
                             status = response.body().getStatus();
                             code = response.body().getCode();
                             info = response.body().getInfo();
                             token = response.body().getToken();
+                            final int user_id = response.body().getUser_id();
                             activated = response.body().isActivated();
                             //Toast.makeText(LoginActivity.this, activated + "  " + token, Toast.LENGTH_SHORT).show();
                             new SharedPreferenceManager().setPreferences(LoginActivity.this, "token", token);
@@ -108,7 +109,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     @Override
                                     public void onResponse(Call<ListRoleResponse> call, Response<ListRoleResponse> response) {
                                         if(response.isSuccessful()){
-                                            Toast.makeText(LoginActivity.this, "Size: "+response.body().getData().size(), Toast.LENGTH_SHORT).show();
+                                            if(response.body().getData().size() > 0){
+                                                for(RoleModel roleModel : response.body().getData()){
+                                                    if(roleModel.getUser_id() == user_id){
+                                                        if(roleModel.getRole_id() == 4){
+                                                            Intent intent = new Intent(LoginActivity.this, DashboardCustomerActivity.class);
+                                                            startActivity(intent);
+                                                            finish();
+                                                        }
+                                                        if(roleModel.getRole_id() == 2){
+                                                            Intent intent = new Intent(LoginActivity.this, DashboardAdminActivity.class);
+                                                            startActivity(intent);
+                                                            finish();
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
 

@@ -8,16 +8,16 @@ public class LoginResponse {
     private String code;
     private String info;
     private String token;
+    private int user_id;
     private boolean activated;
-    private String role;
 
-    public LoginResponse(String status, String code, String info, String token, boolean activated, String role) {
+    public LoginResponse(String status, String code, String info, String token, int user_id, boolean activated) {
         this.status = status;
         this.code = code;
         this.info = info;
         this.token = token;
+        this.user_id = user_id;
         this.activated = activated;
-        this.role = role;
     }
 
     public String getStatus() {
@@ -52,19 +52,19 @@ public class LoginResponse {
         this.token = token;
     }
 
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
     public boolean isActivated() {
         return activated;
     }
 
     public void setActivated(boolean activated) {
         this.activated = activated;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 }

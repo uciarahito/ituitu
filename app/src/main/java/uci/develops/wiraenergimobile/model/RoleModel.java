@@ -5,17 +5,15 @@ package uci.develops.wiraenergimobile.model;
  */
 public class RoleModel {
     private int id;
-    private String name;
-    private String slug;
-    private String description;
+    private int role_id;
+    private int user_id;
     private String created_at;
     private String updated_at;
 
-    public RoleModel(int id, String name, String slug, String description, String created_at, String updated_at) {
+    public RoleModel(int id, int role_id, int user_id, String created_at, String updated_at) {
         this.id = id;
-        this.name = name;
-        this.slug = slug;
-        this.description = description;
+        this.role_id = role_id;
+        this.user_id = user_id;
         this.created_at = created_at;
         this.updated_at = updated_at;
     }
@@ -28,28 +26,20 @@ public class RoleModel {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public int getRole_id() {
+        return role_id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRole_id(int role_id) {
+        this.role_id = role_id;
     }
 
-    public String getSlug() {
-        return slug;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public String getCreated_at() {
