@@ -46,6 +46,8 @@ public class DashboardAdminActivity extends AppCompatActivity implements View.On
             startActivity(intent);
         }
         if(v == button_list_request){
+            intent = new Intent(DashboardAdminActivity.this, ListRequestCustomerActivity.class);
+            startActivity(intent);
         }
     }
 }
