@@ -24,9 +24,6 @@ public class FragmentFormCustomerShippingTo extends Fragment{
             editText_email, editText_phone, editText_mobile, editText_fax, editText_map_cordinate, editText_note;
     private AutoCompleteTextView autoComplete_city, autoComplete_province;
 
-    String[] province = getResources().getStringArray(R.array.list_of_province);
-    String[] city = getResources().getStringArray(R.array.list_of_city);
-
     public FragmentFormCustomerShippingTo() {
         // Required empty public constructor
     }
@@ -69,6 +66,9 @@ public class FragmentFormCustomerShippingTo extends Fragment{
         editText_mobile = (EditText)view.findViewById(R.id.editText_mobile);
         editText_fax = (EditText)view.findViewById(R.id.editText_fax);
         editText_note = (EditText)view.findViewById(R.id.editText_note);
+
+        String[] province = getActivity().getResources().getStringArray(R.array.list_of_province);
+        String[] city = getActivity().getResources().getStringArray(R.array.list_of_city);
 
         ArrayAdapter<String> provinceAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),android.R.layout.simple_list_item_1,province);
         autoComplete_province.setAdapter(provinceAdapter);

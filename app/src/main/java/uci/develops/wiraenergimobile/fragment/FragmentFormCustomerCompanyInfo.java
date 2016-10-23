@@ -26,9 +26,6 @@ public class FragmentFormCustomerCompanyInfo extends Fragment{
     private AutoCompleteTextView autoComplete_city, autoComplete_province;
     private Spinner spinner_valuta, spinner_tax_ppn, spinner_active;
 
-    String[] province = getResources().getStringArray(R.array.list_of_province);
-    String[] city = getResources().getStringArray(R.array.list_of_city);
-
     public FragmentFormCustomerCompanyInfo() {
         // Required empty public constructor
     }
@@ -85,6 +82,9 @@ public class FragmentFormCustomerCompanyInfo extends Fragment{
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_tax_ppn.setAdapter(dataAdapter);
         spinner_active.setAdapter(dataAdapter);
+
+        String[] province = getActivity().getResources().getStringArray(R.array.list_of_province);
+        String[] city = getActivity().getResources().getStringArray(R.array.list_of_city);
 
         ArrayAdapter<String> provinceAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),android.R.layout.simple_list_item_1,province);
         autoComplete_province.setAdapter(provinceAdapter);
