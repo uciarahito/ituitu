@@ -38,7 +38,7 @@ public class RequestCustomerAdapter extends RecyclerView.Adapter<RequestCustomer
 
     public RequestCustomerAdapter(Context context, List<CustomerModel> customerModelList){
         this.context = context;
-        this.customerModelList = customerModelList;
+//        this.customerModelList = customerModelList;
     }
 
 
@@ -53,7 +53,7 @@ public class RequestCustomerAdapter extends RecyclerView.Adapter<RequestCustomer
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final CustomerModel userModel = userModelList.get(position);
-        holder.textView_driver_name.setText(""+userModel.getName());
+//        holder.textView_driver_name.setText(""+userModel.getName());
     }
 
     @Override
