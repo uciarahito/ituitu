@@ -77,7 +77,7 @@ public class FragmentFormCustomerShippingTo extends Fragment{
         autoComplete_province.setAdapter(cityAdapter);
     }
 
-    private boolean isNotEmpty(){
+    public boolean isNotEmpty(){
         String pic_name="", address="", city="", province="", zip_code="", eta="", email="", phone="", mobile="", fax="", note="";
         boolean result=false;
         if(!pic_name.equals("") && !address.equals("") && !city.equals("") && province.equals("") && zip_code.equals("")

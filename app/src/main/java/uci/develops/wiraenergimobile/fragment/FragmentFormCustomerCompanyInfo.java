@@ -93,7 +93,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         autoComplete_province.setAdapter(cityAdapter);
     }
 
-    private boolean isNotEmpty(){
+    public boolean isNotEmpty(){
         String name="", address="", city="", province="", zip_code="", phone="", mobile="", fax="", term="",
                 valuta="", npwp="", tax_ppn="", active="", email="", website="", note="";
         boolean result=false;

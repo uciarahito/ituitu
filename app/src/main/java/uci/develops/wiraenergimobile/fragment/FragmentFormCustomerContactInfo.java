@@ -56,7 +56,7 @@ public class FragmentFormCustomerContactInfo extends Fragment{
         editText_website3 = (EditText)view.findViewById(R.id.editText_jabatan3);
     }
 
-    private boolean isNotEmpty(){
+    public boolean isNotEmpty(){
         String editText_name1="", editText_name2="", editText_name3="", editText_phone1="", editText_phone2="",
                 editText_phone3="", editText_mobile1="", editText_mobile2="", editText_mobile3="", editText_email1="",
                 editText_email2="", editText_email3="", editText_website1="", editText_website2="", editText_website3="";
