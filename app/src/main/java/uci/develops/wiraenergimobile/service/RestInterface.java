@@ -25,11 +25,9 @@ public interface RestInterface {
     @POST("register")
     Call<RegisterResponse> Register(@Field("name") String name, @Field("email") String email, @Field("password") String password);
 
-    @FormUrlEncoded
     @GET("customer")
     Call<RequestListCustomerResponse> getAllRequestCustomer(@Header("Authorization") String token);
 
-    @FormUrlEncoded
     @GET("roleuser")
     Call<ListRoleResponse> getAllRoles(@Header("Authorization") String token);
 }

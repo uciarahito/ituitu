@@ -17,6 +17,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
+import uci.develops.wiraenergimobile.response.ListRoleResponse;
 import uci.develops.wiraenergimobile.response.LoginResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
@@ -102,8 +103,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             //Toast.makeText(LoginActivity.this, activated + "  " + token, Toast.LENGTH_SHORT).show();
                             new SharedPreferenceManager().setPreferences(LoginActivity.this, "token", token);
                             if (activated == true){
-                                Intent intent = new Intent(LoginActivity.this, DashboardAdminActivity.class);
-                                startActivity(intent);
+                                Call<ListRoleResponse> listRoleResponseCall = RestClient.getRestClient().getAllRoles("Bearer "+token);
+                                listRoleResponseCall.enqueue(new Callback<ListRoleResponse>() {
+                                    @Override
+                                    public void onResponse(Call<ListRoleResponse> call, Response<ListRoleResponse> response) {
+                                        if(response.isSuccessful()){
+                                            Toast.makeText(LoginActivity.this, "Size: "+response.body().getData().size(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ListRoleResponse> call, Throwable t) {
+
+                                    }
+                                });
+                                //Intent intent = new Intent(LoginActivity.this, DashboardAdminActivity.class);
+                                //startActivity(intent);
                             } else {
                                 Toast.makeText(LoginActivity.this, "Lakukan Verifikasi Email!", Toast.LENGTH_SHORT).show();
                             }
