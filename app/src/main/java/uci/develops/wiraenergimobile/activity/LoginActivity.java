@@ -6,12 +6,15 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.response.LoginResponse;
@@ -66,22 +69,54 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             email = editText_login_email.getText().toString();
             password = editText_email_password.getText().toString();
             if(!email.equals("") && !password.equals("")) {
-                if(login(email, password)){
-                    Intent intent;
-                    if(new SharedPreferenceManager().getPreferences(LoginActivity.this, "role_login").equals("admin")) {
-                        intent = new Intent(LoginActivity.this, DashboardAdminActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-//                        Call<LoginResponse> loginResponseCall = RestClient.getRestClient().Login(email, password);
-//                        loginResponseCall.en
-                        intent = new Intent(LoginActivity.this, DashboardCustomerActivity.class);
-                        startActivity(intent);
-                        finish();
+//                if(login(email, password)){
+//                    Intent intent;
+//                    if(new SharedPreferenceManager().getPreferences(LoginActivity.this, "role_login").equals("admin")) {
+//                        intent = new Intent(LoginActivity.this, DashboardAdminActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                    } else {
+////                        Call<LoginResponse> loginResponseCall = RestClient.getRestClient().Login(email, password);
+////                        loginResponseCall.en
+//                        intent = new Intent(LoginActivity.this, DashboardCustomerActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                    }
+//                }
+                Call<LoginResponse> loginResponseCall = RestClient.getRestClient().Login(email, password);
+                loginResponseCall.enqueue(new Callback<LoginResponse>() {
+                    @Override
+                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                        if (response.isSuccessful()) {
+                            String status = "";
+                            String code = "";
+                            String info = "";
+                            String token = "";
+                            boolean activated;
+                            String role = "";
+                            status = response.body().getStatus();
+                            code = response.body().getCode();
+                            info = response.body().getInfo();
+                            token = response.body().getToken();
+                            activated = response.body().isActivated();
+                            Toast.makeText(LoginActivity.this, activated + "  " + token, Toast.LENGTH_SHORT).show();
+                            if (activated == true){
+                                Intent intent = new Intent(LoginActivity.this, DashboardAdminActivity.class);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Lakukan Verifikasi Email!", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Email dan Password tidak terdaftar!", Toast.LENGTH_SHORT).show();
+                            Log.d("error message", "Error");
+                        }
                     }
-                } else {
-                    Toast.makeText(LoginActivity.this, "Email atau password anda salah", Toast.LENGTH_SHORT).show();
-                }
+
+                    @Override
+                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+                        Log.e("LoginActivity", "Retrofit Error");
+                    }
+                });
             } else {
                 Toast.makeText(LoginActivity.this, "Field tidak boleh kosong", Toast.LENGTH_SHORT).show();
             }

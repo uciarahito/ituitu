@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import uci.develops.wiraenergimobile.R;
@@ -17,8 +20,12 @@ import uci.develops.wiraenergimobile.R;
 
 public class FragmentFormCustomerShippingTo extends Fragment{
 
-    private EditText editText_pic_name, editText_address, editText_city, editText_province, editText_zip_code, editText_eta,
+    private EditText editText_pic_name, editText_address, editText_zip_code, editText_eta,
             editText_email, editText_phone, editText_mobile, editText_fax, editText_map_cordinate, editText_note;
+    private AutoCompleteTextView autoComplete_city, autoComplete_province;
+
+    String[] province = getResources().getStringArray(R.array.list_of_province);
+    String[] city = getResources().getStringArray(R.array.list_of_city);
 
     public FragmentFormCustomerShippingTo() {
         // Required empty public constructor
@@ -53,8 +60,8 @@ public class FragmentFormCustomerShippingTo extends Fragment{
     private void initializeComponent(View view){
         editText_pic_name = (EditText)view.findViewById(R.id.editText_pic_name);
         editText_address = (EditText)view.findViewById(R.id.editText_address);
-        editText_city = (EditText)view.findViewById(R.id.editText_city);
-        editText_province = (EditText)view.findViewById(R.id.editText_province);
+        autoComplete_city = (AutoCompleteTextView)view.findViewById(R.id.autoComplete_city);
+        autoComplete_province = (AutoCompleteTextView)view.findViewById(R.id.autoComplete_province);
         editText_zip_code = (EditText)view.findViewById(R.id.editText_zip_code);
         editText_eta = (EditText)view.findViewById(R.id.editText_eta);
         editText_email = (EditText)view.findViewById(R.id.editText_email);
@@ -62,6 +69,12 @@ public class FragmentFormCustomerShippingTo extends Fragment{
         editText_mobile = (EditText)view.findViewById(R.id.editText_mobile);
         editText_fax = (EditText)view.findViewById(R.id.editText_fax);
         editText_note = (EditText)view.findViewById(R.id.editText_note);
+
+        ArrayAdapter<String> provinceAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),android.R.layout.simple_list_item_1,province);
+        autoComplete_province.setAdapter(provinceAdapter);
+
+        ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),android.R.layout.simple_list_item_1,city);
+        autoComplete_province.setAdapter(cityAdapter);
     }
 
     private boolean isNotEmpty(){

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -19,10 +20,14 @@ import uci.develops.wiraenergimobile.R;
  */
 public class FragmentFormCustomerCompanyInfo extends Fragment{
 
-    private EditText editText_id, editText_first_name, editText_address, editText_city, editText_province, editText_zip_code,
-            editText_phone, editText_mobile, editText_fax, editText_term, editText_npwp, editText_email, editText_website, editText_note;
-
+    private EditText editText_id, editText_first_name, editText_address, editText_zip_code,
+            editText_phone, editText_mobile, editText_fax, editText_term, editText_npwp,
+            editText_email, editText_website, editText_note;
+    private AutoCompleteTextView autoComplete_city, autoComplete_province;
     private Spinner spinner_valuta, spinner_tax_ppn, spinner_active;
+
+    String[] province = getResources().getStringArray(R.array.list_of_province);
+    String[] city = getResources().getStringArray(R.array.list_of_city);
 
     public FragmentFormCustomerCompanyInfo() {
         // Required empty public constructor
@@ -49,8 +54,8 @@ public class FragmentFormCustomerCompanyInfo extends Fragment{
         editText_id = (EditText)view.findViewById(R.id.editText_id);
         editText_first_name = (EditText)view.findViewById(R.id.editText_name);
         editText_address = (EditText)view.findViewById(R.id.editText_address);
-        editText_city = (EditText)view.findViewById(R.id.editText_city);
-        editText_province = (EditText)view.findViewById(R.id.editText_province);
+        autoComplete_city = (AutoCompleteTextView)view.findViewById(R.id.autoComplete_city);
+        autoComplete_province = (AutoCompleteTextView)view.findViewById(R.id.autoComplete_province);
         editText_zip_code = (EditText)view.findViewById(R.id.editText_zip_code);
         editText_phone = (EditText)view.findViewById(R.id.editText_phone);
         editText_mobile = (EditText)view.findViewById(R.id.editText_mobile);
@@ -80,6 +85,12 @@ public class FragmentFormCustomerCompanyInfo extends Fragment{
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_tax_ppn.setAdapter(dataAdapter);
         spinner_active.setAdapter(dataAdapter);
+
+        ArrayAdapter<String> provinceAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),android.R.layout.simple_list_item_1,province);
+        autoComplete_province.setAdapter(provinceAdapter);
+
+        ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),android.R.layout.simple_list_item_1,city);
+        autoComplete_province.setAdapter(cityAdapter);
     }
 
     private boolean isNotEmpty(){

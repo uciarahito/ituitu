@@ -6,17 +6,24 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.helper.Constant;
+import uci.develops.wiraenergimobile.response.RegisterResponse;
+import uci.develops.wiraenergimobile.service.RestClient;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -67,16 +74,43 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             password = editText_register_password.getText().toString();
             role = spinner_register_role.getSelectedItem().toString();
 
-            if(!name.equals("") && !email.equals("") && !password.equals("")) {
-                List<String> user_data = new ArrayList<>();
-                user_data.add(name);
-                user_data.add(email);
-                user_data.add(password);
-                user_data.add(role);
-                Constant.user_data.add(user_data);
-                intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+            //fitur utk lihat semua user
+//            if(!name.equals("") && !email.equals("") && !password.equals("")) {
+//                List<String> user_data = new ArrayList<>();
+//                user_data.add(name);
+//                user_data.add(email);
+//                user_data.add(password);
+//                user_data.add(role);
+//                Constant.user_data.add(user_data);
+//                intent = new Intent(RegisterActivity.this, LoginActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+
+            if(!name.equals("") && !email.equals("") && !password.equals("")){
+                Call<RegisterResponse> registerResponseCall = RestClient.getRestClient().Register(name, email, password);
+                registerResponseCall.enqueue(new Callback<RegisterResponse>() {
+                    @Override
+                    public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+
+                        if (response.isSuccessful()) {
+                            String info = "";
+                            info = response.body().getInfo();
+                            Toast.makeText(RegisterActivity.this, info, Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Log.d("error message", "Error");
+                            Toast.makeText(RegisterActivity.this, "Data yang anda isi tidak valid!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<RegisterResponse> call, Throwable t) {
+                        Toast.makeText(RegisterActivity.this, "Gagal", Toast.LENGTH_SHORT).show();
+                        Log.e("RegisterActivity", t.getMessage());
+                    }
+                });
             }
         }
         if(v == button_register_login){
