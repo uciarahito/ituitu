@@ -11,10 +11,17 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.support.v4.app.Fragment;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerCompanyInfo;
 import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerContactInfo;
 import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerShippingTo;
+import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
+import uci.develops.wiraenergimobile.model.CustomerModel;
+import uci.develops.wiraenergimobile.response.ApproveResponse;
+import uci.develops.wiraenergimobile.service.RestClient;
 
 public class FormCustomerActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -65,9 +72,11 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         if(v == linearLayout_button_next){
             if(index_fragment < 2){
                 boolean is_not_empty = false;
+                CustomerModel customerModel = new CustomerModel();
                 if(index_fragment == 0){
                     FragmentFormCustomerCompanyInfo fragmentFormCustomerCompanyInfo = (FragmentFormCustomerCompanyInfo)getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_company_info);
                     is_not_empty = fragmentFormCustomerCompanyInfo.isNotEmpty();
+                    customerModel = fragmentFormCustomerCompanyInfo.getFormValue();
                 }
                 if(index_fragment == 1){
                     FragmentFormCustomerContactInfo fragmentFormCustomerContactInfo = (FragmentFormCustomerContactInfo)getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_contact_info);
@@ -79,6 +88,34 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                 }
 
                 if(is_not_empty) {
+                    if(index_fragment == 0){
+                        Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().sendDataCompanyInfo("Bearer "+new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
+                                new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), customerModel.getFirst_name(), customerModel.getLast_name(),
+                                customerModel.getAddress(), customerModel.getCity(), customerModel.getProvince(), customerModel.getPhone(), customerModel.getMobile(), customerModel.getFax(),
+                                customerModel.getTerm(), customerModel.getValuta(), customerModel.getNpwp(), customerModel.getTax(), customerModel.getEmail(), customerModel.getWebsite(), customerModel.getNote());
+                        approveResponseCall.enqueue(new Callback<ApproveResponse>() {
+                            @Override
+                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                                if(response.isSuccessful()){
+                                    Toast.makeText(FormCustomerActivity.this, "Successfully inserted", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(FormCustomerActivity.this, ""+response.errorBody().toString(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(FormCustomerActivity.this, "Not successfull", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
+
+                            }
+                        });
+                    }
+                    if(index_fragment == 1){
+
+                    }
+                    if(index_fragment == 2){
+                        
+                    }
                     index_fragment++;
                     linearLayout_container_basic_info.setVisibility(View.GONE);
                     linearLayout_container_contact_info.setVisibility(View.GONE);

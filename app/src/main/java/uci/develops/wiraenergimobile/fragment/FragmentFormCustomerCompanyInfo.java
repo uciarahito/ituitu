@@ -15,6 +15,7 @@ import java.util.List;
 
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
+import uci.develops.wiraenergimobile.model.CustomerModel;
 
 /**
  * Created by user on 10/22/2016.
@@ -26,6 +27,9 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
             editText_email, editText_website, editText_note;
     private AutoCompleteTextView autoComplete_city, autoComplete_province;
     private Spinner spinner_valuta, spinner_tax_ppn, spinner_active;
+
+    String id = "", name = "", address = "", city = "", province = "", zip_code = "", phone = "", mobile = "", fax = "", term = "",
+            valuta = "", npwp = "", tax_ppn = "", active = "", email = "", website = "", note = "";
 
     public FragmentFormCustomerCompanyInfo() {
         // Required empty public constructor
@@ -98,9 +102,6 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
     }
 
     public boolean isNotEmpty() {
-        String id = "", name = "", address = "", city = "", province = "", zip_code = "", phone = "", mobile = "", fax = "", term = "",
-                valuta = "", npwp = "", tax_ppn = "", active = "", email = "", website = "", note = "";
-
         name = editText_first_name.getText().toString();
         address = editText_address.getText().toString();
         city = autoComplete_city.getText().toString();
@@ -126,5 +127,26 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
             result = true;
         }
         return result;
+    }
+
+    public CustomerModel getFormValue(){
+        CustomerModel customerModel = new CustomerModel();
+        customerModel.setFirst_name(name);
+        customerModel.setLast_name(name);
+        customerModel.setAddress(address);
+        customerModel.setCity(city);
+        customerModel.setProvince(province);
+        customerModel.setPhone(phone);
+        customerModel.setMobile(mobile);
+        customerModel.setFax(fax);
+        customerModel.setTerm(term);
+        customerModel.setValuta(valuta);
+        customerModel.setNpwp(npwp);
+        customerModel.setTax(tax_ppn);
+        customerModel.setEmail(email);
+        customerModel.setWebsite(website);
+        customerModel.setNote(note);
+
+        return customerModel;
     }
 }
