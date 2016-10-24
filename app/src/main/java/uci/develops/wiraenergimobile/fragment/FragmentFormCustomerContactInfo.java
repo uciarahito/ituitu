@@ -57,11 +57,29 @@ public class FragmentFormCustomerContactInfo extends Fragment{
     }
 
     public boolean isNotEmpty(){
-        String editText_name1="", editText_name2="", editText_name3="", editText_phone1="", editText_phone2="",
-                editText_phone3="", editText_mobile1="", editText_mobile2="", editText_mobile3="", editText_email1="",
-                editText_email2="", editText_email3="", editText_website1="", editText_website2="", editText_website3="";
+        String name1="", name2="", name3="", phone1="", phone2="",
+                phone3="", mobile1="", mobile2="", mobile3="", email1="",
+                email2="", email3="", website1="",website2="", website3="";
+
+        name1 = editText_name1.getText().toString();
+        name2 = editText_name2.getText().toString();
+        name3 = editText_name3.getText().toString();
+        phone1 = editText_phone1.getText().toString();
+        phone2 = editText_phone2.getText().toString();
+        phone3 = editText_phone3.getText().toString();
+        mobile1 = editText_mobile1.getText().toString();
+        mobile2 = editText_mobile2.getText().toString();
+        mobile3 = editText_mobile3.getText().toString();
+        email1 = editText_email1.getText().toString();
+        email2 = editText_email2.getText().toString();
+        email3 = editText_email3.getText().toString();
+        website1 = editText_website1.getText().toString();
+        website2 = editText_website2.getText().toString();
+        website3 = editText_website3.getText().toString();
+
         boolean result=false;
-        if(!editText_name1.equals("") && !editText_mobile1.equals("")){
+
+        if(!name1.equals("") && !mobile1.equals("")){
             result=true;
         }
         return  result;

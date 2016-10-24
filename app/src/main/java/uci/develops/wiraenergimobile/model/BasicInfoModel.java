@@ -5,4 +5,5 @@ package uci.develops.wiraenergimobile.model;
  */
 public class BasicInfoModel {
 
+
 }

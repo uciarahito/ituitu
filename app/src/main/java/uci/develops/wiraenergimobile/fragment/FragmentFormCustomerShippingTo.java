@@ -79,6 +79,19 @@ public class FragmentFormCustomerShippingTo extends Fragment{
 
     public boolean isNotEmpty(){
         String pic_name="", address="", city="", province="", zip_code="", eta="", email="", phone="", mobile="", fax="", note="";
+
+        pic_name = editText_pic_name.getText().toString();
+        address = editText_address.getText().toString();
+        city = autoComplete_city.getText().toString();
+        province = autoComplete_province.getText().toString();
+        zip_code = editText_zip_code.getText().toString();
+        eta = editText_eta.getText().toString();
+        email = editText_email.getText().toString();
+        phone = editText_phone.getText().toString();
+        mobile = editText_mobile.getText().toString();
+        fax = editText_fax.getText().toString();
+        note = editText_note.getText().toString();
+
         boolean result=false;
         if(!pic_name.equals("") && !address.equals("") && !city.equals("") && province.equals("") && zip_code.equals("")
                 && eta.equals("") && email.equals("") && phone.equals("") && mobile.equals("")){

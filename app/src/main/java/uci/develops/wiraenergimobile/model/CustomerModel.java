@@ -36,8 +36,8 @@ public class CustomerModel {
     private String register_at;
     private String created_by;
     private String updated_by;
-    private String active;
-    private String approve;
+    private int active;
+    private int approve;
     private String detail;
     private String deleted_at;
     private String shipping_pic;
@@ -69,7 +69,7 @@ public class CustomerModel {
     private String email3;
     private String jabatan3;
 
-    public CustomerModel(int id, String decode, String first_name, String last_name, String address, String city, String province, String postcode, String ktp, String gender, String birthplace, String birthday, String mobile, String phone, String fax, String email, String website, String type, String detail_payment, String term, String npwp, String tax, String valuta, String note, String map, String detail_shipping, String remember_token, String created_at, String updated_at, String register_at, String created_by, String updated_by, String active, String approve, String detail, String deleted_at, String shipping_pic, String shipping_address, String shipping_city, String shipping_province, String shipping_postcode, String shipping_eta, String shipping_map, String shipping_phone, String shipping_mobile, String shipping_email, String shipping_fax, String shipping_tax, String shipping_note, String name1, String phone1, String mobile1, String email1, String jabatan1, String name2, String phone2, String mobile2, String email2, String jabatan2, String name3, String phone3, String mobile3, String email3, String jabatan3) {
+    public CustomerModel(int id, String decode, String first_name, String last_name, String address, String city, String province, String postcode, String ktp, String gender, String birthplace, String birthday, String mobile, String phone, String fax, String email, String website, String type, String detail_payment, String term, String npwp, String tax, String valuta, String note, String map, String detail_shipping, String remember_token, String created_at, String updated_at, String register_at, String created_by, String updated_by, int active, int approve, String detail, String deleted_at, String shipping_pic, String shipping_address, String shipping_city, String shipping_province, String shipping_postcode, String shipping_eta, String shipping_map, String shipping_phone, String shipping_mobile, String shipping_email, String shipping_fax, String shipping_tax, String shipping_note, String name1, String phone1, String mobile1, String email1, String jabatan1, String name2, String phone2, String mobile2, String email2, String jabatan2, String name3, String phone3, String mobile3, String email3, String jabatan3) {
         this.id = id;
         this.decode = decode;
         this.first_name = first_name;
@@ -392,19 +392,19 @@ public class CustomerModel {
         this.updated_by = updated_by;
     }
 
-    public String getActive() {
+    public int getActive() {
         return active;
     }
 
-    public void setActive(String active) {
+    public void setActive(int active) {
         this.active = active;
     }
 
-    public String getApprove() {
+    public int getApprove() {
         return approve;
     }
 
-    public void setApprove(String approve) {
+    public void setApprove(int approve) {
         this.approve = approve;
     }
 

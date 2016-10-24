@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     /**
-     * Akses API Login
+     * Akses API Login (manual)
      */
     private boolean login(String email, String password){
         String[][] data_dummy = {{"admin@email.com", "password", "admin"}, {"customer@email.com", "password", "customer"}};
@@ -95,15 +95,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             String info = "";
                             String token = "";
                             boolean activated;
+                            String customer_decode = "";
                             status = response.body().getStatus();
                             code = response.body().getCode();
                             info = response.body().getInfo();
                             token = response.body().getToken();
                             final int user_id = response.body().getUser_id();
                             activated = response.body().isActivated();
+                            customer_decode = response.body().getCustomer_decode();
                             //Toast.makeText(LoginActivity.this, activated + "  " + token, Toast.LENGTH_SHORT).show();
                             new SharedPreferenceManager().setPreferences(LoginActivity.this, "token", token);
+                            new SharedPreferenceManager().setPreferences(LoginActivity.this, "customer_decode", customer_decode);
                             if (activated == true){
+
                                 Call<ListRoleResponse> listRoleResponseCall = RestClient.getRestClient().getAllRoles("Bearer "+token);
                                 listRoleResponseCall.enqueue(new Callback<ListRoleResponse>() {
                                     @Override
@@ -117,7 +121,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                             startActivity(intent);
                                                             finish();
                                                         }
-                                                        if(roleModel.getRole_id() == 2){
+                                                        if(roleModel.getRole_id() <= 3){
                                                             Intent intent = new Intent(LoginActivity.this, DashboardAdminActivity.class);
                                                             startActivity(intent);
                                                             finish();

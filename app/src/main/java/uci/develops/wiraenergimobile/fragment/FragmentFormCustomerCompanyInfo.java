@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 
 /**
  * Created by user on 10/22/2016.
@@ -66,6 +67,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         editText_website = (EditText)view.findViewById(R.id.editText_website);
         editText_note = (EditText)view.findViewById(R.id.editText_note);
 
+        editText_id.setText(""+new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode"));
         List<String> valutas = new ArrayList<String>();
         valutas.add("Rupiah");
         valutas.add("US Dollar");
@@ -90,12 +92,30 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         autoComplete_province.setAdapter(provinceAdapter);
 
         ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),android.R.layout.simple_list_item_1,city);
-        autoComplete_province.setAdapter(cityAdapter);
+        autoComplete_city.setAdapter(cityAdapter);
     }
 
     public boolean isNotEmpty(){
-        String name="", address="", city="", province="", zip_code="", phone="", mobile="", fax="", term="",
+        String id="", name="", address="", city="", province="", zip_code="", phone="", mobile="", fax="", term="",
                 valuta="", npwp="", tax_ppn="", active="", email="", website="", note="";
+
+        name = editText_first_name.getText().toString();
+        address = editText_address.getText().toString();
+        city = autoComplete_city.getText().toString();
+        province = autoComplete_province.getText().toString();
+        zip_code = editText_zip_code.getText().toString();
+        phone = editText_phone.getText().toString();
+        mobile = editText_mobile.getText().toString();
+        fax = editText_fax.getText().toString();
+        term = editText_term.getText().toString();
+        valuta = spinner_valuta.getSelectedItem().toString();
+        npwp = editText_npwp.getText().toString();
+        tax_ppn = spinner_tax_ppn.getSelectedItem().toString();
+        active = spinner_active.getSelectedItem().toString();
+        email = editText_email.getText().toString();
+        website = editText_website.getText().toString();
+        note = editText_note.getText().toString();
+
         boolean result=false;
 
         if(!name.equals("") && !address.equals("") && !city.equals("") && province.equals("") && zip_code.equals("") && phone.equals("")
@@ -104,6 +124,6 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
 
             result=true;
         }
-        return  result;
+        return result;
     }
 }
