@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 
 /**
  * Created by user on 10/22/2016.
@@ -66,6 +67,8 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         editText_website = (EditText)view.findViewById(R.id.editText_website);
         editText_note = (EditText)view.findViewById(R.id.editText_note);
 
+        editText_id.setText(""+new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode"));
+        editText_id.setVisibility(View.INVISIBLE);
         List<String> valutas = new ArrayList<String>();
         valutas.add("Rupiah");
         valutas.add("US Dollar");
@@ -94,7 +97,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
     }
 
     public boolean isNotEmpty(){
-        String name="", address="", city="", province="", zip_code="", phone="", mobile="", fax="", term="",
+        String id="", name="", address="", city="", province="", zip_code="", phone="", mobile="", fax="", term="",
                 valuta="", npwp="", tax_ppn="", active="", email="", website="", note="";
         boolean result=false;
 
@@ -104,6 +107,6 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
 
             result=true;
         }
-        return  result;
+        return result;
     }
 }

@@ -7,6 +7,9 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
+import uci.develops.wiraenergimobile.response.ApproveResponse;
 import uci.develops.wiraenergimobile.response.ListRoleResponse;
 import uci.develops.wiraenergimobile.response.LoginResponse;
 import uci.develops.wiraenergimobile.response.RegisterResponse;
@@ -30,4 +33,8 @@ public interface RestInterface {
 
     @GET("roleuser")
     Call<ListRoleResponse> getAllRoles(@Header("Authorization") String token);
+
+    @FormUrlEncoded
+    @PUT("customer/{decode}")
+    Call<ApproveResponse> requestCustomerAction(@Header("Authorization") String token, @Path("decode") String decode, @Field("approve") int approve, @Field("active") int active);
 }

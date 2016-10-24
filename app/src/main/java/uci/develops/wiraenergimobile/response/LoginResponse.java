@@ -1,5 +1,9 @@
 package uci.develops.wiraenergimobile.response;
 
+import java.util.List;
+
+import uci.develops.wiraenergimobile.model.RoleModel;
+
 /**
  * Created by user on 10/22/2016.
  */
@@ -10,14 +14,22 @@ public class LoginResponse {
     private String token;
     private int user_id;
     private boolean activated;
+    private List<Integer> roles;
+    private String customer_decode;
+    private int active;
+    private int approve;
 
-    public LoginResponse(String status, String code, String info, String token, int user_id, boolean activated) {
+    public LoginResponse(String status, String code, String info, String token, int user_id, boolean activated, List<Integer> roles, String customer_decode, int active, int approve) {
         this.status = status;
         this.code = code;
         this.info = info;
         this.token = token;
         this.user_id = user_id;
         this.activated = activated;
+        this.roles = roles;
+        this.customer_decode = customer_decode;
+        this.active = active;
+        this.approve = approve;
     }
 
     public String getStatus() {
@@ -66,5 +78,37 @@ public class LoginResponse {
 
     public void setActivated(boolean activated) {
         this.activated = activated;
+    }
+
+    public List<Integer> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Integer> roles) {
+        this.roles = roles;
+    }
+
+    public String getCustomer_decode() {
+        return customer_decode;
+    }
+
+    public void setCustomer_decode(String customer_decode) {
+        this.customer_decode = customer_decode;
+    }
+
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
+    }
+
+    public int getApprove() {
+        return approve;
+    }
+
+    public void setApprove(int approve) {
+        this.approve = approve;
     }
 }
