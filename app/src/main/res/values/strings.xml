@@ -149,5 +149,6 @@
         <item>Yogyakarta</item>
     </string-array>
     <string name="title_activity_list_request_customer">ListRequestCustomerActivity</string>
+    <string name="title_activity_detail_request_customer">DetailRequestCustomerActivity</string>
 
 </resources>

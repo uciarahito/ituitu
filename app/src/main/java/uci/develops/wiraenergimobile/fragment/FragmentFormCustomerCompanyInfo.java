@@ -48,26 +48,26 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         return view;
     }
 
-    private void initializeComponent(View view){
-        editText_id = (EditText)view.findViewById(R.id.editText_id);
-        editText_first_name = (EditText)view.findViewById(R.id.editText_name);
-        editText_address = (EditText)view.findViewById(R.id.editText_address);
-        autoComplete_city = (AutoCompleteTextView)view.findViewById(R.id.autoComplete_city);
-        autoComplete_province = (AutoCompleteTextView)view.findViewById(R.id.autoComplete_province);
-        editText_zip_code = (EditText)view.findViewById(R.id.editText_zip_code);
-        editText_phone = (EditText)view.findViewById(R.id.editText_phone);
-        editText_mobile = (EditText)view.findViewById(R.id.editText_mobile);
-        editText_fax = (EditText)view.findViewById(R.id.editText_fax);
-        editText_term = (EditText)view.findViewById(R.id.editText_term);
-        spinner_valuta = (Spinner)view.findViewById(R.id.spinner_valuta);
-        editText_npwp = (EditText)view.findViewById(R.id.editText_npwp);
-        spinner_tax_ppn= (Spinner)view.findViewById(R.id.spinner_tax_ppn);
-        spinner_active = (Spinner)view.findViewById(R.id.spinner_active);
-        editText_email = (EditText)view.findViewById(R.id.editText_email);
-        editText_website = (EditText)view.findViewById(R.id.editText_website);
-        editText_note = (EditText)view.findViewById(R.id.editText_note);
+    private void initializeComponent(View view) {
+        editText_id = (EditText) view.findViewById(R.id.editText_id);
+        editText_first_name = (EditText) view.findViewById(R.id.editText_name);
+        editText_address = (EditText) view.findViewById(R.id.editText_address);
+        autoComplete_city = (AutoCompleteTextView) view.findViewById(R.id.autoComplete_city);
+        autoComplete_province = (AutoCompleteTextView) view.findViewById(R.id.autoComplete_province);
+        editText_zip_code = (EditText) view.findViewById(R.id.editText_zip_code);
+        editText_phone = (EditText) view.findViewById(R.id.editText_phone);
+        editText_mobile = (EditText) view.findViewById(R.id.editText_mobile);
+        editText_fax = (EditText) view.findViewById(R.id.editText_fax);
+        editText_term = (EditText) view.findViewById(R.id.editText_term);
+        spinner_valuta = (Spinner) view.findViewById(R.id.spinner_valuta);
+        editText_npwp = (EditText) view.findViewById(R.id.editText_npwp);
+        spinner_tax_ppn = (Spinner) view.findViewById(R.id.spinner_tax_ppn);
+        spinner_active = (Spinner) view.findViewById(R.id.spinner_active);
+        editText_email = (EditText) view.findViewById(R.id.editText_email);
+        editText_website = (EditText) view.findViewById(R.id.editText_website);
+        editText_note = (EditText) view.findViewById(R.id.editText_note);
 
-        editText_id.setText(""+new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode"));
+        editText_id.setText("" + new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode"));
 
         List<String> valutas = new ArrayList<String>();
         valutas.add("Rupiah");
@@ -75,6 +75,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         ArrayAdapter<String> valutaAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
                 android.R.layout.simple_spinner_item, valutas);
         valutaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        valutaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinner_valuta.setAdapter(valutaAdapter);
 
         List<String> check_List = new ArrayList<String>();
@@ -89,16 +90,16 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         String[] province = getActivity().getResources().getStringArray(R.array.list_of_province);
         String[] city = getActivity().getResources().getStringArray(R.array.list_of_city);
 
-        ArrayAdapter<String> provinceAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),android.R.layout.simple_list_item_1,province);
+        ArrayAdapter<String> provinceAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, province);
         autoComplete_province.setAdapter(provinceAdapter);
 
-        ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),android.R.layout.simple_list_item_1,city);
+        ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, city);
         autoComplete_city.setAdapter(cityAdapter);
     }
 
-    public boolean isNotEmpty(){
-        String id="", name="", address="", city="", province="", zip_code="", phone="", mobile="", fax="", term="",
-                valuta="", npwp="", tax_ppn="", active="", email="", website="", note="";
+    public boolean isNotEmpty() {
+        String id = "", name = "", address = "", city = "", province = "", zip_code = "", phone = "", mobile = "", fax = "", term = "",
+                valuta = "", npwp = "", tax_ppn = "", active = "", email = "", website = "", note = "";
 
         name = editText_first_name.getText().toString();
         address = editText_address.getText().toString();
@@ -117,13 +118,12 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         website = editText_website.getText().toString();
         note = editText_note.getText().toString();
 
-        boolean result=false;
+        boolean result = false;
 
-        if(!name.equals("") && !address.equals("") && !city.equals("") && province.equals("") && zip_code.equals("") && phone.equals("")
-                && mobile.equals("") && fax.equals("") && term.equals("") && valuta.equals("") && npwp.equals("") && tax_ppn.equals("") &&
-                active.equals("") && email.equals("")){
+        if (!name.equals("") && !address.equals("") && !city.equals("") && province.equals("")
+                && mobile.equals("") && term.equals("") && npwp.equals("") && email.equals("")) {
 
-            result=true;
+            result = true;
         }
         return result;
     }

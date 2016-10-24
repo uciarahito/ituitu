@@ -109,6 +109,7 @@
             android:layout_height="40dp" />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/linear_layout_eta"
         android:layout_margin="5dp"
         android:weightSum="6"
         android:layout_width="match_parent"
@@ -182,7 +183,8 @@
                 android:background="@drawable/rounded_rectangle_gray"
                 android:layout_weight="6"
                 android:layout_width="0dp"
-                android:layout_height="40dp" />
+                android:layout_height="40dp"
+                android:inputType="phone"/>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -219,7 +221,8 @@
                 android:background="@drawable/rounded_rectangle_gray"
                 android:layout_weight="6"
                 android:layout_width="0dp"
-                android:layout_height="40dp" />
+                android:layout_height="40dp"
+                android:inputType="phone"/>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout

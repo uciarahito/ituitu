@@ -20,7 +20,7 @@
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login"
@@ -91,6 +91,10 @@
         <activity
             android:name=".activity.ListRequestCustomerActivity"
             android:label="@string/title_activity_list_request_customer"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.DetailRequestCustomerActivity"
+            android:label="@string/title_activity_detail_request_customer"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
