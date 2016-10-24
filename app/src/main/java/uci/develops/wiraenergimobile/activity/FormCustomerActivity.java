@@ -92,7 +92,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                         Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().sendDataCompanyInfo("Bearer "+new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
                                 new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), customerModel.getFirst_name(), customerModel.getLast_name(),
                                 customerModel.getAddress(), customerModel.getCity(), customerModel.getProvince(), customerModel.getPhone(), customerModel.getMobile(), customerModel.getFax(),
-                                customerModel.getTerm(), customerModel.getValuta(), customerModel.getNpwp(), customerModel.getTax().equals("Yes") ? 1 : 0, customerModel.getEmail(), customerModel.getWebsite(), customerModel.getNote());
+                                customerModel.getTerm(), customerModel.getValuta(), customerModel.getNpwp(), customerModel.getTax().equals("Yes") ? 1 : 0, customerModel.getEmail(), customerModel.getWebsite(), customerModel.getNote(), customerModel.getPostcode());
                         approveResponseCall.enqueue(new Callback<ApproveResponse>() {
                             @Override
                             public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {

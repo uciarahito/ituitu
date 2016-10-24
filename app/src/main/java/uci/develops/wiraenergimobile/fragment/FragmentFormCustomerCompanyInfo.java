@@ -145,6 +145,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         customerModel.setEmail(email);
         customerModel.setWebsite(website);
         customerModel.setNote(note);
+        customerModel.setPostcode(zip_code);
 
         return customerModel;
     }
