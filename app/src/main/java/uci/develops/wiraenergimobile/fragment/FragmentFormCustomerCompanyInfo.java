@@ -68,6 +68,10 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         editText_note = (EditText)view.findViewById(R.id.editText_note);
 
         editText_id.setText(""+new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode"));
+<<<<<<< HEAD
+=======
+        editText_id.setVisibility(View.INVISIBLE);
+>>>>>>> origin/master
         List<String> valutas = new ArrayList<String>();
         valutas.add("Rupiah");
         valutas.add("US Dollar");
