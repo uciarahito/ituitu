@@ -95,6 +95,10 @@
         <activity
             android:name=".activity.DetailRequestCustomerActivity"
             android:label="@string/title_activity_detail_request_customer"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.DetailCustomerActivity"
+            android:label="@string/title_activity_detail_customer"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
