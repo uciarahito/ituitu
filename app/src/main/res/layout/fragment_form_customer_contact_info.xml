@@ -67,6 +67,7 @@
             </LinearLayout>
             <EditText
                 android:id="@+id/editText_phone1"
+                android:inputType="phone"
                 android:hint="   Phone"
                 android:background="@drawable/rounded_rectangle_gray"
                 android:layout_weight="6"
@@ -104,6 +105,7 @@
             </LinearLayout>
             <EditText
                 android:id="@+id/editText_mobile1"
+                android:inputType="phone"
                 android:hint="   Mobile"
                 android:background="@drawable/rounded_rectangle_gray"
                 android:layout_weight="6"
@@ -126,6 +128,7 @@
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/editText_email1"
+            android:inputType="textEmailAddress"
             android:background="@drawable/rounded_rectangle_gray"
             android:layout_weight="4"
             android:layout_width="0dp"
@@ -216,6 +219,7 @@
             </LinearLayout>
             <EditText
                 android:id="@+id/editText_phone2"
+                android:inputType="phone"
                 android:hint="   Phone"
                 android:background="@drawable/rounded_rectangle_gray"
                 android:layout_weight="6"
@@ -253,6 +257,7 @@
             </LinearLayout>
             <EditText
                 android:id="@+id/editText_mobile2"
+                android:inputType="phone"
                 android:hint="   Mobile"
                 android:background="@drawable/rounded_rectangle_gray"
                 android:layout_weight="6"
@@ -275,6 +280,7 @@
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/editText_email2"
+            android:inputType="textEmailAddress"
             android:background="@drawable/rounded_rectangle_gray"
             android:layout_weight="4"
             android:layout_width="0dp"
@@ -365,6 +371,7 @@
             </LinearLayout>
             <EditText
                 android:id="@+id/editText_phone3"
+                android:inputType="phone"
                 android:hint="   Phone"
                 android:background="@drawable/rounded_rectangle_gray"
                 android:layout_weight="6"
@@ -402,6 +409,7 @@
             </LinearLayout>
             <EditText
                 android:id="@+id/editText_mobile3"
+                android:inputType="phone"
                 android:hint="   Mobile"
                 android:background="@drawable/rounded_rectangle_gray"
                 android:layout_weight="6"
@@ -424,6 +432,7 @@
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/editText_email3"
+            android:inputType="textEmailAddress"
             android:background="@drawable/rounded_rectangle_gray"
             android:layout_weight="4"
             android:layout_width="0dp"

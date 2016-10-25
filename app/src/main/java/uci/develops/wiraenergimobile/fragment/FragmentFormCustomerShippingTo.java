@@ -79,7 +79,7 @@ public class FragmentFormCustomerShippingTo extends Fragment{
         autoComplete_province.setAdapter(provinceAdapter);
 
         ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),android.R.layout.simple_list_item_1,city);
-        autoComplete_province.setAdapter(cityAdapter);
+        autoComplete_city.setAdapter(cityAdapter);
     }
 
     public boolean isNotEmpty(){
@@ -95,6 +95,9 @@ public class FragmentFormCustomerShippingTo extends Fragment{
         email = editText_email.getText().toString();
         fax = editText_fax.getText().toString();
         note = editText_note.getText().toString();
+
+        //cek jika role == admin maka visible, selain admin invisible
+        editText_eta.setVisibility(View.INVISIBLE);
 
         boolean result=false;
         if(!pic_name.equals("") && !address.equals("") && !city.equals("") && province.equals("") && postcode.equals("")
