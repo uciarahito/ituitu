@@ -133,6 +133,9 @@ public class FragmentFormCustomerContactInfo extends Fragment{
                     editText_phone1.setText(customerModel.getPhone1()==null ? "" : customerModel.getPhone1());
                     editText_phone2.setText(customerModel.getPhone2()==null ? "" : customerModel.getPhone2());
                     editText_phone3.setText(customerModel.getPhone3()==null ? "" : customerModel.getPhone3());
+                    editText_mobile1.setText(customerModel.getMobile1()==null ? "" : customerModel.getMobile1());
+                    editText_mobile2.setText(customerModel.getMobile2()==null ? "" : customerModel.getMobile2());
+                    editText_mobile3.setText(customerModel.getMobile3()==null ? "" : customerModel.getMobile3());
                     editText_email1.setText(customerModel.getEmail1()==null ? "" : customerModel.getEmail1());
                     editText_email2.setText(customerModel.getEmail2()==null ? "" : customerModel.getEmail2());
                     editText_email3.setText(customerModel.getEmail3()==null ? "" : customerModel.getEmail3());
