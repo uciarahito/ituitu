@@ -58,7 +58,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         editText_address = (EditText) view.findViewById(R.id.editText_address);
         autoComplete_city = (AutoCompleteTextView) view.findViewById(R.id.autoComplete_city);
         autoComplete_province = (AutoCompleteTextView) view.findViewById(R.id.autoComplete_province);
-        editText_zip_code = (EditText) view.findViewById(R.id.editText_zip_code);
+        editText_zip_code = (EditText) view.findViewById(R.id.editText_postcode);
         editText_phone = (EditText) view.findViewById(R.id.editText_phone);
         editText_mobile = (EditText) view.findViewById(R.id.editText_mobile);
         editText_fax = (EditText) view.findViewById(R.id.editText_fax);

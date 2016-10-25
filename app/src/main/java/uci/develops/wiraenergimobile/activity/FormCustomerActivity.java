@@ -81,10 +81,12 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                 if(index_fragment == 1){
                     FragmentFormCustomerContactInfo fragmentFormCustomerContactInfo = (FragmentFormCustomerContactInfo)getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_contact_info);
                     is_not_empty = fragmentFormCustomerContactInfo.isNotEmpty();
+                    customerModel = fragmentFormCustomerContactInfo.getFormValue();
                 }
                 if(index_fragment == 2){
                     FragmentFormCustomerShippingTo fragmentFormCustomerShippingTo = (FragmentFormCustomerShippingTo)getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_shipping_to);
                     is_not_empty = fragmentFormCustomerShippingTo.isNotEmpty();
+                    customerModel = fragmentFormCustomerShippingTo.getFormValue();
                 }
 
                 if(is_not_empty) {
@@ -111,10 +113,49 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                         });
                     }
                     if(index_fragment == 1){
+                        Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().sendDataContactInfo("Bearer "+new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
+                                new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), customerModel.getName1(), customerModel.getName2(), customerModel.getName3(),
+                                customerModel.getPhone1(), customerModel.getPhone2(), customerModel.getPhone3(), customerModel.getMobile1(), customerModel.getMobile2(), customerModel.getMobile3(),
+                                customerModel.getEmail1(), customerModel.getEmail2(), customerModel.getEmail3(), customerModel.getJabatan1(), customerModel.getJabatan2(), customerModel.getJabatan3());
+                        approveResponseCall.enqueue(new Callback<ApproveResponse>() {
+                            @Override
+                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                                if(response.isSuccessful()){
+                                    Toast.makeText(FormCustomerActivity.this, "Successfully inserted", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(FormCustomerActivity.this, ""+response.errorBody().toString(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(FormCustomerActivity.this, "Not successfull", Toast.LENGTH_SHORT).show();
+                                }
+                            }
 
+                            @Override
+                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
+
+                            }
+                        });
                     }
                     if(index_fragment == 2){
+                        Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().sendDataShippingInfo("Bearer "+new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
+                                new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), customerModel.getShipping_pic(), customerModel.getShipping_address(),
+                                customerModel.getShipping_city(), customerModel.getShipping_province(), customerModel.getShipping_postcode(), customerModel.getShipping_eta(), customerModel.getShipping_map(),
+                                customerModel.getShipping_phone(), customerModel.getShipping_mobile(), customerModel.getShipping_email(), customerModel.getShipping_fax(), customerModel.getShipping_tax(),
+                                customerModel.getShipping_note());
+                        approveResponseCall.enqueue(new Callback<ApproveResponse>() {
+                            @Override
+                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                                if(response.isSuccessful()){
+                                    Toast.makeText(FormCustomerActivity.this, "Successfully inserted", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(FormCustomerActivity.this, ""+response.errorBody().toString(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(FormCustomerActivity.this, "Not successfull", Toast.LENGTH_SHORT).show();
+                                }
+                            }
 
+                            @Override
+                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
+
+                            }
+                        });
                     }
                     index_fragment++;
                     linearLayout_container_basic_info.setVisibility(View.GONE);

@@ -10,10 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.model.CustomerModel;
 
 /**
  * Created by user on 10/22/2016.
@@ -21,10 +20,12 @@ import uci.develops.wiraenergimobile.R;
 
 public class FragmentFormCustomerShippingTo extends Fragment{
 
-    private EditText editText_pic_name, editText_address, editText_zip_code, editText_eta,
+    private EditText editText_pic_name, editText_address, editText_postcode, editText_eta,
             editText_email, editText_phone, editText_mobile, editText_fax, editText_map_cordinate, editText_note;
     private AutoCompleteTextView autoComplete_city, autoComplete_province;
     private LinearLayout linear_layout_eta;
+
+    String pic_name="", address="", city="", province="", postcode="", eta="", map="", email="", phone="", mobile="", fax="", note="";
 
     public FragmentFormCustomerShippingTo() {
         // Required empty public constructor
@@ -61,8 +62,9 @@ public class FragmentFormCustomerShippingTo extends Fragment{
         editText_address = (EditText)view.findViewById(R.id.editText_address);
         autoComplete_city = (AutoCompleteTextView)view.findViewById(R.id.autoComplete_city);
         autoComplete_province = (AutoCompleteTextView)view.findViewById(R.id.autoComplete_province);
-        editText_zip_code = (EditText)view.findViewById(R.id.editText_zip_code);
+        editText_postcode = (EditText)view.findViewById(R.id.editText_postcode);
         editText_eta = (EditText)view.findViewById(R.id.editText_eta);
+        editText_map_cordinate = (EditText)view.findViewById(R.id.editText_map_coordinate);
         editText_email = (EditText)view.findViewById(R.id.editText_email);
         editText_phone = (EditText)view.findViewById(R.id.editText_phone);
         editText_mobile = (EditText)view.findViewById(R.id.editText_mobile);
@@ -81,26 +83,43 @@ public class FragmentFormCustomerShippingTo extends Fragment{
     }
 
     public boolean isNotEmpty(){
-        String pic_name="", address="", city="", province="", zip_code="", eta="", email="", phone="", mobile="", fax="", note="";
-
         pic_name = editText_pic_name.getText().toString();
         address = editText_address.getText().toString();
         city = autoComplete_city.getText().toString();
         province = autoComplete_province.getText().toString();
-        zip_code = editText_zip_code.getText().toString();
+        postcode = editText_postcode.getText().toString();
         eta = editText_eta.getText().toString();
-        email = editText_email.getText().toString();
+        map = editText_map_cordinate.getText().toString();
         phone = editText_phone.getText().toString();
         mobile = editText_mobile.getText().toString();
+        email = editText_email.getText().toString();
         fax = editText_fax.getText().toString();
         note = editText_note.getText().toString();
 
         boolean result=false;
-        if(!pic_name.equals("") && !address.equals("") && !city.equals("") && province.equals("") && zip_code.equals("")
+        if(!pic_name.equals("") && !address.equals("") && !city.equals("") && province.equals("") && postcode.equals("")
                 && eta.equals("") && email.equals("") && phone.equals("") && mobile.equals("")){
 
             result=true;
         }
         return  result;
+    }
+
+    public CustomerModel getFormValue(){
+        CustomerModel customerModel = new CustomerModel();
+        customerModel.setShipping_pic(pic_name);
+        customerModel.setShipping_address(address);
+        customerModel.setShipping_city(city);
+        customerModel.setShipping_province(province);
+        customerModel.setShipping_postcode(postcode);
+        customerModel.setShipping_eta(eta);
+        customerModel.setShipping_map(map);
+        customerModel.setShipping_phone(phone);
+        customerModel.setShipping_mobile(mobile);
+        customerModel.setShipping_email(email);
+        customerModel.setShipping_fax(fax);
+        customerModel.setShipping_note(note);
+
+        return customerModel;
     }
 }

@@ -44,4 +44,19 @@ public interface RestInterface {
                                               @Field("address") String address, @Field("city") String city, @Field("province") String province, @Field("phone") String phone,
                                               @Field("mobile") String mobile, @Field("fax") String fax, @Field("term") String term, @Field("valuta") String valuta, @Field("npwp") String npwp,
                                               @Field("tax") int tax, @Field("email") String email, @Field("website") String website, @Field("note") String note, @Field("postcode") String postcode);
+
+    @FormUrlEncoded
+    @PUT("customer/{decode}")
+    Call<ApproveResponse> sendDataContactInfo(@Header("Authorization") String token, @Path("decode") String decode, @Field("name1") String name1, @Field("name2") String name2,
+                                              @Field("name3") String name3, @Field("phone1") String phone1, @Field("phone2") String phone2, @Field("phone3") String phone3,
+                                              @Field("mobile1") String mobile1, @Field("mobile2") String mobile2, @Field("mobile3") String mobile3, @Field("email1") String email1,
+                                              @Field("email2") String email2, @Field("email3") String email3, @Field("jabatan1") String jabatan1, @Field("jabatan2") String jabatan2,
+                                              @Field("jabatan3") String jabatan3);
+
+    @FormUrlEncoded
+    @PUT("customer/{decode}")
+    Call<ApproveResponse> sendDataShippingInfo(@Header("Authorization") String token, @Path("decode") String decode, @Field("shipping_pic") String shipping_pic, @Field("shipping_address") String shipping_address,
+                                               @Field("shipping_city") String shipping_city, @Field("shipping_province") String shipping_province, @Field("shipping_postcode") String shipping_postcode,
+                                               @Field("shipping_eta") String shipping_eta, @Field("shipping_map") String shipping_map, @Field("shipping_phone") String shipping_phone, @Field("shipping_mobile") String shipping_mobile,
+                                               @Field("shipping_email") String shipping_email, @Field("shipping_fax") String shipping_fax, @Field("shipping_tax") String shipping_tax, @Field("shipping_note") String shipping_note);
 }
