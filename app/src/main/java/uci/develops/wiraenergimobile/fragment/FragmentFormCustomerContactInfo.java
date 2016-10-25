@@ -7,8 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerModel;
+import uci.develops.wiraenergimobile.response.CustomerResponse;
+import uci.develops.wiraenergimobile.service.RestClient;
 
 /**
  * Created by user on 10/22/2016.
@@ -20,6 +26,8 @@ public class FragmentFormCustomerContactInfo extends Fragment{
 
     String name1="", name2="", name3="", phone1="", phone2="", phone3="", mobile1="", mobile2="", mobile3="", email1="",
             email2="", email3="", jabatan1="",jabatan2="", jabatan3="";
+
+    private String decode="", token="";
 
     public FragmentFormCustomerContactInfo() {
         // Required empty public constructor
@@ -37,7 +45,12 @@ public class FragmentFormCustomerContactInfo extends Fragment{
         View view;
         view = inflater.inflate(R.layout.fragment_form_customer_contact_info, container, false);
 
+        decode = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode");
+        token = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "token");
+
         initializeComponent(view);
+
+        loadData();
 
         return view;
     }
@@ -100,10 +113,40 @@ public class FragmentFormCustomerContactInfo extends Fragment{
         customerModel.setEmail2(email2);
         customerModel.setEmail3(email3);
         customerModel.setJabatan1(jabatan1);
-        customerModel.setWebsite(jabatan2);
-        customerModel.setNote(jabatan3);
+        customerModel.setJabatan2(jabatan2);
+        customerModel.setJabatan3(jabatan3);
 
         return customerModel;
+    }
+
+    private void loadData(){
+        Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer "+token, decode);
+        customerResponseCall.enqueue(new Callback<CustomerResponse>() {
+            @Override
+            public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
+                if(response.isSuccessful()){
+                    CustomerModel customerModel = new CustomerModel();
+                    customerModel = response.body().getData();
+                    editText_name1.setText(customerModel.getName1()==null ? "" : customerModel.getName1());
+                    editText_name2.setText(customerModel.getName2()==null ? "" : customerModel.getName2());
+                    editText_name3.setText(customerModel.getName3()==null ? "" : customerModel.getName3());
+                    editText_phone1.setText(customerModel.getPhone1()==null ? "" : customerModel.getPhone1());
+                    editText_phone2.setText(customerModel.getPhone2()==null ? "" : customerModel.getPhone2());
+                    editText_phone3.setText(customerModel.getPhone3()==null ? "" : customerModel.getPhone3());
+                    editText_email1.setText(customerModel.getEmail1()==null ? "" : customerModel.getEmail1());
+                    editText_email2.setText(customerModel.getEmail2()==null ? "" : customerModel.getEmail2());
+                    editText_email3.setText(customerModel.getEmail3()==null ? "" : customerModel.getEmail3());
+                    editText_jabatan1.setText(customerModel.getJabatan1()==null ? "" : customerModel.getJabatan1());
+                    editText_jabatan2.setText(customerModel.getJabatan2()==null ? "" : customerModel.getJabatan2());
+                    editText_jabatan3.setText(customerModel.getJabatan3()==null ? "" : customerModel.getJabatan3());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CustomerResponse> call, Throwable t) {
+
+            }
+        });
     }
 
 }

@@ -10,6 +10,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import uci.develops.wiraenergimobile.response.ApproveResponse;
+import uci.develops.wiraenergimobile.response.CustomerResponse;
 import uci.develops.wiraenergimobile.response.ListRoleResponse;
 import uci.develops.wiraenergimobile.response.LoginResponse;
 import uci.develops.wiraenergimobile.response.RegisterResponse;
@@ -59,4 +60,7 @@ public interface RestInterface {
                                                @Field("shipping_city") String shipping_city, @Field("shipping_province") String shipping_province, @Field("shipping_postcode") String shipping_postcode,
                                                @Field("shipping_eta") String shipping_eta, @Field("shipping_map") String shipping_map, @Field("shipping_phone") String shipping_phone, @Field("shipping_mobile") String shipping_mobile,
                                                @Field("shipping_email") String shipping_email, @Field("shipping_fax") String shipping_fax, @Field("shipping_tax") String shipping_tax, @Field("shipping_note") String shipping_note);
+
+    @GET("customer/{decode}")
+    Call<CustomerResponse> getCustomer(@Header("Authorization") String token, @Path("decode") String decode);
 }

@@ -11,8 +11,14 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerModel;
+import uci.develops.wiraenergimobile.response.CustomerResponse;
+import uci.develops.wiraenergimobile.service.RestClient;
 
 /**
  * Created by user on 10/22/2016.
@@ -26,6 +32,8 @@ public class FragmentFormCustomerShippingTo extends Fragment{
     private LinearLayout linear_layout_eta;
 
     String pic_name="", address="", city="", province="", postcode="", eta="", map="", email="", phone="", mobile="", fax="",tax="",  note="";
+
+    private String decode="", token="";
 
     public FragmentFormCustomerShippingTo() {
         // Required empty public constructor
@@ -52,8 +60,11 @@ public class FragmentFormCustomerShippingTo extends Fragment{
             }
         });
 
-        initializeComponent(view);
+        decode = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode");
+        token = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "token");
 
+        initializeComponent(view);
+        loadData();
         return view;
     }
 
@@ -123,9 +134,40 @@ public class FragmentFormCustomerShippingTo extends Fragment{
         customerModel.setShipping_mobile(mobile);
         customerModel.setShipping_email(email);
         customerModel.setShipping_fax(fax);
-        customerModel.setShipping_fax(tax);
+        customerModel.setShipping_tax(tax);
         customerModel.setShipping_note(note);
 
         return customerModel;
+    }
+
+    private void loadData(){
+        Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer "+token, decode);
+        customerResponseCall.enqueue(new Callback<CustomerResponse>() {
+            @Override
+            public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
+                if(response.isSuccessful()){
+                    CustomerModel customerModel = new CustomerModel();
+                    customerModel = response.body().getData();
+                    editText_pic_name.setText(customerModel.getShipping_pic()==null ? "" : customerModel.getShipping_pic());
+                    editText_address.setText(customerModel.getShipping_address()==null ? "" : customerModel.getShipping_address());
+                    autoComplete_city.setText(customerModel.getShipping_city()==null ? "" : customerModel.getShipping_city());
+                    autoComplete_province.setText(customerModel.getShipping_province()==null ? "" : customerModel.getShipping_province());
+                    editText_postcode.setText(customerModel.getShipping_postcode()==null ? "" : customerModel.getShipping_postcode());
+                    editText_eta.setText(customerModel.getShipping_eta()==null ? "" : customerModel.getShipping_eta());
+                    editText_map_cordinate.setText(customerModel.getShipping_map()==null ? "" : customerModel.getShipping_map());
+                    editText_phone.setText(customerModel.getShipping_phone()==null ? "" : customerModel.getShipping_phone());
+                    editText_mobile.setText(customerModel.getShipping_mobile()==null ? "" : customerModel.getShipping_mobile());
+                    editText_email.setText(customerModel.getShipping_email()==null ? "" : customerModel.getShipping_email());
+                    editText_fax.setText(customerModel.getShipping_fax()==null ? "" : customerModel.getShipping_fax());
+                    editText_tax.setText(customerModel.getShipping_tax()==null ? "" : customerModel.getShipping_tax());
+                    editText_note.setText(customerModel.getShipping_note()==null ? "" : customerModel.getShipping_note());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CustomerResponse> call, Throwable t) {
+
+            }
+        });
     }
 }

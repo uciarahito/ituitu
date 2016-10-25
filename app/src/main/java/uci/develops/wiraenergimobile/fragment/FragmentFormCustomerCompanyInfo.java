@@ -13,9 +13,14 @@ import android.support.v4.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerModel;
+import uci.develops.wiraenergimobile.response.CustomerResponse;
+import uci.develops.wiraenergimobile.service.RestClient;
 
 /**
  * Created by user on 10/22/2016.
@@ -30,6 +35,8 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
 
     String id = "", name = "", address = "", city = "", province = "", zip_code = "", phone = "", mobile = "", fax = "", term = "",
             valuta = "", npwp = "", tax_ppn = "", active = "", email = "", website = "", note = "";
+
+    private String decode="", token="";
 
     public FragmentFormCustomerCompanyInfo() {
         // Required empty public constructor
@@ -47,7 +54,11 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         View view;
         view = inflater.inflate(R.layout.fragment_form_customer_company_info, container, false);
 
+        decode = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode");
+        token = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "token");
+
         initializeComponent(view);
+        loadData();
 
         return view;
     }
@@ -148,5 +159,36 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         customerModel.setPostcode(zip_code);
 
         return customerModel;
+    }
+
+    private void loadData(){
+        Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer "+token, decode);
+        customerResponseCall.enqueue(new Callback<CustomerResponse>() {
+            @Override
+            public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
+                if(response.isSuccessful()){
+                    CustomerModel customerModel = new CustomerModel();
+                    customerModel = response.body().getData();
+                    editText_first_name.setText(customerModel.getFirst_name()==null ? "" : customerModel.getFirst_name());
+                    editText_address.setText(customerModel.getAddress()==null ? "" : customerModel.getAddress());
+                    autoComplete_city.setText(customerModel.getCity()==null ? "" : customerModel.getCity());
+                    autoComplete_province.setText(customerModel.getProvince()==null ? "" : customerModel.getProvince());
+                    editText_phone.setText(customerModel.getPhone()==null ? "" : customerModel.getPhone());
+                    editText_mobile.setText(customerModel.getMobile()==null ? "" : customerModel.getMobile());
+                    editText_fax.setText(customerModel.getFax()==null ? "" : customerModel.getFax());
+                    editText_term.setText(customerModel.getTerm()==null ? "" : customerModel.getTerm());
+                    editText_npwp.setText(customerModel.getNpwp()==null ? "" : customerModel.getNpwp());
+                    editText_email.setText(customerModel.getEmail()==null ? "" : customerModel.getEmail());
+                    editText_website.setText(customerModel.getWebsite()==null ? "" : customerModel.getWebsite());
+                    editText_note.setText(customerModel.getNote()==null ? "" : customerModel.getNote());
+                    editText_zip_code.setText(customerModel.getPostcode()==null ? "" : customerModel.getPostcode());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CustomerResponse> call, Throwable t) {
+
+            }
+        });
     }
 }
