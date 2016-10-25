@@ -180,10 +180,18 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                 finish();
             }
         } else if (v == linearLayout_button_back) {
+            if (index_fragment == 2) {
+                linearLayout_button_next.setVisibility(View.INVISIBLE);
+            }
+            if (index_fragment == 1) {
+                linearLayout_button_submit.setVisibility(View.INVISIBLE);
+            }
+            if (index_fragment == 0) {
+                linearLayout_button_back.setVisibility(View.INVISIBLE);
+                linearLayout_button_submit.setVisibility(View.INVISIBLE);
+            }
             if (index_fragment > 0) {
-                if (index_fragment == 2) {
-                    linearLayout_button_next.setVisibility(View.INVISIBLE);
-                }
+                index_fragment--;
                 if (index_fragment == 1) {
                     linearLayout_button_submit.setVisibility(View.INVISIBLE);
                 }
@@ -191,7 +199,6 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                     linearLayout_button_back.setVisibility(View.INVISIBLE);
                     linearLayout_button_submit.setVisibility(View.INVISIBLE);
                 }
-                index_fragment--;
                 linearLayout_container_basic_info.setVisibility(View.GONE);
                 linearLayout_container_contact_info.setVisibility(View.GONE);
                 linearLayout_container_shipping_to.setVisibility(View.GONE);

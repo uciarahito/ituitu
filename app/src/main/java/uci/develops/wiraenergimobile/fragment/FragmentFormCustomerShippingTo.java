@@ -21,11 +21,11 @@ import uci.develops.wiraenergimobile.model.CustomerModel;
 public class FragmentFormCustomerShippingTo extends Fragment{
 
     private EditText editText_pic_name, editText_address, editText_postcode, editText_eta,
-            editText_email, editText_phone, editText_mobile, editText_fax, editText_map_cordinate, editText_note;
+            editText_email, editText_phone, editText_mobile, editText_fax, editText_tax, editText_map_cordinate, editText_note;
     private AutoCompleteTextView autoComplete_city, autoComplete_province;
     private LinearLayout linear_layout_eta;
 
-    String pic_name="", address="", city="", province="", postcode="", eta="", map="", email="", phone="", mobile="", fax="", note="";
+    String pic_name="", address="", city="", province="", postcode="", eta="", map="", email="", phone="", mobile="", fax="",tax="",  note="";
 
     public FragmentFormCustomerShippingTo() {
         // Required empty public constructor
@@ -69,6 +69,7 @@ public class FragmentFormCustomerShippingTo extends Fragment{
         editText_phone = (EditText)view.findViewById(R.id.editText_phone);
         editText_mobile = (EditText)view.findViewById(R.id.editText_mobile);
         editText_fax = (EditText)view.findViewById(R.id.editText_fax);
+        editText_tax = (EditText)view.findViewById(R.id.editText_tax);
         editText_note = (EditText)view.findViewById(R.id.editText_note);
         linear_layout_eta = (LinearLayout)view.findViewById(R.id.linear_layout_eta);
 
@@ -94,14 +95,15 @@ public class FragmentFormCustomerShippingTo extends Fragment{
         mobile = editText_mobile.getText().toString();
         email = editText_email.getText().toString();
         fax = editText_fax.getText().toString();
+        tax = editText_fax.getText().toString();
         note = editText_note.getText().toString();
 
         //cek jika role == admin maka visible, selain admin invisible
         editText_eta.setVisibility(View.INVISIBLE);
 
         boolean result=false;
-        if(!pic_name.equals("") && !address.equals("") && !city.equals("") && province.equals("") && postcode.equals("")
-                && eta.equals("") && email.equals("") && phone.equals("") && mobile.equals("")){
+        if(!pic_name.equals("") && !address.equals("") && !city.equals("") && !province.equals("") && !postcode.equals("")
+                && !eta.equals("") && !email.equals("") && !phone.equals("") && !mobile.equals("")){
 
             result=true;
         }
@@ -121,6 +123,7 @@ public class FragmentFormCustomerShippingTo extends Fragment{
         customerModel.setShipping_mobile(mobile);
         customerModel.setShipping_email(email);
         customerModel.setShipping_fax(fax);
+        customerModel.setShipping_fax(tax);
         customerModel.setShipping_note(note);
 
         return customerModel;
