@@ -110,6 +110,7 @@
     </ScrollView>
 
     <LinearLayout
+        android:gravity="center_horizontal"
         android:weightSum="4"
         android:id="@+id/layout_button_action_form"
         android:layout_alignParentBottom="true"

@@ -66,6 +66,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
 
         linearLayout_button_next.setOnClickListener(this);
         linearLayout_button_back.setOnClickListener(this);
+        linearLayout_button_back.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -78,25 +79,22 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                     FragmentFormCustomerCompanyInfo fragmentFormCustomerCompanyInfo = (FragmentFormCustomerCompanyInfo) getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_company_info);
                     is_not_empty = fragmentFormCustomerCompanyInfo.isNotEmpty();
                     customerModel = fragmentFormCustomerCompanyInfo.getFormValue();
-                    linearLayout_button_back.setVisibility(View.INVISIBLE);
-                    textView_button_next.setText("Next");
                 }
                 if (index_fragment == 1) {
                     FragmentFormCustomerContactInfo fragmentFormCustomerContactInfo = (FragmentFormCustomerContactInfo) getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_contact_info);
                     is_not_empty = fragmentFormCustomerContactInfo.isNotEmpty();
                     customerModel = fragmentFormCustomerContactInfo.getFormValue();
-                    linearLayout_button_back.setVisibility(View.VISIBLE);
-                    textView_button_next.setText("Next");
                 }
                 if (index_fragment == 2) {
                     FragmentFormCustomerShippingTo fragmentFormCustomerShippingTo = (FragmentFormCustomerShippingTo) getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_shipping_to);
                     is_not_empty = fragmentFormCustomerShippingTo.isNotEmpty();
                     customerModel = fragmentFormCustomerShippingTo.getFormValue();
-                    textView_button_next.setText("Submit");
                 }
 
                 if (is_not_empty) {
                     if (index_fragment == 0) {
+                        linearLayout_button_back.setVisibility(View.VISIBLE);
+                        textView_button_next.setText("Next");
                         Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().sendDataCompanyInfo("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
                                 new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), customerModel.getFirst_name(), customerModel.getLast_name(),
                                 customerModel.getAddress(), customerModel.getCity(), customerModel.getProvince(), customerModel.getPhone(), customerModel.getMobile(), customerModel.getFax(),
@@ -119,6 +117,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                         });
                     }
                     if (index_fragment == 1) {
+                        textView_button_next.setText("Submit");
                         Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().sendDataContactInfo("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
                                 new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), customerModel.getName1(), customerModel.getName2(), customerModel.getName3(),
                                 customerModel.getPhone1(), customerModel.getPhone2(), customerModel.getPhone3(), customerModel.getMobile1(), customerModel.getMobile2(), customerModel.getMobile3(),
@@ -190,32 +189,26 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         } else if (v == linearLayout_button_back) {
             if (index_fragment >= 0) {
                 if (index_fragment == 2) {
-                    linearLayout_button_next.setVisibility(View.INVISIBLE);
                 }
                 if (index_fragment == 1) {
-                    linearLayout_button_submit.setVisibility(View.INVISIBLE);
+                    textView_button_next.setText("Next");
+                    linearLayout_button_back.setVisibility(View.GONE);
                 }
                 if (index_fragment == 0) {
-                    linearLayout_button_back.setVisibility(View.INVISIBLE);
-                    linearLayout_button_submit.setVisibility(View.INVISIBLE);
+                    textView_button_next.setText("Next");
                 }
 
-                index_fragment--;
-                if (index_fragment == 1) {
-                    linearLayout_button_submit.setVisibility(View.INVISIBLE);
+                if(index_fragment > 0) {
+                    index_fragment--;
+                    linearLayout_container_basic_info.setVisibility(View.GONE);
+                    linearLayout_container_contact_info.setVisibility(View.GONE);
+                    linearLayout_container_shipping_to.setVisibility(View.GONE);
+                    linearLayout_tab_basic_info.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
+                    linearLayout_tab_contact_info.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
+                    linearLayout_tab_shipping_to.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
+                    linearLayouts_tabs[index_fragment].setBackgroundResource(R.drawable.rounded_rectangle_blue);
+                    linearLayouts_fragment[index_fragment].setVisibility(View.VISIBLE);
                 }
-                if (index_fragment == 0) {
-                    linearLayout_button_back.setVisibility(View.INVISIBLE);
-                    linearLayout_button_submit.setVisibility(View.INVISIBLE);
-                }
-                linearLayout_container_basic_info.setVisibility(View.GONE);
-                linearLayout_container_contact_info.setVisibility(View.GONE);
-                linearLayout_container_shipping_to.setVisibility(View.GONE);
-                linearLayout_tab_basic_info.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
-                linearLayout_tab_contact_info.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
-                linearLayout_tab_shipping_to.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
-                linearLayouts_tabs[index_fragment].setBackgroundResource(R.drawable.rounded_rectangle_blue);
-                linearLayouts_fragment[index_fragment].setVisibility(View.VISIBLE);
             }
         } else if (v == linearLayout_button_submit) {
             Intent intent = new Intent(FormCustomerActivity.this, DashboardCustomerActivity.class);
