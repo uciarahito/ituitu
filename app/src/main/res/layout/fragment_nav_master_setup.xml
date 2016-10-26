@@ -2,12 +2,11 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical"
-              tools:context="com.android.msahakyan.expandablenavigationdrawer.fragment.FragmentAction">
+              android:orientation="vertical">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/movie_icon_container_height">
+        android:layout_height="300dp">
 
         <ImageView
             android:id="@+id/movie_icon"
@@ -20,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="@dimen/layout_padding_default"
+            android:padding="10dp"
             android:text="@string/action_movies"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
             android:textColor="@color/white"/>
@@ -32,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:padding="@dimen/layout_padding_default"
+        android:padding="10dp"
         android:text="@string/movie_title"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"/>
 

@@ -4,6 +4,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -16,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,18 +46,19 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_dashboard);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
 
-        mExpandableListView = (ExpandableListView) findViewById(R.id.navList);
+        mExpandableListView = (ExpandableListView) mDrawerLayout.findViewById(R.id.navList);
         mNavigationManager = FragmentNavigationManager.obtain(this);
 
         initItems();
 
         LayoutInflater inflater = getLayoutInflater();
-        View listHeaderView = inflater.inflate(R.layout.nav_header, null, false);
+        View listHeaderView;
+        listHeaderView = inflater.inflate(R.layout.nav_header, null, false);
         mExpandableListView.addHeaderView(listHeaderView);
 
         mExpandableListData = ExpandableListDataSource.getData(this);
