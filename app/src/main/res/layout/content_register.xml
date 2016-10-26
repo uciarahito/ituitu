@@ -22,19 +22,20 @@
             android:src="@drawable/logo"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppTheme.Large"
-            tools:text="@string/wiraenergi"
-            android:layout_marginBottom="15dp"
-            android:gravity="center"/>
+            android:text="@string/wiraenergi"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:textAppearance="@style/TextAppearance.AppTheme.Large"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppTheme.Title"
-            tools:text="@string/register"
-            android:gravity="center"/>
+            android:text="@string/register"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:textAppearance="@style/TextAppearance.AppTheme.Large"/>
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -110,6 +111,22 @@
                     app:layout_columnWeight="1"
                     app:layout_gravity="center_vertical"/>
 
+                <ImageView
+                    android:padding="16dp"
+                    android:src="@drawable/ic_person_24dp" />
+
+                <Spinner
+                    android:id="@+id/spinner_register_role"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_background"
+                    android:hint="@string/role"
+                    android:imeOptions="actionNext"
+                    app:layout_columnWeight="1"
+                    app:layout_gravity="center_vertical"
+                    android:maxLines="1"
+                    android:spinnerMode="dialog"/>
+
             </android.support.v7.widget.GridLayout>
 
         </android.support.v7.widget.CardView>
@@ -135,10 +152,10 @@
             android:layout_height="wrap_content"
             app:columnCount="2">
             <TextView
+                android:id="@+id/lost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/already_member"
-                android:layout_marginLeft="8dp"
                 android:textAppearance="@style/TextAppearance.AppTheme.Small"/>
             <TextView
                 android:id="@+id/textView_login"
