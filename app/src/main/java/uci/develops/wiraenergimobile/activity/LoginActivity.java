@@ -9,8 +9,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,6 +30,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private EditText editText_login_email, editText_email_password;
     private Button button_login_login, button_login_register;
+    private CheckBox checkBox_login;
+    private TextView lost_pasword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initializeComponent(){
+        lost_pasword = (TextView)findViewById(R.id.lost_password);
+        checkBox_login = (CheckBox)findViewById(R.id.checkBox_login);
         editText_login_email = (EditText)findViewById(R.id.editText_login_email);
         editText_email_password = (EditText)findViewById(R.id.editText_login_password);
         button_login_login = (Button)findViewById(R.id.button_login_login);
@@ -50,19 +58,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     /**
      * Akses API Login (manual)
      */
-    private boolean login(String email, String password){
-        String[][] data_dummy = {{"admin@email.com", "password", "admin"}, {"customer@email.com", "password", "customer"}};
-        boolean result = false;
-
-        for(int i=0; i<data_dummy.length; i++){
-            if(data_dummy[i][0].equals(email) && data_dummy[i][1].equals(password)){
-                result = true;
-                new SharedPreferenceManager().setPreferences(LoginActivity.this, "email_login", email);
-                new SharedPreferenceManager().setPreferences(LoginActivity.this, "role_login", data_dummy[i][2]);
-            }
-        }
-        return result;
-    }
+//    private boolean login(String email, String password){
+//        String[][] data_dummy = {{"admin@email.com", "password", "admin"}, {"customer@email.com", "password", "customer"}};
+//        boolean result = false;
+//
+//        for(int i=0; i<data_dummy.length; i++){
+//            if(data_dummy[i][0].equals(email) && data_dummy[i][1].equals(password)){
+//                result = true;
+//                new SharedPreferenceManager().setPreferences(LoginActivity.this, "email_login", email);
+//                new SharedPreferenceManager().setPreferences(LoginActivity.this, "role_login", data_dummy[i][2]);
+//            }
+//        }
+//        return result;
+//    }
 
     @Override
     public void onClick(View v) {
@@ -95,6 +103,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             String info = "";
                             String token = "";
                             boolean activated;
+
                             String customer_decode = "";
                             status = response.body().getStatus();
                             code = response.body().getCode();
@@ -117,6 +126,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                 for(RoleModel roleModel : response.body().getData()){
                                                     if(roleModel.getUser_id() == user_id){
                                                         if(roleModel.getRole_id() == 4){
+//                                                            String role_id;
+//                                                            role_id = new SharedPreferenceManager().getPreferences(LoginActivity.this, "role_id");
                                                             Intent intent = new Intent(LoginActivity.this, DashboardCustomerActivity.class);
                                                             startActivity(intent);
                                                             finish();

@@ -23,7 +23,7 @@ import uci.develops.wiraenergimobile.service.RestClient;
 
 public class FormCustomerActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private LinearLayout linearLayout_button_back, linearLayout_button_submit, linearLayout_button_cancel, linearLayout_button_next;
+    private LinearLayout linearLayout_button_back, linearLayout_button_next;
     private LinearLayout linearLayout_container_basic_info, linearLayout_container_contact_info, linearLayout_container_shipping_to;
     private LinearLayout linearLayout_tab_basic_info, linearLayout_tab_contact_info, linearLayout_tab_shipping_to;
     private LinearLayout[] linearLayouts_fragment = new LinearLayout[3];
@@ -32,12 +32,16 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
 
     int index_fragment = 0;
 
+    private String role="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_customer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+//        role = new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token");
 
         initializeComponent();
     }
@@ -67,6 +71,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         linearLayout_button_next.setOnClickListener(this);
         linearLayout_button_back.setOnClickListener(this);
         linearLayout_button_back.setVisibility(View.INVISIBLE);
+
     }
 
     @Override
@@ -189,6 +194,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         } else if (v == linearLayout_button_back) {
             if (index_fragment >= 0) {
                 if (index_fragment == 2) {
+                    textView_button_next.setText("Next");
                 }
                 if (index_fragment == 1) {
                     textView_button_next.setText("Next");
@@ -210,13 +216,14 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                     linearLayouts_fragment[index_fragment].setVisibility(View.VISIBLE);
                 }
             }
-        } else if (v == linearLayout_button_submit) {
-            Intent intent = new Intent(FormCustomerActivity.this, DashboardCustomerActivity.class);
-            startActivity(intent);
-        } else if (v == linearLayout_button_cancel) {
-            Intent intent = new Intent(FormCustomerActivity.this, DashboardCustomerActivity.class);
-            startActivity(intent);
         }
+//        else if (v == linearLayout_button_submit) {
+//            Intent intent = new Intent(FormCustomerActivity.this, DashboardCustomerActivity.class);
+//            startActivity(intent);
+//        } else if (v == linearLayout_button_cancel) {
+//            Intent intent = new Intent(FormCustomerActivity.this, DashboardCustomerActivity.class);
+//            startActivity(intent);
+//        }
 
     }
 }

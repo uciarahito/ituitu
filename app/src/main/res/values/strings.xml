@@ -152,4 +152,17 @@
     <string name="title_activity_detail_request_customer">DetailRequestCustomerActivity</string>
     <string name="title_activity_detail_customer">DetailCustomerActivity</string>
 
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="password_confirm">Password Confirmation</string>
+    <string name="full_name">Full Name</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="wiraenergi">Wira Energi</string>
+    <string name="checkBoxLogin">Remember Me |</string>
+    <string name="lost_password">Lost your password?</string>
+    <string name="not_member">Not a member?</string>
+    <string name="already_member">Already a member?</string>
+    <string name="footer">2016 All Rights Reserved. PT. Wiraenergi</string>
+
 </resources>

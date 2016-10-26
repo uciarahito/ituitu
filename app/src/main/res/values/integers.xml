@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="loginImeId" format="integer" type="integer">1001</item>
+    <item name="registerImeId" format="integer" type="integer">1002</item>
+    <item name="resetImeId" format="integer" type="integer">1003</item>
+    <item name="confirmImeId" format="integer" type="integer">1004</item>
+    <item name="saveImeId" format="integer" type="integer">1005</item>
+    <item name="submitImeId" format="integer" type="integer">1006</item>
+    <item name="changeImeId" format="integer" type="integer">1006</item>
+</resources>

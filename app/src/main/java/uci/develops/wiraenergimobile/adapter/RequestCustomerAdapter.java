@@ -17,9 +17,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.activity.DashboardAdminActivity;
+import uci.develops.wiraenergimobile.activity.FormCustomerActivity;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerModel;
-import uci.develops.wiraenergimobile.response.ApproveResponse;
+import uci.develops.wiraenergimobile.response.RequestListCustomerResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 /**
@@ -31,7 +32,7 @@ public class RequestCustomerAdapter extends RecyclerView.Adapter<RequestCustomer
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView txtIdCustomer, txtDecode, txtEmail, txtStatus;
-        public Button buttonApprove, buttonReject;
+        public Button buttonDetail;
 
         public MyViewHolder(View view) {
             super(view);
@@ -39,8 +40,7 @@ public class RequestCustomerAdapter extends RecyclerView.Adapter<RequestCustomer
             txtDecode = (TextView) view.findViewById(R.id.txtDecode);
             txtEmail = (TextView) view.findViewById(R.id.txtEmail);
             txtStatus = (TextView) view.findViewById(R.id.txtStatus);
-            buttonApprove = (Button) view.findViewById(R.id.buttonApprove);
-            buttonReject = (Button) view.findViewById(R.id.buttonReject);
+            buttonDetail = (Button) view.findViewById(R.id.buttonDetail);
         }
     }
 
@@ -59,7 +59,7 @@ public class RequestCustomerAdapter extends RecyclerView.Adapter<RequestCustomer
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView;
         itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_request_customer, parent, false);
+                .inflate(R.layout.item_request_customer2, parent, false);
         return new MyViewHolder(itemView);
     }
 
@@ -76,48 +76,11 @@ public class RequestCustomerAdapter extends RecyclerView.Adapter<RequestCustomer
             holder.txtStatus.setText("Inactive");
         }
 
-        holder.buttonApprove.setOnClickListener(new View.OnClickListener() {
+        holder.buttonDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().requestCustomerAction(
-                        "Bearer " + new SharedPreferenceManager().getPreferences(context, "token"), customerModel.getDecode(), 1, 1);
-                approveResponseCall.enqueue(new Callback<ApproveResponse>() {
-                    @Override
-                    public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                        if (response.isSuccessful()) {
-                            Toast.makeText(context, "Approve success", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(context, DashboardAdminActivity.class);
-                            context.startActivity(intent);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ApproveResponse> call, Throwable t) {
-
-                    }
-                });
-            }
-        });
-        holder.buttonReject.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().requestCustomerAction(
-                        "Bearer " + new SharedPreferenceManager().getPreferences(context, "token"), customerModel.getDecode(), 0, 0);
-                approveResponseCall.enqueue(new Callback<ApproveResponse>() {
-                    @Override
-                    public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                        if (response.isSuccessful()) {
-                            Toast.makeText(context, "Reject success", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(context, DashboardAdminActivity.class);
-                            context.startActivity(intent);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ApproveResponse> call, Throwable t) {
-
-                    }
-                });
+                Intent intent = new Intent(context, FormCustomerActivity.class);
+                context.startActivity(intent);
             }
         });
     }
