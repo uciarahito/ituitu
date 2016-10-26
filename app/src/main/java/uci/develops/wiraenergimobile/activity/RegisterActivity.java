@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -28,8 +29,9 @@ import uci.develops.wiraenergimobile.service.RestClient;
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText editText_register_name, editText_register_email, editText_register_password;
-    private Button button_register_register, button_register_login;
+    private Button button_register_register;
     private Spinner spinner_register_role;
+    private TextView textView_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +44,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initializeComponent(){
+        textView_login = (TextView)findViewById(R.id.textView_login);
         editText_register_name = (EditText)findViewById(R.id.editText_register_name);
         editText_register_email = (EditText)findViewById(R.id.editText_register_email);
         editText_register_password = (EditText)findViewById(R.id.editText_register_password);
         spinner_register_role = (Spinner)findViewById(R.id.spinner_register_role);
-        button_register_login = (Button)findViewById(R.id.button_register_login);
         button_register_register = (Button)findViewById(R.id.button_register_register);
 
         List<String> roles = new ArrayList<String>();
@@ -56,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_register_role.setAdapter(dataAdapter);
 
-        button_register_login.setOnClickListener(this);
+        textView_login.setOnClickListener(this);
         button_register_register.setOnClickListener(this);
     }
 
@@ -113,7 +115,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 });
             }
         }
-        if(v == button_register_login){
+        if(v == textView_login){
             intent = new Intent(RegisterActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();

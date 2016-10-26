@@ -156,6 +156,7 @@
     <string name="password">Password</string>
     <string name="password_confirm">Password Confirmation</string>
     <string name="full_name">Full Name</string>
+    <string name="role">Choose Role</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="wiraenergi">Wira Energi</string>
