@@ -23,6 +23,8 @@ public class ExpandableListDataSource {
     public static Map<String, List<String>> getData(Context context) {
         Map<String, List<String>> expandableListData = new TreeMap<>();
 
+        Map<String, List<String>> expandableListDataSubMenu = new TreeMap<>();
+
         //root
         List<String> rootMenu = Arrays.asList(context.getResources().getStringArray(R.array.general));
 
@@ -56,41 +58,41 @@ public class ExpandableListDataSource {
         List<String> subMenuAccountReceivable_ReportingSalesCustomer = Arrays.asList(context.getResources().getStringArray(R.array.account_receivable));
 
         //tree for root
-        expandableListData.put(rootMenu.get(0), menuMasterSetup);
-        expandableListData.put(rootMenu.get(1), menuPurchasing);
-        expandableListData.put(rootMenu.get(2), menuInventory);
-        expandableListData.put(rootMenu.get(3), menuSalesCustomer);
-        expandableListData.put(rootMenu.get(4), menuReporting);
+        expandableListData.put(rootMenu.get(0), menuPurchasing);
+        expandableListData.put(rootMenu.get(1), menuInventory);
+        expandableListData.put(rootMenu.get(2), menuMasterSetup);
+        expandableListData.put(rootMenu.get(3), menuReporting);
+        expandableListData.put(rootMenu.get(4), menuSalesCustomer);
         expandableListData.put(rootMenu.get(5), menuUtility);
 
         //tree for main menu purchasing
-        expandableListData.put(menuPurchasing.get(0), subMenuMasterDataPurchasing);
-        expandableListData.put(menuPurchasing.get(1), subMenuTransactionPurchasing);
+        expandableListDataSubMenu.put(menuPurchasing.get(0), subMenuMasterDataPurchasing);
+        expandableListDataSubMenu.put(menuPurchasing.get(1), subMenuTransactionPurchasing);
 
-        //tree for main menu inventory
-        expandableListData.put(menuInventory.get(0), subMenuMasterDataInventory);
-        expandableListData.put(menuInventory.get(1), subMenuTransInventory);
-
-        //tree for main menu sales (customer)
-        expandableListData.put(menuSalesCustomer.get(0), subMenuMasterDataSales);
-        expandableListData.put(menuSalesCustomer.get(1), subMenuMarketingOrderSales);
-        expandableListData.put(menuSalesCustomer.get(2), subMenuCustomerSales);
-
-        //tree for main menu reporting
-        expandableListData.put(menuReporting.get(0), subMenuPurchaseReporting);
-        expandableListData.put(menuReporting.get(1), subMenuInventoryReporting);
-        expandableListData.put(menuReporting.get(2), subMenuSalesCustomerReporting);
-        expandableListData.put(menuReporting.get(3), subMenuFinanceGLReporting);
-
-        //tree for sub menu reporting -> purchase
-        expandableListData.put(subMenuPurchaseReporting.get(0), subMenuPurchaseOrder_ReportingPurchase);
-        expandableListData.put(subMenuPurchaseReporting.get(1), subMenuPurchaseVendor_ReportingPurchase);
-        expandableListData.put(subMenuPurchaseReporting.get(2), subMenuAccountPayable_ReportingPurchase);
-
-        //tree for sub menu reporting -> sales (customer)
-        expandableListData.put(subMenuSalesCustomerReporting.get(0), subMenuCustomerOrder_ReportingSalesCustomer);
-        expandableListData.put(subMenuSalesCustomerReporting.get(1), subMenuSalesDelivery_ReportingSalesCustomer);
-        expandableListData.put(subMenuSalesCustomerReporting.get(2), subMenuAccountReceivable_ReportingSalesCustomer);
+//        //tree for main menu inventory
+//        expandableListData.put(menuInventory.get(0), subMenuMasterDataInventory);
+//        expandableListData.put(menuInventory.get(1), subMenuTransInventory);
+//
+//        //tree for main menu sales (customer)
+//        expandableListData.put(menuSalesCustomer.get(0), subMenuMasterDataSales);
+//        expandableListData.put(menuSalesCustomer.get(1), subMenuMarketingOrderSales);
+//        expandableListData.put(menuSalesCustomer.get(2), subMenuCustomerSales);
+//
+//        //tree for main menu reporting
+//        expandableListData.put(menuReporting.get(0), subMenuPurchaseReporting);
+//        expandableListData.put(menuReporting.get(1), subMenuInventoryReporting);
+//        expandableListData.put(menuReporting.get(2), subMenuSalesCustomerReporting);
+//        expandableListData.put(menuReporting.get(3), subMenuFinanceGLReporting);
+//
+//        //tree for sub menu reporting -> purchase
+//        expandableListData.put(subMenuPurchaseReporting.get(0), subMenuPurchaseOrder_ReportingPurchase);
+//        expandableListData.put(subMenuPurchaseReporting.get(1), subMenuPurchaseVendor_ReportingPurchase);
+//        expandableListData.put(subMenuPurchaseReporting.get(2), subMenuAccountPayable_ReportingPurchase);
+//
+//        //tree for sub menu reporting -> sales (customer)
+//        expandableListData.put(subMenuSalesCustomerReporting.get(0), subMenuCustomerOrder_ReportingSalesCustomer);
+//        expandableListData.put(subMenuSalesCustomerReporting.get(1), subMenuSalesDelivery_ReportingSalesCustomer);
+//        expandableListData.put(subMenuSalesCustomerReporting.get(2), subMenuAccountReceivable_ReportingSalesCustomer);
 
         return expandableListData;
     }

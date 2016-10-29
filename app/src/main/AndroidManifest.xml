@@ -25,11 +25,13 @@
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".activity.RegisterActivity"
@@ -113,6 +115,14 @@
         <activity
             android:name=".activity.ResetPasswordActivity"
             android:label="@string/title_activity_reset_password"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.VerificationStatusActivity"
+            android:label="@string/title_activity_verification_status"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.WaitingApprovalActivity"
+            android:label="@string/title_activity_waiting_approval"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

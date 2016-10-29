@@ -15,14 +15,9 @@ import android.widget.TextView;
 
 import uci.develops.wiraenergimobile.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentNavPurchasing#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FragmentNavPurchasing extends Fragment {
 
-    private static final String KEY_MOVIE_TITLE = "key_title";
+//    private static final String KEY_MOVIE_TITLE = "key_title";
 
     public FragmentNavPurchasing() {
         // Required empty public constructor
@@ -34,14 +29,14 @@ public class FragmentNavPurchasing extends Fragment {
      *
      * @return A new instance of fragment FragmentNavInventory.
      */
-    public static FragmentNavPurchasing newInstance(String movieTitle) {
-        FragmentNavPurchasing fragmentComedy = new FragmentNavPurchasing();
-        Bundle args = new Bundle();
-        args.putString(KEY_MOVIE_TITLE, movieTitle);
-        fragmentComedy.setArguments(args);
-
-        return fragmentComedy;
-    }
+//    public static FragmentNavPurchasing newInstance(String movieTitle) {
+//        FragmentNavPurchasing fragmentComedy = new FragmentNavPurchasing();
+//        Bundle args = new Bundle();
+//        args.putString(KEY_MOVIE_TITLE, movieTitle);
+//        fragmentComedy.setArguments(args);
+//
+//        return fragmentComedy;
+//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,17 +50,17 @@ public class FragmentNavPurchasing extends Fragment {
         return inflater.inflate(R.layout.fragment_nav_purchasing, container, false);
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        Drawable movieIcon = ResourcesCompat.getDrawable(getResources(), R.drawable.movie_icon, getContext().getTheme());
-        if (movieIcon != null) {
-            movieIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.purple), PorterDuff.Mode.SRC_ATOP);
-        }
-        ((ImageView) view.findViewById(R.id.movie_icon)).setImageDrawable(movieIcon);
-
-        String movieTitle = getArguments().getString(KEY_MOVIE_TITLE);
-        ((TextView) view.findViewById(R.id.movie_title)).setText(movieTitle);
-    }
+//    @Override
+//    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//
+//        Drawable movieIcon = ResourcesCompat.getDrawable(getResources(), R.drawable.movie_icon, getContext().getTheme());
+//        if (movieIcon != null) {
+//            movieIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.purple), PorterDuff.Mode.SRC_ATOP);
+//        }
+//        ((ImageView) view.findViewById(R.id.movie_icon)).setImageDrawable(movieIcon);
+//
+//        String movieTitle = getArguments().getString(KEY_MOVIE_TITLE);
+//        ((TextView) view.findViewById(R.id.movie_title)).setText(movieTitle);
+//    }
 }

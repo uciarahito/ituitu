@@ -16,18 +16,18 @@
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/logo"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/wiraenergi"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:textAppearance="@style/TextAppearance.AppTheme.Large"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/wiraenergi"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:textAppearance="@style/TextAppearance.AppTheme.Large"/>-->
 
         <TextView
             android:layout_width="wrap_content"
@@ -120,7 +120,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_text_background"
-                    android:hint="@string/role"
                     android:imeOptions="actionNext"
                     app:layout_columnWeight="1"
                     app:layout_gravity="center_vertical"
@@ -134,8 +133,8 @@
         <Button
             android:id="@+id/button_register_register"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="16dp"
             android:text="@string/register"
             android:textAllCaps="false"
@@ -148,9 +147,10 @@
             android:background="@drawable/drop_shadow" />
 
         <android.support.v7.widget.GridLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:columnCount="2">
+            app:columnCount="2"
+            android:layout_gravity="center">
             <TextView
                 android:id="@+id/lost"
                 android:layout_width="wrap_content"

@@ -16,7 +16,7 @@ import java.util.concurrent.ExecutionException;
  * Created by user on 10/22/2016.
  */
 public class SharedPreferenceManager {
-    public void setPreferences(Context context, String key, String value){
+    public void setPreferences(Context context, String key, String value) {
         /*
             Fungsi ini untuk menambahkan atau menyimpan sesuatu dengan kata kunci (key) berupa String
             MODE_PRIVATE : Agar session hanya bisa diakses oleh aplikasi ini saja
@@ -26,7 +26,7 @@ public class SharedPreferenceManager {
         editor.commit();
     }
 
-    public String getPreferences(Context context, String key){
+    public String getPreferences(Context context, String key) {
         /*
             Fungsi ini untuk mengambil atau mendapatkan nilai (string) yang tersimpan berdasarkan key
          */
@@ -35,26 +35,26 @@ public class SharedPreferenceManager {
         return position;
     }
 
-    public String getCurrentDateTime(){
+    public String getCurrentDateTime() {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat timeformat = new SimpleDateFormat("HH:mm:ss");
-        String dateandtime = ""+mdformat.format(calendar.getTime())+" "+timeformat.format(calendar.getTime());
+        String dateandtime = "" + mdformat.format(calendar.getTime()) + " " + timeformat.format(calendar.getTime());
         return dateandtime;
     }
 
-    public String getToken(Context context){
+    public String getToken(Context context) {
         return new SharedPreferenceManager().getPreferences(context, "token");
     }
 
-    public boolean isCustomer(Context context){
-        if(new SharedPreferenceManager().getPreferences(context, "role").equals("customer")){
+    public boolean isCustomer(Context context) {
+        if (new SharedPreferenceManager().getPreferences(context, "role").equals("customer")) {
             return true;
         }
         return false;
     }
 
-    public String generateRandomString(int passwordSize){
+    public String generateRandomString(int passwordSize) {
         char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
