@@ -153,6 +153,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                             }
                                                         }
                                                         if(roleModel.getRole_id() <= 3){
+                                                            new SharedPreferenceManager().setPreferences(LoginActivity.this, "role", "admin");
                                                             Intent intent = new Intent(LoginActivity.this, DashboardAdminActivity.class);
                                                             startActivity(intent);
                                                             finish();

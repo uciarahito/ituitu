@@ -22,6 +22,5 @@ public class Constant {
      * semi database
      */
     public static List<List<String>> user_data = new ArrayList<>();
-
     public static List<Integer> role_data = new ArrayList<>();
 }

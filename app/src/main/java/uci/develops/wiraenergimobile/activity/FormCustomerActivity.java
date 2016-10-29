@@ -97,6 +97,10 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                     customerModel = fragmentFormCustomerShippingTo.getFormValue();
                 }
 
+                if(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "role").equals("admin")){
+                    is_not_empty = true;
+                }
+
                 if (is_not_empty) {
                     if (index_fragment == 0) {
                         linearLayout_button_back.setVisibility(View.VISIBLE);
@@ -165,9 +169,16 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                                         @Override
                                         public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                                             if (response.isSuccessful()) {
-                                                Toast.makeText(FormCustomerActivity.this, "Waiting for approval", Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(FormCustomerActivity.this, WaitingApprovalActivity.class);
-                                                startActivity(intent);
+                                                if(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "role").equals("admin")){
+                                                    Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                } else {
+                                                    Toast.makeText(FormCustomerActivity.this, "Waiting for approval", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(FormCustomerActivity.this, WaitingApprovalActivity.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
                                             }
                                         }
 
