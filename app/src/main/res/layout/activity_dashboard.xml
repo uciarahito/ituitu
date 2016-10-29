@@ -30,6 +30,6 @@
         android:background="@color/white"
         android:divider="@color/group_divider_color"
         android:dividerHeight="1dp"
-        android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"/>
+        android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorRight"/>
 
 </android.support.v4.widget.DrawerLayout>
