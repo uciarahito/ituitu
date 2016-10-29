@@ -2,22 +2,16 @@ package uci.develops.wiraenergimobile.activity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +78,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void initItems() {
-        items = getResources().getStringArray(R.array.film_genre);
+        items = getResources().getStringArray(R.array.general);
     }
 
     private void addDrawerItems() {
@@ -122,7 +116,7 @@ public class DashboardActivity extends AppCompatActivity {
                     mNavigationManager.showFragmentNavSales(selectedItem);
                 } else if (items[4].equals(mExpandableListTitle.get(groupPosition))) {
                     mNavigationManager.showFragmentNavReporting(selectedItem);
-                } else if (items[4].equals(mExpandableListTitle.get(groupPosition))) {
+                } else if (items[5].equals(mExpandableListTitle.get(groupPosition))) {
                     mNavigationManager.showFragmentNavUtility(selectedItem);
                 } else {
                     throw new IllegalArgumentException("Not supported fragment type");
