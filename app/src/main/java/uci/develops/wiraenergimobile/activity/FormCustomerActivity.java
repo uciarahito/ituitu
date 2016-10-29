@@ -31,6 +31,11 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
     private LinearLayout[] linearLayouts_tabs = new LinearLayout[3];
     private TextView textView_button_next, textView_button_back;
 
+    /**
+     * Button approve reject for admin
+     */
+    private LinearLayout linearLayout_button_approve, linearLayout_button_reject;
+
     int index_fragment = 0;
 
     private String role="";
@@ -56,6 +61,8 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         linearLayout_tab_basic_info = (LinearLayout) findViewById(R.id.layout_tab_company_info);
         linearLayout_tab_contact_info = (LinearLayout) findViewById(R.id.layout_tab_contact_info);
         linearLayout_tab_shipping_to = (LinearLayout) findViewById(R.id.layout_tab_shipping_to);
+        linearLayout_button_approve= (LinearLayout) findViewById(R.id.layout_button_approve);
+        linearLayout_button_reject= (LinearLayout) findViewById(R.id.layout_button_reject);
         textView_button_back = (TextView)findViewById(R.id.textView_button_back);
         textView_button_next = (TextView)findViewById(R.id.textView_button_next);
 
@@ -71,12 +78,66 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
 
         linearLayout_button_next.setOnClickListener(this);
         linearLayout_button_back.setOnClickListener(this);
+        linearLayout_button_approve.setOnClickListener(this);
+        linearLayout_button_reject.setOnClickListener(this);
         linearLayout_button_back.setVisibility(View.INVISIBLE);
 
+        /**
+         * Check if role is admin
+         * show button approve and reject
+         */
+        if(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "role").equals("admin")){
+            linearLayout_button_approve.setVisibility(View.VISIBLE);
+            linearLayout_button_reject.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     public void onClick(View v) {
+        if(v == linearLayout_button_approve){
+            Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().requestCustomerAction("Bearer "+new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
+                    new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), 1, 1);
+            approveResponseCall.enqueue(new Callback<ApproveResponse>() {
+                @Override
+                public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                    if(response.isSuccessful()){
+                        Toast.makeText(FormCustomerActivity.this, "Approve request successfull", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(FormCustomerActivity.this, "Unable to approve request", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ApproveResponse> call, Throwable t) {
+                    Toast.makeText(FormCustomerActivity.this, "Unable to approve request", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        if(v == linearLayout_button_reject){
+            Call<ApproveResponse> rejectResponseCall = RestClient.getRestClient().requestCustomerAction("Bearer "+new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
+                    new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), 0, 0);
+            rejectResponseCall.enqueue(new Callback<ApproveResponse>() {
+                @Override
+                public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                    if(response.isSuccessful()){
+                        Toast.makeText(FormCustomerActivity.this, "Reject request successfull", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(FormCustomerActivity.this, "Unable to reject request", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ApproveResponse> call, Throwable t) {
+                    Toast.makeText(FormCustomerActivity.this, "Unable to reject request", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
         if (v == linearLayout_button_next) {
             if (index_fragment <= 2) {
                 boolean is_not_empty = false;
