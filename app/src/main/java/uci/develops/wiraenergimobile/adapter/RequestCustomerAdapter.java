@@ -83,6 +83,11 @@ public class RequestCustomerAdapter extends RecyclerView.Adapter<RequestCustomer
         holder.buttonDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /**
+                 * Set decode melalui data per row
+                 * menampung di shared preference
+                 */
+                new SharedPreferenceManager().setPreferences(context, "customer_decode", ""+customerModel.getDecode());
                 Intent intent = new Intent(context, FormCustomerActivity.class);
                 context.startActivity(intent);
             }
