@@ -10,6 +10,8 @@ public class UserModel {
     private String password;
     private String role;
 
+    public UserModel(){}
+
     public UserModel(int id, String name, String email, String password, String role) {
         this.id = id;
         this.name = name;

@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,6 +31,8 @@ import uci.develops.wiraenergimobile.service.RestClient;
 public class RequestCustomerAdapter extends RecyclerView.Adapter<RequestCustomerAdapter.MyViewHolder> {
     private List<CustomerModel> customerModelList;
     private Context context;
+
+    Map<String, List<String>> mRoles = new TreeMap<>();
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView txtIdCustomer, txtDecode, txtEmail, txtStatus;

@@ -21,9 +21,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
+import uci.develops.wiraenergimobile.model.CustomerModel;
 import uci.develops.wiraenergimobile.model.RoleModel;
+import uci.develops.wiraenergimobile.model.UserModel;
 import uci.develops.wiraenergimobile.response.ListRoleResponse;
 import uci.develops.wiraenergimobile.response.LoginResponse;
+import uci.develops.wiraenergimobile.response.RegisterResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
@@ -33,6 +36,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private CheckBox checkBox_login;
     private TextView lost_pasword;
 
+    String email = "", password = "", name = "", role = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +46,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setSupportActionBar(toolbar);
 
         initializeComponent();
+        loadData();
     }
 
     private void initializeComponent(){
@@ -75,7 +81,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         if(v == button_login_login){
-            String email = "", password = "";
+
             email = editText_login_email.getText().toString();
             password = editText_email_password.getText().toString();
             if(!email.equals("") && !password.equals("")) {
@@ -103,20 +109,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             String info = "";
                             String token = "";
                             boolean activated;
-
                             String customer_decode = "";
+
                             status = response.body().getStatus();
                             code = response.body().getCode();
                             info = response.body().getInfo();
                             token = response.body().getToken();
                             final int user_id = response.body().getUser_id();
+                            final int active = response.body().getActive();
+                            final int approve = response.body().getApprove();
                             activated = response.body().isActivated();
                             customer_decode = response.body().getCustomer_decode();
                             //Toast.makeText(LoginActivity.this, activated + "  " + token, Toast.LENGTH_SHORT).show();
                             new SharedPreferenceManager().setPreferences(LoginActivity.this, "token", token);
                             new SharedPreferenceManager().setPreferences(LoginActivity.this, "customer_decode", customer_decode);
                             if (activated == true){
-
                                 Call<ListRoleResponse> listRoleResponseCall = RestClient.getRestClient().getAllRoles("Bearer "+token);
                                 listRoleResponseCall.enqueue(new Callback<ListRoleResponse>() {
                                     @Override
@@ -126,11 +133,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                 for(RoleModel roleModel : response.body().getData()){
                                                     if(roleModel.getUser_id() == user_id){
                                                         if(roleModel.getRole_id() == 4){
-//                                                            String role_id;
-//                                                            role_id = new SharedPreferenceManager().getPreferences(LoginActivity.this, "role_id");
-                                                            Intent intent = new Intent(LoginActivity.this, DashboardCustomerActivity.class);
-                                                            startActivity(intent);
-                                                            finish();
+                                                            if (active == 1){
+                                                                Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                                                                startActivity(intent);
+                                                            } else {
+                                                                if (approve == 0){
+                                                                    Intent intent = new Intent(LoginActivity.this, VerificationStatusActivity.class);
+                                                                    startActivity(intent);
+                                                                } else if(approve == 1){
+                                                                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                                                                    startActivity(intent);
+                                                                } else if(approve == 2){
+                                                                    Intent intent = new Intent(LoginActivity.this, FormCustomerActivity.class);
+                                                                    startActivity(intent);
+                                                                } else if(approve == 3){
+                                                                    Intent intent = new Intent(LoginActivity.this, WaitingApprovalActivity.class);
+                                                                    startActivity(intent);
+                                                                }
+                                                            }
                                                         }
                                                         if(roleModel.getRole_id() <= 3){
                                                             Intent intent = new Intent(LoginActivity.this, DashboardAdminActivity.class);
@@ -174,5 +194,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             startActivity(intent);
             finish();
         }
+    }
+
+    private void loadData(){
+        UserModel userModel = new UserModel();
+        editText_login_email.setText(userModel.getEmail()==null ? "" : userModel.getEmail());
+        editText_email_password.setText(userModel.getPassword()==null ? "" : userModel.getPassword());
     }
 }

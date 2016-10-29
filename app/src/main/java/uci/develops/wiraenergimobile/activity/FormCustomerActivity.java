@@ -16,6 +16,7 @@ import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerCompanyInfo;
 import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerContactInfo;
 import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerShippingTo;
+import uci.develops.wiraenergimobile.helper.Constant;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerModel;
 import uci.develops.wiraenergimobile.response.ApproveResponse;
@@ -155,7 +156,26 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                             @Override
                             public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                                 if (response.isSuccessful()) {
+                                    final CustomerModel customerModel = new CustomerModel();
                                     Toast.makeText(FormCustomerActivity.this, "Successfully inserted", Toast.LENGTH_SHORT).show();
+                                    //baru ditambah
+                                    Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().requestCustomerAction(
+                                            "Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), customerModel.getDecode(), 3, 0);
+                                    approveResponseCall.enqueue(new Callback<ApproveResponse>() {
+                                        @Override
+                                        public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                                            if (response.isSuccessful()) {
+                                                Toast.makeText(FormCustomerActivity.this, "Waiting for approval", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(FormCustomerActivity.this, WaitingApprovalActivity.class);
+                                                startActivity(intent);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<ApproveResponse> call, Throwable t) {
+
+                                        }
+                                    });
                                 } else {
                                     Toast.makeText(FormCustomerActivity.this, "" + response.errorBody().toString(), Toast.LENGTH_SHORT).show();
                                     Toast.makeText(FormCustomerActivity.this, "Not successfull", Toast.LENGTH_SHORT).show();
@@ -179,7 +199,8 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                         linearLayouts_tabs[index_fragment].setBackgroundResource(R.drawable.rounded_rectangle_blue);
                         linearLayouts_fragment[index_fragment].setVisibility(View.VISIBLE);
                     } else {
-                        Intent intent = new Intent(FormCustomerActivity.this, DashboardCustomerActivity.class);
+//                        Intent intent = new Intent(FormCustomerActivity.this, DashboardCustomerActivity.class);
+                        Intent intent = new Intent(FormCustomerActivity.this, WaitingApprovalActivity.class);
                         startActivity(intent);
                         finish();
                     }
@@ -187,7 +208,8 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                     Toast.makeText(FormCustomerActivity.this, "All field are required!", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Intent intent = new Intent(FormCustomerActivity.this, DashboardCustomerActivity.class);
+//                Intent intent = new Intent(FormCustomerActivity.this, DashboardCustomerActivity.class);
+                Intent intent = new Intent(FormCustomerActivity.this, WaitingApprovalActivity.class);
                 startActivity(intent);
                 finish();
             }

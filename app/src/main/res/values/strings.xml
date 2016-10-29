@@ -160,7 +160,14 @@
     <string name="role">Choose Role</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="view_data">View Data</string>
     <string name="wiraenergi">Wira Energi</string>
+    <string name="verification">Email Verification Status</string>
+    <string name="waiting">Wait For Approval</string>
+    <string name="please_wait">Please Wait, we will contact you soon after your data have been verified. Thank You...</string>
+    <string name="succes">Success!</string>
     <string name="checkBoxLogin">Remember Me |</string>
     <string name="lost_password">Lost your password?</string>
     <string name="not_member">Not a member?</string>
@@ -174,8 +181,8 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="film_genres">Film genres</string>
-    <string name="website">https://en.wikipedia.org/wiki/Film</string>
-    <string name="date">22 Oct 2015</string>
+    <string name="website">PT. Wira Energi</string>
+    <string name="welcome">Welcome, </string>
     <string name="selected_item">Selected item</string>
 
     <string-array name="general">
@@ -368,5 +375,7 @@
     <string name="thriller_movies">Thriller</string>
     <string name="movie_genre">genre</string>
     <string name="title_activity_reset_password">ResetPasswordActivity</string>
+    <string name="title_activity_verification_status">VerificationStatusActivity</string>
+    <string name="title_activity_waiting_approval">WaitingApprovalActivity</string>
 
 </resources>

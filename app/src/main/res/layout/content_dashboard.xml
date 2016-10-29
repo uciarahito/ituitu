@@ -1,16 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/content_dashboard"
+    android:id="@+id/tabla_cuerpo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="uci.develops.wiraenergimobile.activity.DashboardActivity"
-    tools:showIn="@layout/app_bar_dashboard">
+    android:stretchColumns="5"
+    tools:showIn="@layout/app_bar_dashboard"
+    tools:context="uci.develops.wiraenergimobile.activity.DashboardActivity">
 
-</RelativeLayout>
+    <TableRow>
+
+        <TextView
+            android:padding="3dip"
+            android:text="No" />
+
+        <TextView
+            android:padding="3dip"
+            android:text="Nama" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="0"
+            android:padding="3dip"
+            android:text="No" />
+
+        <TextView
+            android:gravity="right"
+            android:padding="3dip"
+            android:text="Nama" />
+
+        <TextView
+            android:gravity="right"
+            android:padding="3dip"
+            android:text="Alamat" />
+
+        <TextView
+            android:gravity="right"
+            android:padding="3dip"
+            android:text="Mobile" />
+
+        <TextView
+            android:gravity="right"
+            android:padding="3dip" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="1"
+            android:padding="3dip"
+            android:text="1" />
+
+        <TextView
+            android:gravity="right"
+            android:padding="3dip"
+            android:text="1" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="1"
+            android:padding="3dip"
+            android:text="1" />
+
+        <TextView
+            android:gravity="right"
+            android:padding="3dip"
+            android:text="1" />
+    </TableRow>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dip"
+        android:background="#FF909090" />
+
+    <TableRow>
+
+        <TextView
+            android:padding="3dip"
+            android:text="X" />
+
+        <TextView
+            android:padding="3dip"
+            android:text="I" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:padding="3dip"
+            android:text="X" />
+
+        <TextView
+            android:padding="3dip"
+            android:text="E" />
+
+        <TextView
+            android:gravity="right"
+            android:padding="3dip"
+            android:text="Ctrl-E" />
+    </TableRow>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dip"
+        android:background="#FF909090" />
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="1"
+            android:padding="3dip"
+            android:text="Quit" />
+    </TableRow>
+
+
+</TableLayout>

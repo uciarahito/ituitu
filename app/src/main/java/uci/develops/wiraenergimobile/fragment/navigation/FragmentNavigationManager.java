@@ -41,17 +41,17 @@ public class FragmentNavigationManager implements NavigationManager {
 
     @Override
     public void showFragmentNavMasterSetup(String title) {
-        showFragment(FragmentNavMasterSetup.newInstance(title), false);
+//        showFragment(FragmentNavMasterSetup.newInstance(title), false);
     }
 
     @Override
     public void showFragmentNavPurchasing(String title) {
-        showFragment(FragmentNavPurchasing.newInstance(title), false);
+//        showFragment(FragmentNavPurchasing.newInstance(title), false);
     }
 
     @Override
     public void showFragmentNavInventory(String title) {
-        showFragment(FragmentNavInventory.newInstance(title), false);
+//        showFragment(FragmentNavInventory.newInstance(title), false);
     }
 
     @Override
