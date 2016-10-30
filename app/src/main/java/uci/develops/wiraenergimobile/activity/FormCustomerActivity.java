@@ -1,10 +1,17 @@
 package uci.develops.wiraenergimobile.activity;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -188,77 +195,84 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                         });
                     }
                     if (index_fragment == 1) {
-                        textView_button_next.setText("Submit");
-                        Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().sendDataContactInfo("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
-                                new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), customerModel.getName1(), customerModel.getName2(), customerModel.getName3(),
-                                customerModel.getPhone1(), customerModel.getPhone2(), customerModel.getPhone3(), customerModel.getMobile1(), customerModel.getMobile2(), customerModel.getMobile3(),
-                                customerModel.getEmail1(), customerModel.getEmail2(), customerModel.getEmail3(), customerModel.getJabatan1(), customerModel.getJabatan2(), customerModel.getJabatan3());
-                        approveResponseCall.enqueue(new Callback<ApproveResponse>() {
-                            @Override
-                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                                if (response.isSuccessful()) {
-                                    Toast.makeText(FormCustomerActivity.this, "Successfully inserted", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(FormCustomerActivity.this, "" + response.errorBody().toString(), Toast.LENGTH_SHORT).show();
-                                    Toast.makeText(FormCustomerActivity.this, "Not successfull", Toast.LENGTH_SHORT).show();
+                        if(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "role").equals("admin")){
+                            textView_button_next.setText("Feedback");
+                        } else {
+                            textView_button_next.setText("Submit");
+                            Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().sendDataContactInfo("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
+                                    new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), customerModel.getName1(), customerModel.getName2(), customerModel.getName3(),
+                                    customerModel.getPhone1(), customerModel.getPhone2(), customerModel.getPhone3(), customerModel.getMobile1(), customerModel.getMobile2(), customerModel.getMobile3(),
+                                    customerModel.getEmail1(), customerModel.getEmail2(), customerModel.getEmail3(), customerModel.getJabatan1(), customerModel.getJabatan2(), customerModel.getJabatan3());
+                            approveResponseCall.enqueue(new Callback<ApproveResponse>() {
+                                @Override
+                                public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                                    if (response.isSuccessful()) {
+                                        Toast.makeText(FormCustomerActivity.this, "Successfully inserted", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(FormCustomerActivity.this, "" + response.errorBody().toString(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(FormCustomerActivity.this, "Not successfull", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
 
-                            @Override
-                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
+                                @Override
+                                public void onFailure(Call<ApproveResponse> call, Throwable t) {
 
-                            }
-                        });
+                                }
+                            });
+                        }
                     }
                     if (index_fragment == 2) {
-
-                        Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().sendDataShippingInfo("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
-                                new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), customerModel.getShipping_pic(), customerModel.getShipping_address(),
-                                customerModel.getShipping_city(), customerModel.getShipping_province(), customerModel.getShipping_postcode(), customerModel.getShipping_eta(), customerModel.getShipping_map(),
-                                customerModel.getShipping_phone(), customerModel.getShipping_mobile(), customerModel.getShipping_email(), customerModel.getShipping_fax(), customerModel.getShipping_tax(),
-                                customerModel.getShipping_note());
-                        approveResponseCall.enqueue(new Callback<ApproveResponse>() {
-                            @Override
-                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                                if (response.isSuccessful()) {
-                                    final CustomerModel customerModel = new CustomerModel();
-                                    Toast.makeText(FormCustomerActivity.this, "Successfully inserted", Toast.LENGTH_SHORT).show();
-                                    //baru ditambah
-                                    Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().requestCustomerAction(
-                                            "Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), customerModel.getDecode(), 3, 0);
-                                    approveResponseCall.enqueue(new Callback<ApproveResponse>() {
-                                        @Override
-                                        public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                                            if (response.isSuccessful()) {
-                                                if(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "role").equals("admin")){
-                                                    Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
-                                                    startActivity(intent);
-                                                    finish();
-                                                } else {
-                                                    Toast.makeText(FormCustomerActivity.this, "Waiting for approval", Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent(FormCustomerActivity.this, WaitingApprovalActivity.class);
-                                                    startActivity(intent);
-                                                    finish();
+                        if(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "role").equals("admin")){
+                            showDialogNote();
+                        } else {
+                            Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().sendDataShippingInfo("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
+                                    new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), customerModel.getShipping_pic(), customerModel.getShipping_address(),
+                                    customerModel.getShipping_city(), customerModel.getShipping_province(), customerModel.getShipping_postcode(), customerModel.getShipping_eta(), customerModel.getShipping_map(),
+                                    customerModel.getShipping_phone(), customerModel.getShipping_mobile(), customerModel.getShipping_email(), customerModel.getShipping_fax(), customerModel.getShipping_tax(),
+                                    customerModel.getShipping_note());
+                            approveResponseCall.enqueue(new Callback<ApproveResponse>() {
+                                @Override
+                                public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                                    if (response.isSuccessful()) {
+                                        final CustomerModel customerModel = new CustomerModel();
+                                        Toast.makeText(FormCustomerActivity.this, "Successfully inserted", Toast.LENGTH_SHORT).show();
+                                        //baru ditambah
+                                        Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().requestCustomerAction(
+                                                "Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), customerModel.getDecode(), 3, 0);
+                                        approveResponseCall.enqueue(new Callback<ApproveResponse>() {
+                                            @Override
+                                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                                                if (response.isSuccessful()) {
+                                                    if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "role").equals("admin")) {
+                                                        Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    } else {
+                                                        Toast.makeText(FormCustomerActivity.this, "Waiting for approval", Toast.LENGTH_SHORT).show();
+                                                        Intent intent = new Intent(FormCustomerActivity.this, WaitingApprovalActivity.class);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    }
                                                 }
                                             }
-                                        }
 
-                                        @Override
-                                        public void onFailure(Call<ApproveResponse> call, Throwable t) {
+                                            @Override
+                                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
 
-                                        }
-                                    });
-                                } else {
-                                    Toast.makeText(FormCustomerActivity.this, "" + response.errorBody().toString(), Toast.LENGTH_SHORT).show();
-                                    Toast.makeText(FormCustomerActivity.this, "Not successfull", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    } else {
+                                        Toast.makeText(FormCustomerActivity.this, "" + response.errorBody().toString(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(FormCustomerActivity.this, "Not successfull", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
 
-                            @Override
-                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
+                                @Override
+                                public void onFailure(Call<ApproveResponse> call, Throwable t) {
 
-                            }
-                        });
+                                }
+                            });
+                        }
                     }
                     if(index_fragment < 2) {
                         index_fragment++;
@@ -272,18 +286,22 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                         linearLayouts_fragment[index_fragment].setVisibility(View.VISIBLE);
                     } else {
 //                        Intent intent = new Intent(FormCustomerActivity.this, DashboardCustomerActivity.class);
+                        /*
                         Intent intent = new Intent(FormCustomerActivity.this, WaitingApprovalActivity.class);
                         startActivity(intent);
                         finish();
+                        */
                     }
                 } else {
                     Toast.makeText(FormCustomerActivity.this, "All field are required!", Toast.LENGTH_SHORT).show();
                 }
             } else {
 //                Intent intent = new Intent(FormCustomerActivity.this, DashboardCustomerActivity.class);
+                /*
                 Intent intent = new Intent(FormCustomerActivity.this, WaitingApprovalActivity.class);
                 startActivity(intent);
                 finish();
+                */
             }
         } else if (v == linearLayout_button_back) {
             if (index_fragment >= 0) {
@@ -320,4 +338,55 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
 //        }
 
     }
+
+    private Dialog dialog_feedback;
+    EditText editText_feedback;
+    Button button_submit_feedback;
+
+    private void showDialogNote(){
+        dialog_feedback = new Dialog(FormCustomerActivity.this);
+        dialog_feedback.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog_feedback.setContentView(R.layout.custom_dialog_add_feedback);
+
+        editText_feedback = (EditText) dialog_feedback.findViewById(R.id.editText_feedback);
+        button_submit_feedback = (Button) dialog_feedback.findViewById(R.id.button_submit_feedback);
+
+        button_submit_feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!editText_feedback.getText().toString().equals("")) {
+                    Call<ApproveResponse> addFeedbackResponseCall = RestClient.getRestClient().addFeedback("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
+                            new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), editText_feedback.getText().toString());
+                    addFeedbackResponseCall.enqueue(new Callback<ApproveResponse>() {
+                        @Override
+                        public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                            if (response.isSuccessful()) {
+                                Toast.makeText(FormCustomerActivity.this, "Berhasil menambahkan feedback", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ApproveResponse> call, Throwable t) {
+
+                        }
+                    });
+                } else {
+                    Toast.makeText(FormCustomerActivity.this, "Field feedback tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager windowmanager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        windowmanager.getDefaultDisplay().getMetrics(displayMetrics);
+        int deviceWidth = displayMetrics.widthPixels;
+        int deviceHeight = displayMetrics.heightPixels;
+        dialog_feedback.getWindow().setLayout(deviceWidth-20, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog_feedback.setCancelable(true);
+        dialog_feedback.show();
+    }
+
 }

@@ -63,4 +63,8 @@ public interface RestInterface {
 
     @GET("customer/{decode}")
     Call<CustomerResponse> getCustomer(@Header("Authorization") String token, @Path("decode") String decode);
+
+    @FormUrlEncoded
+    @PUT("customer/{decode}")
+    Call<ApproveResponse> addFeedback(@Header("Authorization") String token, @Path("decode") String decode, @Field("note") String note);
 }
