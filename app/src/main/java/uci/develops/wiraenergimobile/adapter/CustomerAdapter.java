@@ -68,7 +68,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
         holder.txtEmail.setText(": " + customerModel.getEmail());
 
         if (customerModel.getActive() == 1 && customerModel.getApprove() == 1) {
-            holder.txtStatus.setText("Activated");
+            holder.txtStatus.setText("Active");
         } else {
             holder.txtStatus.setText("Inactive");
         }
