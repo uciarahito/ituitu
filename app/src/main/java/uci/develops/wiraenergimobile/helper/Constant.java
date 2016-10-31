@@ -22,5 +22,41 @@ public class Constant {
      * semi database
      */
     public static List<List<String>> user_data = new ArrayList<>();
-    public static List<Integer> role_data = new ArrayList<>();
+    public static List<String> role_data = new ArrayList<>();
+
+    public static boolean isAdmin(){
+        boolean result = false;
+        if(Constant.role_data.size() > 0){
+            for(String role : Constant.role_data){
+                if(role.equals("2")){
+                    result = true;
+                }
+            }
+        }
+        return result;
+    }
+
+    public static boolean isMobile(){
+        boolean result = false;
+        if(Constant.role_data.size() > 0){
+            for(String role : Constant.role_data){
+                if(role.equals("3")){
+                    result = true;
+                }
+            }
+        }
+        return result;
+    }
+
+    public static boolean isCustomer(){
+        boolean result = false;
+        if(Constant.role_data.size() > 0){
+            for(String role : Constant.role_data){
+                if(role.equals("4")){
+                    result = true;
+                }
+            }
+        }
+        return result;
+    }
 }
