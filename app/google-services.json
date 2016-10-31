@@ -1,0 +1,51 @@
+{
+  "project_info": {
+    "project_number": "571036429243",
+    "firebase_url": "https://wiraenergimobile.firebaseio.com",
+    "project_id": "wiraenergimobile",
+    "storage_bucket": "wiraenergimobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571036429243:android:5052484094ef198d",
+        "android_client_info": {
+          "package_name": "uci.develops.wiraenergimobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "571036429243-gv3k9r15v9skp205mbidhibcgirvjrk2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uci.develops.wiraenergimobile",
+            "certificate_hash": "E2785E15FEF6B27D6BA8ACB2898F80FB1FF9AB58"
+          }
+        },
+        {
+          "client_id": "571036429243-rr7mb17n5g5kko7j3agl0u1089s08hrr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [{ "current_key": "" }],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "571036429243-rr7mb17n5g5kko7j3agl0u1089s08hrr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
