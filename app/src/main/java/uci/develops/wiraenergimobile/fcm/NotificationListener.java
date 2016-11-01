@@ -67,6 +67,8 @@ public class NotificationListener extends Service {
 
                     if(tipe.equals("approve_customer")){
                         showNotification(msg, tipe);
+                    } else if(tipe.equals("reject_customer")){
+                        showNotification(msg, tipe);
                     }
 
                     if(!time.equals(time_fcm)) {
@@ -100,6 +102,51 @@ public class NotificationListener extends Service {
             e.printStackTrace();
         }
 
+        if(tipe.equals("approve_customer")) {
+
+            Intent intent;
+            if(new SharedPreferenceManager().getPreferences(this, "is_login").equals("true")){
+                intent = new Intent(this, DashboardCustomerActivity.class);
+            } else {
+                intent = new Intent(this, LoginActivity.class);
+            }
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            int requestCode = 0;
+            // Create destination after clicking notification
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, requestCode, intent, PendingIntent.FLAG_ONE_SHOT);
+            // Customize the notification
+            android.support.v4.app.NotificationCompat.Builder noBuilder = new android.support.v4.app.NotificationCompat.Builder(this)
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setContentTitle("Wira Energi Mobile")
+                    .setContentText(message)
+                    .setAutoCancel(true)
+                    .setContentIntent(pendingIntent);
+
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.notify(0, noBuilder.build()); //0 = ID of notification
+        } else {
+            Intent intent;
+            if(new SharedPreferenceManager().getPreferences(this, "is_login").equals("true")){
+                intent = new Intent(this, DashboardActivity.class);
+            } else {
+                intent = new Intent(this, LoginActivity.class);
+            }
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            int requestCode = 0;
+            // Create destination after clicking notification
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, requestCode, intent, PendingIntent.FLAG_ONE_SHOT);
+            // Customize the notification
+            android.support.v4.app.NotificationCompat.Builder noBuilder = new android.support.v4.app.NotificationCompat.Builder(this)
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setContentTitle("Wira Energi Mobile")
+                    .setContentText(message)
+                    .setAutoCancel(true)
+                    .setContentIntent(pendingIntent);
+
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.notify(0, noBuilder.build()); //0 = ID of notification
+        }
+        /*
         if(!foreground)
         {
             if(tipe.equals("approve_customer")) {
@@ -154,6 +201,7 @@ public class NotificationListener extends Service {
             LocalBroadcastManager.getInstance(this).sendBroadcast(pushNotification);
             Log.e("NotificationListener","Foreground");
         }
+        */
 
     }
 }

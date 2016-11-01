@@ -15,6 +15,7 @@ import uci.develops.wiraenergimobile.response.ListRoleResponse;
 import uci.develops.wiraenergimobile.response.LoginResponse;
 import uci.develops.wiraenergimobile.response.RegisterResponse;
 import uci.develops.wiraenergimobile.response.RequestListCustomerResponse;
+import uci.develops.wiraenergimobile.response.UserResponse;
 
 /**
  * Created by user on 10/22/2016.
@@ -67,4 +68,7 @@ public interface RestInterface {
     @FormUrlEncoded
     @PUT("customer/{decode}")
     Call<ApproveResponse> addFeedback(@Header("Authorization") String token, @Path("decode") String decode, @Field("note") String note);
+
+    @GET("user/{id_user}")
+    Call<UserResponse> getUser(@Header("Authorization") String token, @Path("id_user") int id_user);
 }

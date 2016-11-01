@@ -27,6 +27,7 @@ import uci.develops.wiraenergimobile.helper.Constant;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerModel;
 import uci.develops.wiraenergimobile.response.ApproveResponse;
+import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class FormCustomerActivity extends AppCompatActivity implements View.OnClickListener {
@@ -109,9 +110,27 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                 public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                     if(response.isSuccessful()){
                         Toast.makeText(FormCustomerActivity.this, "Approve request successfull", Toast.LENGTH_SHORT).show();
+                        Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer "+new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), 4);
+                        userResponseCall.enqueue(new Callback<UserResponse>() {
+                            @Override
+                            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                                if(response.isSuccessful()){
+                                    if(response.body().getData().getRegistration_key() != null){
+                                        Constant.sendNotification(response.body().getData().getRegistration_key(), "Request anda telah di setujui", "approve_customer");
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<UserResponse> call, Throwable t) {
+
+                            }
+                        });
+                        /*
                         Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
                         startActivity(intent);
                         finish();
+                        */
                     } else {
                         Toast.makeText(FormCustomerActivity.this, "Unable to approve request", Toast.LENGTH_SHORT).show();
                     }
@@ -130,10 +149,28 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                 @Override
                 public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                     if(response.isSuccessful()){
+                        Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer "+new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), 4);
+                        userResponseCall.enqueue(new Callback<UserResponse>() {
+                            @Override
+                            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                                if(response.isSuccessful()){
+                                    if(response.body().getData().getRegistration_key() != null){
+                                        Constant.sendNotification(response.body().getData().getRegistration_key(), "Request anda telah di tolak", "reject_customer");
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<UserResponse> call, Throwable t) {
+
+                            }
+                        });
                         Toast.makeText(FormCustomerActivity.this, "Reject request successfull", Toast.LENGTH_SHORT).show();
+                        /*
                         Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
                         startActivity(intent);
                         finish();
+                        */
                     } else {
                         Toast.makeText(FormCustomerActivity.this, "Unable to reject request", Toast.LENGTH_SHORT).show();
                     }

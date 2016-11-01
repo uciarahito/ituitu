@@ -71,7 +71,7 @@ public class Constant {
         return result;
     }
 
-    private static void sendNotification(String unique_id, String message, String tipe){
+    public static void sendNotification(String unique_id, String message, String tipe){
         Firebase firebase = new Firebase(Constant.FIREBASE_APP+unique_id);
 
         //Pushing a new element to firebase it will automatically create a unique id
