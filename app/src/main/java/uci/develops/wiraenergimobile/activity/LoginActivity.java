@@ -111,6 +111,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             String token = "";
                             boolean activated;
                             String customer_decode = "";
+                            String registration_key = "";
 
                             status = response.body().getStatus();
                             code = response.body().getCode();

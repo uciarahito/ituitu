@@ -18,8 +18,9 @@ public class LoginResponse {
     private String customer_decode;
     private int active;
     private int approve;
+    private String registration_key;
 
-    public LoginResponse(String status, String code, String info, String token, int user_id, boolean activated, List<Integer> roles, String customer_decode, int active, int approve) {
+    public LoginResponse(String status, String code, String info, String token, int user_id, boolean activated, List<Integer> roles, String customer_decode, int active, int approve, String registration_key) {
         this.status = status;
         this.code = code;
         this.info = info;
@@ -30,6 +31,7 @@ public class LoginResponse {
         this.customer_decode = customer_decode;
         this.active = active;
         this.approve = approve;
+        this.registration_key = registration_key;
     }
 
     public String getStatus() {
@@ -110,5 +112,13 @@ public class LoginResponse {
 
     public void setApprove(int approve) {
         this.approve = approve;
+    }
+
+    public String getRegistration_key() {
+        return registration_key;
+    }
+
+    public void setRegistration_key(String registration_key) {
+        this.registration_key = registration_key;
     }
 }
