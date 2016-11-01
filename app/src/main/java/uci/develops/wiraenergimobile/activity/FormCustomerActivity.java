@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -109,13 +110,14 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                 @Override
                 public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                     if(response.isSuccessful()){
-                        Toast.makeText(FormCustomerActivity.this, "Approve request successfull", Toast.LENGTH_SHORT).show();
                         Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer "+new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), 4);
                         userResponseCall.enqueue(new Callback<UserResponse>() {
                             @Override
                             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                                 if(response.isSuccessful()){
                                     if(response.body().getData().getRegistration_key() != null){
+                                        Toast.makeText(FormCustomerActivity.this, "Approve request successfull", Toast.LENGTH_SHORT).show();
+                                        Log.e("FormCustomer", ""+response.body().getData().getRegistration_key());
                                         Constant.sendNotification(response.body().getData().getRegistration_key(), "Request anda telah di setujui", "approve_customer");
                                     }
                                 }
@@ -155,6 +157,8 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                                 if(response.isSuccessful()){
                                     if(response.body().getData().getRegistration_key() != null){
+                                        Toast.makeText(FormCustomerActivity.this, "Reject request successfull", Toast.LENGTH_SHORT).show();
+                                        Log.e("FormCustomer", ""+response.body().getData().getRegistration_key());
                                         Constant.sendNotification(response.body().getData().getRegistration_key(), "Request anda telah di tolak", "reject_customer");
                                     }
                                 }
@@ -165,7 +169,6 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
 
                             }
                         });
-                        Toast.makeText(FormCustomerActivity.this, "Reject request successfull", Toast.LENGTH_SHORT).show();
                         /*
                         Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
                         startActivity(intent);
