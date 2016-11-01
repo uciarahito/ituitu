@@ -24,6 +24,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.fcm.NotificationListener;
 import uci.develops.wiraenergimobile.helper.Constant;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerModel;
@@ -227,6 +228,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         newFirebase.setValue(val);
 
         String uniqueId = newFirebase.getKey();
+
+        new SharedPreferenceManager().setPreferences(LoginActivity.this,Constant.UNIQUE_ID,uniqueId);
+        startService(new Intent(getBaseContext(), NotificationListener.class));
+
         return uniqueId;
     }
 }

@@ -75,6 +75,9 @@
             android:label="@string/title_activity_list_customer"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <!-- FCM Receiver Service -->
+        <service android:name=".fcm.NotificationListener" />
+
         <meta-data
             android:name="DATABASE"
             android:value="wiraenergi.db" />
