@@ -72,11 +72,11 @@ public class Constant {
     }
 
     public static void sendNotification(String unique_id, String message, String tipe){
-        Firebase firebase = new Firebase(Constant.FIREBASE_APP+unique_id);
+        Firebase ref = new Firebase(Constant.FIREBASE_APP+unique_id);
 
         //Pushing a new element to firebase it will automatically create a unique id
-        Firebase newFirebase = firebase.push();
-
+        //ref.child(unique_id);
+        ref.push();
         //Creating a map to store name value pair
         Map<String, String> val = new HashMap<>();
 
@@ -84,7 +84,6 @@ public class Constant {
         val.put("message", ""+message);
         val.put("tipe",""+tipe);
         val.put("time", "" + new SharedPreferenceManager().getCurrentDateTime());
-        //saving the map to firebase
-        newFirebase.setValue(val);
+        ref.setValue(val);
     }
 }
