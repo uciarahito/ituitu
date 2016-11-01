@@ -17,6 +17,7 @@ public class Constant {
     public boolean is_login = false;
     public int id_login = 0;
     public String role_login = "";
+    public static String FIREBASE_APP = "https://wiraenergimobile.firebaseio.com/";
 
     /**
      * semi database

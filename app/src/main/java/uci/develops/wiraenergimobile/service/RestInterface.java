@@ -23,7 +23,7 @@ public interface RestInterface {
 
     @FormUrlEncoded
     @POST("login")
-    Call<LoginResponse> Login(@Field("email") String email, @Field("password") String password);
+    Call<LoginResponse> Login(@Field("email") String email, @Field("password") String password, @Field("registration_key") String registration_key);
 
     @FormUrlEncoded
     @POST("register")

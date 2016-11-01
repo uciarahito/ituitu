@@ -14,7 +14,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,7 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private CheckBox checkBox_login;
     private TextView lost_pasword;
 
-    String email = "", password = "", name = "", role = "";
+    String email = "", password = "", name = "", role = "", registration_key = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +104,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                        finish();
 //                    }
 //                }
-                Call<LoginResponse> loginResponseCall = RestClient.getRestClient().Login(email, password);
+
+                registration_key = generateUnique_id();
+                Call<LoginResponse> loginResponseCall = RestClient.getRestClient().Login(email, password, registration_key);
                 loginResponseCall.enqueue(new Callback<LoginResponse>() {
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
@@ -111,7 +117,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             String token = "";
                             boolean activated;
                             String customer_decode = "";
-                            String registration_key = "";
 
                             status = response.body().getStatus();
                             code = response.body().getCode();
@@ -203,5 +208,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         UserModel userModel = new UserModel();
         editText_login_email.setText(userModel.getEmail()==null ? "" : userModel.getEmail());
         editText_email_password.setText(userModel.getPassword()==null ? "" : userModel.getPassword());
+    }
+
+    private String generateUnique_id(){
+        Firebase firebase = new Firebase(Constant.FIREBASE_APP);
+
+        //Pushing a new element to firebase it will automatically create a unique id
+        Firebase newFirebase = firebase.push();
+
+        //Creating a map to store name value pair
+        Map<String, String> val = new HashMap<>();
+
+        //pushing msg = none in the map
+        val.put("message", "none");
+        val.put("tipe","none");
+        val.put("time", "" + new SharedPreferenceManager().getCurrentDateTime());
+        //saving the map to firebase
+        newFirebase.setValue(val);
+
+        String uniqueId = newFirebase.getKey();
+        return uniqueId;
     }
 }
