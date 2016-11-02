@@ -22,6 +22,7 @@ import uci.develops.wiraenergimobile.activity.DashboardActivity;
 import uci.develops.wiraenergimobile.activity.DashboardAdminActivity;
 import uci.develops.wiraenergimobile.activity.DashboardCustomerActivity;
 import uci.develops.wiraenergimobile.activity.LoginActivity;
+import uci.develops.wiraenergimobile.activity.WaitingApprovalActivity;
 import uci.develops.wiraenergimobile.helper.Constant;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 
@@ -67,7 +68,11 @@ public class NotificationListener extends Service {
 
                     if(tipe.equals("approve_customer")){
                         showNotification(msg, tipe);
-                    } else if(tipe.equals("reject_customer")){
+                    }
+                    if(tipe.equals("feedback_customer")){
+                        showNotification(msg, tipe);
+                    }
+                    if(tipe.equals("reject_customer")){
                         showNotification(msg, tipe);
                     }
 
@@ -75,7 +80,6 @@ public class NotificationListener extends Service {
                         new SharedPreferenceManager().setPreferences(NotificationListener.this, "time_fcm", time);
                         showNotification(msg, tipe);
                     }
-
                 } catch (Exception e) {
                     Log.e("NotificationListener", "Gak masuk");
                 }
@@ -124,7 +128,31 @@ public class NotificationListener extends Service {
 
             NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.notify(0, noBuilder.build()); //0 = ID of notification
-        } else {
+        }
+        if(tipe.equals("feedback_customer")) {
+
+            Intent intent;
+            if(new SharedPreferenceManager().getPreferences(this, "is_login").equals("true")){
+                intent = new Intent(this, WaitingApprovalActivity.class);
+            } else {
+                intent = new Intent(this, LoginActivity.class);
+            }
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            int requestCode = 0;
+            // Create destination after clicking notification
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, requestCode, intent, PendingIntent.FLAG_ONE_SHOT);
+            // Customize the notification
+            android.support.v4.app.NotificationCompat.Builder noBuilder = new android.support.v4.app.NotificationCompat.Builder(this)
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setContentTitle("Wira Energi Mobile")
+                    .setContentText(message)
+                    .setAutoCancel(true)
+                    .setContentIntent(pendingIntent);
+
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.notify(0, noBuilder.build()); //0 = ID of notification
+        }
+        if(tipe.equals("reject_customer")) {
             Intent intent;
             if(new SharedPreferenceManager().getPreferences(this, "is_login").equals("true")){
                 intent = new Intent(this, DashboardActivity.class);

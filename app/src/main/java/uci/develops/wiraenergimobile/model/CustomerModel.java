@@ -5,6 +5,7 @@ package uci.develops.wiraenergimobile.model;
  */
 public class CustomerModel {
     public int id;
+    public int user_id;
     private String decode;
     private String first_name;
     private String last_name;
@@ -71,8 +72,9 @@ public class CustomerModel {
 
     public CustomerModel(){}
 
-    public CustomerModel(int id, String decode, String first_name, String last_name, String address, String city, String province, String postcode, String ktp, String gender, String birthplace, String birthday, String mobile, String phone, String fax, String email, String website, String type, String detail_payment, String term, String npwp, String tax, String valuta, String note, String map, String detail_shipping, String remember_token, String created_at, String updated_at, String register_at, String created_by, String updated_by, int active, int approve, String detail, String deleted_at, String shipping_pic, String shipping_address, String shipping_city, String shipping_province, String shipping_postcode, String shipping_eta, String shipping_map, String shipping_phone, String shipping_mobile, String shipping_email, String shipping_fax, String shipping_tax, String shipping_note, String name1, String phone1, String mobile1, String email1, String jabatan1, String name2, String phone2, String mobile2, String email2, String jabatan2, String name3, String phone3, String mobile3, String email3, String jabatan3) {
+    public CustomerModel(int id, int user_id, String decode, String first_name, String last_name, String address, String city, String province, String postcode, String ktp, String gender, String birthplace, String birthday, String mobile, String phone, String fax, String email, String website, String type, String detail_payment, String term, String npwp, String tax, String valuta, String note, String map, String detail_shipping, String remember_token, String created_at, String updated_at, String register_at, String created_by, String updated_by, int active, int approve, String detail, String deleted_at, String shipping_pic, String shipping_address, String shipping_city, String shipping_province, String shipping_postcode, String shipping_eta, String shipping_map, String shipping_phone, String shipping_mobile, String shipping_email, String shipping_fax, String shipping_tax, String shipping_note, String name1, String phone1, String mobile1, String email1, String jabatan1, String name2, String phone2, String mobile2, String email2, String jabatan2, String name3, String phone3, String mobile3, String email3, String jabatan3) {
         this.id = id;
+        this.user_id = user_id;
         this.decode = decode;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -144,6 +146,14 @@ public class CustomerModel {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public String getDecode() {
