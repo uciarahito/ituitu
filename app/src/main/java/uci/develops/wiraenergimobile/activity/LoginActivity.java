@@ -131,6 +131,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             //Toast.makeText(LoginActivity.this, activated + "  " + token, Toast.LENGTH_SHORT).show();
                             new SharedPreferenceManager().setPreferences(LoginActivity.this, "token", token);
                             new SharedPreferenceManager().setPreferences(LoginActivity.this, "customer_decode", customer_decode);
+                            new SharedPreferenceManager().setPreferences(LoginActivity.this, "is_login", "true");
                             if (activated == true){
                                 Call<ListRoleResponse> listRoleResponseCall = RestClient.getRestClient().getAllRoles("Bearer "+token);
                                 listRoleResponseCall.enqueue(new Callback<ListRoleResponse>() {

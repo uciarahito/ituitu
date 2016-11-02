@@ -12,12 +12,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".helper.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="Wira Energi Mobile"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".helper.MyApplication">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
@@ -28,6 +28,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -109,6 +110,7 @@
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -119,15 +121,20 @@
         <activity
             android:name=".activity.VerificationStatusActivity"
             android:label="@string/title_activity_verification_status"
-            android:theme="@style/AppTheme.NoActionBar" >
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activity.WaitingApprovalActivity"
             android:label="@string/title_activity_waiting_approval"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.RequestQuotationActivity"
+            android:label="@string/title_activity_request_quotation"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
