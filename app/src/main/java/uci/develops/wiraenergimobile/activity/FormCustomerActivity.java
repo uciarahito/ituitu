@@ -110,7 +110,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                 @Override
                 public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                     if (response.isSuccessful()) {
-                        Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), 4);
+                        Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_user_id")));
                         userResponseCall.enqueue(new Callback<UserResponse>() {
                             @Override
                             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
@@ -151,7 +151,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                 @Override
                 public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                     if (response.isSuccessful()) {
-                        Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), 4);
+                        Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_user_id")));
                         userResponseCall.enqueue(new Callback<UserResponse>() {
                             @Override
                             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
@@ -403,7 +403,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                             if (response.isSuccessful()) {
 
                                 //baru ditambah uci
-                                Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer "+new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), 4);
+                                Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer "+new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_user_id")));
                                 userResponseCall.enqueue(new Callback<UserResponse>() {
                                     @Override
                                     public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
