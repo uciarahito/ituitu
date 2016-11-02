@@ -36,7 +36,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
     String id = "", name = "", address = "", city = "", province = "", zip_code = "", phone = "", mobile = "", fax = "", term = "",
             valuta = "", npwp = "", tax_ppn = "", active = "", email = "", website = "", note = "";
 
-    private String decode="", token="";
+    private String decode = "", token = "";
 
     public FragmentFormCustomerCompanyInfo() {
         // Required empty public constructor
@@ -90,7 +90,6 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         ArrayAdapter<String> valutaAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
                 android.R.layout.simple_spinner_item, valutas);
         valutaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        valutaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinner_valuta.setAdapter(valutaAdapter);
 
         List<String> check_List = new ArrayList<String>();
@@ -139,7 +138,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         return result;
     }
 
-    public CustomerModel getFormValue(){
+    public CustomerModel getFormValue() {
         CustomerModel customerModel = new CustomerModel();
         customerModel.setFirst_name(name);
         customerModel.setLast_name(name);
@@ -161,27 +160,27 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         return customerModel;
     }
 
-    private void loadData(){
-        Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer "+token, decode);
+    private void loadData() {
+        Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer " + token, decode);
         customerResponseCall.enqueue(new Callback<CustomerResponse>() {
             @Override
             public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     CustomerModel customerModel = new CustomerModel();
                     customerModel = response.body().getData();
-                    editText_first_name.setText(customerModel.getFirst_name()==null ? "" : customerModel.getFirst_name());
-                    editText_address.setText(customerModel.getAddress()==null ? "" : customerModel.getAddress());
-                    autoComplete_city.setText(customerModel.getCity()==null ? "" : customerModel.getCity());
-                    autoComplete_province.setText(customerModel.getProvince()==null ? "" : customerModel.getProvince());
-                    editText_phone.setText(customerModel.getPhone()==null ? "" : customerModel.getPhone());
-                    editText_mobile.setText(customerModel.getMobile()==null ? "" : customerModel.getMobile());
-                    editText_fax.setText(customerModel.getFax()==null ? "" : customerModel.getFax());
-                    editText_term.setText(customerModel.getTerm()==null ? "" : customerModel.getTerm());
-                    editText_npwp.setText(customerModel.getNpwp()==null ? "" : customerModel.getNpwp());
-                    editText_email.setText(customerModel.getEmail()==null ? "" : customerModel.getEmail());
-                    editText_website.setText(customerModel.getWebsite()==null ? "" : customerModel.getWebsite());
-                    editText_note.setText(customerModel.getNote()==null ? "" : customerModel.getNote());
-                    editText_zip_code.setText(customerModel.getPostcode()==null ? "" : customerModel.getPostcode());
+                    editText_first_name.setText(customerModel.getFirst_name() == null ? "" : customerModel.getFirst_name());
+                    editText_address.setText(customerModel.getAddress() == null ? "" : customerModel.getAddress());
+                    autoComplete_city.setText(customerModel.getCity() == null ? "" : customerModel.getCity());
+                    autoComplete_province.setText(customerModel.getProvince() == null ? "" : customerModel.getProvince());
+                    editText_phone.setText(customerModel.getPhone() == null ? "" : customerModel.getPhone());
+                    editText_mobile.setText(customerModel.getMobile() == null ? "" : customerModel.getMobile());
+                    editText_fax.setText(customerModel.getFax() == null ? "" : customerModel.getFax());
+                    editText_term.setText(customerModel.getTerm() == null ? "" : customerModel.getTerm());
+                    editText_npwp.setText(customerModel.getNpwp() == null ? "" : customerModel.getNpwp());
+                    editText_email.setText(customerModel.getEmail() == null ? "" : customerModel.getEmail());
+                    editText_website.setText(customerModel.getWebsite() == null ? "" : customerModel.getWebsite());
+                    editText_note.setText(customerModel.getNote() == null ? "" : customerModel.getNote());
+                    editText_zip_code.setText(customerModel.getPostcode() == null ? "" : customerModel.getPostcode());
                 }
             }
 
@@ -190,5 +189,25 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
 
             }
         });
+    }
+
+    public void readOnly() {
+        editText_id.setEnabled(false);
+        editText_first_name.setEnabled(false);
+        editText_address.setEnabled(false);
+        autoComplete_city.setEnabled(false);
+        autoComplete_province.setEnabled(false);
+        editText_zip_code.setEnabled(false);
+        editText_phone.setEnabled(false);
+        editText_mobile.setEnabled(false);
+        editText_fax.setEnabled(false);
+        editText_term.setEnabled(false);
+        spinner_valuta.setEnabled(false);
+        editText_npwp.setEnabled(false);
+        spinner_tax_ppn.setEnabled(false);
+        spinner_active.setEnabled(false);
+        editText_email.setEnabled(false);
+        editText_website.setEnabled(false);
+        editText_note.setEnabled(false);
     }
 }

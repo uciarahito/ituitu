@@ -31,7 +31,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginBottom="5dp"
             android:weightSum="6">
 
             <TextView
@@ -50,16 +50,13 @@
                 android:layout_weight="4"
                 android:background="@drawable/edit_text_background"
                 android:imeOptions="actionNext"
-                android:maxLines="1"
                 android:spinnerMode="dialog"
-                app:layout_columnWeight="1"
                 app:layout_gravity="center_vertical" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:orientation="vertical">
 
             <TextView
@@ -77,13 +74,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:weightSum="6">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
                 android:layout_weight="2"
                 android:gravity="end"
                 android:text="Name:"
@@ -96,22 +91,18 @@
                 android:layout_weight="4"
                 android:background="@drawable/edit_text_background"
                 android:imeOptions="actionNext"
-                android:maxLines="1"
                 android:spinnerMode="dialog"
-                app:layout_columnWeight="1"
                 app:layout_gravity="center_vertical" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:weightSum="6">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
                 android:layout_weight="2"
                 android:gravity="end"
                 android:textStyle="bold" />
@@ -142,9 +133,7 @@
                     android:layout_weight="4"
                     android:background="@drawable/edit_text_background"
                     android:imeOptions="actionNext"
-                    android:maxLines="1"
                     android:spinnerMode="dialog"
-                    app:layout_columnWeight="1"
                     app:layout_gravity="center_vertical" />
             </LinearLayout>
         </LinearLayout>
@@ -152,13 +141,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:weightSum="6">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
                 android:layout_weight="2"
                 android:gravity="end"
                 android:textStyle="bold" />
@@ -189,9 +176,7 @@
                     android:layout_weight="4"
                     android:background="@drawable/edit_text_background"
                     android:imeOptions="actionNext"
-                    android:maxLines="1"
                     android:spinnerMode="dialog"
-                    app:layout_columnWeight="1"
                     app:layout_gravity="center_vertical" />
             </LinearLayout>
         </LinearLayout>
@@ -199,13 +184,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:weightSum="6">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
                 android:layout_weight="2"
                 android:gravity="end"
                 android:text="Email:"
@@ -218,22 +201,18 @@
                 android:layout_weight="4"
                 android:background="@drawable/edit_text_background"
                 android:imeOptions="actionNext"
-                android:maxLines="1"
                 android:spinnerMode="dialog"
-                app:layout_columnWeight="1"
                 app:layout_gravity="center_vertical" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:weightSum="6">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
                 android:layout_weight="2"
                 android:gravity="end"
                 android:text="Jabatan:"
@@ -246,26 +225,152 @@
                 android:layout_weight="4"
                 android:background="@drawable/edit_text_background"
                 android:imeOptions="actionNext"
-                android:maxLines="1"
                 android:spinnerMode="dialog"
-                app:layout_columnWeight="1"
                 app:layout_gravity="center_vertical" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:weightSum="6">
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
                 android:layout_weight="2"
                 android:gravity="end"
+                android:layout_marginRight="10dp"
                 android:text="Tanggal Kirim:"
                 android:textStyle="bold" />
 
+            <EditText
+                android:id="@+id/editText_tgl_kirim"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="4"
+                android:background="@drawable/rounded_rectangle_gray" />
+
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="6">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="end"
+                android:text="Item:"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_item"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:background="@drawable/edit_text_background"
+                android:imeOptions="actionNext"
+                android:spinnerMode="dialog"
+                app:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="6">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="end"
+                android:text="Satuan:"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_satuan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:background="@drawable/edit_text_background"
+                android:imeOptions="actionNext"
+                android:spinnerMode="dialog"
+                app:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="6">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="end"
+                android:text="Qty:"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_qty"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:background="@drawable/edit_text_background"
+                android:imeOptions="actionNext"
+                android:spinnerMode="dialog"
+                app:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="6"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="end"
+                android:text="Keterangan:"
+                android:textStyle="bold"
+                android:layout_marginRight="10dp"/>
+
+            <EditText
+                android:id="@+id/editText_keterangan"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="4"
+                android:background="@drawable/rounded_rectangle_gray" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_save"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/rounded_rectangle_gray"
+                android:text="@string/save"
+                android:textAllCaps="false"
+                android:layout_marginRight="5dp"/>
+
+            <Button
+                android:id="@+id/button_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@color/GreenColor"
+                android:text="@string/submit"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppTheme.Small"
+                android:textColor="@color/White" />
+        </LinearLayout>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

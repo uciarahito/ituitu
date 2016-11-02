@@ -24,16 +24,16 @@ import uci.develops.wiraenergimobile.service.RestClient;
  * Created by user on 10/22/2016.
  */
 
-public class FragmentFormCustomerShippingTo extends Fragment{
+public class FragmentFormCustomerShippingTo extends Fragment {
 
     private EditText editText_pic_name, editText_address, editText_postcode, editText_eta,
             editText_email, editText_phone, editText_mobile, editText_fax, editText_tax, editText_map_cordinate, editText_note;
     private AutoCompleteTextView autoComplete_city, autoComplete_province;
     private LinearLayout linear_layout_eta;
 
-    String pic_name="", address="", city="", province="", postcode="", eta="", map="", email="", phone="", mobile="", fax="",tax="",  note="";
+    String pic_name = "", address = "", city = "", province = "", postcode = "", eta = "", map = "", email = "", phone = "", mobile = "", fax = "", tax = "", note = "";
 
-    private String decode="", token="";
+    private String decode = "", token = "";
 
     public FragmentFormCustomerShippingTo() {
         // Required empty public constructor
@@ -50,7 +50,7 @@ public class FragmentFormCustomerShippingTo extends Fragment{
         // Inflate the layout for this fragment
         View view;
         view = inflater.inflate(R.layout.fragment_form_customer_shipping_to, container, false);
-        editText_map_cordinate = (EditText)view.findViewById(R.id.editText_map_coordinate);
+        editText_map_cordinate = (EditText) view.findViewById(R.id.editText_map_coordinate);
 
         editText_map_cordinate.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -68,33 +68,33 @@ public class FragmentFormCustomerShippingTo extends Fragment{
         return view;
     }
 
-    private void initializeComponent(View view){
-        editText_pic_name = (EditText)view.findViewById(R.id.editText_pic_name);
-        editText_address = (EditText)view.findViewById(R.id.editText_address);
-        autoComplete_city = (AutoCompleteTextView)view.findViewById(R.id.autoComplete_city);
-        autoComplete_province = (AutoCompleteTextView)view.findViewById(R.id.autoComplete_province);
-        editText_postcode = (EditText)view.findViewById(R.id.editText_postcode);
-        editText_eta = (EditText)view.findViewById(R.id.editText_eta);
-        editText_map_cordinate = (EditText)view.findViewById(R.id.editText_map_coordinate);
-        editText_email = (EditText)view.findViewById(R.id.editText_email);
-        editText_phone = (EditText)view.findViewById(R.id.editText_phone);
-        editText_mobile = (EditText)view.findViewById(R.id.editText_mobile);
-        editText_fax = (EditText)view.findViewById(R.id.editText_fax);
-        editText_tax = (EditText)view.findViewById(R.id.editText_tax);
-        editText_note = (EditText)view.findViewById(R.id.editText_note);
-        linear_layout_eta = (LinearLayout)view.findViewById(R.id.linear_layout_eta);
+    private void initializeComponent(View view) {
+        editText_pic_name = (EditText) view.findViewById(R.id.editText_pic_name);
+        editText_address = (EditText) view.findViewById(R.id.editText_address);
+        autoComplete_city = (AutoCompleteTextView) view.findViewById(R.id.autoComplete_city);
+        autoComplete_province = (AutoCompleteTextView) view.findViewById(R.id.autoComplete_province);
+        editText_postcode = (EditText) view.findViewById(R.id.editText_postcode);
+        editText_eta = (EditText) view.findViewById(R.id.editText_eta);
+        editText_map_cordinate = (EditText) view.findViewById(R.id.editText_map_coordinate);
+        editText_email = (EditText) view.findViewById(R.id.editText_email);
+        editText_phone = (EditText) view.findViewById(R.id.editText_phone);
+        editText_mobile = (EditText) view.findViewById(R.id.editText_mobile);
+        editText_fax = (EditText) view.findViewById(R.id.editText_fax);
+        editText_tax = (EditText) view.findViewById(R.id.editText_tax);
+        editText_note = (EditText) view.findViewById(R.id.editText_note);
+        linear_layout_eta = (LinearLayout) view.findViewById(R.id.linear_layout_eta);
 
         String[] province = getActivity().getResources().getStringArray(R.array.list_of_province);
         String[] city = getActivity().getResources().getStringArray(R.array.list_of_city);
 
-        ArrayAdapter<String> provinceAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),android.R.layout.simple_list_item_1,province);
+        ArrayAdapter<String> provinceAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, province);
         autoComplete_province.setAdapter(provinceAdapter);
 
-        ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),android.R.layout.simple_list_item_1,city);
+        ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, city);
         autoComplete_city.setAdapter(cityAdapter);
     }
 
-    public boolean isNotEmpty(){
+    public boolean isNotEmpty() {
         pic_name = editText_pic_name.getText().toString();
         address = editText_address.getText().toString();
         city = autoComplete_city.getText().toString();
@@ -112,16 +112,16 @@ public class FragmentFormCustomerShippingTo extends Fragment{
         //cek jika role == admin maka visible, selain admin invisible
         editText_eta.setVisibility(View.INVISIBLE);
 
-        boolean result=false;
-        if(!pic_name.equals("") && !address.equals("") && !city.equals("") && !province.equals("") && !postcode.equals("")
-                && !eta.equals("") && !email.equals("") && !phone.equals("") && !mobile.equals("")){
+        boolean result = false;
+        if (!pic_name.equals("") && !address.equals("") && !city.equals("") && !province.equals("") && !postcode.equals("")
+                && !eta.equals("") && !email.equals("") && !phone.equals("") && !mobile.equals("")) {
 
-            result=true;
+            result = true;
         }
-        return  result;
+        return result;
     }
 
-    public CustomerModel getFormValue(){
+    public CustomerModel getFormValue() {
         CustomerModel customerModel = new CustomerModel();
         customerModel.setShipping_pic(pic_name);
         customerModel.setShipping_address(address);
@@ -140,27 +140,27 @@ public class FragmentFormCustomerShippingTo extends Fragment{
         return customerModel;
     }
 
-    private void loadData(){
-        Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer "+token, decode);
+    private void loadData() {
+        Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer " + token, decode);
         customerResponseCall.enqueue(new Callback<CustomerResponse>() {
             @Override
             public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     CustomerModel customerModel = new CustomerModel();
                     customerModel = response.body().getData();
-                    editText_pic_name.setText(customerModel.getShipping_pic()==null ? "" : customerModel.getShipping_pic());
-                    editText_address.setText(customerModel.getShipping_address()==null ? "" : customerModel.getShipping_address());
-                    autoComplete_city.setText(customerModel.getShipping_city()==null ? "" : customerModel.getShipping_city());
-                    autoComplete_province.setText(customerModel.getShipping_province()==null ? "" : customerModel.getShipping_province());
-                    editText_postcode.setText(customerModel.getShipping_postcode()==null ? "" : customerModel.getShipping_postcode());
-                    editText_eta.setText(customerModel.getShipping_eta()==null ? "" : customerModel.getShipping_eta());
-                    editText_map_cordinate.setText(customerModel.getShipping_map()==null ? "" : customerModel.getShipping_map());
-                    editText_phone.setText(customerModel.getShipping_phone()==null ? "" : customerModel.getShipping_phone());
-                    editText_mobile.setText(customerModel.getShipping_mobile()==null ? "" : customerModel.getShipping_mobile());
-                    editText_email.setText(customerModel.getShipping_email()==null ? "" : customerModel.getShipping_email());
-                    editText_fax.setText(customerModel.getShipping_fax()==null ? "" : customerModel.getShipping_fax());
-                    editText_tax.setText(customerModel.getShipping_tax()==null ? "" : customerModel.getShipping_tax());
-                    editText_note.setText(customerModel.getShipping_note()==null ? "" : customerModel.getShipping_note());
+                    editText_pic_name.setText(customerModel.getShipping_pic() == null ? "" : customerModel.getShipping_pic());
+                    editText_address.setText(customerModel.getShipping_address() == null ? "" : customerModel.getShipping_address());
+                    autoComplete_city.setText(customerModel.getShipping_city() == null ? "" : customerModel.getShipping_city());
+                    autoComplete_province.setText(customerModel.getShipping_province() == null ? "" : customerModel.getShipping_province());
+                    editText_postcode.setText(customerModel.getShipping_postcode() == null ? "" : customerModel.getShipping_postcode());
+                    editText_eta.setText(customerModel.getShipping_eta() == null ? "" : customerModel.getShipping_eta());
+                    editText_map_cordinate.setText(customerModel.getShipping_map() == null ? "" : customerModel.getShipping_map());
+                    editText_phone.setText(customerModel.getShipping_phone() == null ? "" : customerModel.getShipping_phone());
+                    editText_mobile.setText(customerModel.getShipping_mobile() == null ? "" : customerModel.getShipping_mobile());
+                    editText_email.setText(customerModel.getShipping_email() == null ? "" : customerModel.getShipping_email());
+                    editText_fax.setText(customerModel.getShipping_fax() == null ? "" : customerModel.getShipping_fax());
+                    editText_tax.setText(customerModel.getShipping_tax() == null ? "" : customerModel.getShipping_tax());
+                    editText_note.setText(customerModel.getShipping_note() == null ? "" : customerModel.getShipping_note());
                 }
             }
 
@@ -169,5 +169,22 @@ public class FragmentFormCustomerShippingTo extends Fragment{
 
             }
         });
+    }
+
+    public void readOnly() {
+        editText_pic_name.setEnabled(false);
+        editText_address.setEnabled(false);
+        autoComplete_city.setEnabled(false);
+        autoComplete_province.setEnabled(false);
+        editText_postcode.setEnabled(false);
+        editText_eta.setEnabled(false);
+        editText_map_cordinate.setEnabled(false);
+        editText_email.setEnabled(false);
+        editText_phone.setEnabled(false);
+        editText_mobile.setEnabled(false);
+        editText_fax.setEnabled(false);
+        editText_tax.setEnabled(false);
+        editText_note.setEnabled(false);
+
     }
 }

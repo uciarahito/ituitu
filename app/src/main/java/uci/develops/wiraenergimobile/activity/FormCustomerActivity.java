@@ -295,6 +295,15 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                                                         finish();
                                                     } else {
                                                         Toast.makeText(FormCustomerActivity.this, "Waiting for approval", Toast.LENGTH_SHORT).show();
+                                                        FragmentFormCustomerCompanyInfo fragmentFormCustomerCompanyInfo = (FragmentFormCustomerCompanyInfo) getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_company_info);
+                                                        fragmentFormCustomerCompanyInfo.readOnly();
+
+                                                        FragmentFormCustomerContactInfo fragmentFormCustomerContactInfo = (FragmentFormCustomerContactInfo) getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_contact_info);
+                                                        fragmentFormCustomerContactInfo.readOnly();
+
+                                                        FragmentFormCustomerShippingTo fragmentFormCustomerShippingTo = (FragmentFormCustomerShippingTo) getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_shipping_to);
+                                                        fragmentFormCustomerShippingTo.readOnly();
+
                                                         Intent intent = new Intent(FormCustomerActivity.this, WaitingApprovalActivity.class);
                                                         startActivity(intent);
                                                         finish();
@@ -417,7 +426,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                                             if (response.body().getData().getRegistration_key() != null) {
                                                 Toast.makeText(FormCustomerActivity.this, "Berhasil menambahkan feedback", Toast.LENGTH_SHORT).show();
                                                 Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
-                                                Constant.sendNotification(response.body().getData().getRegistration_key(), ""+editText_feedback.getText().toString(), "feedback_customer");
+                                                Constant.sendNotification(response.body().getData().getRegistration_key(), "" + editText_feedback.getText().toString(), "feedback_customer");
                                                 Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
                                                 startActivity(intent);
                                                 finish();
