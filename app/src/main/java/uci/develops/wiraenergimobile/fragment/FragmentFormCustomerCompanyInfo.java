@@ -169,7 +169,6 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
                 if(response.isSuccessful()){
                     CustomerModel customerModel = new CustomerModel();
                     customerModel = response.body().getData();
-                    new SharedPreferenceManager().setPreferences(getContext(), "customer_user_id", ""+customerModel.getUser_id());
                     editText_first_name.setText(customerModel.getFirst_name()==null ? "" : customerModel.getFirst_name());
                     editText_address.setText(customerModel.getAddress()==null ? "" : customerModel.getAddress());
                     autoComplete_city.setText(customerModel.getCity()==null ? "" : customerModel.getCity());

@@ -81,6 +81,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
                  * menampung di shared preference
                  */
                 new SharedPreferenceManager().setPreferences(context, "customer_decode", ""+customerModel.getDecode());
+                new SharedPreferenceManager().setPreferences(context, "customer_user_id", ""+customerModel.getUser_id());
                 Intent intent = new Intent(context, FormCustomerActivity.class);
                 context.startActivity(intent);
             }

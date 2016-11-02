@@ -119,6 +119,9 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                                         Toast.makeText(FormCustomerActivity.this, "Approve request successfull", Toast.LENGTH_SHORT).show();
                                         Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
                                         Constant.sendNotification(response.body().getData().getRegistration_key(), "Request anda telah di setujui", "approve_customer");
+                                        Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
+                                        startActivity(intent);
+                                        finish();
                                     }
                                 }
                             }
@@ -159,7 +162,10 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                                     if (response.body().getData().getRegistration_key() != null) {
                                         Toast.makeText(FormCustomerActivity.this, "Reject request successfull", Toast.LENGTH_SHORT).show();
                                         Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
-                                        Constant.sendNotification(response.body().getData().getRegistration_key(), "Request anda telah di tolak", "reject_customer");
+                                        Constant.sendNotification(response.body().getData().getRegistration_key(), "Request telah di tolak", "reject_customer");
+                                        Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
+                                        startActivity(intent);
+                                        finish();
                                     }
                                 }
                             }
@@ -411,7 +417,10 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                                             if (response.body().getData().getRegistration_key() != null) {
                                                 Toast.makeText(FormCustomerActivity.this, "Berhasil menambahkan feedback", Toast.LENGTH_SHORT).show();
                                                 Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
-                                                Constant.sendNotification(response.body().getData().getRegistration_key(), "Data anda tidak valid, periksa kembali data anda", "feedback_customer");
+                                                Constant.sendNotification(response.body().getData().getRegistration_key(), ""+editText_feedback.getText().toString(), "feedback_customer");
+                                                Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
+                                                startActivity(intent);
+                                                finish();
                                             }
                                         }
                                     }
