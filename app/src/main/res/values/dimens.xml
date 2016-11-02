@@ -26,4 +26,5 @@
     <dimen name="toolbar_bottom_protector_height">24dp</dimen>
     <dimen name="footer_bar_height">56dp</dimen>
     <dimen name="narrow_container">320dp</dimen>
+    <dimen name="narrow_container_request_penawaran">360dp</dimen>
 </resources>

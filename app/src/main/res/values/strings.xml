@@ -185,6 +185,8 @@
     <string name="welcome">Welcome, </string>
     <string name="selected_item">Selected item</string>
 
+    <string name="title_request_penawaran">Request Quotation</string>
+
     <string-array name="general">
         <item>Master Setup</item>
         <item>Purchasing</item>
