@@ -292,36 +292,16 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                                         final CustomerModel customerModel = new CustomerModel();
                                         Toast.makeText(FormCustomerActivity.this, "Successfully inserted", Toast.LENGTH_SHORT).show();
                                         //baru ditambah
-                                        Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().requestCustomerAction(
-                                                "Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), customerModel.getDecode(), 3, 0);
-                                        approveResponseCall.enqueue(new Callback<ApproveResponse>() {
+                                        Call<ApproveResponse> submitCustomerResponse = RestClient.getRestClient().customerSubmit("Bearer "+new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
+                                                new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), 3);
+                                        submitCustomerResponse.enqueue(new Callback<ApproveResponse>() {
                                             @Override
                                             public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                                                if (response.isSuccessful()) {
-                                                    if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("mobile")) {
-                                                        Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
-                                                        startActivity(intent);
-                                                        finish();
-                                                    } else {
-                                                        Call<ApproveResponse> submitCustomerResponse = RestClient.getRestClient().customerSubmit("Bearer "+new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
-                                                                new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), 3);
-                                                        submitCustomerResponse.enqueue(new Callback<ApproveResponse>() {
-                                                            @Override
-                                                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                                                                if(response.isSuccessful()){
-                                                                    Toast.makeText(FormCustomerActivity.this, "Waiting for approval", Toast.LENGTH_SHORT).show();
-                                                                    Intent intent = new Intent(FormCustomerActivity.this, WaitingApprovalActivity.class);
-                                                                    startActivity(intent);
-                                                                    finish();
-                                                                }
-                                                            }
-
-                                                            @Override
-                                                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
-
-                                                            }
-                                                        });
-                                                    }
+                                                if(response.isSuccessful()){
+                                                    Toast.makeText(FormCustomerActivity.this, "Waiting for approval", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(FormCustomerActivity.this, WaitingApprovalActivity.class);
+                                                    startActivity(intent);
+                                                    finish();
                                                 }
                                             }
 
