@@ -126,8 +126,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             info = response.body().getInfo();
                             token = response.body().getToken();
                             final int user_id = response.body().getUser_id();
-                            final int active = response.body().getActive();
-                            final int approve = response.body().getApprove();
+                            final String active = response.body().getActive();
+                            final String approve = response.body().getApprove();
                             activated = response.body().isActivated();
                             customer_decode = response.body().getCustomer_decode();
                             //Toast.makeText(LoginActivity.this, activated + "  " + token, Toast.LENGTH_SHORT).show();
@@ -143,35 +143,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         if (response.isSuccessful()) {
                                             if (response.body().getData().size() > 0) {
                                                 for (RoleModel roleModel : response.body().getData()) {
-                                                    if (roleModel.getRole_id() == 3) {
-                                                        new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "mobile");
-                                                    } else if (roleModel.getRole_id() == 4) {
-                                                        new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "customer");
-                                                    }
-
                                                     if (roleModel.getUser_id() == user_id) {
                                                         if (roleModel.getRole_id() == 4) {
-                                                            if (active == 1) {
+                                                            new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "customer");
+                                                            if (active == "1") {
                                                                 Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                                                                 startActivity(intent);
                                                             } else {
-                                                                if (approve == 0) {
+                                                                if (approve == "0") {
                                                                     Intent intent = new Intent(LoginActivity.this, VerificationStatusActivity.class);
                                                                     startActivity(intent);
-                                                                } else if (approve == 1) {
+                                                                } else if (approve == "1") {
                                                                     Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                                                                     startActivity(intent);
-                                                                } else if (approve == 2) {
+                                                                } else if (approve == "2") {
                                                                     Intent intent = new Intent(LoginActivity.this, FormCustomerActivity.class);
                                                                     startActivity(intent);
-                                                                } else if (approve == 3) {
+                                                                } else if (approve == "3") {
                                                                     Intent intent = new Intent(LoginActivity.this, WaitingApprovalActivity.class);
                                                                     startActivity(intent);
                                                                 }
                                                             }
                                                         }
                                                         if (roleModel.getRole_id() <= 3) {
-                                                            new SharedPreferenceManager().setPreferences(LoginActivity.this, "role", "admin");
+                                                            new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "mobile");
                                                             Intent intent = new Intent(LoginActivity.this, DashboardAdminActivity.class);
                                                             startActivity(intent);
                                                             finish();

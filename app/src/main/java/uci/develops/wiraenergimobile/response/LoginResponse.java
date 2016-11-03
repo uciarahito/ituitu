@@ -16,11 +16,11 @@ public class LoginResponse {
     private boolean activated;
     private List<Integer> roles;
     private String customer_decode;
-    private int active;
-    private int approve;
+    private String active;
+    private String approve;
     private String registration_key;
 
-    public LoginResponse(String status, String code, String info, String token, int user_id, boolean activated, List<Integer> roles, String customer_decode, int active, int approve, String registration_key) {
+    public LoginResponse(String status, String code, String info, String token, int user_id, boolean activated, List<Integer> roles, String customer_decode, String active, String approve, String registration_key) {
         this.status = status;
         this.code = code;
         this.info = info;
@@ -98,19 +98,19 @@ public class LoginResponse {
         this.customer_decode = customer_decode;
     }
 
-    public int getActive() {
+    public String getActive() {
         return active;
     }
 
-    public void setActive(int active) {
+    public void setActive(String active) {
         this.active = active;
     }
 
-    public int getApprove() {
+    public String getApprove() {
         return approve;
     }
 
-    public void setApprove(int approve) {
+    public void setApprove(String approve) {
         this.approve = approve;
     }
 
