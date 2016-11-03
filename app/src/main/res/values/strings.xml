@@ -382,5 +382,6 @@
     <string name="title_activity_verification_status">VerificationStatusActivity</string>
     <string name="title_activity_waiting_approval">WaitingApprovalActivity</string>
     <string name="title_activity_request_quotation">RequestQuotationActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
 
 </resources>
