@@ -1,5 +1,7 @@
 package uci.develops.wiraenergimobile.response;
 
+import java.util.List;
+
 import uci.develops.wiraenergimobile.model.CustomerModel;
 
 /**
@@ -10,9 +12,9 @@ public class CustomerResponse {
     private String status;
     private String code;
     private String info;
-    private CustomerModel data;
+    private List<CustomerModel> data;
 
-    public CustomerResponse(String status, String code, String info, CustomerModel data) {
+    public CustomerResponse(String status, String code, String info, List<CustomerModel> data) {
         this.status = status;
         this.code = code;
         this.info = info;
@@ -43,11 +45,11 @@ public class CustomerResponse {
         this.info = info;
     }
 
-    public CustomerModel getData() {
+    public List<CustomerModel> getData() {
         return data;
     }
 
-    public void setData(CustomerModel data) {
+    public void setData(List<CustomerModel> data) {
         this.data = data;
     }
 }

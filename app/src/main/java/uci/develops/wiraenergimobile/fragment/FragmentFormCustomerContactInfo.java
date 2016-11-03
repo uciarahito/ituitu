@@ -126,7 +126,7 @@ public class FragmentFormCustomerContactInfo extends Fragment {
             public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
                 if (response.isSuccessful()) {
                     CustomerModel customerModel = new CustomerModel();
-                    customerModel = response.body().getData();
+                    customerModel = response.body().getData().get(0);
                     editText_name1.setText(customerModel.getName1() == null ? "" : customerModel.getName1());
                     editText_name2.setText(customerModel.getName2() == null ? "" : customerModel.getName2());
                     editText_name3.setText(customerModel.getName3() == null ? "" : customerModel.getName3());

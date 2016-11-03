@@ -147,7 +147,7 @@ public class FragmentFormCustomerShippingTo extends Fragment {
             public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
                 if (response.isSuccessful()) {
                     CustomerModel customerModel = new CustomerModel();
-                    customerModel = response.body().getData();
+                    customerModel = response.body().getData().get(0);
                     editText_pic_name.setText(customerModel.getShipping_pic() == null ? "" : customerModel.getShipping_pic());
                     editText_address.setText(customerModel.getShipping_address() == null ? "" : customerModel.getShipping_address());
                     autoComplete_city.setText(customerModel.getShipping_city() == null ? "" : customerModel.getShipping_city());

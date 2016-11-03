@@ -167,7 +167,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
             public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
                 if (response.isSuccessful()) {
                     CustomerModel customerModel = new CustomerModel();
-                    customerModel = response.body().getData();
+                    customerModel = response.body().getData().get(0);
                     editText_first_name.setText(customerModel.getFirst_name() == null ? "" : customerModel.getFirst_name());
                     editText_address.setText(customerModel.getAddress() == null ? "" : customerModel.getAddress());
                     autoComplete_city.setText(customerModel.getCity() == null ? "" : customerModel.getCity());
