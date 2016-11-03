@@ -71,4 +71,8 @@ public interface RestInterface {
 
     @GET("user/{id_user}")
     Call<UserResponse> getUser(@Header("Authorization") String token, @Path("id_user") int id_user);
+
+    @FormUrlEncoded
+    @PUT("customer/{decode}")
+    Call<ApproveResponse> customerSubmit(@Header("Authorization") String token, @Path("decode") String decode, @Field("approve") int approve);
 }

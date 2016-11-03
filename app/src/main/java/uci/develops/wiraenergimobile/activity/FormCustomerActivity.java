@@ -303,10 +303,24 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                                                         startActivity(intent);
                                                         finish();
                                                     } else {
-                                                        Toast.makeText(FormCustomerActivity.this, "Waiting for approval", Toast.LENGTH_SHORT).show();
-                                                        Intent intent = new Intent(FormCustomerActivity.this, WaitingApprovalActivity.class);
-                                                        startActivity(intent);
-                                                        finish();
+                                                        Call<ApproveResponse> submitCustomerResponse = RestClient.getRestClient().customerSubmit("Bearer "+new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
+                                                                new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), 3);
+                                                        submitCustomerResponse.enqueue(new Callback<ApproveResponse>() {
+                                                            @Override
+                                                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                                                                if(response.isSuccessful()){
+                                                                    Toast.makeText(FormCustomerActivity.this, "Waiting for approval", Toast.LENGTH_SHORT).show();
+                                                                    Intent intent = new Intent(FormCustomerActivity.this, WaitingApprovalActivity.class);
+                                                                    startActivity(intent);
+                                                                    finish();
+                                                                }
+                                                            }
+
+                                                            @Override
+                                                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
+
+                                                            }
+                                                        });
                                                     }
                                                 }
                                             }
