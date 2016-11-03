@@ -22,14 +22,6 @@
             android:layout_gravity="center_horizontal"
             android:src="@drawable/logo"/>
 
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/wiraenergi"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginBottom="10dp"-->
-            <!--android:textAppearance="@style/TextAppearance.AppTheme.Large"/>-->
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,23 +30,23 @@
             android:layout_marginBottom="5dp"
             android:textAppearance="@style/TextAppearance.AppTheme.Large"/>
 
-        <android.support.v7.widget.CardView
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@android:color/white"
-            app:cardElevation="1dp"
-            app:cardUseCompatPadding="true">
-
-            <android.support.v7.widget.GridLayout
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:weightSum="10"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:columnCount="2">
-
+                android:layout_height="wrap_content">
                 <ImageView
-                    android:padding="16dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:src="@drawable/ic_person_24dp" />
-
                 <EditText
+                    android:layout_weight="9"
                     android:id="@+id/editText_register_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -64,12 +56,41 @@
                     android:inputType="text|textNoSuggestions"
                     app:layout_columnWeight="1"
                     app:layout_gravity="center_vertical" />
+            </LinearLayout>
+            <LinearLayout
+                android:weightSum="10"
+                android:gravity="end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/textView_error_full_name"
+                    android:textSize="11dp"
+                    android:layout_weight="9"
+                    android:textColor="@color/Red"
+                    android:text="Full name tidak valid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:weightSum="10"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
                 <ImageView
-                    android:padding="16dp"
-                    android:src="@drawable/ic_email_24dp"/>
-
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_email_24dp" />
                 <EditText
+                    android:layout_weight="9"
                     android:id="@+id/editText_register_email"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -79,12 +100,41 @@
                     android:inputType="text|textNoSuggestions"
                     app:layout_columnWeight="1"
                     app:layout_gravity="center_vertical"/>
+            </LinearLayout>
+            <LinearLayout
+                android:weightSum="10"
+                android:gravity="end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/textView_error_email"
+                    android:textSize="11dp"
+                    android:layout_weight="9"
+                    android:textColor="@color/Red"
+                    android:text="Email tidak valid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:weightSum="10"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
                 <ImageView
-                    android:padding="16dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:src="@drawable/ic_lock_24dp"/>
-
                 <EditText
+                    android:layout_weight="9"
                     android:id="@+id/editText_register_password"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -95,12 +145,41 @@
                     android:inputType="textPassword"
                     app:layout_columnWeight="1"
                     app:layout_gravity="center_vertical"/>
+            </LinearLayout>
+            <LinearLayout
+                android:weightSum="10"
+                android:gravity="end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/textView_error_password"
+                    android:textSize="11dp"
+                    android:layout_weight="9"
+                    android:textColor="@color/Red"
+                    android:text="Password tidak valid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:weightSum="10"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
                 <ImageView
-                    android:padding="16dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
                     android:src="@drawable/ic_lock_24dp"/>
-
                 <EditText
+                    android:layout_weight="9"
                     android:id="@+id/editText_register_password_confirmation"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -111,29 +190,27 @@
                     android:inputType="textPassword"
                     app:layout_columnWeight="1"
                     app:layout_gravity="center_vertical"/>
-
-                <ImageView
-                    android:padding="16dp"
-                    android:src="@drawable/ic_person_24dp" />
-
-                <Spinner
-                    android:id="@+id/spinner_register_role"
+            </LinearLayout>
+            <LinearLayout
+                android:weightSum="10"
+                android:gravity="end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/textView_error_confirm_password"
+                    android:textSize="11dp"
+                    android:layout_weight="9"
+                    android:textColor="@color/Red"
+                    android:text="Confirm password tidak valid"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/edit_text_background"
-                    android:imeOptions="actionNext"
-                    app:layout_columnWeight="1"
-                    app:layout_gravity="center_vertical"
-                    android:maxLines="1"
-                    android:spinnerMode="dialog"/>
-
-            </android.support.v7.widget.GridLayout>
-
-        </android.support.v7.widget.CardView>
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
 
         <Button
             android:id="@+id/button_register_register"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="16dp"

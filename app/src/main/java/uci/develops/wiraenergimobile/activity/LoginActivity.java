@@ -70,22 +70,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         button_login_register.setOnClickListener(this);
     }
 
-    /**
-     * Akses API Login (manual)
-     */
-//    private boolean login(String email, String password){
-//        String[][] data_dummy = {{"admin@email.com", "password", "admin"}, {"customer@email.com", "password", "customer"}};
-//        boolean result = false;
-//
-//        for(int i=0; i<data_dummy.length; i++){
-//            if(data_dummy[i][0].equals(email) && data_dummy[i][1].equals(password)){
-//                result = true;
-//                new SharedPreferenceManager().setPreferences(LoginActivity.this, "email_login", email);
-//                new SharedPreferenceManager().setPreferences(LoginActivity.this, "role_login", data_dummy[i][2]);
-//            }
-//        }
-//        return result;
-//    }
     @Override
     public void onClick(View v) {
         if (v == button_login_login) {
@@ -93,20 +77,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             email = editText_login_email.getText().toString();
             password = editText_email_password.getText().toString();
             if (!email.equals("") && !password.equals("")) {
-//                if(login(email, password)){
-//                    Intent intent;
-//                    if(new SharedPreferenceManager().getPreferences(LoginActivity.this, "role_login").equals("admin")) {
-//                        intent = new Intent(LoginActivity.this, DashboardAdminActivity.class);
-//                        startActivity(intent);
-//                        finish();
-//                    } else {
-////                        Call<LoginResponse> loginResponseCall = RestClient.getRestClient().Login(email, password);
-////                        loginResponseCall.en
-//                        intent = new Intent(LoginActivity.this, DashboardCustomerActivity.class);
-//                        startActivity(intent);
-//                        finish();
-//                    }
-//                }
 
                 registration_key = generateUnique_id();
                 Call<LoginResponse> loginResponseCall = RestClient.getRestClient().Login(email, password, registration_key);

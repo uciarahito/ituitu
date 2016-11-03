@@ -28,10 +28,9 @@ import uci.develops.wiraenergimobile.service.RestClient;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private EditText editText_register_name, editText_register_email, editText_register_password;
+    private EditText editText_register_name, editText_register_email, editText_register_password, editText_register_password_confirmation;
     private Button button_register_register;
-    private Spinner spinner_register_role;
-    private TextView textView_login;
+    private TextView textView_login, textView_error_full_name, textView_error_email, textView_error_password, textView_error_confirm_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +47,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         editText_register_name = (EditText)findViewById(R.id.editText_register_name);
         editText_register_email = (EditText)findViewById(R.id.editText_register_email);
         editText_register_password = (EditText)findViewById(R.id.editText_register_password);
-        spinner_register_role = (Spinner)findViewById(R.id.spinner_register_role);
+        editText_register_password_confirmation = (EditText)findViewById(R.id.editText_register_password_confirmation);
+        textView_error_full_name = (TextView)findViewById(R.id.textView_error_full_name);
+        textView_error_email = (TextView)findViewById(R.id.textView_error_email);
+        textView_error_password = (TextView)findViewById(R.id.textView_error_password);
+        textView_error_confirm_password = (TextView)findViewById(R.id.textView_error_confirm_password);
         button_register_register = (Button)findViewById(R.id.button_register_register);
 
         List<String> roles = new ArrayList<String>();
@@ -56,7 +59,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         roles.add("Customer");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, roles);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_register_role.setAdapter(dataAdapter);
 
         textView_login.setOnClickListener(this);
         button_register_register.setOnClickListener(this);
@@ -70,31 +72,56 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         Intent intent;
         if(v == button_register_register){
-            String name="", email="", password="", role="";
+            String name="", email="", password="", confirm_password="";
             name = editText_register_name.getText().toString();
             email = editText_register_email.getText().toString();
             password = editText_register_password.getText().toString();
-            role = spinner_register_role.getSelectedItem().toString();
+            boolean empty_email=false, empty_name=false, empty_password=false, empty_confirm_password=false, not_password_match=false;
 
-            //fitur utk lihat semua user
-//            if(!name.equals("") && !email.equals("") && !password.equals("")) {
-//                List<String> user_data = new ArrayList<>();
-//                user_data.add(name);
-//                user_data.add(email);
-//                user_data.add(password);
-//                user_data.add(role);
-//                Constant.user_data.add(user_data);
-//                intent = new Intent(RegisterActivity.this, LoginActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
+            confirm_password = editText_register_password_confirmation.getText().toString();
 
-            if(!name.equals("") && !email.equals("") && !password.equals("")){
+            if(!email.contains("@") || email.equals("")) {
+                textView_error_email.setVisibility(View.VISIBLE);
+                empty_email=true;
+            } else {
+                textView_error_email.setVisibility(View.GONE);
+                empty_email=false;
+            }
+            if(name.equals("")){
+                textView_error_full_name.setVisibility(View.VISIBLE);
+                empty_name=true;
+            } else {
+                textView_error_full_name.setVisibility(View.GONE);
+                empty_name=false;
+            }
+            if(password.equals("")){
+                textView_error_password.setVisibility(View.VISIBLE);
+                empty_password=true;
+            } else {
+                textView_error_password.setVisibility(View.GONE);
+                empty_password=false;
+            }
+            if(confirm_password.equals("")){
+                textView_error_confirm_password.setVisibility(View.VISIBLE);
+                empty_confirm_password=true;
+            } else {
+                textView_error_confirm_password.setVisibility(View.GONE);
+                empty_confirm_password=false;
+                if (!confirm_password.equals(password)) {
+                    textView_error_confirm_password.setText("Confirm password tidak sama");
+                    textView_error_confirm_password.setVisibility(View.VISIBLE);
+                    not_password_match=true;
+                } else {
+                    textView_error_password.setVisibility(View.GONE);
+                    textView_error_confirm_password.setVisibility(View.GONE);
+                    not_password_match=false;
+                }
+            }
+            if(!empty_name && !empty_email && !empty_password && !empty_confirm_password && !not_password_match){
                 Call<RegisterResponse> registerResponseCall = RestClient.getRestClient().Register(name, email, password);
                 registerResponseCall.enqueue(new Callback<RegisterResponse>() {
                     @Override
                     public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
-
                         if (response.isSuccessful()) {
                             String info = "";
                             info = response.body().getInfo();
