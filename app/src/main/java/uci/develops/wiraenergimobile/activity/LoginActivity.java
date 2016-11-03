@@ -38,7 +38,7 @@ import uci.develops.wiraenergimobile.response.LoginResponse;
 import uci.develops.wiraenergimobile.response.RegisterResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editText_login_email, editText_email_password;
     private Button button_login_login, button_login_register;
@@ -58,13 +58,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loadData();
     }
 
-    private void initializeComponent(){
-        lost_pasword = (TextView)findViewById(R.id.lost_password);
-        checkBox_login = (CheckBox)findViewById(R.id.checkBox_login);
-        editText_login_email = (EditText)findViewById(R.id.editText_login_email);
-        editText_email_password = (EditText)findViewById(R.id.editText_login_password);
-        button_login_login = (Button)findViewById(R.id.button_login_login);
-        button_login_register = (Button)findViewById(R.id.button_login_register);
+    private void initializeComponent() {
+        lost_pasword = (TextView) findViewById(R.id.lost_password);
+        checkBox_login = (CheckBox) findViewById(R.id.checkBox_login);
+        editText_login_email = (EditText) findViewById(R.id.editText_login_email);
+        editText_email_password = (EditText) findViewById(R.id.editText_login_password);
+        button_login_login = (Button) findViewById(R.id.button_login_login);
+        button_login_register = (Button) findViewById(R.id.button_login_register);
 
         button_login_login.setOnClickListener(this);
         button_login_register.setOnClickListener(this);
@@ -86,14 +86,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //        }
 //        return result;
 //    }
-
     @Override
     public void onClick(View v) {
-        if(v == button_login_login){
+        if (v == button_login_login) {
             Constant.role_data.clear();
             email = editText_login_email.getText().toString();
             password = editText_email_password.getText().toString();
-            if(!email.equals("") && !password.equals("")) {
+            if (!email.equals("") && !password.equals("")) {
 //                if(login(email, password)){
 //                    Intent intent;
 //                    if(new SharedPreferenceManager().getPreferences(LoginActivity.this, "role_login").equals("admin")) {
@@ -133,38 +132,45 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             customer_decode = response.body().getCustomer_decode();
                             //Toast.makeText(LoginActivity.this, activated + "  " + token, Toast.LENGTH_SHORT).show();
                             new SharedPreferenceManager().setPreferences(LoginActivity.this, "token", token);
+                            new SharedPreferenceManager().setPreferences(LoginActivity.this, "approve", "" + approve);
                             new SharedPreferenceManager().setPreferences(LoginActivity.this, "customer_decode", customer_decode);
                             new SharedPreferenceManager().setPreferences(LoginActivity.this, "is_login", "true");
-                            if (activated == true){
-                                Call<ListRoleResponse> listRoleResponseCall = RestClient.getRestClient().getAllRoles("Bearer "+token);
+                            if (activated == true) {
+                                Call<ListRoleResponse> listRoleResponseCall = RestClient.getRestClient().getAllRoles("Bearer " + token);
                                 listRoleResponseCall.enqueue(new Callback<ListRoleResponse>() {
                                     @Override
                                     public void onResponse(Call<ListRoleResponse> call, Response<ListRoleResponse> response) {
-                                        if(response.isSuccessful()){
-                                            if(response.body().getData().size() > 0){
-                                                for(RoleModel roleModel : response.body().getData()){
-                                                    if(roleModel.getUser_id() == user_id){
-                                                        if(roleModel.getRole_id() == 4){
-                                                            if (active == 1){
+                                        if (response.isSuccessful()) {
+                                            if (response.body().getData().size() > 0) {
+                                                for (RoleModel roleModel : response.body().getData()) {
+                                                    if (roleModel.getRole_id() == 3) {
+                                                        new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "mobile");
+                                                    } else if (roleModel.getRole_id() == 4) {
+                                                        new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "customer");
+                                                    }
+
+                                                    if (roleModel.getUser_id() == user_id) {
+                                                        if (roleModel.getRole_id() == 4) {
+                                                            if (active == 1) {
                                                                 Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                                                                 startActivity(intent);
                                                             } else {
-                                                                if (approve == 0){
+                                                                if (approve == 0) {
                                                                     Intent intent = new Intent(LoginActivity.this, VerificationStatusActivity.class);
                                                                     startActivity(intent);
-                                                                } else if(approve == 1){
+                                                                } else if (approve == 1) {
                                                                     Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                                                                     startActivity(intent);
-                                                                } else if(approve == 2){
+                                                                } else if (approve == 2) {
                                                                     Intent intent = new Intent(LoginActivity.this, FormCustomerActivity.class);
                                                                     startActivity(intent);
-                                                                } else if(approve == 3){
+                                                                } else if (approve == 3) {
                                                                     Intent intent = new Intent(LoginActivity.this, WaitingApprovalActivity.class);
                                                                     startActivity(intent);
                                                                 }
                                                             }
                                                         }
-                                                        if(roleModel.getRole_id() <= 3){
+                                                        if (roleModel.getRole_id() <= 3) {
                                                             new SharedPreferenceManager().setPreferences(LoginActivity.this, "role", "admin");
                                                             Intent intent = new Intent(LoginActivity.this, DashboardAdminActivity.class);
                                                             startActivity(intent);
@@ -202,20 +208,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         }
 
-        if(v == button_login_register){
+        if (v == button_login_register) {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
             finish();
         }
     }
 
-    private void loadData(){
+    private void loadData() {
         UserModel userModel = new UserModel();
-        editText_login_email.setText(userModel.getEmail()==null ? "" : userModel.getEmail());
-        editText_email_password.setText(userModel.getPassword()==null ? "" : userModel.getPassword());
+        editText_login_email.setText(userModel.getEmail() == null ? "" : userModel.getEmail());
+        editText_email_password.setText(userModel.getPassword() == null ? "" : userModel.getPassword());
     }
 
-    private String generateUnique_id(){
+    private String generateUnique_id() {
         Firebase firebase = new Firebase(Constant.FIREBASE_APP);
 
         //Pushing a new element to firebase it will automatically create a unique id
@@ -226,14 +232,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         //pushing msg = none in the map
         val.put("message", "none");
-        val.put("tipe","none");
+        val.put("tipe", "none");
         val.put("time", "" + new SharedPreferenceManager().getCurrentDateTime());
         //saving the map to firebase
         newFirebase.setValue(val);
 
         String uniqueId = newFirebase.getKey();
 
-        new SharedPreferenceManager().setPreferences(LoginActivity.this,Constant.UNIQUE_ID,uniqueId);
+        new SharedPreferenceManager().setPreferences(LoginActivity.this, Constant.UNIQUE_ID, uniqueId);
         startService(new Intent(getBaseContext(), NotificationListener.class));
 
         return uniqueId;

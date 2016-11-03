@@ -40,6 +40,10 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
     private LinearLayout[] linearLayouts_tabs = new LinearLayout[3];
     private TextView textView_button_next, textView_button_back;
 
+    private Dialog dialog_feedback;
+    EditText editText_feedback;
+    Button button_submit_feedback;
+
     /**
      * Button approve reject for admin
      */
@@ -47,16 +51,12 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
 
     int index_fragment = 0;
 
-    private String role = "";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_customer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-//        role = new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token");
 
         initializeComponent();
     }
@@ -92,12 +92,21 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         linearLayout_button_back.setVisibility(View.INVISIBLE);
 
         /**
-         * Check if role is admin
-         * show button approve and reject
+         * Check if roles is admin
+         * show button approve, reject, and feedback
          */
-        if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "role").equals("admin")) {
+        if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("mobile")) {
             linearLayout_button_approve.setVisibility(View.VISIBLE);
             linearLayout_button_reject.setVisibility(View.VISIBLE);
+        }
+
+        if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("customer")) {
+            linearLayout_button_approve.setVisibility(View.INVISIBLE);
+            linearLayout_button_reject.setVisibility(View.INVISIBLE);
+        }
+
+        if(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "approve").equals(3)){
+            linearLayout_tab_shipping_to.setEnabled(false);
         }
     }
 
@@ -211,7 +220,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                     customerModel = fragmentFormCustomerShippingTo.getFormValue();
                 }
 
-                if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "role").equals("admin")) {
+                if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("mobile")) {
                     is_not_empty = true;
                 }
 
@@ -241,7 +250,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                         });
                     }
                     if (index_fragment == 1) {
-                        if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "role").equals("admin")) {
+                        if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("mobile")) {
                             textView_button_next.setText("Feedback");
                         } else {
                             textView_button_next.setText("Submit");
@@ -268,7 +277,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                         }
                     }
                     if (index_fragment == 2) {
-                        if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "role").equals("admin")) {
+                        if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("mobile")) {
                             showDialogNote();
                         } else {
                             Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().sendDataShippingInfo("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
@@ -289,21 +298,12 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                                             @Override
                                             public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                                                 if (response.isSuccessful()) {
-                                                    if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "role").equals("admin")) {
+                                                    if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("mobile")) {
                                                         Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
                                                         startActivity(intent);
                                                         finish();
                                                     } else {
                                                         Toast.makeText(FormCustomerActivity.this, "Waiting for approval", Toast.LENGTH_SHORT).show();
-                                                        FragmentFormCustomerCompanyInfo fragmentFormCustomerCompanyInfo = (FragmentFormCustomerCompanyInfo) getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_company_info);
-                                                        fragmentFormCustomerCompanyInfo.readOnly();
-
-                                                        FragmentFormCustomerContactInfo fragmentFormCustomerContactInfo = (FragmentFormCustomerContactInfo) getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_contact_info);
-                                                        fragmentFormCustomerContactInfo.readOnly();
-
-                                                        FragmentFormCustomerShippingTo fragmentFormCustomerShippingTo = (FragmentFormCustomerShippingTo) getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_shipping_to);
-                                                        fragmentFormCustomerShippingTo.readOnly();
-
                                                         Intent intent = new Intent(FormCustomerActivity.this, WaitingApprovalActivity.class);
                                                         startActivity(intent);
                                                         finish();
@@ -393,10 +393,6 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
 //        }
 
     }
-
-    private Dialog dialog_feedback;
-    EditText editText_feedback;
-    Button button_submit_feedback;
 
     private void showDialogNote() {
         dialog_feedback = new Dialog(FormCustomerActivity.this);

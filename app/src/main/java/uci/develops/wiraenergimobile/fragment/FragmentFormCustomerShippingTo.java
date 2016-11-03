@@ -161,6 +161,10 @@ public class FragmentFormCustomerShippingTo extends Fragment {
                     editText_fax.setText(customerModel.getShipping_fax() == null ? "" : customerModel.getShipping_fax());
                     editText_tax.setText(customerModel.getShipping_tax() == null ? "" : customerModel.getShipping_tax());
                     editText_note.setText(customerModel.getShipping_note() == null ? "" : customerModel.getShipping_note());
+
+                    if (customerModel.getApprove() == 3){
+                        readOnly();
+                    }
                 }
             }
 

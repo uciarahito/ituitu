@@ -181,6 +181,10 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
                     editText_website.setText(customerModel.getWebsite() == null ? "" : customerModel.getWebsite());
                     editText_note.setText(customerModel.getNote() == null ? "" : customerModel.getNote());
                     editText_zip_code.setText(customerModel.getPostcode() == null ? "" : customerModel.getPostcode());
+
+                    if (customerModel.getApprove() == 3){
+                        readOnly();
+                    }
                 }
             }
 
