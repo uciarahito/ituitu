@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,6 +91,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             String token = "";
                             boolean activated;
                             String customer_decode = "";
+                            List<Integer> roles = new ArrayList<Integer>();
+                            roles = response.body().getRoles();
 
                             status = response.body().getStatus();
                             code = response.body().getCode();
@@ -106,54 +109,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             new SharedPreferenceManager().setPreferences(LoginActivity.this, "customer_decode", customer_decode);
                             new SharedPreferenceManager().setPreferences(LoginActivity.this, "is_login", "true");
                             if (activated == true) {
-                                Call<ListRoleResponse> listRoleResponseCall = RestClient.getRestClient().getAllRoles("Bearer " + token);
-                                listRoleResponseCall.enqueue(new Callback<ListRoleResponse>() {
-                                    @Override
-                                    public void onResponse(Call<ListRoleResponse> call, Response<ListRoleResponse> response) {
-                                        if (response.isSuccessful()) {
-                                            if (response.body().getData().size() > 0) {
-                                                for (RoleModel roleModel : response.body().getData()) {
-                                                    if (roleModel.getUser_id() == user_id) {
-                                                        if (roleModel.getRole_id() == 4) {
-                                                            new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "customer");
-                                                            if (active == "1") {
-                                                                Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                                                                startActivity(intent);
-                                                            } else {
-                                                                if (approve == "0") {
-                                                                    Intent intent = new Intent(LoginActivity.this, VerificationStatusActivity.class);
-                                                                    startActivity(intent);
-                                                                } else if (approve == "1") {
-                                                                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                                                                    startActivity(intent);
-                                                                } else if (approve == "2") {
-                                                                    Intent intent = new Intent(LoginActivity.this, FormCustomerActivity.class);
-                                                                    startActivity(intent);
-                                                                } else if (approve == "3") {
-                                                                    Intent intent = new Intent(LoginActivity.this, WaitingApprovalActivity.class);
-                                                                    startActivity(intent);
-                                                                }
-                                                            }
-                                                        }
-                                                        if (roleModel.getRole_id() <= 3) {
-                                                            new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "mobile");
-                                                            Intent intent = new Intent(LoginActivity.this, DashboardAdminActivity.class);
-                                                            startActivity(intent);
-                                                            finish();
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
+                                for(Integer ind : roles){
+                                    if(ind == 4){
+                                        new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "customer");
+                                        Intent intent = new Intent(LoginActivity.this, DashboardCustomerActivity.class);
+                                        startActivity(intent);
+                                        finish();
                                     }
-
-                                    @Override
-                                    public void onFailure(Call<ListRoleResponse> call, Throwable t) {
-
+                                    if(ind <= 3){
+                                        new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "admin");
+                                        Intent intent = new Intent(LoginActivity.this, DashboardAdminActivity.class);
+                                        startActivity(intent);
+                                        finish();
                                     }
-                                });
-                                //Intent intent = new Intent(LoginActivity.this, DashboardAdminActivity.class);
-                                //startActivity(intent);
+                                }
                             } else {
                                 Toast.makeText(LoginActivity.this, "Lakukan Verifikasi Email!", Toast.LENGTH_SHORT).show();
                             }
