@@ -162,8 +162,10 @@ public class FragmentFormCustomerShippingTo extends Fragment {
                     editText_tax.setText(customerModel.getShipping_tax() == null ? "" : customerModel.getShipping_tax());
                     editText_note.setText(customerModel.getShipping_note() == null ? "" : customerModel.getShipping_note());
 
-                    if (customerModel.getApprove() == 3){
-                        readOnly();
+                    if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
+                        if (customerModel.getApprove() == 3) {
+                            readOnly();
+                        }
                     }
                 }
             }

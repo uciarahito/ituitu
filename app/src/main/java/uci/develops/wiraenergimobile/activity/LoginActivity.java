@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText editText_login_email, editText_email_password;
     private Button button_login_login, button_login_register;
     private CheckBox checkBox_login;
-    private TextView lost_pasword;
+    private TextView lost_pasword, textView_error_email, textView_error_password;
 
     String email = "", password = "", name = "", role = "", registration_key = "";
 
@@ -61,6 +61,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void initializeComponent() {
         lost_pasword = (TextView) findViewById(R.id.lost_password);
+        textView_error_email = (TextView) findViewById(R.id.textView_error_email);
+        textView_error_password = (TextView) findViewById(R.id.textView_error_password);
         checkBox_login = (CheckBox) findViewById(R.id.checkBox_login);
         editText_login_email = (EditText) findViewById(R.id.editText_login_email);
         editText_email_password = (EditText) findViewById(R.id.editText_login_password);
@@ -69,6 +71,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         button_login_login.setOnClickListener(this);
         button_login_register.setOnClickListener(this);
+        lost_pasword.setOnClickListener(this);
     }
 
     @Override
@@ -77,7 +80,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Constant.role_data.clear();
             email = editText_login_email.getText().toString();
             password = editText_email_password.getText().toString();
-            if (!email.equals("") && !password.equals("")) {
+            boolean empty_email = false, empty_password = false;
+
+            if (!email.contains("@") || email.equals("")) {
+                textView_error_email.setVisibility(View.VISIBLE);
+                empty_email = true;
+            } else {
+                textView_error_email.setVisibility(View.GONE);
+                empty_email = false;
+            }
+            if (password.equals("")) {
+                textView_error_password.setVisibility(View.VISIBLE);
+                empty_password = true;
+            } else {
+                textView_error_password.setVisibility(View.GONE);
+                empty_password = false;
+            }
+
+//            if (!email.equals("") && !password.equals("")) {
+
+            if (!empty_email && !empty_password) {
 
                 registration_key = generateUnique_id();
                 Call<LoginResponse> loginResponseCall = RestClient.getRestClient().Login(email, password, registration_key);
@@ -144,6 +166,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if (v == button_login_register) {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+        if (v == lost_pasword) {
+            Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
             startActivity(intent);
             finish();
         }

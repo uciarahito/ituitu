@@ -26,7 +26,7 @@ import uci.develops.wiraenergimobile.helper.Constant;
 import uci.develops.wiraenergimobile.response.RegisterResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editText_register_name, editText_register_email, editText_register_password, editText_register_password_confirmation;
     private Button button_register_register;
@@ -42,82 +42,76 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         initializeComponent();
     }
 
-    private void initializeComponent(){
-        textView_login = (TextView)findViewById(R.id.textView_login);
-        editText_register_name = (EditText)findViewById(R.id.editText_register_name);
-        editText_register_email = (EditText)findViewById(R.id.editText_register_email);
-        editText_register_password = (EditText)findViewById(R.id.editText_register_password);
-        editText_register_password_confirmation = (EditText)findViewById(R.id.editText_register_password_confirmation);
-        textView_error_full_name = (TextView)findViewById(R.id.textView_error_full_name);
-        textView_error_email = (TextView)findViewById(R.id.textView_error_email);
-        textView_error_password = (TextView)findViewById(R.id.textView_error_password);
-        textView_error_confirm_password = (TextView)findViewById(R.id.textView_error_confirm_password);
-        button_register_register = (Button)findViewById(R.id.button_register_register);
-
-        List<String> roles = new ArrayList<String>();
-        roles.add("Admin");
-        roles.add("Customer");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, roles);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    private void initializeComponent() {
+        textView_login = (TextView) findViewById(R.id.textView_login);
+        editText_register_name = (EditText) findViewById(R.id.editText_register_name);
+        editText_register_email = (EditText) findViewById(R.id.editText_register_email);
+        editText_register_password = (EditText) findViewById(R.id.editText_register_password);
+        editText_register_password_confirmation = (EditText) findViewById(R.id.editText_register_password_confirmation);
+        textView_error_full_name = (TextView) findViewById(R.id.textView_error_full_name);
+        textView_error_email = (TextView) findViewById(R.id.textView_error_email);
+        textView_error_password = (TextView) findViewById(R.id.textView_error_password);
+        textView_error_confirm_password = (TextView) findViewById(R.id.textView_error_confirm_password);
+        button_register_register = (Button) findViewById(R.id.button_register_register);
 
         textView_login.setOnClickListener(this);
         button_register_register.setOnClickListener(this);
     }
 
-    private void register(){
+    private void register() {
 
     }
 
     @Override
     public void onClick(View v) {
         Intent intent;
-        if(v == button_register_register){
-            String name="", email="", password="", confirm_password="";
+        if (v == button_register_register) {
+            String name = "", email = "", password = "", confirm_password = "";
             name = editText_register_name.getText().toString();
             email = editText_register_email.getText().toString();
             password = editText_register_password.getText().toString();
-            boolean empty_email=false, empty_name=false, empty_password=false, empty_confirm_password=false, not_password_match=false;
+            boolean empty_email = false, empty_name = false, empty_password = false, empty_confirm_password = false, not_password_match = false;
 
             confirm_password = editText_register_password_confirmation.getText().toString();
 
-            if(!email.contains("@") || email.equals("")) {
+            if (!email.contains("@") || email.equals("")) {
                 textView_error_email.setVisibility(View.VISIBLE);
-                empty_email=true;
+                empty_email = true;
             } else {
                 textView_error_email.setVisibility(View.GONE);
-                empty_email=false;
+                empty_email = false;
             }
-            if(name.equals("")){
+            if (name.equals("")) {
                 textView_error_full_name.setVisibility(View.VISIBLE);
-                empty_name=true;
+                empty_name = true;
             } else {
                 textView_error_full_name.setVisibility(View.GONE);
-                empty_name=false;
+                empty_name = false;
             }
-            if(password.equals("")){
+            if (password.equals("")) {
                 textView_error_password.setVisibility(View.VISIBLE);
-                empty_password=true;
+                empty_password = true;
             } else {
                 textView_error_password.setVisibility(View.GONE);
-                empty_password=false;
+                empty_password = false;
             }
-            if(confirm_password.equals("")){
+            if (confirm_password.equals("")) {
                 textView_error_confirm_password.setVisibility(View.VISIBLE);
-                empty_confirm_password=true;
+                empty_confirm_password = true;
             } else {
                 textView_error_confirm_password.setVisibility(View.GONE);
-                empty_confirm_password=false;
+                empty_confirm_password = false;
                 if (!confirm_password.equals(password)) {
                     textView_error_confirm_password.setText("Confirm password tidak sama");
                     textView_error_confirm_password.setVisibility(View.VISIBLE);
-                    not_password_match=true;
+                    not_password_match = true;
                 } else {
                     textView_error_password.setVisibility(View.GONE);
                     textView_error_confirm_password.setVisibility(View.GONE);
-                    not_password_match=false;
+                    not_password_match = false;
                 }
             }
-            if(!empty_name && !empty_email && !empty_password && !empty_confirm_password && !not_password_match){
+            if (!empty_name && !empty_email && !empty_password && !empty_confirm_password && !not_password_match) {
                 Call<RegisterResponse> registerResponseCall = RestClient.getRestClient().Register(name, email, password);
                 registerResponseCall.enqueue(new Callback<RegisterResponse>() {
                     @Override
@@ -142,7 +136,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 });
             }
         }
-        if(v == textView_login){
+        if (v == textView_login) {
             intent = new Intent(RegisterActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
