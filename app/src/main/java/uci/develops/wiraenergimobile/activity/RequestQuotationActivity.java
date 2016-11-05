@@ -16,17 +16,20 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import net.rimoto.intlphoneinput.IntlPhoneInput;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import uci.develops.wiraenergimobile.R;
 
-public class RequestQuotationActivity extends AppCompatActivity implements View.OnClickListener{
-    private Spinner spinner_shipping_address, spinner_name, spinner_phone, spinner_mobile, spinner_email, spinner_jabatan, spinner_item, spinner_satuan, spinner_qty;
-    private EditText editText_keterangan, editText_tgl_kirim;
+public class RequestQuotationActivity extends AppCompatActivity implements View.OnClickListener {
+    private Spinner spinner_shipping_address, spinner_shipping_name, spinner_item, spinner_unit;
+    private EditText quantity, notes, shipping_email, shipping_position, shipping_date;
     private DatePickerDialog datePickerDialog;
-    private Button button_save, button_submit;
+    private Button button_save, button_submit, button_cancel;
+    private IntlPhoneInput shipping_phone, shipping_mobile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,21 +41,21 @@ public class RequestQuotationActivity extends AppCompatActivity implements View.
         initializeComponent();
     }
 
-    private void initializeComponent(){
-        spinner_shipping_address = (Spinner)findViewById(R.id.spinner_shipping_address);
-        spinner_name = (Spinner)findViewById(R.id.spinner_name);
-        spinner_phone = (Spinner)findViewById(R.id.spinner_phone);
-        spinner_mobile = (Spinner)findViewById(R.id.spinner_mobile);
-        spinner_email = (Spinner)findViewById(R.id.spinner_email);
-        spinner_jabatan = (Spinner)findViewById(R.id.spinner_jabatan);
-        spinner_item = (Spinner)findViewById(R.id.spinner_item);
-        spinner_satuan = (Spinner)findViewById(R.id.spinner_satuan);
-        spinner_qty = (Spinner)findViewById(R.id.spinner_qty);
-        editText_keterangan = (EditText)findViewById(R.id.editText_keterangan);
-        editText_tgl_kirim = (EditText)findViewById(R.id.editText_tgl_kirim);
-
-        button_save = (Button)findViewById(R.id.button_save);
-        button_submit = (Button)findViewById(R.id.button_submit);
+    private void initializeComponent() {
+        spinner_shipping_address = (Spinner) findViewById(R.id.spinner_shipping_address);
+        spinner_shipping_name = (Spinner) findViewById(R.id.spinner_shipping_name);
+        spinner_item = (Spinner) findViewById(R.id.spinner_item);
+        spinner_unit = (Spinner) findViewById(R.id.spinner_unit);
+        quantity = (EditText) findViewById(R.id.quantity);
+        notes = (EditText) findViewById(R.id.notes);
+        shipping_email = (EditText) findViewById(R.id.shipping_email);
+        shipping_position = (EditText) findViewById(R.id.shipping_position);
+        shipping_date = (EditText) findViewById(R.id.shipping_date);
+        button_save = (Button) findViewById(R.id.button_save);
+        button_submit = (Button) findViewById(R.id.button_submit);
+        button_cancel = (Button) findViewById(R.id.button_cancel);
+        shipping_phone = (IntlPhoneInput) findViewById(R.id.shipping_phone);
+        shipping_mobile = (IntlPhoneInput) findViewById(R.id.shipping_mobile);
 
         List<String> check_List = new ArrayList<String>();
         check_List.add("No");
@@ -60,18 +63,13 @@ public class RequestQuotationActivity extends AppCompatActivity implements View.
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(RequestQuotationActivity.this, android.R.layout.simple_spinner_item, check_List);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_shipping_address.setAdapter(dataAdapter);
-        spinner_name.setAdapter(dataAdapter);
-        spinner_phone.setAdapter(dataAdapter);
-        spinner_mobile.setAdapter(dataAdapter);
-        spinner_email.setAdapter(dataAdapter);
-        spinner_jabatan.setAdapter(dataAdapter);
+        spinner_shipping_name.setAdapter(dataAdapter);
         spinner_item.setAdapter(dataAdapter);
-        spinner_satuan.setAdapter(dataAdapter);
-        spinner_qty.setAdapter(dataAdapter);
+        spinner_unit.setAdapter(dataAdapter);
 
         button_save.setOnClickListener(this);
         button_submit.setOnClickListener(this);
-        editText_tgl_kirim.setOnClickListener(this);
+        button_cancel.setOnClickListener(this);
     }
 
     @Override
@@ -99,25 +97,28 @@ public class RequestQuotationActivity extends AppCompatActivity implements View.
     @Override
     public void onClick(View v) {
         Intent intent;
-        if(v == button_save){
+        if (v == button_save) {
 
         }
-        if(v == button_submit){
+        if (v == button_submit) {
 
         }
-        if(v == editText_tgl_kirim){
+        if (v == button_cancel) {
+
+        }
+        if (v == shipping_date) {
             final Calendar calendar = Calendar.getInstance();
             int mYear = calendar.get(Calendar.YEAR); // current year
             int mMonth = calendar.get(Calendar.MONTH); // current month
             int mDay = calendar.get(Calendar.DAY_OF_MONTH); // current day
             // date picker dialog
             datePickerDialog = new DatePickerDialog(RequestQuotationActivity.this, new DatePickerDialog.OnDateSetListener() {
-                        @Override
-                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                            // set day of month , month and year value in the edit text
-                            editText_tgl_kirim.setText(dayOfMonth + "/"+ (monthOfYear + 1) + "/" + year);
-                        }
-                    }, mYear, mMonth, mDay);
+                @Override
+                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                    // set day of month , month and year value in the edit text
+                    shipping_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                }
+            }, mYear, mMonth, mDay);
             datePickerDialog.show();
         }
     }

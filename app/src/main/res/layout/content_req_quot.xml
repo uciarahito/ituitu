@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/colorBackground"
-    tools:context=".activity.LoginActivity">
+    tools:context="uci.develops.wiraenergimobile.activity.RequestQuotationActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
                 app:layout_gravity="center_vertical" />
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/spinner_shipping_address"
                 android:layout_width="0dp"
                 app:layout_columnWeight="1"
                 app:layout_gravity="center_vertical"
@@ -53,7 +53,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
             android:background="@color/white"
             app:columnCount="2">
@@ -62,15 +61,12 @@
                 android:padding="12dp"
                 android:src="@drawable/ic_person_24dp"/>
 
-            <EditText
-                android:id="@+id/name"
+            <Spinner
+                android:id="@+id/spinner_shipping_name"
                 android:layout_width="0dp"
-                android:background="@drawable/edit_text_background"
-                android:hint="@string/name"
-                android:imeOptions="actionNext"
-                android:inputType="textCapWords|textPersonName"
-                android:textColorHint="@color/colorGray"
-                app:layout_columnWeight="1"/>
+                app:layout_columnWeight="1"
+                app:layout_gravity="center_vertical"
+                tools:listitem="@android:layout/simple_spinner_dropdown_item" />
 
             <ImageView
                 android:padding="12dp"
@@ -85,7 +81,7 @@
 
             <ImageView
                 android:padding="12dp"
-                android:src="@drawable/ic_phone_24dp"/>
+                android:src="@drawable/ic_mobile_24dp"/>
 
             <net.rimoto.intlphoneinput.IntlPhoneInput
                 android:id="@+id/shipping_mobile"
@@ -99,7 +95,7 @@
                 android:src="@drawable/ic_email_24dp" />
 
             <EditText
-                android:id="@+id/email"
+                android:id="@+id/shipping_email"
                 android:layout_width="0dp"
                 android:textColorHint="@color/colorGray"
                 android:background="@drawable/edit_text_background"
@@ -109,6 +105,147 @@
                 app:layout_columnWeight="1"
                 app:layout_gravity="center_vertical" />
 
+            <ImageView
+                android:padding="16dp"
+                android:src="@drawable/ic_position_24dp" />
+
+            <EditText
+                android:id="@+id/shipping_position"
+                android:layout_width="0dp"
+                android:textColorHint="@color/colorGray"
+                android:background="@drawable/edit_text_background"
+                android:hint="@string/position"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords|textPersonName"
+                app:layout_columnWeight="1"
+                app:layout_gravity="center_vertical" />
+
+            <ImageView
+                android:padding="16dp"
+                android:src="@drawable/ic_event_black_24dp" />
+
+            <EditText
+                android:id="@+id/shipping_date"
+                android:layout_width="0dp"
+                android:textColorHint="@color/colorGray"
+                android:background="@drawable/edit_text_background"
+                android:hint="@string/date"
+                app:layout_columnWeight="1"
+                app:layout_gravity="center_vertical" />
+        </android.support.v7.widget.GridLayout>
+
+        <android.support.v7.widget.GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/white"
+            app:columnCount="3">
+
+            <TextView
+                android:padding="8dp"
+                android:text="@string/item"
+                android:textStyle="bold"
+                app:layout_columnWeight="1"/>
+
+            <TextView
+                android:padding="8dp"
+                android:text="@string/unit"
+                android:textStyle="bold"
+                app:layout_columnWeight="1"/>
+
+            <TextView
+                android:padding="8dp"
+                android:text="@string/qty"
+                android:textStyle="bold"
+                app:layout_columnWeight="1"/>
+
+            <Spinner
+                android:id="@+id/spinner_item"
+                android:layout_width="0dp"
+                app:layout_columnWeight="1"
+                app:layout_gravity="center_vertical"
+                tools:listitem="@android:layout/simple_spinner_dropdown_item" />
+
+            <Spinner
+                android:id="@+id/spinner_unit"
+                android:layout_width="0dp"
+                app:layout_columnWeight="1"
+                app:layout_gravity="center_vertical"
+                tools:listitem="@android:layout/simple_spinner_dropdown_item" />
+
+            <EditText
+                android:id="@+id/quantity"
+                android:layout_width="0dp"
+                android:textColorHint="@color/colorGray"
+                android:background="@drawable/edit_text_background"
+                android:hint="@string/qty"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords|textPersonName"
+                app:layout_columnWeight="1"
+                app:layout_gravity="center_vertical" />
+
+        </android.support.v7.widget.GridLayout>
+
+        <android.support.v7.widget.GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/white"
+            app:columnCount="2">
+
+            <ImageView
+                android:padding="12dp"
+                app:layout_gravity="center"
+                android:src="@drawable/ic_border_color_black_24dp"/>
+
+            <EditText
+                android:id="@+id/notes"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:background="@drawable/edit_text_background"
+                android:hint="@string/note"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:textColorHint="@color/colorGray"
+                app:layout_columnWeight="1"/>
+        </android.support.v7.widget.GridLayout>
+
+        <android.support.v7.widget.GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/white"
+            app:columnCount="3">
+
+            <Button
+                android:id="@+id/button_submit"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/submit"
+                android:layout_margin="5dp"
+                app:layout_columnWeight="1"/>
+
+            <Button
+                android:id="@+id/button_save"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/save"
+                android:layout_margin="5dp"
+                app:layout_columnWeight="1"/>
+
+            <Button
+                android:id="@+id/button_cancel"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel"
+                android:layout_margin="5dp"
+                app:layout_columnWeight="1"/>
         </android.support.v7.widget.GridLayout>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
