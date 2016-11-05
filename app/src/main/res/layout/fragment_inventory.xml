@@ -1,50 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:weightSum="2"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:id="@+id/linearLayout_menu_master_inventory"
-            android:orientation="vertical"
-            android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <android.support.v7.widget.CardView
             android:layout_width="0dp"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/imageView_master_inventory"
-                android:src="@android:drawable/alert_dark_frame"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/textView_1"
-                android:textStyle="bold"
-                android:gravity="center_horizontal"
-                android:text="Master Inventory"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/linearLayout_menu_transaction_inventori"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/imageView_transaction_inventory"
-                android:src="@android:drawable/alert_dark_frame"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/textView_2"
-                android:textStyle="bold"
-                android:gravity="center_horizontal"
-                android:layout_width="match_parent"
-                android:text="Transaction Inventory"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+            app:cardBackgroundColor="@android:color/white"
+            app:cardElevation="1dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:id="@+id/linearLayout_menu_good_received"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView_master_inventory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/good_receive" />
+
+                <TextView
+                    android:id="@+id/textView_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="Good Received"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 </LinearLayout>

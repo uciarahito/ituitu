@@ -165,6 +165,7 @@
     <string name="save">Save</string>
     <string name="submit">Submit</string>
     <string name="view_data">View Data</string>
+    <string name="name">Name</string>
     <string name="wiraenergi">Wira Energi</string>
     <string name="verification">Email Verification Status</string>
     <string name="waiting">Wait For Approval</string>
@@ -186,6 +187,12 @@
     <string name="website">PT. Wira Energi</string>
     <string name="welcome">Welcome, </string>
     <string name="selected_item">Selected item</string>
+
+    <string name="master_setup">Master Setup</string>
+    <string name="purchasing">Purchasing</string>
+    <string name="sales">Sales</string>
+    <string name="inventory">Inventory</string>
+    <string name="reporting">Reporting</string>
 
     <string name="title_request_penawaran">Request Quotation</string>
 
@@ -382,6 +389,6 @@
     <string name="title_activity_verification_status">VerificationStatusActivity</string>
     <string name="title_activity_waiting_approval">WaitingApprovalActivity</string>
     <string name="title_activity_request_quotation">RequestQuotationActivity</string>
-    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_home">Home</string>
 
 </resources>

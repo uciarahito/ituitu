@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground"
+    tools:context=".activity.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/white"
+            app:columnCount="2">
+
+            <ImageView
+                android:padding="16dp"
+                android:src="@drawable/ic_home_black_24dp"
+                app:layout_gravity="center_vertical" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="0dp"
+                app:layout_columnWeight="1"
+                app:layout_gravity="center_vertical"
+                tools:listitem="@android:layout/simple_spinner_dropdown_item" />
+        </android.support.v7.widget.GridLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kontak Info"
+            android:layout_marginLeft="16dp"
+            android:textStyle="bold"
+            app:layout_gravity="fill_horizontal"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/drop_shadow" />
+
+        <android.support.v7.widget.GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/white"
+            app:columnCount="2">
+
+            <ImageView
+                android:padding="12dp"
+                android:src="@drawable/ic_person_24dp"/>
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="0dp"
+                android:background="@drawable/edit_text_background"
+                android:hint="@string/name"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords|textPersonName"
+                android:textColorHint="@color/colorGray"
+                app:layout_columnWeight="1"/>
+
+            <ImageView
+                android:padding="12dp"
+                android:src="@drawable/ic_phone_24dp"/>
+
+            <net.rimoto.intlphoneinput.IntlPhoneInput
+                android:id="@+id/shipping_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                app:layout_columnWeight="1"/>
+
+            <ImageView
+                android:padding="12dp"
+                android:src="@drawable/ic_phone_24dp"/>
+
+            <net.rimoto.intlphoneinput.IntlPhoneInput
+                android:id="@+id/shipping_mobile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                app:layout_columnWeight="1"/>
+
+            <ImageView
+                android:padding="16dp"
+                android:src="@drawable/ic_email_24dp" />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="0dp"
+                android:textColorHint="@color/colorGray"
+                android:background="@drawable/edit_text_background"
+                android:hint="@string/email"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                app:layout_columnWeight="1"
+                app:layout_gravity="center_vertical" />
+
+        </android.support.v7.widget.GridLayout>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

@@ -127,18 +127,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             customer_decode = response.body().getCustomer_decode();
                             //Toast.makeText(LoginActivity.this, activated + "  " + token, Toast.LENGTH_SHORT).show();
                             new SharedPreferenceManager().setPreferences(LoginActivity.this, "token", token);
-                            new SharedPreferenceManager().setPreferences(LoginActivity.this, "approve", "" + approve);
+                            new SharedPreferenceManager().setPreferences(LoginActivity.this, "approve", approve);
                             new SharedPreferenceManager().setPreferences(LoginActivity.this, "customer_decode", customer_decode);
                             new SharedPreferenceManager().setPreferences(LoginActivity.this, "is_login", "true");
                             if (activated == true) {
-                                for(Integer ind : roles){
-                                    if(ind == 4){
+                                for (Integer ind : roles) {
+                                    if (ind == 4) {
                                         new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "customer");
-                                        Intent intent = new Intent(LoginActivity.this, DashboardCustomerActivity.class);
-                                        startActivity(intent);
-                                        finish();
+
+//                                        Intent intent = new Intent(LoginActivity.this, DashboardCustomerActivity.class);
+//                                        startActivity(intent);
+//                                        finish();
+
+                                        if (new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve").equals(0)) {
+                                            Intent intent = new Intent(LoginActivity.this, VerificationStatusActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+
+                                        if (new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve").equals(1)) {
+                                            Intent intent = new Intent(LoginActivity.this, DashboardCustomerActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
                                     }
-                                    if(ind <= 3){
+                                    if (ind <= 3) {
                                         new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "mobile");
                                         Intent intent = new Intent(LoginActivity.this, DashboardAdminActivity.class);
                                         startActivity(intent);
