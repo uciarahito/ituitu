@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.Map;
@@ -82,6 +83,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
                  */
                 new SharedPreferenceManager().setPreferences(context, "customer_decode", ""+customerModel.getDecode());
                 new SharedPreferenceManager().setPreferences(context, "customer_user_id", ""+customerModel.getUser_id());
+                Toast.makeText(context, "User_ID: "+new SharedPreferenceManager().getPreferences(context, "customer_user_id"), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, FormCustomerActivity.class);
                 context.startActivity(intent);
             }

@@ -28,6 +28,7 @@ import uci.develops.wiraenergimobile.helper.Constant;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerModel;
 import uci.develops.wiraenergimobile.response.ApproveResponse;
+import uci.develops.wiraenergimobile.response.CustomerResponse;
 import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
@@ -59,6 +60,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         setSupportActionBar(toolbar);
 
         initializeComponent();
+        buttonValidation();
     }
 
     private void initializeComponent() {
@@ -108,6 +110,33 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         if(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "approve").equals(3)){
             linearLayout_tab_shipping_to.setEnabled(false);
         }
+    }
+
+    private void buttonValidation(){
+        Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer "+new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
+                new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"));
+        customerResponseCall.enqueue(new Callback<CustomerResponse>() {
+            @Override
+            public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
+                if(response.isSuccessful()){
+                    CustomerModel customerModel = response.body().getData().get(0);
+                    if(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("mobile")){
+                        if(customerModel.getApprove()==1 && customerModel.getActive()==1){
+                            linearLayout_button_approve.setVisibility(View.GONE);
+                            linearLayout_button_reject.setVisibility(View.GONE);
+                        }
+                    } else {
+                        linearLayout_button_approve.setVisibility(View.GONE);
+                        linearLayout_button_reject.setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CustomerResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
@@ -284,7 +313,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                                     new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), customerModel.getShipping_pic(), customerModel.getShipping_address(),
                                     customerModel.getShipping_city(), customerModel.getShipping_province(), customerModel.getShipping_postcode(), customerModel.getShipping_eta(), customerModel.getShipping_map(),
                                     customerModel.getShipping_phone(), customerModel.getShipping_mobile(), customerModel.getShipping_email(), customerModel.getShipping_fax(), customerModel.getShipping_tax(),
-                                    customerModel.getShipping_note());
+                                    customerModel.getShipping_note(), 3, 0);
                             approveResponseCall.enqueue(new Callback<ApproveResponse>() {
                                 @Override
                                 public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
@@ -401,12 +430,11 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
             public void onClick(View v) {
                 if (!editText_feedback.getText().toString().equals("")) {
                     Call<ApproveResponse> addFeedbackResponseCall = RestClient.getRestClient().addFeedback("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
-                            new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), editText_feedback.getText().toString());
+                            new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), editText_feedback.getText().toString(), 2, 0);
                     addFeedbackResponseCall.enqueue(new Callback<ApproveResponse>() {
                         @Override
                         public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                             if (response.isSuccessful()) {
-
                                 //baru ditambah uci
                                 Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer "+new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_user_id")));
                                 userResponseCall.enqueue(new Callback<UserResponse>() {
