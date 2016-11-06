@@ -23,7 +23,7 @@
             app:columnCount="2">
 
             <ImageView
-                android:padding="16dp"
+                android:padding="12dp"
                 android:src="@drawable/ic_home_black_24dp"
                 app:layout_gravity="center_vertical" />
 
@@ -92,7 +92,7 @@
                 app:layout_columnWeight="1"/>
 
             <ImageView
-                android:padding="16dp"
+                android:padding="12dp"
                 android:src="@drawable/ic_email_24dp" />
 
             <EditText
@@ -107,7 +107,7 @@
                 app:layout_gravity="center_vertical" />
 
             <ImageView
-                android:padding="16dp"
+                android:padding="12dp"
                 android:src="@drawable/ic_position_24dp" />
 
             <EditText
@@ -122,7 +122,7 @@
                 app:layout_gravity="center_vertical" />
 
             <ImageView
-                android:padding="16dp"
+                android:padding="12dp"
                 android:src="@drawable/ic_event_black_24dp" />
 
             <EditText

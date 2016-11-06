@@ -147,6 +147,10 @@
         <activity
             android:name=".activity.ReportQuotationActivity"
             android:label="@string/title_activity_report_quotation"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.ItemQuotationActivity"
+            android:label="@string/title_activity_item_quotation"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

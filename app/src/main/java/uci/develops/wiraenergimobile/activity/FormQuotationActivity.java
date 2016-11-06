@@ -122,16 +122,22 @@ public class FormQuotationActivity extends AppCompatActivity implements View.OnC
 
         }
         if (v == imageView_view) {
-
+            intent = new Intent(FormQuotationActivity.this, ItemQuotationActivity.class);
+            startActivity(intent);
+            finish();
         }
         if (v == imageView_edit) {
-
+            intent = new Intent(FormQuotationActivity.this, ItemQuotationActivity.class);
+            startActivity(intent);
+            finish();
         }
         if (v == imageView_delete) {
 
         }
         if (v == imageView_add) {
-
+            intent = new Intent(FormQuotationActivity.this, ItemQuotationActivity.class);
+            startActivity(intent);
+            finish();
         }
         if (v == button_cancel) {
             intent = new Intent(FormQuotationActivity.this, ReportQuotationActivity.class);

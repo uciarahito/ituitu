@@ -413,5 +413,6 @@
     <string name="title_activity_home">Home</string>
     <string name="title_activity_form_quotation">FormQuotationActivity</string>
     <string name="title_activity_report_quotation">ReportQuotationActivity</string>
+    <string name="title_activity_item_quotation">ItemQuotationActivity</string>
 
 </resources>
