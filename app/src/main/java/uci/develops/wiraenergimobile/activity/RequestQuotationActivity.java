@@ -70,6 +70,7 @@ public class RequestQuotationActivity extends AppCompatActivity implements View.
         button_save.setOnClickListener(this);
         button_submit.setOnClickListener(this);
         button_cancel.setOnClickListener(this);
+        shipping_date.setOnClickListener(this);
     }
 
     @Override
@@ -101,7 +102,9 @@ public class RequestQuotationActivity extends AppCompatActivity implements View.
 
         }
         if (v == button_submit) {
-
+            intent = new Intent(RequestQuotationActivity.this, FormQuotationActivity.class);
+            startActivity(intent);
+            finish();
         }
         if (v == button_cancel) {
 

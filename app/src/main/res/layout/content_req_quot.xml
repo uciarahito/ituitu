@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/colorBackground"
-    tools:context="uci.develops.wiraenergimobile.activity.RequestQuotationActivity">
+    tools:context="uci.develops.wiraenergimobile.activity.RequestQuotationActivity"
+    tools:showIn="@layout/activity_request_quotation">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -164,6 +165,7 @@
                 android:id="@+id/spinner_item"
                 android:layout_width="0dp"
                 app:layout_columnWeight="1"
+                android:layout_marginRight="10dp"
                 app:layout_gravity="center_vertical"
                 tools:listitem="@android:layout/simple_spinner_dropdown_item" />
 
@@ -171,6 +173,7 @@
                 android:id="@+id/spinner_unit"
                 android:layout_width="0dp"
                 app:layout_columnWeight="1"
+                android:layout_marginRight="10dp"
                 app:layout_gravity="center_vertical"
                 tools:listitem="@android:layout/simple_spinner_dropdown_item" />
 
@@ -181,7 +184,7 @@
                 android:background="@drawable/edit_text_background"
                 android:hint="@string/qty"
                 android:imeOptions="actionNext"
-                android:inputType="textCapWords|textPersonName"
+                android:inputType="number"
                 app:layout_columnWeight="1"
                 app:layout_gravity="center_vertical" />
 

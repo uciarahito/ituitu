@@ -185,6 +185,20 @@
     <string name="footer">2016 All Rights Reserved. PT. Wiraenergi</string>
     <string name="title_activity_dashboard">DashboardActivity</string>
 
+    <string name="qty_no">QT No:</string>
+    <string name="qty_date">QT Date:</string>
+    <string name="customer">Customer:</string>
+    <string name="tax">Tax/PPN:</string>
+    <string name="due_date">Due Date:</string>
+    <string name="shipping_address">Shipping Address:</string>
+    <string name="add_row">Add Row:</string>
+    <string name="bruto">Bruto:</string>
+    <string name="disc">Disc (%):</string>
+    <string name="ppn">PPN:</string>
+    <string name="other_cost">Other Cost:</string>
+    <string name="netto">Netto:</string>
+    <string name="terbilang">Terbilang:</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -397,5 +411,7 @@
     <string name="title_activity_waiting_approval">WaitingApprovalActivity</string>
     <string name="title_activity_request_quotation">RequestQuotationActivity</string>
     <string name="title_activity_home">Home</string>
+    <string name="title_activity_form_quotation">FormQuotationActivity</string>
+    <string name="title_activity_report_quotation">ReportQuotationActivity</string>
 
 </resources>
