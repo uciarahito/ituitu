@@ -60,14 +60,15 @@ public interface RestInterface {
     Call<ApproveResponse> sendDataShippingInfo(@Header("Authorization") String token, @Path("decode") String decode, @Field("shipping_pic") String shipping_pic, @Field("shipping_address") String shipping_address,
                                                @Field("shipping_city") String shipping_city, @Field("shipping_province") String shipping_province, @Field("shipping_postcode") String shipping_postcode,
                                                @Field("shipping_eta") String shipping_eta, @Field("shipping_map") String shipping_map, @Field("shipping_phone") String shipping_phone, @Field("shipping_mobile") String shipping_mobile,
-                                               @Field("shipping_email") String shipping_email, @Field("shipping_fax") String shipping_fax, @Field("shipping_tax") String shipping_tax, @Field("shipping_note") String shipping_note);
+                                               @Field("shipping_email") String shipping_email, @Field("shipping_fax") String shipping_fax, @Field("shipping_tax") String shipping_tax, @Field("shipping_note") String shipping_note,
+                                               @Field("approve") int approve, @Field("active") int active);
 
     @GET("customer/{decode}")
     Call<CustomerResponse> getCustomer(@Header("Authorization") String token, @Path("decode") String decode);
 
     @FormUrlEncoded
     @PUT("customer/{decode}")
-    Call<ApproveResponse> addFeedback(@Header("Authorization") String token, @Path("decode") String decode, @Field("note") String note);
+    Call<ApproveResponse> addFeedback(@Header("Authorization") String token, @Path("decode") String decode, @Field("note") String note, @Field("approve") int approve, @Field("active") int active);
 
     @GET("user/{id_user}")
     Call<UserResponse> getUser(@Header("Authorization") String token, @Path("id_user") int id_user);
