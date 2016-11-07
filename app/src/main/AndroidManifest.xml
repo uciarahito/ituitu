@@ -28,6 +28,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -106,8 +107,7 @@
         <activity
             android:name=".activity.DashboardActivity"
             android:label="@string/title_activity_dashboard"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"></activity>
         <activity
             android:name=".activity.ResetPasswordActivity"
             android:label="@string/title_activity_reset_password"
@@ -127,8 +127,7 @@
         <activity
             android:name=".activity.HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".activity.FormQuotationActivity"
             android:label="@string/title_activity_form_quotation"
@@ -140,6 +139,10 @@
         <activity
             android:name=".activity.ItemQuotationActivity"
             android:label="@string/title_activity_item_quotation"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.SalesQuotationActivity"
+            android:label="@string/title_activity_sales_quotation"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
