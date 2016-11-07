@@ -31,7 +31,8 @@
             <EditText
                 android:id="@+id/editText_qty_number"
                 android:layout_width="0dp"
-                android:background="@drawable/edit_text_background"
+                android:background="@drawable/rounded_rectangle_gray"
+                android:layout_marginBottom="5dp"
                 android:imeOptions="actionNext"
                 android:inputType="number"
                 app:layout_columnWeight="2"
@@ -45,8 +46,9 @@
             <EditText
                 android:id="@+id/editText_qty_date"
                 android:layout_width="0dp"
-                android:background="@drawable/edit_text_background"
+                android:background="@drawable/rounded_rectangle_gray"
                 app:layout_columnWeight="1"
+                android:layout_marginBottom="5dp"
                 app:layout_gravity="center_vertical" />
             <TextView
                 android:layout_width="0dp"
@@ -59,6 +61,8 @@
                 android:layout_width="0dp"
                 app:layout_columnWeight="1"
                 app:layout_gravity="center_vertical"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/rounded_rectangle_gray"
                 tools:listitem="@android:layout/simple_spinner_dropdown_item" />
 
             <TextView
@@ -72,7 +76,9 @@
                 android:id="@+id/spinner_tax_ppn"
                 android:layout_width="0dp"
                 app:layout_columnWeight="1"
+                android:layout_marginBottom="5dp"
                 app:layout_gravity="center_vertical"
+                android:background="@drawable/rounded_rectangle_gray"
                 tools:listitem="@android:layout/simple_spinner_dropdown_item" />
 
             <TextView
@@ -85,8 +91,9 @@
             <EditText
                 android:id="@+id/editText_due_date"
                 android:layout_width="0dp"
-                android:background="@drawable/edit_text_background"
+                android:background="@drawable/rounded_rectangle_gray"
                 app:layout_columnWeight="1"
+                android:layout_marginBottom="5dp"
                 app:layout_gravity="center_vertical" />
 
             <TextView
@@ -100,8 +107,9 @@
                 android:id="@+id/editText_shipping_address"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
-                android:background="@drawable/edit_text_background"
+                android:background="@drawable/rounded_rectangle_gray"
                 app:layout_columnWeight="1"
+                android:layout_marginBottom="5dp"
                 app:layout_gravity="center_vertical" />
         </android.support.v7.widget.GridLayout>
 
@@ -205,10 +213,11 @@
             <EditText
                 android:id="@+id/editText_terbilang"
                 android:layout_width="0dp"
-                android:background="@drawable/edit_text_background"
+                android:background="@drawable/rounded_rectangle_gray"
                 android:imeOptions="actionNext"
                 android:inputType="number"
                 app:layout_columnWeight="2"
+                android:layout_marginBottom="5dp"
                 app:layout_gravity="center_vertical" />
 
             <TextView
@@ -222,7 +231,8 @@
                 android:id="@+id/editText_note"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
-                android:background="@drawable/edit_text_background"
+                android:background="@drawable/rounded_rectangle_gray"
+                android:layout_marginBottom="5dp"
                 app:layout_columnWeight="1"
                 app:layout_gravity="center_vertical" />
 
@@ -236,7 +246,8 @@
             <EditText
                 android:id="@+id/editText_bruto"
                 android:layout_width="0dp"
-                android:background="@drawable/edit_text_background"
+                android:background="@drawable/rounded_rectangle_gray"
+                android:layout_marginBottom="5dp"
                 android:imeOptions="actionNext"
                 android:inputType="number"
                 app:layout_columnWeight="2"
@@ -252,13 +263,14 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:orientation="horizontal"
-                app:layout_columnWeight="2">
+                app:layout_columnWeight="2"
+                android:layout_marginBottom="5dp">
 
                 <EditText
                     android:id="@+id/editText_disc_percent"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/edit_text_background"
+                    android:background="@drawable/rounded_rectangle_gray"
                     android:imeOptions="actionNext"
                     android:inputType="number" />
 
@@ -271,9 +283,9 @@
 
                 <EditText
                     android:id="@+id/eidtText_disc_number"
-                    android:layout_width="150dp"
+                    android:layout_width="147dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/edit_text_background"
+                    android:background="@drawable/rounded_rectangle_gray"
                     android:imeOptions="actionNext"
                     android:inputType="number" />
             </LinearLayout>
@@ -288,7 +300,8 @@
             <EditText
                 android:id="@+id/editText_ppn"
                 android:layout_width="0dp"
-                android:background="@drawable/edit_text_background"
+                android:background="@drawable/rounded_rectangle_gray"
+                android:layout_marginBottom="5dp"
                 android:imeOptions="actionNext"
                 android:inputType="number"
                 app:layout_columnWeight="2"
@@ -304,7 +317,8 @@
             <EditText
                 android:id="@+id/editText_other_cost"
                 android:layout_width="0dp"
-                android:background="@drawable/edit_text_background"
+                android:background="@drawable/rounded_rectangle_gray"
+                android:layout_marginBottom="5dp"
                 android:imeOptions="actionNext"
                 android:inputType="number"
                 app:layout_columnWeight="2"
@@ -320,7 +334,8 @@
             <EditText
                 android:id="@+id/editText_netto"
                 android:layout_width="0dp"
-                android:background="@drawable/edit_text_background"
+                android:background="@drawable/rounded_rectangle_gray"
+                android:layout_marginBottom="5dp"
                 android:imeOptions="actionNext"
                 android:inputType="number"
                 app:layout_columnWeight="2"

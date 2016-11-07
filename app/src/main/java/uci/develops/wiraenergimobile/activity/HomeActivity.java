@@ -55,7 +55,8 @@ public class HomeActivity extends AppCompatActivity {
          * Pending merupakan delivery_order yang telah planner assign ke driver
          * namun driver belum mengconfirm delivery_order tersebut
          */
-//        adapter.addFragment(new FragmentMasterSetup(), "");
+
+        adapter.addFragment(new FragmentMasterSetup(), "");
         adapter.addFragment(new FragmentPurchasing(), "");
         adapter.addFragment(new FragmentSales(), "");
         adapter.addFragment(new FragmentInventory(), "");
@@ -94,15 +95,17 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setupTabIcons() {
 //        tabLayout.getTabAt(0).setIcon(R.drawable.ic_tab_setup);
-//        tabLayout.getTabAt(0).setText(R.string.master_setup);
-        tabLayout.getTabAt(0).setText(R.string.purchasing);
-        tabLayout.getTabAt(1).setText(R.string.sales);
-        tabLayout.getTabAt(2).setText(R.string.inventory);
-        tabLayout.getTabAt(3).setText(R.string.reporting);
 //        tabLayout.getTabAt(1).setIcon(R.drawable.ic_tab_purchasing);
 //        tabLayout.getTabAt(2).setIcon(R.drawable.ic_tab_sales);
 //        tabLayout.getTabAt(3).setIcon(R.drawable.ic_tab_inventory);
 //        tabLayout.getTabAt(4).setIcon(R.drawable.ic_tab_report);
+
+        tabLayout.getTabAt(0).setText(R.string.master_setup);
+        tabLayout.getTabAt(1).setText(R.string.purchasing);
+        tabLayout.getTabAt(2).setText(R.string.sales);
+        tabLayout.getTabAt(3).setText(R.string.inventory);
+        tabLayout.getTabAt(4).setText(R.string.reporting);
+
     }
 
     @Override
