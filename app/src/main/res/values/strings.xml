@@ -201,8 +201,8 @@
 
     <string name="price">Price</string>
     <string name="quantity">Quantity</string>
-    <string name="discount">Discount (%)</string>
-    <string name="dsc_amount">Discount amount</string>
+    <string name="discount">Discount</string>
+    <string name="disc_amount">Discount amount</string>
     <string name="sub_total">Sub total</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -210,197 +210,36 @@
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
-    <string name="film_genres">Film genres</string>
+    <string name="dashboard">Dashboard</string>
     <string name="website">PT. Wira Energi</string>
     <string name="welcome">Welcome, </string>
     <string name="selected_item">Selected item</string>
 
-    <string name="master_setup">Master Setup</string>
-    <string name="purchasing">Purchasing</string>
-    <string name="sales">Sales</string>
-    <string name="inventory">Inventory</string>
-    <string name="reporting">Reporting</string>
+    //utk tab-tab
+    <string name="tab_customer">Customer</string>
+    <string name="tab_purchasing">Purchasing</string>
+    <string name="tab_sales">Sales</string>
 
     <string name="title_request_penawaran">Request Quotation</string>
 
     <string-array name="general">
-        <item>Master Setup</item>
+        <item>Dashboard</item>
+        <item>Customer</item>
         <item>Purchasing</item>
-        <item>Inventory</item>
-        <item>Sales (Customer)</item>
-        <item>Reporting</item>
-        <item>Utility</item>
+        <item>Sales</item>
     </string-array>
 
-    <string-array name="master_setup">
-        <item>Master Company</item>
-        <item>Master Valuta</item>
+    <string-array name="menu_purchasing">
+        <item>Purchase Order [PO]</item>
+        <item>Good Receive [GR]</item>
     </string-array>
 
-    <string-array name="purchasing">
-        <item>Master Data</item>
-        <item>Transaction</item>
-    </string-array>
-
-    <string-array name="master_data_purchasing">
-        <item>Supplier</item>
-    </string-array>
-
-    <string-array name="transaction_purchasing">
-        <item>[PO] Purchase Order</item>
-        <item>[GR] Good Received</item>
-    </string-array>
-
-    <string-array name="inventory">
-        <item>Master Data</item>
-        <item>Trans Inventory</item>
-    </string-array>
-
-    <string-array name="master_data_inventory">
-        <item>Item</item>
-        <item>Item Type</item>
-        <item>Item Grup</item>
-        <item>Item Family</item>
-        <item>Item Brand</item>
-        <item>Item Unit</item>
-        <item>Warehouse</item>
-    </string-array>
-
-    <string-array name="trans_inventory">
-        <item>Transfer Request</item>
-        <item>Transfer Warehouse in Store</item>
-        <item>Transfer Out Delivery</item>
-        <item>Transfer In Received</item>
-        <item>Transfer Stock</item>
-        <item>Inventory Adjustment</item>
-    </string-array>
-
-    <string-array name="sales_customer">
-        <item>Master Data Sales</item>
-        <item>Marketting Order</item>
-        <item>Customer (sales)</item>
-    </string-array>
-
-    <string-array name="master_data_sales">
-        <item>Master Customer</item>
-        <item>Master Salesman</item>
-        <item>Master Paket Penjualan</item>
-    </string-array>
-
-    <string-array name="marketing_order">
-        <item>Sales Quotation</item>
-        <item>Marketting Order</item>
-    </string-array>
-
-    <string-array name="customer_sales">
-        <item>Sales Order</item>
-        <item>Delivery Order</item>
-        <item>Sales Invoice</item>
-        <item>Sales Return</item>
-        <item>Sales Stock</item>
-        <item>Inventory Adjustment</item>
-    </string-array>
-
-    <string-array name="reporting">
-        <item>Purchase</item>
-        <item>Inventory</item>
-        <item>Sales (Customer)</item>
-        <item>Finance (GL)</item>
-    </string-array>
-
-    <string-array name="purchase_reporting">
-        <item>Purchase Order</item>
-        <item>Purchase/Vendor</item>
-        <item>Account Payable</item>
-    </string-array>
-
-    <string-array name="purchase_order">
-        <item>Outstanding PO</item>
-        <item>Outstanding PO | Detail</item>
-        <item>PO by Transaction Type</item>
-        <item>PO History</item>
-    </string-array>
-
-    <string-array name="purchase_vendor">
-        <item>Receipt by Supplier</item>
-        <item>Receipt by Supplier | Item</item>
-        <item>Receipt by Item</item>
-        <item>Receipt Book</item>
-        <item>Receipt Book | Detail</item>
-        <item>Purchase by Supplier</item>
-        <item>Purchase by Supplier | Item</item>
-        <item>Purchase by Item</item>
-        <item>Purchase Book</item>
-        <item>Purchase Book | Detail</item>
-    </string-array>
-
-    <string-array name="account_payable">
-        <item>AP Oustanding</item>
-        <item>AP Aging</item>
-        <item>AP Oustanding</item>
-    </string-array>
-
-    <string-array name="inventory_reporting">
-        <item>Inventory/Item</item>
-        <item>Inventory/Store/Item</item>
-        <item>Inventory/Store/Item/Whs</item>
-        <item>Inventory/Brand/Item</item>
-        <item>Stock Opname</item>
-        <item>Stock CARD | by Item</item>
-        <item>Stock CARD | by Summary</item>
-        <item>Transfer In/Out</item>
-        <item>Purchase Vs Sales</item>
-        <item>Inventory by Type</item>
-        <item>Inventory Adjustment by Type</item>
-        <item>Inventory Aging</item>
-    </string-array>
-
-    <string-array name="sales_reporting">
-        <item>Customer Order</item>
-        <item>Sales/Delivery</item>
-        <item>Account Receivable</item>
-    </string-array>
-
-    <string-array name="customer_order">
-        <item>Status SO</item>
-        <item>Status SO | Detail</item>
-        <item>Transaksi SO</item>
-        <item>Transaksi SO History</item>
-    </string-array>
-
-    <string-array name="sales_delivery">
-        <item>Sales by Item</item>
-        <item>Sales by Customer</item>
-        <item>Sales by Salesman</item>
-        <item>Sales by Book | Summarry</item>
-        <item>Sales by Customer Item</item>
-        <item>Sales by Produk Group</item>
-        <item>Sales by Produk Brand</item>
-        <item>Sales by Area</item>
-        <item>Sales by Return</item>
-        <item>Sales by Return | Detail</item>
-    </string-array>
-
-    <string-array name="account_receivable">
-        <item>AR Aging</item>
-        <item>AR Outstanding</item>
-        <item>AR Confirmation</item>
-        <item>Piutang Giro</item>
-    </string-array>
-
-    <string-array name="finance_GL_reporting">
-        <item>Custom Fin. Statement</item>
-        <item>General Leader</item>
-        <item>Trial Balance</item>
-        <item>Cash/Bank</item>
-        <item>Cost</item>
-        <item>Jurnal History</item>
-    </string-array>
-
-    <string-array name="utility">
-        <item>Upload/Import Data</item>
-        <item>Atur Menu</item>
-        <item>Utility</item>
+    <string-array name="menu_sales">
+        <item>Quotation</item>
+        <item>Sales Order [SO]</item>
+        <item>Delivery Order [DO]</item>
+        <item>Invoice</item>
+        <item>Payment</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
