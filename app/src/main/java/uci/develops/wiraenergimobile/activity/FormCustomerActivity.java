@@ -41,6 +41,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
     private LinearLayout[] linearLayouts_tabs = new LinearLayout[3];
     private TextView textView_button_next, textView_button_back;
 
+    //utk button feedback
     private Dialog dialog_feedback;
     EditText editText_feedback;
     Button button_submit_feedback;

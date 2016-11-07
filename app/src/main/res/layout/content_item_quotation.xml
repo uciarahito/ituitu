@@ -13,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,7 +27,7 @@
                 android:padding="12dp"
                 android:src="@drawable/ic_gas_24dp" />
             <Spinner
-                android:id="@+id/spinner_shipping_name"
+                android:id="@+id/spinner_item"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="6"
@@ -46,13 +46,105 @@
                 android:padding="12dp"
                 android:src="@drawable/ic_list_24dp" />
             <Spinner
-                android:layout_weight="6"
                 android:id="@+id/spinner_unit"
+                android:layout_weight="6"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 app:layout_gravity="center_vertical"
                 tools:listitem="@android:layout/simple_spinner_dropdown_item"/>
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="7">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="12dp"
+                android:src="@drawable/ic_price_24dp" />
+
+            <EditText
+                android:id="@+id/editText_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:textColorHint="@color/colorGray"
+                android:background="@drawable/edit_text_background"
+                android:hint="@string/price"
+                android:inputType="number"
+                app:layout_gravity="center_vertical" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="7">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="12dp"
+                android:src="@drawable/ic_quantity_24dp" />
+
+            <EditText
+                android:id="@+id/editText_quantity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:textColorHint="@color/colorGray"
+                android:background="@drawable/edit_text_background"
+                android:hint="@string/quantity"
+                android:inputType="number"
+                app:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="7">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="12dp"
+                android:src="@drawable/ic_discount_24dp" />
+
+            <EditText
+                android:id="@+id/editText_discount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:textColorHint="@color/colorGray"
+                android:background="@drawable/edit_text_background"
+                android:hint="@string/discount"
+                android:inputType="number"
+                app:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="7">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="12dp"
+                android:src="@drawable/ic_discount_24dp" />
+
+            <EditText
+                android:id="@+id/editText_disc_amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:textColorHint="@color/colorGray"
+                android:background="@drawable/edit_text_background"
+                android:hint="@string/quantity"
+                android:inputType="number"
+                app:layout_gravity="center_vertical" />
         </LinearLayout>
 
         <LinearLayout
@@ -66,7 +158,40 @@
                 android:padding="12dp"
                 android:src="@drawable/ic_person_24dp" />
 
+            <EditText
+                android:id="@+id/editText_sub_total"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:textColorHint="@color/colorGray"
+                android:background="@drawable/edit_text_background"
+                android:hint="@string/sub_total"
+                android:inputType="number"
+                app:layout_gravity="center_vertical" />
         </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2">
+        <Button
+            android:id="@+id/button_cancel"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cancel"
+            android:layout_margin="5dp"/>
+
+        <Button
+            android:id="@+id/button_save"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/save"
+            android:layout_margin="5dp"/>
+    </LinearLayout>
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>
