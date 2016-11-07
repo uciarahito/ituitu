@@ -2,14 +2,18 @@ package uci.develops.wiraenergimobile.activity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -17,12 +21,21 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.helper.Constant;
+import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
+import uci.develops.wiraenergimobile.response.ApproveResponse;
+import uci.develops.wiraenergimobile.response.UserResponse;
+import uci.develops.wiraenergimobile.service.RestClient;
 
 public class FormQuotationActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -144,23 +157,67 @@ public class FormQuotationActivity extends AppCompatActivity implements View.OnC
 
         }
         if (v == imageView_view) {
-            dialog_item.setContentView(R.layout.content_item_quotation);
+            showDialogAdd();
 
         }
         if (v == imageView_edit) {
-            dialog_item.setContentView(R.layout.content_item_quotation);
+            showDialogEdit();
         }
         if (v == imageView_delete) {
 
         }
         if (v == imageView_add) {
-            dialog_item.setContentView(R.layout.content_item_quotation);
+            showDialogEdit();
         }
         if (v == button_cancel) {
             intent = new Intent(FormQuotationActivity.this, ReportQuotationActivity.class);
             startActivity(intent);
             finish();
         }
+    }
+
+    private Dialog dialog_add, dialog_view, dialog_edit;
+    private void showDialogAdd() {
+        dialog_add = new Dialog(FormQuotationActivity.this);
+        dialog_add.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog_add.setContentView(R.layout.content_item_quotation);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager windowmanager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        windowmanager.getDefaultDisplay().getMetrics(displayMetrics);
+        int deviceWidth = displayMetrics.widthPixels;
+        int deviceHeight = displayMetrics.heightPixels;
+        dialog_add.getWindow().setLayout(deviceWidth - 20, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog_add.setCancelable(true);
+        dialog_add.show();
+    }
+    private void showDialogEdit() {
+        dialog_edit = new Dialog(FormQuotationActivity.this);
+        dialog_edit.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog_edit.setContentView(R.layout.content_item_quotation);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager windowmanager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        windowmanager.getDefaultDisplay().getMetrics(displayMetrics);
+        int deviceWidth = displayMetrics.widthPixels;
+        int deviceHeight = displayMetrics.heightPixels;
+        dialog_edit.getWindow().setLayout(deviceWidth - 20, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog_edit.setCancelable(true);
+        dialog_edit.show();
+    }
+    private void showDialogView() {
+        dialog_view = new Dialog(FormQuotationActivity.this);
+        dialog_view.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog_view.setContentView(R.layout.content_item_quotation);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager windowmanager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        windowmanager.getDefaultDisplay().getMetrics(displayMetrics);
+        int deviceWidth = displayMetrics.widthPixels;
+        int deviceHeight = displayMetrics.heightPixels;
+        dialog_view.getWindow().setLayout(deviceWidth - 20, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog_view.setCancelable(true);
+        dialog_view.show();
     }
 
 }
