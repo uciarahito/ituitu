@@ -31,6 +31,7 @@ import uci.develops.wiraenergimobile.fragment.FragmentPurchasing;
 import uci.develops.wiraenergimobile.fragment.FragmentSales;
 import uci.develops.wiraenergimobile.fragment.navigation.FragmentNavigationManager;
 import uci.develops.wiraenergimobile.fragment.navigation.NavigationManager;
+import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
 
 public class HomeActivity extends AppCompatActivity {
@@ -98,8 +99,16 @@ public class HomeActivity extends AppCompatActivity {
          * namun driver belum mengconfirm delivery_order tersebut
          */
 
-        adapter.addFragment(new FragmentCustomer(), "");
-        adapter.addFragment(new FragmentPurchasing(), "");
+        String roles = "";
+        try {
+            roles = new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles");
+        } catch (Exception e){
+
+        }
+        if(roles != "" && roles.equals("mobile")) {
+            adapter.addFragment(new FragmentCustomer(), "");
+            adapter.addFragment(new FragmentPurchasing(), "");
+        }
         adapter.addFragment(new FragmentSales(), "");
 
         viewPager.setAdapter(adapter);
@@ -180,9 +189,19 @@ public class HomeActivity extends AppCompatActivity {
 //        tabLayout.getTabAt(3).setIcon(R.drawable.ic_tab_inventory);
 //        tabLayout.getTabAt(4).setIcon(R.drawable.ic_tab_report);
 
-        tabLayout.getTabAt(0).setText(R.string.tab_customer);
-        tabLayout.getTabAt(1).setText(R.string.tab_purchasing);
-        tabLayout.getTabAt(2).setText(R.string.tab_sales);
+        String roles = "";
+        try {
+            roles = new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles");
+        } catch (Exception e){
+
+        }
+        if(roles != "" && roles.equals("mobile")) {
+            tabLayout.getTabAt(0).setText(R.string.tab_customer);
+            tabLayout.getTabAt(1).setText(R.string.tab_purchasing);
+            tabLayout.getTabAt(2).setText(R.string.tab_sales);
+        } else {
+            tabLayout.getTabAt(0).setText(R.string.tab_sales);
+        }
     }
 
     private void setupDrawer() {

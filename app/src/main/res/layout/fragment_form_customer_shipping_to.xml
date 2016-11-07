@@ -301,6 +301,7 @@
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/linear_layout_tax"
         android:layout_margin="5dp"
         android:weightSum="6"
         android:layout_width="match_parent"
@@ -321,6 +322,7 @@
             android:layout_height="40dp" />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/linear_layout_note"
         android:layout_margin="5dp"
         android:weightSum="6"
         android:layout_width="match_parent"

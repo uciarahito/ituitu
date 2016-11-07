@@ -31,7 +31,7 @@ public class FragmentFormCustomerShippingTo extends Fragment {
     private EditText editText_pic_name, editText_address, editText_postcode, editText_eta,
             editText_email, editText_phone, editText_mobile, editText_fax, editText_tax, editText_map_cordinate, editText_note;
     private AutoCompleteTextView autoComplete_city, autoComplete_province;
-    private LinearLayout linear_layout_eta;
+    private LinearLayout linear_layout_eta, linear_layout_note, linear_layout_tax;
 
     String pic_name = "", address = "", city = "", province = "", postcode = "", eta = "", map = "", email = "", phone = "", mobile = "", fax = "", tax = "", note = "";
 
@@ -87,6 +87,9 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         editText_tax = (EditText) view.findViewById(R.id.editText_tax);
         editText_note = (EditText) view.findViewById(R.id.editText_note);
         linear_layout_eta = (LinearLayout) view.findViewById(R.id.linear_layout_eta);
+        linear_layout_note = (LinearLayout) view.findViewById(R.id.linear_layout_note);
+        linear_layout_tax = (LinearLayout) view.findViewById(R.id.linear_layout_tax);
+
 
         String[] province = getActivity().getResources().getStringArray(R.array.list_of_province);
         String[] city = getActivity().getResources().getStringArray(R.array.list_of_city);
@@ -96,6 +99,12 @@ public class FragmentFormCustomerShippingTo extends Fragment {
 
         ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, city);
         autoComplete_city.setAdapter(cityAdapter);
+
+        if(!new SharedPreferenceManager().getPreferences(getContext(), "roles").equals("mobile")){
+            linear_layout_eta.setVisibility(View.GONE);
+            linear_layout_note.setVisibility(View.GONE);
+            linear_layout_tax.setVisibility(View.GONE);
+        }
     }
 
     public boolean isNotEmpty() {
