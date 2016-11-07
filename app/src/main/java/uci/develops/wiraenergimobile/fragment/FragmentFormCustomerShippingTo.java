@@ -1,5 +1,6 @@
 package uci.develops.wiraenergimobile.fragment;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.activity.MapsCoordinateActivity;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerModel;
 import uci.develops.wiraenergimobile.response.CustomerResponse;
@@ -29,7 +31,7 @@ public class FragmentFormCustomerShippingTo extends Fragment {
     private EditText editText_pic_name, editText_address, editText_postcode, editText_eta,
             editText_email, editText_phone, editText_mobile, editText_fax, editText_tax, editText_map_cordinate, editText_note;
     private AutoCompleteTextView autoComplete_city, autoComplete_province;
-    private LinearLayout linear_layout_eta;
+    private LinearLayout linear_layout_eta, linear_layout_note, linear_layout_tax;
 
     String pic_name = "", address = "", city = "", province = "", postcode = "", eta = "", map = "", email = "", phone = "", mobile = "", fax = "", tax = "", note = "";
 
@@ -52,19 +54,21 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         view = inflater.inflate(R.layout.fragment_form_customer_shipping_to, container, false);
         editText_map_cordinate = (EditText) view.findViewById(R.id.editText_map_coordinate);
 
-        editText_map_cordinate.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                //Toast.makeText(getActivity().getApplicationContext(), "Map coordinate", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
-
         decode = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode");
         token = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "token");
 
         initializeComponent(view);
         loadData();
+
+        editText_map_cordinate.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Intent intent = new Intent(getContext(), MapsCoordinateActivity.class);
+                startActivity(intent);
+                return false;
+            }
+        });
+
         return view;
     }
 
@@ -83,6 +87,9 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         editText_tax = (EditText) view.findViewById(R.id.editText_tax);
         editText_note = (EditText) view.findViewById(R.id.editText_note);
         linear_layout_eta = (LinearLayout) view.findViewById(R.id.linear_layout_eta);
+        linear_layout_note = (LinearLayout) view.findViewById(R.id.linear_layout_note);
+        linear_layout_tax = (LinearLayout) view.findViewById(R.id.linear_layout_tax);
+
 
         String[] province = getActivity().getResources().getStringArray(R.array.list_of_province);
         String[] city = getActivity().getResources().getStringArray(R.array.list_of_city);
@@ -92,6 +99,12 @@ public class FragmentFormCustomerShippingTo extends Fragment {
 
         ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, city);
         autoComplete_city.setAdapter(cityAdapter);
+
+        if(!new SharedPreferenceManager().getPreferences(getContext(), "roles").equals("mobile")){
+            linear_layout_eta.setVisibility(View.GONE);
+            linear_layout_note.setVisibility(View.GONE);
+            linear_layout_tax.setVisibility(View.GONE);
+        }
     }
 
     public boolean isNotEmpty() {
