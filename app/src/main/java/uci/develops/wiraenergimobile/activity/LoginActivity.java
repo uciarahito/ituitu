@@ -57,6 +57,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         initializeComponent();
         loadData();
+
+        isLogin();
+    }
+
+    private void isLogin(){
+        try {
+            if(new SharedPreferenceManager().getPreferences(LoginActivity.this, "is_login").equals("true")){
+                if(new SharedPreferenceManager().getPreferences(LoginActivity.this, "roles").equals("admin")){
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                if(new SharedPreferenceManager().getPreferences(LoginActivity.this, "roles").equals("mobile")){
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                if(new SharedPreferenceManager().getPreferences(LoginActivity.this, "roles").equals("customer")){
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        } catch (Exception e){
+
+        }
     }
 
     private void initializeComponent() {
