@@ -1,5 +1,6 @@
 package uci.develops.wiraenergimobile.fragment;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.activity.MapsCoordinateActivity;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerModel;
 import uci.develops.wiraenergimobile.response.CustomerResponse;
@@ -52,19 +54,21 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         view = inflater.inflate(R.layout.fragment_form_customer_shipping_to, container, false);
         editText_map_cordinate = (EditText) view.findViewById(R.id.editText_map_coordinate);
 
-        editText_map_cordinate.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                //Toast.makeText(getActivity().getApplicationContext(), "Map coordinate", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
-
         decode = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode");
         token = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "token");
 
         initializeComponent(view);
         loadData();
+
+        editText_map_cordinate.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Intent intent = new Intent(getContext(), MapsCoordinateActivity.class);
+                startActivity(intent);
+                return false;
+            }
+        });
+
         return view;
     }
 

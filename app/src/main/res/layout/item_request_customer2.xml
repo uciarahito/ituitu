@@ -59,6 +59,7 @@
                 android:layout_width="0dp"/>
         </LinearLayout>
         <TextView
+            android:visibility="gone"
             android:id="@+id/txtStatus"
             android:gravity="end"
             android:layout_width="match_parent"
