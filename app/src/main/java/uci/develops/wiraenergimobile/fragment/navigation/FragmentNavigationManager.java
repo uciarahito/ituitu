@@ -8,12 +8,15 @@ import android.support.v4.app.FragmentTransaction;
 import uci.develops.wiraenergimobile.BuildConfig;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.activity.DashboardActivity;
+import uci.develops.wiraenergimobile.activity.HomeActivity;
 import uci.develops.wiraenergimobile.fragment.FragmentNavInventory;
 import uci.develops.wiraenergimobile.fragment.FragmentNavMasterSetup;
 import uci.develops.wiraenergimobile.fragment.FragmentNavPurchasing;
 import uci.develops.wiraenergimobile.fragment.FragmentNavReporting;
 import uci.develops.wiraenergimobile.fragment.FragmentNavSales;
 import uci.develops.wiraenergimobile.fragment.FragmentNavUtility;
+import uci.develops.wiraenergimobile.fragment.FragmentPurchasing;
+import uci.develops.wiraenergimobile.fragment.FragmentSales;
 
 /**
  * @author msahakyan
@@ -24,9 +27,9 @@ public class FragmentNavigationManager implements NavigationManager {
     private static FragmentNavigationManager sInstance;
 
     private FragmentManager mFragmentManager;
-    private DashboardActivity mActivity;
+    private HomeActivity mActivity;
 
-    public static FragmentNavigationManager obtain(DashboardActivity activity) {
+    public static FragmentNavigationManager obtain(HomeActivity activity) {
         if (sInstance == null) {
             sInstance = new FragmentNavigationManager();
         }
@@ -34,39 +37,19 @@ public class FragmentNavigationManager implements NavigationManager {
         return sInstance;
     }
 
-    private void configure(DashboardActivity activity) {
+    private void configure(HomeActivity activity) {
         mActivity = activity;
         mFragmentManager = mActivity.getSupportFragmentManager();
     }
 
     @Override
-    public void showFragmentNavMasterSetup(String title) {
-//        showFragment(FragmentNavMasterSetup.newInstance(title), false);
-    }
-
-    @Override
     public void showFragmentNavPurchasing(String title) {
-//        showFragment(FragmentNavPurchasing.newInstance(title), false);
-    }
-
-    @Override
-    public void showFragmentNavInventory(String title) {
-//        showFragment(FragmentNavInventory.newInstance(title), false);
+        showFragment(FragmentPurchasing.newInstance(title), false);
     }
 
     @Override
     public void showFragmentNavSales(String title) {
-        showFragment(FragmentNavSales.newInstance(title), false);
-    }
-
-    @Override
-    public void showFragmentNavReporting(String title) {
-        showFragment(FragmentNavReporting.newInstance(title), false);
-    }
-
-    @Override
-    public void showFragmentNavUtility(String title) {
-        showFragment(FragmentNavUtility.newInstance(title), false);
+        showFragment(FragmentSales.newInstance(title), false);
     }
 
     private void showFragment(Fragment fragment, boolean allowStateLoss) {

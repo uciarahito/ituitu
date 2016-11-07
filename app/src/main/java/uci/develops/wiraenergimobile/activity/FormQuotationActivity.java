@@ -168,6 +168,9 @@ public class FormQuotationActivity extends AppCompatActivity implements View.OnC
         }
         if (v == imageView_edit) {
             showDialogEdit();
+            //google maps masih belum bisa ban
+            // coba jalankan aja di emulator, biar ku liat
+            
         }
         if (v == imageView_delete) {
 
@@ -187,22 +190,24 @@ public class FormQuotationActivity extends AppCompatActivity implements View.OnC
         dialog_add = new Dialog(FormQuotationActivity.this);
         dialog_add.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog_add.setContentView(R.layout.content_item_quotation);
+        button_cancel_item = (Button)dialog_add.findViewById(R.id.button_cancel);
+        button_save_item = (Button)dialog_add.findViewById(R.id.button_save);
 
-//        button_cancel_item.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(FormQuotationActivity.this, FormQuotationActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        button_save_item.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(FormQuotationActivity.this, FormQuotationActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        button_cancel_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FormQuotationActivity.this, FormQuotationActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        button_save_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FormQuotationActivity.this, FormQuotationActivity.class);
+                startActivity(intent);
+            }
+        });
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         WindowManager windowmanager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
@@ -218,6 +223,25 @@ public class FormQuotationActivity extends AppCompatActivity implements View.OnC
         dialog_edit.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog_edit.setContentView(R.layout.content_item_quotation);
 
+        button_cancel_item = (Button)dialog_edit.findViewById(R.id.button_cancel);
+        button_save_item = (Button)dialog_edit.findViewById(R.id.button_save);
+
+        button_cancel_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FormQuotationActivity.this, FormQuotationActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        button_save_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FormQuotationActivity.this, FormQuotationActivity.class);
+                startActivity(intent);
+            }
+        });
+
         DisplayMetrics displayMetrics = new DisplayMetrics();
         WindowManager windowmanager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
         windowmanager.getDefaultDisplay().getMetrics(displayMetrics);
@@ -231,6 +255,25 @@ public class FormQuotationActivity extends AppCompatActivity implements View.OnC
         dialog_view = new Dialog(FormQuotationActivity.this);
         dialog_view.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog_view.setContentView(R.layout.content_item_quotation);
+
+        button_cancel_item = (Button)dialog_view.findViewById(R.id.button_cancel);
+        button_save_item = (Button)dialog_view.findViewById(R.id.button_save);
+
+        button_cancel_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FormQuotationActivity.this, FormQuotationActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        button_save_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FormQuotationActivity.this, FormQuotationActivity.class);
+                startActivity(intent);
+            }
+        });
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         WindowManager windowmanager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);

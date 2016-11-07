@@ -69,9 +69,8 @@ public class DashboardActivity extends AppCompatActivity{
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
-
         mExpandableListView = (ExpandableListView) mDrawerLayout.findViewById(R.id.navList);
-        mNavigationManager = FragmentNavigationManager.obtain(this);
+//        mNavigationManager = FragmentNavigationManager.obtain(this);
 
         initItems();
 
@@ -191,7 +190,7 @@ public class DashboardActivity extends AppCompatActivity{
         mExpandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
             @Override
             public void onGroupCollapse(int groupPosition) {
-                getSupportActionBar().setTitle(R.string.film_genres);
+//                getSupportActionBar().setTitle(R.string.film_genres);
             }
         });
 
@@ -203,21 +202,21 @@ public class DashboardActivity extends AppCompatActivity{
                         .get(childPosition).toString();
                 getSupportActionBar().setTitle(selectedItem);
 
-                if (items[0].equals(mExpandableListTitle.get(groupPosition))) {
-                    mNavigationManager.showFragmentNavMasterSetup(selectedItem);
-                } else if (items[1].equals(mExpandableListTitle.get(groupPosition))) {
-                    mNavigationManager.showFragmentNavPurchasing(selectedItem);
-                } else if (items[2].equals(mExpandableListTitle.get(groupPosition))) {
-                    mNavigationManager.showFragmentNavInventory(selectedItem);
-                } else if (items[3].equals(mExpandableListTitle.get(groupPosition))) {
-                    mNavigationManager.showFragmentNavSales(selectedItem);
-                } else if (items[4].equals(mExpandableListTitle.get(groupPosition))) {
-                    mNavigationManager.showFragmentNavReporting(selectedItem);
-                } else if (items[5].equals(mExpandableListTitle.get(groupPosition))) {
-                    mNavigationManager.showFragmentNavUtility(selectedItem);
-                } else {
-                    throw new IllegalArgumentException("Not supported fragment type");
-                }
+//                if (items[0].equals(mExpandableListTitle.get(groupPosition))) {
+//                    mNavigationManager.showFragmentNavMasterSetup(selectedItem);
+//                } else if (items[1].equals(mExpandableListTitle.get(groupPosition))) {
+//                    mNavigationManager.showFragmentNavPurchasing(selectedItem);
+//                } else if (items[2].equals(mExpandableListTitle.get(groupPosition))) {
+//                    mNavigationManager.showFragmentNavInventory(selectedItem);
+//                } else if (items[3].equals(mExpandableListTitle.get(groupPosition))) {
+//                    mNavigationManager.showFragmentNavSales(selectedItem);
+//                } else if (items[4].equals(mExpandableListTitle.get(groupPosition))) {
+//                    mNavigationManager.showFragmentNavReporting(selectedItem);
+//                } else if (items[5].equals(mExpandableListTitle.get(groupPosition))) {
+//                    mNavigationManager.showFragmentNavUtility(selectedItem);
+//                } else {
+//                    throw new IllegalArgumentException("Not supported fragment type");
+//                }
 
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 return false;
@@ -231,7 +230,7 @@ public class DashboardActivity extends AppCompatActivity{
             /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                getSupportActionBar().setTitle(R.string.film_genres);
+//                getSupportActionBar().setTitle(R.string.film_genres);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 

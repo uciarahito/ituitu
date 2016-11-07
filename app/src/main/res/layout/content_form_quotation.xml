@@ -118,6 +118,15 @@
             android:layout_height="15dp"
             android:background="@drawable/drop_shadow" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="List of Item"
+            android:textStyle="bold"
+            android:padding="@dimen/keyline_xs"/>
+
+        <!--<include layout="@layout/content_list_item_quotation" />-->
+
         <android.support.v7.widget.GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

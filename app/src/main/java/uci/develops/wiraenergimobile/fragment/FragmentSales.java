@@ -18,8 +18,24 @@ import uci.develops.wiraenergimobile.activity.RequestQuotationActivity;
 public class FragmentSales extends Fragment implements View.OnClickListener{
 
     private LinearLayout linearLayout_menu_sales_quotation, linearLayout_menu_sales_order, linearLayout_menu_delivery_order, linearLayout_menu_invoicing_payment;
+    private static final String KEY_MOVIE_TITLE = "key_title";
 
     public FragmentSales(){}
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment.
+     *
+     * @return A new instance of fragment FragmentSales.
+     */
+    public static FragmentSales newInstance(String movieTitle) {
+        FragmentSales fragmentSales = new FragmentSales();
+        Bundle args = new Bundle();
+        args.putString(KEY_MOVIE_TITLE, movieTitle);
+        fragmentSales.setArguments(args);
+
+        return fragmentSales;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
