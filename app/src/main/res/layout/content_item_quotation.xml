@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="12dp"
-                android:src="@drawable/ic_person_24dp" />
+                android:src="@drawable/ic_gas_24dp" />
             <Spinner
                 android:id="@+id/spinner_shipping_name"
                 android:layout_width="0dp"
@@ -44,20 +44,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="12dp"
-                android:src="@drawable/ic_person_24dp" />
+                android:src="@drawable/ic_list_24dp" />
             <Spinner
                 android:layout_weight="6"
-                android:spinnerMode="dialog"
-                android:id="@+id/spinner_tax_ppn"
+                android:id="@+id/spinner_unit"
                 android:layout_width="0dp"
-                android:layout_height="40dp" />
-            <!--<Spinner-->
-                <!--android:id="@+id/spinner_unit"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_weight="6"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--app:layout_gravity="center_vertical"-->
-                <!--tools:listitem="@android:layout/simple_spinner_dropdown_item"/>-->
+                android:layout_height="40dp"
+                app:layout_gravity="center_vertical"
+                tools:listitem="@android:layout/simple_spinner_dropdown_item"/>
 
         </LinearLayout>
 
@@ -71,13 +65,6 @@
                 android:layout_weight="1"
                 android:padding="12dp"
                 android:src="@drawable/ic_person_24dp" />
-            <!--<Spinner-->
-            <!--android:id="@+id/spinner_unit"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_weight="6"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--app:layout_gravity="center_vertical"-->
-            <!--tools:listitem="@android:layout/simple_spinner_dropdown_item"/>-->
 
         </LinearLayout>
     </LinearLayout>

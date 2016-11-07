@@ -135,21 +135,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     if (ind == 4) {
                                         new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "customer");
 
-//                                        Intent intent = new Intent(LoginActivity.this, DashboardCustomerActivity.class);
-//                                        startActivity(intent);
-//                                        finish();
+                                        Intent intent = new Intent(LoginActivity.this, DashboardCustomerActivity.class);
+                                        startActivity(intent);
+                                        finish();
 
-                                        if (new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve").equals(0)) {
-                                            Intent intent = new Intent(LoginActivity.this, VerificationStatusActivity.class);
-                                            startActivity(intent);
-                                            finish();
-                                        }
-
-                                        if (new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve").equals(1)) {
-                                            Intent intent = new Intent(LoginActivity.this, DashboardCustomerActivity.class);
-                                            startActivity(intent);
-                                            finish();
-                                        }
+//                                        if (new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve").equals(0)) {
+//                                            Intent intent = new Intent(LoginActivity.this, VerificationStatusActivity.class);
+//                                            startActivity(intent);
+//                                            finish();
+//                                        }
+//
+//                                        if (new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve").equals(1)) {
+//                                            Intent intent = new Intent(LoginActivity.this, DashboardCustomerActivity.class);
+//                                            startActivity(intent);
+//                                            finish();
+//                                        }
                                     }
                                     if (ind <= 3) {
                                         new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "mobile");

@@ -1,6 +1,7 @@
 package uci.develops.wiraenergimobile.activity;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -31,6 +33,7 @@ public class FormQuotationActivity extends AppCompatActivity implements View.OnC
     private ImageView imageView_view, imageView_edit, imageView_delete, imageView_add;
     private TextView textView_item_name, textView_qty_item, textView_unit_item;
     private DatePickerDialog datePickerDialog;
+    private Dialog dialog_item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +125,11 @@ public class FormQuotationActivity extends AppCompatActivity implements View.OnC
 
         }
         if (v == imageView_view) {
+            dialog_item = new Dialog(FormQuotationActivity.this);
+            dialog_item.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog_item.setContentView(R.layout.content_item_quotation);
+
+
             intent = new Intent(FormQuotationActivity.this, ItemQuotationActivity.class);
             startActivity(intent);
             finish();
