@@ -2,6 +2,7 @@ package uci.develops.wiraenergimobile.model;
 
 import android.content.Context;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -30,10 +31,21 @@ public class ExpandableListDataSource {
         List<String> menuPurchasing = Arrays.asList(context.getResources().getStringArray(R.array.menu_purchasing));
         List<String> menuSales = Arrays.asList(context.getResources().getStringArray(R.array.menu_sales));
 
+        /*
         //tree for root
         expandableListData.put(rootMenu.get(0), menuPurchasing);
         expandableListData.put(rootMenu.get(1), menuSales);
+        */
 
+        for(String menu_root_ : rootMenu){
+            if(menu_root_.equals("Purchasing")){
+                expandableListData.put(menu_root_, menuPurchasing);
+            } else if(menu_root_.equals("Sales")){
+                expandableListData.put(menu_root_, menuSales);
+            } else {
+                expandableListData.put(menu_root_, new ArrayList<String>());
+            }
+        }
         return expandableListData;
     }
 }
