@@ -111,6 +111,10 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "approve").equals(2)) {
             linearLayout_tab_shipping_to.setEnabled(false);
         }
+
+        linearLayout_tab_basic_info.setOnClickListener(this);
+        linearLayout_tab_contact_info.setOnClickListener(this);
+        linearLayout_tab_shipping_to.setOnClickListener(this);
     }
 
     private void buttonValidation() {
@@ -157,6 +161,21 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
+        if(v == linearLayout_tab_basic_info){
+            linearLayouts_fragment[0].setVisibility(View.VISIBLE);
+            linearLayouts_fragment[1].setVisibility(View.GONE);
+            linearLayouts_fragment[2].setVisibility(View.GONE);
+        }
+        if(v == linearLayout_tab_contact_info){
+            linearLayouts_fragment[0].setVisibility(View.GONE);
+            linearLayouts_fragment[1].setVisibility(View.VISIBLE);
+            linearLayouts_fragment[2].setVisibility(View.GONE);
+        }
+        if(v == linearLayout_tab_shipping_to){
+            linearLayouts_fragment[0].setVisibility(View.GONE);
+            linearLayouts_fragment[1].setVisibility(View.GONE);
+            linearLayouts_fragment[2].setVisibility(View.VISIBLE);
+        }
         if (v == linearLayout_button_approve) {
             Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().requestCustomerAction("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
                     new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), 1, 1);
