@@ -54,26 +54,41 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         isLogin();
     }
 
-    private void isLogin(){
+    private void isLogin() {
         try {
-            if(new SharedPreferenceManager().getPreferences(LoginActivity.this, "is_login").equals("true")){
-                if(new SharedPreferenceManager().getPreferences(LoginActivity.this, "roles").equals("admin")){
+            if (new SharedPreferenceManager().getPreferences(LoginActivity.this, "is_login").equals("true")) {
+                if (new SharedPreferenceManager().getPreferences(LoginActivity.this, "roles").equals("admin")) {
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
                 }
-                if(new SharedPreferenceManager().getPreferences(LoginActivity.this, "roles").equals("customer")){
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                    finish();
+                if (new SharedPreferenceManager().getPreferences(LoginActivity.this, "roles").equals("customer")) {
+                    if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 2) {
+                        Intent intent = new Intent(LoginActivity.this, VerificationStatusActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 1) {
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 0) {
+                        Intent intent = new Intent(LoginActivity.this, WaitingApprovalActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+//                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+//                    startActivity(intent);
+//                    finish();
                 }
-                if(new SharedPreferenceManager().getPreferences(LoginActivity.this, "roles").equals("expedition")){
+                if (new SharedPreferenceManager().getPreferences(LoginActivity.this, "roles").equals("expedition")) {
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
                 }
             }
-        } catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
@@ -140,7 +155,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             info = response.body().getInfo();
                             token = response.body().getToken();
                             final int user_id = response.body().getUser_id();
-                            final String active = response.body().getActive();
                             final String approve = response.body().getApprove();
                             activated = response.body().isActivated();
                             customer_decode = response.body().getCustomer_decode();
@@ -165,17 +179,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                                     if (ind == 3) {
                                         new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "customer");
-                                        if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 0) {
+                                        if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 2) {
                                             Intent intent = new Intent(LoginActivity.this, VerificationStatusActivity.class);
                                             startActivity(intent);
                                             finish();
-                                        }
-                                        if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 1) {
+                                        } else if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 1) {
                                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                             startActivity(intent);
                                             finish();
                                         }
-                                        if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 3) {
+                                        if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 0) {
                                             Intent intent = new Intent(LoginActivity.this, WaitingApprovalActivity.class);
                                             startActivity(intent);
                                             finish();

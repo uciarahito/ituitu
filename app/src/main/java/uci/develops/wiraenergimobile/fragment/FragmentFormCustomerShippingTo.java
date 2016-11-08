@@ -100,7 +100,7 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, city);
         autoComplete_city.setAdapter(cityAdapter);
 
-        if(!new SharedPreferenceManager().getPreferences(getContext(), "roles").equals("mobile")){
+        if(!new SharedPreferenceManager().getPreferences(getContext(), "roles").equals("customer")){
             linear_layout_eta.setVisibility(View.GONE);
             linear_layout_note.setVisibility(View.GONE);
             linear_layout_tax.setVisibility(View.GONE);
@@ -159,25 +159,27 @@ public class FragmentFormCustomerShippingTo extends Fragment {
             @Override
             public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
                 if (response.isSuccessful()) {
-                    CustomerModel customerModel = new CustomerModel();
-                    customerModel = response.body().getData().get(0);
-                    editText_pic_name.setText(customerModel.getShipping_pic() == null ? "" : customerModel.getShipping_pic());
-                    editText_address.setText(customerModel.getShipping_address() == null ? "" : customerModel.getShipping_address());
-                    autoComplete_city.setText(customerModel.getShipping_city() == null ? "" : customerModel.getShipping_city());
-                    autoComplete_province.setText(customerModel.getShipping_province() == null ? "" : customerModel.getShipping_province());
-                    editText_postcode.setText(customerModel.getShipping_postcode() == null ? "" : customerModel.getShipping_postcode());
-                    editText_eta.setText(customerModel.getShipping_eta() == null ? "" : customerModel.getShipping_eta());
-                    editText_map_cordinate.setText(customerModel.getShipping_map() == null ? "" : customerModel.getShipping_map());
-                    editText_phone.setText(customerModel.getShipping_phone() == null ? "" : customerModel.getShipping_phone());
-                    editText_mobile.setText(customerModel.getShipping_mobile() == null ? "" : customerModel.getShipping_mobile());
-                    editText_email.setText(customerModel.getShipping_email() == null ? "" : customerModel.getShipping_email());
-                    editText_fax.setText(customerModel.getShipping_fax() == null ? "" : customerModel.getShipping_fax());
-                    editText_tax.setText(customerModel.getShipping_tax() == null ? "" : customerModel.getShipping_tax());
-                    editText_note.setText(customerModel.getShipping_note() == null ? "" : customerModel.getShipping_note());
+                    if (response.body().getData().size() > 0) {
+                        CustomerModel customerModel = new CustomerModel();
+                        customerModel = response.body().getData().get(0);
+                        editText_pic_name.setText(customerModel.getShipping_pic() == null ? "" : customerModel.getShipping_pic());
+                        editText_address.setText(customerModel.getShipping_address() == null ? "" : customerModel.getShipping_address());
+                        autoComplete_city.setText(customerModel.getShipping_city() == null ? "" : customerModel.getShipping_city());
+                        autoComplete_province.setText(customerModel.getShipping_province() == null ? "" : customerModel.getShipping_province());
+                        editText_postcode.setText(customerModel.getShipping_postcode() == null ? "" : customerModel.getShipping_postcode());
+                        editText_eta.setText(customerModel.getShipping_eta() == null ? "" : customerModel.getShipping_eta());
+                        editText_map_cordinate.setText(customerModel.getShipping_map() == null ? "" : customerModel.getShipping_map());
+                        editText_phone.setText(customerModel.getShipping_phone() == null ? "" : customerModel.getShipping_phone());
+                        editText_mobile.setText(customerModel.getShipping_mobile() == null ? "" : customerModel.getShipping_mobile());
+                        editText_email.setText(customerModel.getShipping_email() == null ? "" : customerModel.getShipping_email());
+                        editText_fax.setText(customerModel.getShipping_fax() == null ? "" : customerModel.getShipping_fax());
+                        editText_tax.setText(customerModel.getShipping_tax() == null ? "" : customerModel.getShipping_tax());
+                        editText_note.setText(customerModel.getShipping_note() == null ? "" : customerModel.getShipping_note());
 
-                    if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
-                        if (customerModel.getApprove() == 3) {
-                            readOnly();
+                        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
+                            if (customerModel.getApprove() == 0) {
+                                readOnly();
+                            }
                         }
                     }
                 }

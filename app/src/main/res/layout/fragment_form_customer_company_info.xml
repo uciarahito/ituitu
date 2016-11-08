@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:id="@+id/linear_layout_id"
         android:layout_margin="5dp"
         android:weightSum="6"
         android:layout_width="match_parent"
@@ -23,7 +24,6 @@
             android:layout_weight="4"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:editable="false"
             android:background="@color/LightGrey"/>
     </LinearLayout>
     <LinearLayout
@@ -158,7 +158,7 @@
                 android:gravity="center"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:src="@android:drawable/ic_menu_call"
+                    android:src="@drawable/ic_phone_24dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -196,7 +196,7 @@
                 android:gravity="center"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:src="@android:drawable/ic_menu_call"
+                    android:src="@drawable/ic_mobile_24dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -234,7 +234,7 @@
                 android:gravity="center"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:src="@android:drawable/ic_menu_call"
+                    android:src="@drawable/ic_fax_24dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -248,6 +248,7 @@
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/linear_layout_term"
         android:layout_margin="5dp"
         android:weightSum="6"
         android:layout_width="match_parent"
@@ -268,6 +269,7 @@
             android:layout_height="40dp" />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/linear_layout_valuta"
         android:layout_margin="5dp"
         android:weightSum="6"
         android:orientation="horizontal"
@@ -322,6 +324,7 @@
             android:layout_height="40dp" />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/linear_layout_tax_ppn"
         android:layout_margin="5dp"
         android:weightSum="6"
         android:layout_width="match_parent"
@@ -342,6 +345,7 @@
             android:layout_height="40dp" />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/linear_layout_active"
         android:layout_margin="5dp"
         android:weightSum="6"
         android:layout_width="match_parent"
@@ -403,6 +407,7 @@
             android:layout_height="40dp" />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/linear_layout_note"
         android:layout_margin="5dp"
         android:weightSum="6"
         android:layout_width="match_parent"

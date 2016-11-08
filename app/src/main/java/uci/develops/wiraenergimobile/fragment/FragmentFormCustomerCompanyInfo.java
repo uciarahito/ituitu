@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.support.v4.app.Fragment;
 
@@ -17,6 +18,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.activity.LoginActivity;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerModel;
 import uci.develops.wiraenergimobile.response.CustomerResponse;
@@ -32,6 +34,8 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
             editText_email, editText_website, editText_note;
     private AutoCompleteTextView autoComplete_city, autoComplete_province;
     private Spinner spinner_valuta, spinner_tax_ppn, spinner_active;
+
+    private LinearLayout linear_layout_id, linear_layout_term, linear_layout_valuta, linear_layout_tax_ppn, linear_layout_active, linear_layout_note;
 
     String id = "", name = "", address = "", city = "", province = "", zip_code = "", phone = "", mobile = "", fax = "", term = "",
             valuta = "", npwp = "", tax_ppn = "", active = "", email = "", website = "", note = "";
@@ -82,7 +86,22 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         editText_website = (EditText) view.findViewById(R.id.editText_website);
         editText_note = (EditText) view.findViewById(R.id.editText_note);
 
+        linear_layout_id = (LinearLayout) view.findViewById(R.id.linear_layout_id);
+        linear_layout_term = (LinearLayout) view.findViewById(R.id.linear_layout_term);
+        linear_layout_valuta = (LinearLayout) view.findViewById(R.id.linear_layout_valuta);
+        linear_layout_tax_ppn = (LinearLayout) view.findViewById(R.id.linear_layout_tax_ppn);
+        linear_layout_active = (LinearLayout) view.findViewById(R.id.linear_layout_active);
+        linear_layout_note = (LinearLayout) view.findViewById(R.id.linear_layout_note);
+
         editText_id.setText("" + new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode"));
+        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")){
+            linear_layout_id.setVisibility(View.GONE);
+            linear_layout_term.setVisibility(View.GONE);
+            linear_layout_valuta.setVisibility(View.GONE);
+            linear_layout_tax_ppn.setVisibility(View.GONE);
+            linear_layout_active.setVisibility(View.GONE);
+            linear_layout_note.setVisibility(View.GONE);
+        }
 
         List<String> valutas = new ArrayList<String>();
         valutas.add("Rupiah");
@@ -166,27 +185,30 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
             @Override
             public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
                 if (response.isSuccessful()) {
-                    CustomerModel customerModel = new CustomerModel();
-                    customerModel = response.body().getData().get(0);
-                    editText_first_name.setText(customerModel.getFirst_name() == null ? "" : customerModel.getFirst_name());
-                    editText_address.setText(customerModel.getAddress() == null ? "" : customerModel.getAddress());
-                    autoComplete_city.setText(customerModel.getCity() == null ? "" : customerModel.getCity());
-                    autoComplete_province.setText(customerModel.getProvince() == null ? "" : customerModel.getProvince());
-                    editText_phone.setText(customerModel.getPhone() == null ? "" : customerModel.getPhone());
-                    editText_mobile.setText(customerModel.getMobile() == null ? "" : customerModel.getMobile());
-                    editText_fax.setText(customerModel.getFax() == null ? "" : customerModel.getFax());
-                    editText_term.setText(customerModel.getTerm() == null ? "" : customerModel.getTerm());
-                    editText_npwp.setText(customerModel.getNpwp() == null ? "" : customerModel.getNpwp());
-                    editText_email.setText(customerModel.getEmail() == null ? "" : customerModel.getEmail());
-                    editText_website.setText(customerModel.getWebsite() == null ? "" : customerModel.getWebsite());
-                    editText_note.setText(customerModel.getNote() == null ? "" : customerModel.getNote());
-                    editText_zip_code.setText(customerModel.getPostcode() == null ? "" : customerModel.getPostcode());
+                    if (response.body().getData().size() > 0) {
+                        CustomerModel customerModel = new CustomerModel();
+                        customerModel = response.body().getData().get(0);
+                        editText_first_name.setText(customerModel.getFirst_name() == null ? "" : customerModel.getFirst_name());
+                        editText_address.setText(customerModel.getAddress() == null ? "" : customerModel.getAddress());
+                        autoComplete_city.setText(customerModel.getCity() == null ? "" : customerModel.getCity());
+                        autoComplete_province.setText(customerModel.getProvince() == null ? "" : customerModel.getProvince());
+                        editText_phone.setText(customerModel.getPhone() == null ? "" : customerModel.getPhone());
+                        editText_mobile.setText(customerModel.getMobile() == null ? "" : customerModel.getMobile());
+                        editText_fax.setText(customerModel.getFax() == null ? "" : customerModel.getFax());
+                        editText_term.setText(customerModel.getTerm() == null ? "" : customerModel.getTerm());
+                        editText_npwp.setText(customerModel.getNpwp() == null ? "" : customerModel.getNpwp());
+                        editText_email.setText(customerModel.getEmail() == null ? "" : customerModel.getEmail());
+                        editText_website.setText(customerModel.getWebsite() == null ? "" : customerModel.getWebsite());
+                        editText_note.setText(customerModel.getNote() == null ? "" : customerModel.getNote());
+                        editText_zip_code.setText(customerModel.getPostcode() == null ? "" : customerModel.getPostcode());
 
-                    if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
-                        if (customerModel.getApprove() == 3) {
-                            readOnly();
+                        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
+                            if (customerModel.getApprove() == 0) {
+                                readOnly();
+                            }
                         }
                     }
+
                 }
             }
 

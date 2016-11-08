@@ -106,7 +106,7 @@ public class HomeActivity extends AppCompatActivity {
         } catch (Exception e){
 
         }
-        if(roles != "" && roles.equals("mobile")) {
+        if(roles != "" && roles.equals("admin")) {
             adapter.addFragment(new FragmentCustomer(), "");
             adapter.addFragment(new FragmentPurchasing(), "");
         }
@@ -156,7 +156,7 @@ public class HomeActivity extends AppCompatActivity {
                         .get(childPosition).toString();
                 getSupportActionBar().setTitle(selectedItem);
 
-                Toast.makeText(HomeActivity.this, ""+selectedItem, Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeActivity.this, "" + selectedItem, Toast.LENGTH_SHORT).show();
                 /*
                 if (items[0].equals(mExpandableListTitle.get(groupPosition))) {
                     mNavigationManager.showFragmentNavPurchasing(selectedItem);
@@ -175,7 +175,15 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 String selected_item = getResources().getStringArray(R.array.general)[groupPosition];
-                if(selected_item.equals("Logout")){
+                if (selected_item.equals("Logout")) {
+                    logout();
+                } else if (selected_item.equals("Dashboard")) {
+                    Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else if (selected_item.equals("Purchase")) {
+                    logout();
+                } else if (selected_item.equals("Logout")) {
                     logout();
                 }
                 return false;
@@ -207,11 +215,13 @@ public class HomeActivity extends AppCompatActivity {
         } catch (Exception e){
 
         }
-        if(roles != "" && roles.equals("mobile")) {
+        if(roles != "" && roles.equals("admin")) {
             tabLayout.getTabAt(0).setText(R.string.tab_customer);
             tabLayout.getTabAt(1).setText(R.string.tab_purchasing);
             tabLayout.getTabAt(2).setText(R.string.tab_sales);
-        } else {
+        } else if(roles != "" && roles.equals("customer")){
+            tabLayout.getTabAt(0).setText(R.string.tab_sales);
+        } else if(roles != "" && roles.equals("expedition")){
             tabLayout.getTabAt(0).setText(R.string.tab_sales);
         }
     }

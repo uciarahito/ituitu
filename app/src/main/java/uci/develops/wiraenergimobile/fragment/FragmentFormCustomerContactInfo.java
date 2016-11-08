@@ -125,27 +125,29 @@ public class FragmentFormCustomerContactInfo extends Fragment {
             @Override
             public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
                 if (response.isSuccessful()) {
-                    CustomerModel customerModel = new CustomerModel();
-                    customerModel = response.body().getData().get(0);
-                    editText_name1.setText(customerModel.getFirst_name() == null ? "" : customerModel.getFirst_name()+" "+customerModel.getLast_name());
-                    editText_name2.setText(customerModel.getName2() == null ? "" : customerModel.getName2());
-                    editText_name3.setText(customerModel.getName3() == null ? "" : customerModel.getName3());
-                    editText_phone1.setText(customerModel.getPhone() == null ? "" : customerModel.getPhone());
-                    editText_phone2.setText(customerModel.getPhone2() == null ? "" : customerModel.getPhone2());
-                    editText_phone3.setText(customerModel.getPhone3() == null ? "" : customerModel.getPhone3());
-                    editText_mobile1.setText(customerModel.getMobile() == null ? "" : customerModel.getMobile());
-                    editText_mobile2.setText(customerModel.getMobile2() == null ? "" : customerModel.getMobile2());
-                    editText_mobile3.setText(customerModel.getMobile3() == null ? "" : customerModel.getMobile3());
-                    editText_email1.setText(customerModel.getEmail() == null ? "" : customerModel.getEmail());
-                    editText_email2.setText(customerModel.getEmail2() == null ? "" : customerModel.getEmail2());
-                    editText_email3.setText(customerModel.getEmail3() == null ? "" : customerModel.getEmail3());
-                    editText_jabatan1.setText(customerModel.getJabatan1() == null ? "" : customerModel.getJabatan1());
-                    editText_jabatan2.setText(customerModel.getJabatan2() == null ? "" : customerModel.getJabatan2());
-                    editText_jabatan3.setText(customerModel.getJabatan3() == null ? "" : customerModel.getJabatan3());
+                    if (response.body().getData().size() > 0) {
+                        CustomerModel customerModel = new CustomerModel();
+                        customerModel = response.body().getData().get(0);
+                        editText_name1.setText(customerModel.getFirst_name() == null ? "" : customerModel.getFirst_name()+" "+customerModel.getLast_name());
+                        editText_name2.setText(customerModel.getName2() == null ? "" : customerModel.getName2());
+                        editText_name3.setText(customerModel.getName3() == null ? "" : customerModel.getName3());
+                        editText_phone1.setText(customerModel.getPhone() == null ? "" : customerModel.getPhone());
+                        editText_phone2.setText(customerModel.getPhone2() == null ? "" : customerModel.getPhone2());
+                        editText_phone3.setText(customerModel.getPhone3() == null ? "" : customerModel.getPhone3());
+                        editText_mobile1.setText(customerModel.getMobile() == null ? "" : customerModel.getMobile());
+                        editText_mobile2.setText(customerModel.getMobile2() == null ? "" : customerModel.getMobile2());
+                        editText_mobile3.setText(customerModel.getMobile3() == null ? "" : customerModel.getMobile3());
+                        editText_email1.setText(customerModel.getEmail() == null ? "" : customerModel.getEmail());
+                        editText_email2.setText(customerModel.getEmail2() == null ? "" : customerModel.getEmail2());
+                        editText_email3.setText(customerModel.getEmail3() == null ? "" : customerModel.getEmail3());
+                        editText_jabatan1.setText(customerModel.getJabatan1() == null ? "" : customerModel.getJabatan1());
+                        editText_jabatan2.setText(customerModel.getJabatan2() == null ? "" : customerModel.getJabatan2());
+                        editText_jabatan3.setText(customerModel.getJabatan3() == null ? "" : customerModel.getJabatan3());
 
-                    if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
-                        if (customerModel.getApprove() == 3) {
-                            readOnly();
+                        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
+                            if (customerModel.getApprove() == 0) {
+                                readOnly();
+                            }
                         }
                     }
                 }

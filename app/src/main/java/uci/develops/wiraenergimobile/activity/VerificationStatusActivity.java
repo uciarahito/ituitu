@@ -13,7 +13,7 @@ import uci.develops.wiraenergimobile.R;
 
 public class VerificationStatusActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private Button button_previous, button_next;
+    private Button button_next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +26,8 @@ public class VerificationStatusActivity extends AppCompatActivity implements Vie
     }
 
     private void initializeComponent(){
-        button_previous = (Button)findViewById(R.id.button_previous);
         button_next = (Button)findViewById(R.id.button_view_data);
 
-        button_previous.setOnClickListener(this);
         button_next.setOnClickListener(this);
     }
 
@@ -58,10 +56,6 @@ public class VerificationStatusActivity extends AppCompatActivity implements Vie
     @Override
     public void onClick(View v) {
         Intent intent;
-        if(v == button_previous){
-            intent = new Intent(VerificationStatusActivity.this, DashboardActivity.class);
-            startActivity(intent);
-        }
         if (v == button_next){
             intent = new Intent(VerificationStatusActivity.this, FormCustomerActivity.class);
             startActivity(intent);

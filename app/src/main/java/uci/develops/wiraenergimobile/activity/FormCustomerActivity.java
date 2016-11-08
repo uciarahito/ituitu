@@ -108,30 +108,43 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
             linearLayout_button_reject.setVisibility(View.INVISIBLE);
         }
 
-        if(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "approve").equals(3)){
+        if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "approve").equals(2)) {
             linearLayout_tab_shipping_to.setEnabled(false);
         }
     }
 
-    private void buttonValidation(){
-        Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer "+new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
+    private void buttonValidation() {
+        Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
                 new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"));
         customerResponseCall.enqueue(new Callback<CustomerResponse>() {
             @Override
             public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
-                if(response.isSuccessful()){
-                    CustomerModel customerModel = response.body().getData().get(0);
-                    if(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("admin")){
-                        if(customerModel.getApprove()==1 && customerModel.getActive()==1){
-                            linearLayout_button_approve.setVisibility(View.GONE);
-                            linearLayout_button_reject.setVisibility(View.GONE);
-                            linearLayout_button_back.setVisibility(View.GONE);
-                            linearLayout_button_next.setVisibility(View.GONE);
+                if (response.isSuccessful()) {
+                    if (response.body().getData().size() > 0) {
+                        CustomerModel customerModel = response.body().getData().get(0);
+                        if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("admin")) {
+                            if (customerModel.getApprove() == 1 && customerModel.getActive() == 1) {
+                                linearLayout_button_approve.setVisibility(View.GONE);
+                                linearLayout_button_reject.setVisibility(View.GONE);
+                                linearLayout_button_back.setVisibility(View.GONE);
+                                linearLayout_button_next.setVisibility(View.GONE);
+                            } else if (customerModel.getApprove() == 0 && customerModel.getActive() == 0) {
+                                linearLayout_button_approve.setVisibility(View.VISIBLE);
+                                linearLayout_button_reject.setVisibility(View.VISIBLE);
+                                linearLayout_button_back.setVisibility(View.VISIBLE);
+                                linearLayout_button_next.setVisibility(View.VISIBLE);
+                            }
+                        } else if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("customer")) {
+                            if (customerModel.getApprove() == 1 && customerModel.getActive() == 1) {
+                                linearLayout_button_back.setVisibility(View.GONE);
+                                linearLayout_button_next.setVisibility(View.GONE);
+                            } else if (customerModel.getApprove() == 2 && customerModel.getActive() == 0) {
+                                linearLayout_button_approve.setVisibility(View.GONE);
+                                linearLayout_button_reject.setVisibility(View.GONE);
+                            }
                         }
-                    } else {
-                        linearLayout_button_approve.setVisibility(View.GONE);
-                        linearLayout_button_reject.setVisibility(View.GONE);
                     }
+
                 }
             }
 
@@ -252,7 +265,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                     customerModel = fragmentFormCustomerShippingTo.getFormValue();
                 }
 
-                if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("mobile")) {
+                if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("admin")) {
                     is_not_empty = true;
                 }
 
@@ -282,8 +295,8 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                         });
                     }
                     if (index_fragment == 1) {
-                        if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("mobile")) {
-                            textView_button_next.setText("Feedback");
+                        if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("admin")) {
+//                            textView_button_next.setText("Feedback");
                         } else {
                             textView_button_next.setText("Submit");
                             Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().sendDataContactInfo("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
@@ -295,6 +308,27 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                                 public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                                     if (response.isSuccessful()) {
                                         Toast.makeText(FormCustomerActivity.this, "Successfully inserted", Toast.LENGTH_SHORT).show();
+                                        //baru ditambah
+                                        Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_user_id")));
+                                        userResponseCall.enqueue(new Callback<UserResponse>() {
+                                            @Override
+                                            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                                                if (response.isSuccessful()) {
+                                                    if (response.body().getData().getRegistration_key() != null) {
+                                                        Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
+                                                        Constant.sendNotification(response.body().getData().getRegistration_key(), "Ada request customer yang masuk", "request_customer");
+                                                        Intent intent = new Intent(FormCustomerActivity.this, ListRequestCustomerActivity.class);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    }
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<UserResponse> call, Throwable t) {
+
+                                            }
+                                        });
                                     } else {
                                         Toast.makeText(FormCustomerActivity.this, "" + response.errorBody().toString(), Toast.LENGTH_SHORT).show();
                                         Toast.makeText(FormCustomerActivity.this, "Not successfull", Toast.LENGTH_SHORT).show();
@@ -309,14 +343,14 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                         }
                     }
                     if (index_fragment == 2) {
-                        if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("mobile")) {
-                            showDialogNote();
+                        if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("admin")) {
+//                            showDialogNote();
                         } else {
                             Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().sendDataShippingInfo("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
                                     new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), customerModel.getShipping_pic(), customerModel.getShipping_address(),
                                     customerModel.getShipping_city(), customerModel.getShipping_province(), customerModel.getShipping_postcode(), customerModel.getShipping_eta(), customerModel.getShipping_map(),
                                     customerModel.getShipping_phone(), customerModel.getShipping_mobile(), customerModel.getShipping_email(), customerModel.getShipping_fax(), customerModel.getShipping_tax(),
-                                    customerModel.getShipping_note(), 3, 0);
+                                    customerModel.getShipping_note(), 0, 0);
                             approveResponseCall.enqueue(new Callback<ApproveResponse>() {
                                 @Override
                                 public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
@@ -324,12 +358,12 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                                         final CustomerModel customerModel = new CustomerModel();
                                         Toast.makeText(FormCustomerActivity.this, "Successfully inserted", Toast.LENGTH_SHORT).show();
                                         //baru ditambah
-                                        Call<ApproveResponse> submitCustomerResponse = RestClient.getRestClient().customerSubmit("Bearer "+new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
-                                                new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), 3);
+                                        Call<ApproveResponse> submitCustomerResponse = RestClient.getRestClient().customerSubmit("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
+                                                new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), 0);
                                         submitCustomerResponse.enqueue(new Callback<ApproveResponse>() {
                                             @Override
                                             public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                                                if(response.isSuccessful()){
+                                                if (response.isSuccessful()) {
                                                     Toast.makeText(FormCustomerActivity.this, "Waiting for approval", Toast.LENGTH_SHORT).show();
                                                     Intent intent = new Intent(FormCustomerActivity.this, WaitingApprovalActivity.class);
                                                     startActivity(intent);
@@ -439,7 +473,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                         public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                             if (response.isSuccessful()) {
                                 //baru ditambah
-                                Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer "+new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_user_id")));
+                                Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_user_id")));
                                 userResponseCall.enqueue(new Callback<UserResponse>() {
                                     @Override
                                     public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
@@ -460,7 +494,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
 
                                     }
                                 });
-                                    // di comment sementara karna lagi ngetest push notification
+                                // di comment sementara karna lagi ngetest push notification
 //                                Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
 //                                startActivity(intent);
 //                                finish();
