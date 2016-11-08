@@ -181,10 +181,12 @@ public class HomeActivity extends AppCompatActivity {
                     Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
-                } else if (selected_item.equals("Purchase")) {
-                    logout();
-                } else if (selected_item.equals("Logout")) {
-                    logout();
+                } else if (selected_item.equals("Customer")) {
+
+                } else if (selected_item.equals("Purchasing")) {
+
+                } else if (selected_item.equals("Sales")){
+
                 }
                 return false;
             }
