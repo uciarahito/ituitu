@@ -47,7 +47,7 @@ public class Constant {
         return result;
     }
 
-    public static boolean isMobile(){
+    public static boolean isCustomer(){
         boolean result = false;
         if(Constant.role_data.size() > 0){
             for(String role : Constant.role_data){
@@ -59,7 +59,7 @@ public class Constant {
         return result;
     }
 
-    public static boolean isCustomer(){
+    public static boolean isExpedition(){
         boolean result = false;
         if(Constant.role_data.size() > 0){
             for(String role : Constant.role_data){

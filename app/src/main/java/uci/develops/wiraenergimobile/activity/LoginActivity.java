@@ -26,17 +26,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.fcm.NotificationListener;
-import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerCompanyInfo;
-import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerContactInfo;
-import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerShippingTo;
 import uci.develops.wiraenergimobile.helper.Constant;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
-import uci.develops.wiraenergimobile.model.CustomerModel;
-import uci.develops.wiraenergimobile.model.RoleModel;
 import uci.develops.wiraenergimobile.model.UserModel;
-import uci.develops.wiraenergimobile.response.ListRoleResponse;
 import uci.develops.wiraenergimobile.response.LoginResponse;
-import uci.develops.wiraenergimobile.response.RegisterResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -69,12 +62,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     startActivity(intent);
                     finish();
                 }
-                if(new SharedPreferenceManager().getPreferences(LoginActivity.this, "roles").equals("mobile")){
+                if(new SharedPreferenceManager().getPreferences(LoginActivity.this, "roles").equals("customer")){
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
                 }
-                if(new SharedPreferenceManager().getPreferences(LoginActivity.this, "roles").equals("customer")){
+                if(new SharedPreferenceManager().getPreferences(LoginActivity.this, "roles").equals("expedition")){
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
@@ -158,40 +151,40 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             new SharedPreferenceManager().setPreferences(LoginActivity.this, "is_login", "true");
                             if (activated == true) {
                                 for (Integer ind : roles) {
-                                    if (ind == 4) {
+
+//                                    Intent intent = new Intent(LoginActivity.this, DashboardCustomerActivity.class);
+//                                    startActivity(intent);
+//                                    finish();
+
+                                    if (ind <= 2) {
+                                        new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "admin");
+                                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+
+                                    if (ind == 3) {
                                         new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "customer");
-
-//                                        Intent intent = new Intent(LoginActivity.this, DashboardCustomerActivity.class);
-//                                        startActivity(intent);
-//                                        finish();
-
                                         if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 0) {
                                             Intent intent = new Intent(LoginActivity.this, VerificationStatusActivity.class);
                                             startActivity(intent);
                                             finish();
                                         }
-
                                         if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 1) {
                                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                             startActivity(intent);
                                             finish();
                                         }
-
-                                        if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 2) {
-                                            Intent intent = new Intent(LoginActivity.this, FormCustomerActivity.class);
-                                            startActivity(intent);
-                                            finish();
-                                        }
-
                                         if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 3) {
                                             Intent intent = new Intent(LoginActivity.this, WaitingApprovalActivity.class);
                                             startActivity(intent);
                                             finish();
                                         }
                                     }
-                                    if (ind <= 3) {
-                                        new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "mobile");
-                                        Intent intent = new Intent(LoginActivity.this, DashboardAdminActivity.class);
+
+                                    if (ind == 4) {
+                                        new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "expedition");
+                                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                         startActivity(intent);
                                         finish();
                                     }

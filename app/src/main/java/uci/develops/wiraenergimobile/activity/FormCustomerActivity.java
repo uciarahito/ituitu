@@ -98,7 +98,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
          * Check if roles is admin
          * show button approve, reject, and feedback
          */
-        if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("mobile")) {
+        if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("admin")) {
             linearLayout_button_approve.setVisibility(View.VISIBLE);
             linearLayout_button_reject.setVisibility(View.VISIBLE);
         }
@@ -121,10 +121,12 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
             public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
                 if(response.isSuccessful()){
                     CustomerModel customerModel = response.body().getData().get(0);
-                    if(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("mobile")){
+                    if(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("admin")){
                         if(customerModel.getApprove()==1 && customerModel.getActive()==1){
                             linearLayout_button_approve.setVisibility(View.GONE);
                             linearLayout_button_reject.setVisibility(View.GONE);
+                            linearLayout_button_back.setVisibility(View.GONE);
+                            linearLayout_button_next.setVisibility(View.GONE);
                         }
                     } else {
                         linearLayout_button_approve.setVisibility(View.GONE);

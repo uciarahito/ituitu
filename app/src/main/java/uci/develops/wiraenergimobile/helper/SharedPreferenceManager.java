@@ -48,7 +48,7 @@ public class SharedPreferenceManager {
     }
 
     public boolean isCustomer(Context context) {
-        if (new SharedPreferenceManager().getPreferences(context, "role").equals("customer")) {
+        if (new SharedPreferenceManager().getPreferences(context, "roles").equals("customer")) {
             return true;
         }
         return false;
