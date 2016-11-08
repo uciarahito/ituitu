@@ -170,7 +170,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                                    startActivity(intent);
 //                                    finish();
 
-                                    if (ind <= 2) {
+                                    if (ind == 2) {
                                         new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "admin");
                                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                         startActivity(intent);

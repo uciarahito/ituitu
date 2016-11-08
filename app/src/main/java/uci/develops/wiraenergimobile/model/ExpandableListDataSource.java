@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 
 /**
  * Created by msahakyan on 22/10/15.
@@ -28,11 +29,20 @@ public class ExpandableListDataSource {
         //root
         //List<String> rootMenu = Arrays.asList(context.getResources().getStringArray(R.array.general));
         List<String> rootMenu = new ArrayList<>();
-        rootMenu.add("Dashboard");
-        rootMenu.add("Customer");
-        rootMenu.add("Purchasing");
-        rootMenu.add("Sales");
-        rootMenu.add("Logout");
+        if(new SharedPreferenceManager().getPreferences(context, "roles").equals("admin")) {
+            rootMenu.add("Dashboard");
+            rootMenu.add("Customer");
+            rootMenu.add("Purchasing");
+            rootMenu.add("Sales");
+            rootMenu.add("Logout");
+        } else if(new SharedPreferenceManager().getPreferences(context, "roleq").equals("customer")){
+            rootMenu.add("Dashboard");
+            rootMenu.add("Sales");
+            rootMenu.add("Logout");
+        } else {
+            rootMenu.add("Dashboard");
+            rootMenu.add("Logout");
+        }
 
         //main menu
         List<String> menuPurchasing = Arrays.asList(context.getResources().getStringArray(R.array.menu_purchasing));
