@@ -35,7 +35,7 @@ public class ExpandableListDataSource {
             rootMenu.add("Purchasing");
             rootMenu.add("Sales");
             rootMenu.add("Logout");
-        } else if(new SharedPreferenceManager().getPreferences(context, "roleq").equals("customer")){
+        } else if(new SharedPreferenceManager().getPreferences(context, "roles").equals("customer")){
             rootMenu.add("Dashboard");
             rootMenu.add("Sales");
             rootMenu.add("Logout");

@@ -232,7 +232,7 @@
 
     <string-array name="menu_purchasing">
         <item>Purchase Order [PO]</item>
-        <item>Good Receive [GR]</item>
+        <item>Good Received [GR]</item>
     </string-array>
 
     <string-array name="menu_sales">
@@ -261,5 +261,11 @@
     <string name="title_activity_report_quotation">ReportQuotationActivity</string>
     <string name="title_activity_item_quotation">ItemQuotationActivity</string>
     <string name="title_activity_sales_quotation">SalesQuotationActivity</string>
+    <string name="title_activity_purchase_order">PurchaseOrderActivity</string>
+    <string name="title_activity_good_receive">GoodReceiveActivity</string>
+    <string name="title_activity_sales_order">SalesOrderActivity</string>
+    <string name="title_activity_delivery_order">DeliveryOrderActivity</string>
+    <string name="title_activity_invoice">InvoiceActivity</string>
+    <string name="title_activity_payment">PaymentActivity</string>
 
 </resources>

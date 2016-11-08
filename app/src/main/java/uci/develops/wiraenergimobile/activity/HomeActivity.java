@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -85,7 +86,7 @@ public class HomeActivity extends AppCompatActivity {
             rootMenu.add("Purchasing");
             rootMenu.add("Sales");
             rootMenu.add("Logout");
-        } else if(new SharedPreferenceManager().getPreferences(HomeActivity.this, "roleq").equals("customer")){
+        } else if(new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("customer")){
             rootMenu.add("Dashboard");
             rootMenu.add("Sales");
             rootMenu.add("Logout");
@@ -181,6 +182,34 @@ public class HomeActivity extends AppCompatActivity {
                     throw new IllegalArgumentException("Not supported fragment type");
                 }*/
 
+                //utk menu purchasing
+                if (selectedItem.equals("Purchase Order [PO]")) {
+                    Log.e("Cekkkkkk", selectedItem+"qqqqqqqqqqqqqqqq");
+                    Intent intent = new Intent(HomeActivity.this, PurchaseOrderActivity.class);
+                    startActivity(intent);
+                } else if (selectedItem.equals("Good Received [GR]")) {
+                    Intent intent = new Intent(HomeActivity.this, GoodReceivedActivity.class);
+                    startActivity(intent);
+                }
+
+                //utk menu sales
+                if (selectedItem.equals("Quotation")) {
+                    Intent intent = new Intent(HomeActivity.this, SalesQuotationActivity.class);
+                    startActivity(intent);
+                } else if (selectedItem.equals("Sales Order [SO]")) {
+                    Intent intent = new Intent(HomeActivity.this, SalesOrderActivity.class);
+                    startActivity(intent);
+                } else if (selectedItem.equals("Delivery Order [DO]")) {
+                    Intent intent = new Intent(HomeActivity.this, DeliveryOrderActivity.class);
+                    startActivity(intent);
+                } else if (selectedItem.equals("Invoice")) {
+                    Intent intent = new Intent(HomeActivity.this, InvoiceActivity.class);
+                    startActivity(intent);
+                } else if (selectedItem.equals("Payment")) {
+                    Intent intent = new Intent(HomeActivity.this, PaymentActivity.class);
+                    startActivity(intent);
+                }
+
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 return false;
             }
@@ -197,10 +226,6 @@ public class HomeActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else if (selected_item.equals("Customer")) {
-
-                } else if (selected_item.equals("Purchasing")) {
-
-                } else if (selected_item.equals("Sales")){
 
                 }
                 return false;

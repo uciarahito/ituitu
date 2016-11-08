@@ -45,6 +45,7 @@ public class ListCustomerActivity extends AppCompatActivity {
         recycleViewRequest.setItemAnimator(new DefaultItemAnimator());
         modelRequestList = new ArrayList<>();
         customerAdapter = new CustomerAdapter(ListCustomerActivity.this, modelRequestList);
+
         recycleViewRequest.setAdapter(customerAdapter);
 
         Call<RequestListCustomerResponse> requestListCustomerResponseCall = RestClient.getRestClient()
