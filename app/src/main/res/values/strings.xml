@@ -227,6 +227,7 @@
         <item>Customer</item>
         <item>Purchasing</item>
         <item>Sales</item>
+        <item>Logout</item>
     </string-array>
 
     <string-array name="menu_purchasing">

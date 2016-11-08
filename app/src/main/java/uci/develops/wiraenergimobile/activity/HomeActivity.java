@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +78,7 @@ public class HomeActivity extends AppCompatActivity {
         mExpandableListView.addHeaderView(listHeaderView);
 
         mExpandableListData = ExpandableListDataSource.getData(this);
-        mExpandableListTitle = new ArrayList(mExpandableListData.keySet());
+        mExpandableListTitle = ExpandableListDataSource.getTitle();
 
         setupTabIcons();
         addDrawerItems();
@@ -146,19 +147,6 @@ public class HomeActivity extends AppCompatActivity {
     private void addDrawerItems() {
         mExpandableListAdapter = new CustomExpandableListAdapter(this, mExpandableListTitle, mExpandableListData);
         mExpandableListView.setAdapter(mExpandableListAdapter);
-        mExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                getSupportActionBar().setTitle(mExpandableListTitle.get(groupPosition).toString());
-            }
-        });
-
-        mExpandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-                getSupportActionBar().setTitle(R.string.dashboard);
-            }
-        });
 
         mExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
@@ -168,18 +156,42 @@ public class HomeActivity extends AppCompatActivity {
                         .get(childPosition).toString();
                 getSupportActionBar().setTitle(selectedItem);
 
+                Toast.makeText(HomeActivity.this, ""+selectedItem, Toast.LENGTH_SHORT).show();
+                /*
                 if (items[0].equals(mExpandableListTitle.get(groupPosition))) {
                     mNavigationManager.showFragmentNavPurchasing(selectedItem);
                 } else if (items[1].equals(mExpandableListTitle.get(groupPosition))) {
                     mNavigationManager.showFragmentNavSales(selectedItem);
                 } else {
                     throw new IllegalArgumentException("Not supported fragment type");
-                }
+                }*/
 
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 return false;
             }
         });
+
+        mExpandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                String selected_item = getResources().getStringArray(R.array.general)[groupPosition];
+                if(selected_item.equals("Logout")){
+                    logout();
+                }
+                return false;
+            }
+        });
+    }
+
+    private void logout(){
+        new SharedPreferenceManager().setPreferences(HomeActivity.this, "is_login", "");
+        new SharedPreferenceManager().setPreferences(HomeActivity.this, "token", "");
+        new SharedPreferenceManager().setPreferences(HomeActivity.this, "customer_decode", "");
+        new SharedPreferenceManager().setPreferences(HomeActivity.this, "roles", "");
+
+        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void setupTabIcons() {
