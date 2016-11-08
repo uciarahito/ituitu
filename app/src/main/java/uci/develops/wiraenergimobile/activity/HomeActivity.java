@@ -78,7 +78,22 @@ public class HomeActivity extends AppCompatActivity {
         mExpandableListView.addHeaderView(listHeaderView);
 
         mExpandableListData = ExpandableListDataSource.getData(this);
-        mExpandableListTitle = ExpandableListDataSource.getTitle();
+        List<String> rootMenu = new ArrayList<>();
+        if(new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("admin")) {
+            rootMenu.add("Dashboard");
+            rootMenu.add("Customer");
+            rootMenu.add("Purchasing");
+            rootMenu.add("Sales");
+            rootMenu.add("Logout");
+        } else if(new SharedPreferenceManager().getPreferences(HomeActivity.this, "roleq").equals("customer")){
+            rootMenu.add("Dashboard");
+            rootMenu.add("Sales");
+            rootMenu.add("Logout");
+        } else {
+            rootMenu.add("Dashboard");
+            rootMenu.add("Logout");
+        }
+        mExpandableListTitle = rootMenu;
 
         setupTabIcons();
         addDrawerItems();
