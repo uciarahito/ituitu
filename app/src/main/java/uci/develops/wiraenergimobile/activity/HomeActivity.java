@@ -88,6 +88,7 @@ public class HomeActivity extends AppCompatActivity {
             rootMenu.add("Logout");
         } else if(new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("customer")){
             rootMenu.add("Dashboard");
+            rootMenu.add("Customer");
             rootMenu.add("Sales");
             rootMenu.add("Logout");
         } else {
@@ -126,10 +127,12 @@ public class HomeActivity extends AppCompatActivity {
             adapter.addFragment(new FragmentCustomer(), "");
             adapter.addFragment(new FragmentPurchasing(), "");
             adapter.addFragment(new FragmentSales(), "");
+        } else if(roles != "" && roles.equals("customer")){
+            adapter.addFragment(new FragmentCustomer(), "");
+            adapter.addFragment(new FragmentSales(), "");
+        } else {
+            adapter.addFragment(new FragmentSales(), "");
         }
-//        else if(roles != "" && roles.equals("customer")){
-//            adapter.addFragment(new FragmentCustomer(), "");
-//        }
 
         viewPager.setAdapter(adapter);
     }
@@ -335,33 +338,11 @@ public class HomeActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         Intent intentLogin, intentRegister;
-
-        // Activate the navigation drawer toggle
-//        if (mDrawerToggle.onOptionsItemSelected(item)) {
-//            return true;
-//        }
-
-//        switch (id){
-//            case R.id.action_login:
-//                intentLogin = new Intent(HomeActivity.this, LoginActivity.class);
-//                startActivity(intentLogin);
-//                return true;
-//            case R.id.action_register:
-//                intentRegister = new Intent(HomeActivity.this, RegisterActivity.class);
-//                startActivity(intentRegister );
-//                return true;
-//            default:
                 return super.onOptionsItemSelected(item);
 //        }
     }
 
     private void initItems() {
-        if(new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("admin")) {
-            items = getResources().getStringArray(R.array.general);
-        }
-//        else if(new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("customer")) {
-//            items = getResources().getStringArray(R.array.general_customer);
-//        }
         items = ExpandableListDataSource.getArrayTitle(HomeActivity.this);
     }
 
