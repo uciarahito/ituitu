@@ -126,10 +126,11 @@ public class HomeActivity extends AppCompatActivity {
         if(roles != "" && roles.equals("admin")) {
             adapter.addFragment(new FragmentCustomer(), "");
             adapter.addFragment(new FragmentPurchasing(), "");
-        } else if(roles != "" && roles.equals("customer")){
-            adapter.addFragment(new FragmentCustomer(), "");
+            adapter.addFragment(new FragmentSales(), "");
         }
-        adapter.addFragment(new FragmentSales(), "");
+//        else if(roles != "" && roles.equals("customer")){
+//            adapter.addFragment(new FragmentCustomer(), "");
+//        }
 
         viewPager.setAdapter(adapter);
     }
@@ -270,7 +271,8 @@ public class HomeActivity extends AppCompatActivity {
             tabLayout.getTabAt(0).setText(R.string.tab_customer);
             tabLayout.getTabAt(1).setText(R.string.tab_purchasing);
             tabLayout.getTabAt(2).setText(R.string.tab_sales);
-        } else if(roles != "" && roles.equals("customer")){
+        }
+        else if(roles != "" && roles.equals("customer")){
             tabLayout.getTabAt(0).setText(R.string.tab_customer);
             tabLayout.getTabAt(1).setText(R.string.tab_sales);
         } else if(roles != "" && roles.equals("expedition")){
@@ -356,6 +358,12 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initItems() {
+        if(new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("admin")) {
+            items = getResources().getStringArray(R.array.general);
+        }
+//        else if(new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("customer")) {
+//            items = getResources().getStringArray(R.array.general_customer);
+//        }
         items = ExpandableListDataSource.getArrayTitle(HomeActivity.this);
     }
 

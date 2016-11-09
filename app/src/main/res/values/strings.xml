@@ -234,6 +234,20 @@
         <item>Logout</item>
     </string-array>
 
+    <string-array name="general_customer">
+        <item>Dashboard</item>
+        <item>Profile</item>
+        <item>Sales</item>
+        <item>Logout</item>
+    </string-array>
+
+    <string-array name="general_expedition">
+        <item>Dashboard</item>
+        <item>Profile</item>
+        <item>Delivery Order [DO]</item>
+        <item>Logout</item>
+    </string-array>
+
     <string-array name="menu_purchasing">
         <item>Purchase Order [PO]</item>
         <item>Good Received [GR]</item>
