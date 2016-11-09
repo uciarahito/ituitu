@@ -228,8 +228,13 @@ public class HomeActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else if (selected_item.equals("Customer")) {
-                    Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
-                    startActivity(intent);
+                    if(new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("admin")) {
+                        Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+                        startActivity(intent);
+                    }
                 }
                 return false;
             }
