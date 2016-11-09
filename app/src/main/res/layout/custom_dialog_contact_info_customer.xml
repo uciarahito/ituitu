@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:background="@color/ReceiverLayoutMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:layout_margin="10dp"
+            android:textAlignment="center"
+            android:text="Contact Info Customer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+            android:id="@+id/layout_contact_info_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Contact Info 1."
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:weightSum="2"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="Name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/textView_contact1_name"
+                        android:layout_marginLeft="10dp"
+                        android:textStyle="bold"
+                        android:text="Uci Arahito Lubis"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="Email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/textView_contact1_email"
+                        android:layout_marginLeft="10dp"
+                        android:textStyle="bold"
+                        android:text="arahitolubis@gmail.com"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="end"
+                android:weightSum="2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/button_delete_contact_1"
+                    android:layout_margin="5dp"
+                    android:background="@color/SkyBlue"
+                    android:textAllCaps="false"
+                    android:text="Delete"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:background="@color/Gray"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"></LinearLayout>
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+            android:id="@+id/layout_contact_info_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Contact Info 2."
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:weightSum="2"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="Name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/textView_contact2_name"
+                        android:layout_marginLeft="10dp"
+                        android:textStyle="bold"
+                        android:text="Uci Arahito Lubis"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="Email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/textView_contact2_email"
+                        android:layout_marginLeft="10dp"
+                        android:textStyle="bold"
+                        android:text="arahitolubis@gmail.com"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="end"
+                android:weightSum="2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/button_delete_contact_2"
+                    android:layout_margin="5dp"
+                    android:background="@color/SkyBlue"
+                    android:textAllCaps="false"
+                    android:text="Delete"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:background="@color/Gray"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"></LinearLayout>
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+            android:id="@+id/layout_contact_info_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Contact Info 3."
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:weightSum="2"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="Name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/textView_contact3_name"
+                        android:layout_marginLeft="10dp"
+                        android:textStyle="bold"
+                        android:text="Uci Arahito Lubis"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="Email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/textView_contact3_email"
+                        android:layout_marginLeft="10dp"
+                        android:textStyle="bold"
+                        android:text="arahitolubis@gmail.com"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="end"
+                android:weightSum="2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/button_delete_contact_3"
+                    android:layout_margin="5dp"
+                    android:background="@color/SkyBlue"
+                    android:textAllCaps="false"
+                    android:text="Delete"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:background="@color/Gray"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"></LinearLayout>
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:weightSum="3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:background="@color/SkyBlue"
+                android:layout_margin="10dp"
+                android:layout_weight="2"
+                android:textAllCaps="false"
+                android:text="Submit"
+                android:id="@+id/button_submit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
