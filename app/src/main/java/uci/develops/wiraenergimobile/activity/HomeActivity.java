@@ -270,8 +270,7 @@ public class HomeActivity extends AppCompatActivity {
             tabLayout.getTabAt(0).setText(R.string.tab_customer);
             tabLayout.getTabAt(1).setText(R.string.tab_purchasing);
             tabLayout.getTabAt(2).setText(R.string.tab_sales);
-        }
-        else if(roles != "" && roles.equals("customer")){
+        } else if(roles != "" && roles.equals("customer")){
             tabLayout.getTabAt(0).setText(R.string.tab_customer);
             tabLayout.getTabAt(1).setText(R.string.tab_sales);
         } else if(roles != "" && roles.equals("expedition")){
