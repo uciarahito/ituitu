@@ -28,10 +28,10 @@ public class SalesQuotationActivity extends AppCompatActivity implements View.On
     }
 
     private void initializeComponent(){
-        linearLayout_menu_all_quotation = (LinearLayout) findViewById(R.id.linearLayout_menu_all_customer);
-        linearLayout_menu_new_quotation = (LinearLayout) findViewById(R.id.linearLayout_menu_new_customer);
-        textView_label_all_quotation = (TextView) findViewById(R.id.textView_label_all_customer);
-        textView_label_new_quotation = (TextView) findViewById(R.id.textView_label_new_customer);
+        linearLayout_menu_all_quotation = (LinearLayout) findViewById(R.id.linearLayout_menu_all_quotation);
+        linearLayout_menu_new_quotation = (LinearLayout) findViewById(R.id.linearLayout_menu_new_quotation);
+        textView_label_all_quotation = (TextView) findViewById(R.id.textView_label_all_quotation);
+        textView_label_new_quotation = (TextView) findViewById(R.id.textView_label_new_quotation);
 
         linearLayout_menu_all_quotation.setOnClickListener(this);
         linearLayout_menu_new_quotation.setOnClickListener(this);
