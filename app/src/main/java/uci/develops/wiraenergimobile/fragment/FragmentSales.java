@@ -17,7 +17,7 @@ import uci.develops.wiraenergimobile.activity.RequestQuotationActivity;
 
 public class FragmentSales extends Fragment implements View.OnClickListener{
 
-    private LinearLayout linearLayout_menu_sales_quotation, linearLayout_menu_sales_order, linearLayout_menu_delivery_order, linearLayout_menu_invoicing_payment;
+    private LinearLayout linearLayout_menu_sales_quotation, linearLayout_menu_sales_order, linearLayout_menu_delivery_order, linearLayout_menu_invoicing, linearLayout_menu_payment;
     private static final String KEY_MOVIE_TITLE = "key_title";
 
     public FragmentSales(){}
@@ -60,12 +60,14 @@ public class FragmentSales extends Fragment implements View.OnClickListener{
         linearLayout_menu_sales_quotation = (LinearLayout) view.findViewById(R.id.linearLayout_menu_sales_quotation);
         linearLayout_menu_sales_order = (LinearLayout) view.findViewById(R.id.linearLayout_menu_sales_order);
         linearLayout_menu_delivery_order = (LinearLayout) view.findViewById(R.id.linearLayout_menu_delivery_order);
-        linearLayout_menu_invoicing_payment = (LinearLayout) view.findViewById(R.id.linearLayout_menu_invoicing_payment);
+        linearLayout_menu_invoicing = (LinearLayout) view.findViewById(R.id.linearLayout_menu_invoicing);
+        linearLayout_menu_payment = (LinearLayout) view.findViewById(R.id.linearLayout_menu_payment);
 
         linearLayout_menu_sales_quotation.setOnClickListener(this);
         linearLayout_menu_sales_order.setOnClickListener(this);
         linearLayout_menu_delivery_order.setOnClickListener(this);
-        linearLayout_menu_invoicing_payment.setOnClickListener(this);
+        linearLayout_menu_invoicing.setOnClickListener(this);
+        linearLayout_menu_payment.setOnClickListener(this);
     }
 
     /**
