@@ -14,6 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -77,6 +78,7 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final CustomerModel customerModel = customerModelList.get(position);
+        new SharedPreferenceManager().setPreferences(context, "customer_decode", customerModel.getDecode());
         holder.txtName.setText(": " + customerModel.getFirst_name()+" "+customerModel.getLast_name());
         holder.txtEmail.setText(": " + customerModel.getEmail());
         holder.txtCompany.setText(": " + customerModel.getAddress());
@@ -85,7 +87,7 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
             @Override
             public void onClick(View v) {
                 // asign to this customer
-                alertDialogAssign();
+                alertDialogAssign(customerModel);
             }
         });
     }
@@ -95,7 +97,8 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
         return customerModelList.size();
     }
 
-    private void alertDialogAssign(){
+    private void alertDialogAssign(final CustomerModel customerModel){
+        Toast.makeText(context, ""+customerModel.getDecode(), Toast.LENGTH_SHORT).show();
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
         alertDialogBuilder.setMessage("Are you sure want to add contact?");
         alertDialogBuilder.setNegativeButton("Yes",
@@ -111,23 +114,151 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
                             @Override
                             public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
                                 if(response.isSuccessful()){
-                                    CustomerModel customerModel = response.body().getData().get(0);
-                                    int contact_counter = 0;
-                                    if(customerModel.getName1() != null){
-                                        contact_counter+=1;
-                                    }
-                                    if(customerModel.getName1() != null){
-                                        contact_counter+=1;
-                                    }
-                                    if(customerModel.getName1() != null){
-                                        contact_counter+=1;
-                                    }
-                                    if(contact_counter == 3){
-                                        // it means full
-                                        showCustomDialogContactInfoCustomer();
-                                    } else {
-                                        Toast.makeText(context, "Contact slot is available", Toast.LENGTH_SHORT).show();
+                                    CustomerModel customerModelX = response.body().getData().get(0);
+                                    if(customerModel.getName1() == null){
+                                        Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().updateContactInfo1(
+                                                "Bearer "+new SharedPreferenceManager().getPreferences(context, "token"),
+                                                customerModel.getDecode(),
+                                                customerModelX.getFirst_name()+" "+customerModelX.getLast_name(),
+                                                customerModelX.getPhone(), customerModelX.getMobile(), customerModelX.getEmail(),
+                                                "Jabatan"
+                                        );
+                                        approveResponseCall.enqueue(new Callback<ApproveResponse>() {
+                                            @Override
+                                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                                                if(response.isSuccessful()){
+                                                    Toast.makeText(context, "Assign berhasil", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(context, HomeActivity.class);
+                                                    context.startActivity(intent);
+                                                }
+                                            }
 
+                                            @Override
+                                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
+                                                Toast.makeText(context, "Assign gagal", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    } else if(customerModel.getName2() == null){
+                                        Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().updateContactInfo2(
+                                                "Bearer "+new SharedPreferenceManager().getPreferences(context, "token"),
+                                                customerModel.getDecode(),
+                                                customerModelX.getFirst_name()+" "+customerModelX.getLast_name(),
+                                                customerModelX.getPhone(), customerModelX.getMobile(), customerModelX.getEmail(),
+                                                "Jabatan"
+                                        );
+                                        approveResponseCall.enqueue(new Callback<ApproveResponse>() {
+                                            @Override
+                                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                                                if(response.isSuccessful()){
+                                                    Toast.makeText(context, "Assign berhasil", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(context, HomeActivity.class);
+                                                    context.startActivity(intent);
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
+                                                Toast.makeText(context, "Assign gagal", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    } else if(customerModel.getName3() == null){
+                                        Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().updateContactInfo3(
+                                                "Bearer "+new SharedPreferenceManager().getPreferences(context, "token"),
+                                                customerModel.getDecode(),
+                                                customerModelX.getFirst_name()+" "+customerModelX.getLast_name(),
+                                                customerModelX.getPhone(), customerModelX.getMobile(), customerModelX.getEmail(),
+                                                "Jabatan"
+                                        );
+                                        approveResponseCall.enqueue(new Callback<ApproveResponse>() {
+                                            @Override
+                                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                                                if(response.isSuccessful()){
+                                                    Toast.makeText(context, "Assign berhasil", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(context, HomeActivity.class);
+                                                    context.startActivity(intent);
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
+                                                Toast.makeText(context, "Assign gagal", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    } else {
+                                        if(customerModel.getName1().equals("")){
+                                            Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().updateContactInfo1(
+                                                    "Bearer "+new SharedPreferenceManager().getPreferences(context, "token"),
+                                                    customerModel.getDecode(),
+                                                    customerModelX.getFirst_name()+" "+customerModelX.getLast_name(),
+                                                    customerModelX.getPhone(), customerModelX.getMobile(), customerModelX.getEmail(),
+                                                    "Jabatan"
+                                            );
+                                            approveResponseCall.enqueue(new Callback<ApproveResponse>() {
+                                                @Override
+                                                public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                                                    if(response.isSuccessful()){
+                                                        Toast.makeText(context, "Assign berhasil", Toast.LENGTH_SHORT).show();
+                                                        Intent intent = new Intent(context, HomeActivity.class);
+                                                        context.startActivity(intent);
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onFailure(Call<ApproveResponse> call, Throwable t) {
+                                                    Toast.makeText(context, "Assign gagal", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                        } else if(customerModel.getName2().equals("")){
+                                            Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().updateContactInfo2(
+                                                    "Bearer "+new SharedPreferenceManager().getPreferences(context, "token"),
+                                                    customerModel.getDecode(),
+                                                    customerModelX.getFirst_name()+" "+customerModelX.getLast_name(),
+                                                    customerModelX.getPhone(), customerModelX.getMobile(), customerModelX.getEmail(),
+                                                    "Jabatan"
+                                            );
+                                            approveResponseCall.enqueue(new Callback<ApproveResponse>() {
+                                                @Override
+                                                public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                                                    if(response.isSuccessful()){
+                                                        Toast.makeText(context, "Assign berhasil", Toast.LENGTH_SHORT).show();
+                                                        Intent intent = new Intent(context, HomeActivity.class);
+                                                        context.startActivity(intent);
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onFailure(Call<ApproveResponse> call, Throwable t) {
+                                                    Toast.makeText(context, "Assign gagal", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                        } else if(customerModel.getName3().equals("")){
+                                            Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().updateContactInfo3(
+                                                    "Bearer "+new SharedPreferenceManager().getPreferences(context, "token"),
+                                                    customerModel.getDecode(),
+                                                    customerModelX.getFirst_name()+" "+customerModelX.getLast_name(),
+                                                    customerModelX.getPhone(), customerModelX.getMobile(), customerModelX.getEmail(),
+                                                    "Jabatan"
+                                            );
+                                            approveResponseCall.enqueue(new Callback<ApproveResponse>() {
+                                                @Override
+                                                public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                                                    if(response.isSuccessful()){
+                                                        Toast.makeText(context, "Assign berhasil", Toast.LENGTH_SHORT).show();
+                                                        Intent intent = new Intent(context, HomeActivity.class);
+                                                        context.startActivity(intent);
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onFailure(Call<ApproveResponse> call, Throwable t) {
+                                                    Toast.makeText(context, "Assign gagal", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                        } else {
+                                            // it means full
+                                            Toast.makeText(context, "No slot contact available", Toast.LENGTH_SHORT).show();
+                                            showCustomDialogContactInfoCustomer(customerModel);
+                                        }
                                     }
                                 }
                             }
@@ -158,7 +289,8 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
                             }
 
                             @Override
-                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
+                            public void onFailure(Call<ApproveResponse> call, Throwable t
+                            ) {
                                 Toast.makeText(context, "Approve request not successfull", Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -174,8 +306,9 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
             button_dialog_contact3_delete, button_dialog_submit, button_dialog_new_customer, button_dialog_existing_customer;
     private TextView textView_dialog_contact1_name, textView_dialog_contact1_email, textView_dialog_contact2_name,
             textView_dialog_contact2_email, textView_dialog_contact3_name, textView_dialog_contact3_email;
+    private LinearLayout linearLayout_contact1, linearLayout_contact2, linearLayout_contact3;
 
-    private void showCustomDialogContactInfoCustomer(){
+    private void showCustomDialogContactInfoCustomer(final CustomerModel customerModel){
         final Dialog dialog_contactt_info_customer = new Dialog(context);
         dialog_contactt_info_customer.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog_contactt_info_customer.setContentView(R.layout.custom_dialog_contact_info_customer);
@@ -190,9 +323,12 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
         button_dialog_contact2_delete = (Button)dialog_contactt_info_customer.findViewById(R.id.button_delete_contact_2);
         button_dialog_contact3_delete = (Button)dialog_contactt_info_customer.findViewById(R.id.button_delete_contact_3);
         button_dialog_submit = (Button)dialog_contactt_info_customer.findViewById(R.id.button_submit);
+        linearLayout_contact1 = (LinearLayout)dialog_contactt_info_customer.findViewById(R.id.layout_contact_info_1);
+        linearLayout_contact2 = (LinearLayout)dialog_contactt_info_customer.findViewById(R.id.layout_contact_info_2);
+        linearLayout_contact3 = (LinearLayout)dialog_contactt_info_customer.findViewById(R.id.layout_contact_info_3);
 
         Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer "+new SharedPreferenceManager().getPreferences(context, "token"),
-                new SharedPreferenceManager().getPreferences(context, "customer_decode"));
+                customerModel.getDecode());
         customerResponseCall.enqueue(new Callback<CustomerResponse>() {
             @Override
             public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
@@ -217,6 +353,24 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
             @Override
             public void onClick(View v) {
                 // delete contact 1
+                Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().updateContactInfo1(
+                        "Bearer "+new SharedPreferenceManager().getPreferences(context, "token"),
+                        customerModel.getDecode(),
+                        "", "", "", "", ""
+                );
+                approveResponseCall.enqueue(new Callback<ApproveResponse>() {
+                    @Override
+                    public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                        if(response.isSuccessful()){
+                            dialog_contactt_info_customer.dismiss();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApproveResponse> call, Throwable t) {
+                        Toast.makeText(context, "Assign gagal", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 dialog_contactt_info_customer.dismiss();
             }
         });
@@ -224,6 +378,24 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
             @Override
             public void onClick(View v) {
                 // delete contact 2
+                Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().updateContactInfo2(
+                        "Bearer "+new SharedPreferenceManager().getPreferences(context, "token"),
+                        customerModel.getDecode(),
+                        "", "", "", "", ""
+                );
+                approveResponseCall.enqueue(new Callback<ApproveResponse>() {
+                    @Override
+                    public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                        if(response.isSuccessful()){
+                            dialog_contactt_info_customer.dismiss();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApproveResponse> call, Throwable t) {
+                        Toast.makeText(context, "Assign gagal", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 dialog_contactt_info_customer.dismiss();
             }
         });
@@ -231,6 +403,24 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
             @Override
             public void onClick(View v) {
                 // delete contact 3
+                Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().updateContactInfo3(
+                        "Bearer "+new SharedPreferenceManager().getPreferences(context, "token"),
+                        customerModel.getDecode(),
+                        "", "", "", "", ""
+                );
+                approveResponseCall.enqueue(new Callback<ApproveResponse>() {
+                    @Override
+                    public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                        if(response.isSuccessful()){
+                            dialog_contactt_info_customer.dismiss();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApproveResponse> call, Throwable t) {
+                        Toast.makeText(context, "Assign gagal", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 dialog_contactt_info_customer.dismiss();
             }
         });
