@@ -125,6 +125,8 @@ public class HomeActivity extends AppCompatActivity {
         if(roles != "" && roles.equals("admin")) {
             adapter.addFragment(new FragmentCustomer(), "");
             adapter.addFragment(new FragmentPurchasing(), "");
+        } else if(roles != "" && roles.equals("customer")){
+            adapter.addFragment(new FragmentCustomer(), "");
         }
         adapter.addFragment(new FragmentSales(), "");
 
@@ -184,7 +186,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 //utk menu purchasing
                 if (selectedItem.equals("Purchase Order [PO]")) {
-                    Log.e("Cekkkkkk", selectedItem+"qqqqqqqqqqqqqqqq");
+                    Log.e("Cekkkkkk", selectedItem + "qqqqqqqqqqqqqqqq");
                     Intent intent = new Intent(HomeActivity.this, PurchaseOrderActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Good Received [GR]")) {
@@ -226,7 +228,8 @@ public class HomeActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else if (selected_item.equals("Customer")) {
-
+                    Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
+                    startActivity(intent);
                 }
                 return false;
             }
@@ -262,7 +265,8 @@ public class HomeActivity extends AppCompatActivity {
             tabLayout.getTabAt(1).setText(R.string.tab_purchasing);
             tabLayout.getTabAt(2).setText(R.string.tab_sales);
         } else if(roles != "" && roles.equals("customer")){
-            tabLayout.getTabAt(0).setText(R.string.tab_sales);
+            tabLayout.getTabAt(0).setText(R.string.tab_customer);
+            tabLayout.getTabAt(1).setText(R.string.tab_sales);
         } else if(roles != "" && roles.equals("expedition")){
             tabLayout.getTabAt(0).setText(R.string.tab_sales);
         }

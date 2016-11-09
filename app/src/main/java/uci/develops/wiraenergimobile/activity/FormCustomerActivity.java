@@ -152,6 +152,12 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                             } else if (customerModel.getApprove() == 2 && customerModel.getActive() == 0) {
                                 linearLayout_button_approve.setVisibility(View.GONE);
                                 linearLayout_button_reject.setVisibility(View.GONE);
+                                linearLayout_tab_basic_info.setEnabled(false);
+                                linearLayout_tab_contact_info.setEnabled(false);
+                                linearLayout_tab_shipping_to.setEnabled(false);
+                            } else if (customerModel.getApprove() == 0 && customerModel.getActive() == 0) {
+                                linearLayout_button_back.setVisibility(View.GONE);
+                                linearLayout_button_next.setVisibility(View.GONE);
                             }
                         }
                     }
@@ -394,7 +400,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                                                     userResponseCall.enqueue(new Callback<UserResponse>() {
                                                         @Override
                                                         public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                                                            if(response.isSuccessful()){
+                                                            if (response.isSuccessful()) {
                                                                 String reg_key_admin = "";
                                                                 reg_key_admin = response.body().getData().getRegistration_key();
                                                                 Constant.sendNotification(reg_key_admin, "Ada customer baru mendaftar", "register_customer");
@@ -436,10 +442,15 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                         linearLayout_container_basic_info.setVisibility(View.GONE);
                         linearLayout_container_contact_info.setVisibility(View.GONE);
                         linearLayout_container_shipping_to.setVisibility(View.GONE);
-                        linearLayout_tab_basic_info.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
-                        linearLayout_tab_contact_info.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
-                        linearLayout_tab_shipping_to.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
-                        linearLayouts_tabs[index_fragment].setBackgroundResource(R.drawable.rounded_rectangle_blue);
+//                        linearLayout_tab_basic_info.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
+//                        linearLayout_tab_contact_info.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
+//                        linearLayout_tab_shipping_to.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
+//                        linearLayouts_tabs[index_fragment].setBackgroundResource(R.drawable.rounded_rectangle_blue);
+
+                        linearLayout_tab_basic_info.setBackgroundResource(R.drawable.rounded_rectangle_orange_green);
+                        linearLayout_tab_contact_info.setBackgroundResource(R.drawable.rounded_rectangle_orange_green);
+                        linearLayout_tab_shipping_to.setBackgroundResource(R.drawable.rounded_rectangle_orange_green);
+                        linearLayouts_tabs[index_fragment].setBackgroundResource(R.drawable.rounded_rectangle_orange);
                         linearLayouts_fragment[index_fragment].setVisibility(View.VISIBLE);
                     } else {
 //                        Intent intent = new Intent(FormCustomerActivity.this, DashboardCustomerActivity.class);
@@ -478,10 +489,16 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                     linearLayout_container_basic_info.setVisibility(View.GONE);
                     linearLayout_container_contact_info.setVisibility(View.GONE);
                     linearLayout_container_shipping_to.setVisibility(View.GONE);
-                    linearLayout_tab_basic_info.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
-                    linearLayout_tab_contact_info.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
-                    linearLayout_tab_shipping_to.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
-                    linearLayouts_tabs[index_fragment].setBackgroundResource(R.drawable.rounded_rectangle_blue);
+
+//                    linearLayout_tab_basic_info.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
+//                    linearLayout_tab_contact_info.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
+//                    linearLayout_tab_shipping_to.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
+//                    linearLayouts_tabs[index_fragment].setBackgroundResource(R.drawable.rounded_rectangle_blue);
+
+                    linearLayout_tab_basic_info.setBackgroundResource(R.drawable.rounded_rectangle_orange_green);
+                    linearLayout_tab_contact_info.setBackgroundResource(R.drawable.rounded_rectangle_orange_green);
+                    linearLayout_tab_shipping_to.setBackgroundResource(R.drawable.rounded_rectangle_orange_green);
+                    linearLayouts_tabs[index_fragment].setBackgroundResource(R.drawable.rounded_rectangle_orange);
                     linearLayouts_fragment[index_fragment].setVisibility(View.VISIBLE);
                 }
             }

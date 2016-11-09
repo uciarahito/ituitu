@@ -8,9 +8,10 @@
     tools:context="uci.develops.wiraenergimobile.activity.LoginActivity">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appbarlayout"
             android:layout_width="match_parent"
@@ -25,6 +26,7 @@
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         </android.support.design.widget.AppBarLayout>
+
         <include layout="@layout/content_login" />
     </LinearLayout>
 

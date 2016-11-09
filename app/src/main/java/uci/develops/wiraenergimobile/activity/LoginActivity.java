@@ -63,6 +63,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     finish();
                 }
                 if (new SharedPreferenceManager().getPreferences(LoginActivity.this, "roles").equals("customer")) {
+                    Toast.makeText(LoginActivity.this, ""+Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")), Toast.LENGTH_SHORT).show();
                     if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 2) {
                         Intent intent = new Intent(LoginActivity.this, VerificationStatusActivity.class);
                         startActivity(intent);
