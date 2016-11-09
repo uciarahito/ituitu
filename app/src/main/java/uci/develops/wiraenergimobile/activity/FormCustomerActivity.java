@@ -390,10 +390,26 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                                             @Override
                                             public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                                                 if (response.isSuccessful()) {
-                                                    Toast.makeText(FormCustomerActivity.this, "Waiting for approval", Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent(FormCustomerActivity.this, WaitingApprovalActivity.class);
-                                                    startActivity(intent);
-                                                    finish();
+                                                    Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer "+new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), 3);
+                                                    userResponseCall.enqueue(new Callback<UserResponse>() {
+                                                        @Override
+                                                        public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                                                            if(response.isSuccessful()){
+                                                                String reg_key_admin = "";
+                                                                reg_key_admin = response.body().getData().getRegistration_key();
+                                                                Constant.sendNotification(reg_key_admin, "Ada customer baru mendaftar", "register_customer");
+                                                                Toast.makeText(FormCustomerActivity.this, "Waiting for approval", Toast.LENGTH_SHORT).show();
+                                                                Intent intent = new Intent(FormCustomerActivity.this, WaitingApprovalActivity.class);
+                                                                startActivity(intent);
+                                                                finish();
+                                                            }
+                                                        }
+
+                                                        @Override
+                                                        public void onFailure(Call<UserResponse> call, Throwable t) {
+
+                                                        }
+                                                    });
                                                 }
                                             }
 
