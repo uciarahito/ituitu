@@ -271,12 +271,12 @@ public class HomeActivity extends AppCompatActivity {
             tabLayout.getTabAt(1).setText(R.string.tab_purchasing);
             tabLayout.getTabAt(2).setText(R.string.tab_sales);
         }
-//        else if(roles != "" && roles.equals("customer")){
-//            tabLayout.getTabAt(0).setText(R.string.tab_customer);
-//            tabLayout.getTabAt(1).setText(R.string.tab_sales);
-//        } else if(roles != "" && roles.equals("expedition")){
-//            tabLayout.getTabAt(0).setText(R.string.tab_sales);
-//        }
+        else if(roles != "" && roles.equals("customer")){
+            tabLayout.getTabAt(0).setText(R.string.tab_customer);
+            tabLayout.getTabAt(1).setText(R.string.tab_sales);
+        } else if(roles != "" && roles.equals("expedition")){
+            tabLayout.getTabAt(0).setText(R.string.tab_sales);
+        }
     }
 
     private void setupDrawer() {
@@ -363,7 +363,7 @@ public class HomeActivity extends AppCompatActivity {
 //        else if(new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("customer")) {
 //            items = getResources().getStringArray(R.array.general_customer);
 //        }
-
+        items = ExpandableListDataSource.getArrayTitle(HomeActivity.this);
     }
 
 }

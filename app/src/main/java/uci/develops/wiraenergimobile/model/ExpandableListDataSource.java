@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.helper.Constant;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 
 /**
@@ -67,13 +68,41 @@ public class ExpandableListDataSource {
         return expandableListData;
     }
 
-    public static List<String> getTitle(){
+    public static List<String> getTitle(Context context){
         List<String> rootMenu = new ArrayList<>();
-        rootMenu.add("Dashboard");
-        rootMenu.add("Customer");
-        rootMenu.add("Purchasing");
-        rootMenu.add("Sales");
-        rootMenu.add("Logout");
+        if(new SharedPreferenceManager().getPreferences(context, "roles").equals("admin")) {
+            rootMenu.add("Dashboard");
+            rootMenu.add("Customer");
+            rootMenu.add("Purchasing");
+            rootMenu.add("Sales");
+            rootMenu.add("Logout");
+        } else if(new SharedPreferenceManager().getPreferences(context, "roles").equals("customer")){
+            rootMenu.add("Dashboard");
+            rootMenu.add("Sales");
+            rootMenu.add("Logout");
+        } else {
+            rootMenu.add("Dashboard");
+            rootMenu.add("Logout");
+        }
+        return  rootMenu;
+    }
+
+    public static String[] getArrayTitle(Context context){
+        String[] rootMenu = new String[5];
+        if(new SharedPreferenceManager().getPreferences(context, "roles").equals("admin")) {
+            rootMenu[0] = "Dashboard";
+            rootMenu[1] = "Customer";
+            rootMenu[2] = "Purchasing";
+            rootMenu[3] = "Sales";
+            rootMenu[4] = "Logout";
+        } else if(new SharedPreferenceManager().getPreferences(context, "roles").equals("customer")){
+            rootMenu[0] = "Dashboard";
+            rootMenu[1] = "Sales";
+            rootMenu[2] = "Logout";
+        } else {
+            rootMenu[0] = "Dashboard";
+            rootMenu[1] = "Logout";
+        }
         return  rootMenu;
     }
 }
