@@ -7,9 +7,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -19,10 +23,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.adapter.CustomerAdapter;
+import uci.develops.wiraenergimobile.adapter.CustomerDialogAdapter;
 import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerCompanyInfo;
 import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerContactInfo;
 import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerShippingTo;
@@ -31,6 +40,7 @@ import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerModel;
 import uci.develops.wiraenergimobile.response.ApproveResponse;
 import uci.develops.wiraenergimobile.response.CustomerResponse;
+import uci.develops.wiraenergimobile.response.RequestListCustomerResponse;
 import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
@@ -192,6 +202,8 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
             linearLayouts_fragment[2].setVisibility(View.VISIBLE);
         }
         if (v == linearLayout_button_approve) {
+            showCustomDialogCustomerCode();
+            /*
             Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().requestCustomerAction("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
                     new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), 1, 1);
             approveResponseCall.enqueue(new Callback<ApproveResponse>() {
@@ -219,11 +231,6 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
 
                             }
                         });
-                        /*
-                        Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
-                        startActivity(intent);
-                        finish();
-                        */
                     } else {
                         Toast.makeText(FormCustomerActivity.this, "Unable to approve request", Toast.LENGTH_SHORT).show();
                     }
@@ -234,6 +241,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                     Toast.makeText(FormCustomerActivity.this, "Unable to approve request", Toast.LENGTH_SHORT).show();
                 }
             });
+        */
         }
         if (v == linearLayout_button_reject) {
             alertDialogReject();
@@ -478,10 +486,8 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                                     public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                                         if (response.isSuccessful()) {
                                             if (response.body().getData().getRegistration_key() != null) {
-                                                Toast.makeText(FormCustomerActivity.this, "Berhasil menambahkan feedback", Toast.LENGTH_SHORT).show();
-                                                Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
                                                 Constant.sendNotification(response.body().getData().getRegistration_key(), "" + editText_feedback.getText().toString(), "feedback_customer");
-                                                Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
+                                                Intent intent = new Intent(FormCustomerActivity.this, HomeActivity.class);
                                                 startActivity(intent);
                                                 finish();
                                             }
@@ -493,11 +499,6 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
 
                                     }
                                 });
-                                // di comment sementara karna lagi ngetest push notification
-//                                Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
-//                                startActivity(intent);
-//                                finish();
-
                             }
                         }
 
@@ -525,50 +526,34 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
     private void alertDialogReject(){
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage("Are you sure want to reject the customer?");
-        alertDialogBuilder.setPositiveButton("Yes",
+        alertDialogBuilder.setNegativeButton("Yes",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
-                        Call<ApproveResponse> rejectResponseCall = RestClient.getRestClient().requestCustomerAction("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
-                                new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), 0, 0);
-                        rejectResponseCall.enqueue(new Callback<ApproveResponse>() {
+                        Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_user_id")));
+                        userResponseCall.enqueue(new Callback<UserResponse>() {
                             @Override
-                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                                 if (response.isSuccessful()) {
-                                    Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_user_id")));
-                                    userResponseCall.enqueue(new Callback<UserResponse>() {
-                                        @Override
-                                        public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                                            if (response.isSuccessful()) {
-                                                if (response.body().getData().getRegistration_key() != null) {
-                                                    Toast.makeText(FormCustomerActivity.this, "Reject request successfull", Toast.LENGTH_SHORT).show();
-                                                    Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
-                                                    Constant.sendNotification(response.body().getData().getRegistration_key(), "Request telah di tolak", "reject_customer");
-                                                    Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
-                                                    startActivity(intent);
-                                                    finish();
-                                                }
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<UserResponse> call, Throwable t) {
-
-                                        }
-                                    });
-                                } else {
-                                    Toast.makeText(FormCustomerActivity.this, "Unable to reject request", Toast.LENGTH_SHORT).show();
+                                    if (response.body().getData().getRegistration_key() != null) {
+                                        Toast.makeText(FormCustomerActivity.this, "Reject request successfull", Toast.LENGTH_SHORT).show();
+                                        Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
+                                        Constant.sendNotification(response.body().getData().getRegistration_key(), "Request telah di tolak", "reject_customer");
+                                        Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
                                 }
                             }
 
                             @Override
-                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
-                                Toast.makeText(FormCustomerActivity.this, "Unable to reject request", Toast.LENGTH_SHORT).show();
+                            public void onFailure(Call<UserResponse> call, Throwable t) {
+
                             }
                         });
                     }
                 });
-        alertDialogBuilder.setNegativeButton("No",
+        alertDialogBuilder.setPositiveButton("No",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
@@ -580,4 +565,239 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         alertDialog.show();
     }
 
+    private EditText editText_dialog_customer_code;
+    private Button button_dialog_save, button_dialog_cancel, button_dialog_contact1_delete, button_dialog_contact2_delete,
+    button_dialog_contact3_delete, button_dialog_submit, button_dialog_new_customer, button_dialog_existing_customer;
+    private TextView textView_dialog_contact1_name, textView_dialog_contact1_email, textView_dialog_contact2_name,
+    textView_dialog_contact2_email, textView_dialog_contact3_name, textView_dialog_contact3_email;
+    private RecyclerView recyclerView_customer;
+
+    boolean is_new_customer = false;
+
+    private void showCustomDialogCustomerCode(){
+        final Dialog dialog_customer_code = new Dialog(FormCustomerActivity.this);
+        dialog_customer_code.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog_customer_code.setContentView(R.layout.custom_dialog_customer_code_input);
+
+        editText_dialog_customer_code = (EditText)dialog_customer_code.findViewById(R.id.editText_customer_code);
+        button_dialog_save = (Button)dialog_customer_code.findViewById(R.id.button_save);
+        button_dialog_cancel = (Button)dialog_customer_code.findViewById(R.id.button_cancel);
+
+        editText_dialog_customer_code.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(!is_new_customer) {
+                    showCustomDialogCustomerRegisterType();
+                }
+                return false;
+            }
+        });
+
+        button_dialog_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog_customer_code.dismiss();
+            }
+        });
+
+        button_dialog_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(editText_dialog_customer_code.getText().toString().equals("")){
+                    Toast.makeText(FormCustomerActivity.this, "Field customer code is required", Toast.LENGTH_SHORT).show();
+                } else {
+                    Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().requestCustomerAction("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
+                            new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), 1, 1);
+                    approveResponseCall.enqueue(new Callback<ApproveResponse>() {
+                        @Override
+                        public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                            if (response.isSuccessful()) {
+                                Toast.makeText(FormCustomerActivity.this, "Approve response success", Toast.LENGTH_SHORT).show();
+                                Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_user_id")));
+                                userResponseCall.enqueue(new Callback<UserResponse>() {
+                                    @Override
+                                    public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                                        if (response.isSuccessful()) {
+                                            if (response.body().getData().getRegistration_key() != null) {
+                                                Toast.makeText(FormCustomerActivity.this, "Approve request successfull", Toast.LENGTH_SHORT).show();
+                                                Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
+                                                Constant.sendNotification(response.body().getData().getRegistration_key(), "Request anda telah di setujui", "approve_customer");
+                                                Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<UserResponse> call, Throwable t) {
+
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ApproveResponse> call, Throwable t) {
+
+                        }
+                    });
+                }
+            }
+        });
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager windowmanager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        windowmanager.getDefaultDisplay().getMetrics(displayMetrics);
+        int deviceWidth = displayMetrics.widthPixels;
+        int deviceHeight = displayMetrics.heightPixels;
+        dialog_customer_code.getWindow().setLayout(deviceWidth - 20, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog_customer_code.setCancelable(true);
+        dialog_customer_code.show();
+    }
+
+    private void showCustomDialogContactInfoCustomer(){
+        final Dialog  dialog_contactt_info_customer = new Dialog(FormCustomerActivity.this);
+        dialog_contactt_info_customer.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog_contactt_info_customer.setContentView(R.layout.custom_dialog_contact_info_customer);
+
+        textView_dialog_contact1_name = (TextView)dialog_contactt_info_customer.findViewById(R.id.textView_contact1_name);
+        textView_dialog_contact2_name = (TextView)dialog_contactt_info_customer.findViewById(R.id.textView_contact2_name);
+        textView_dialog_contact3_name = (TextView)dialog_contactt_info_customer.findViewById(R.id.textView_contact3_name);
+        textView_dialog_contact1_email = (TextView)dialog_contactt_info_customer.findViewById(R.id.textView_contact1_email);
+        textView_dialog_contact2_email = (TextView)dialog_contactt_info_customer.findViewById(R.id.textView_contact2_email);
+        textView_dialog_contact3_email = (TextView)dialog_contactt_info_customer.findViewById(R.id.textView_contact3_email);
+        button_dialog_contact1_delete = (Button)dialog_contactt_info_customer.findViewById(R.id.button_delete_contact_1);
+        button_dialog_contact2_delete = (Button)dialog_contactt_info_customer.findViewById(R.id.button_delete_contact_2);
+        button_dialog_contact3_delete = (Button)dialog_contactt_info_customer.findViewById(R.id.button_delete_contact_3);
+        button_dialog_submit = (Button)dialog_contactt_info_customer.findViewById(R.id.button_submit);
+
+        Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer "+new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
+                new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"));
+        customerResponseCall.enqueue(new Callback<CustomerResponse>() {
+            @Override
+            public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
+                if(response.isSuccessful()){
+                    CustomerModel customerModel = response.body().getData().get(0);
+                    textView_dialog_contact1_name.setText(""+(customerModel.getName1()));
+                    textView_dialog_contact2_name.setText(""+(customerModel.getName2()));
+                    textView_dialog_contact3_name.setText(""+(customerModel.getName3()));
+                    textView_dialog_contact1_email.setText(""+(customerModel.getEmail1()));
+                    textView_dialog_contact2_email.setText(""+(customerModel.getEmail2()));
+                    textView_dialog_contact3_email.setText(""+(customerModel.getEmail3()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CustomerResponse> call, Throwable t) {
+
+            }
+        });
+
+        button_dialog_contact1_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // delete contact 1
+                dialog_contactt_info_customer.dismiss();
+            }
+        });
+        button_dialog_contact2_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // delete contact 2
+                dialog_contactt_info_customer.dismiss();
+            }
+        });
+        button_dialog_contact3_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // delete contact 3
+                dialog_contactt_info_customer.dismiss();
+            }
+        });
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager windowmanager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        windowmanager.getDefaultDisplay().getMetrics(displayMetrics);
+        int deviceWidth = displayMetrics.widthPixels;
+        int deviceHeight = displayMetrics.heightPixels;
+        dialog_contactt_info_customer.getWindow().setLayout(deviceWidth - 20, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog_contactt_info_customer.setCancelable(true);
+        dialog_contactt_info_customer.show();
+    }
+
+    private void showCustomDialogCustomerRegisterType(){
+        final Dialog dialog_customer_register_type = new Dialog(FormCustomerActivity.this);
+        dialog_customer_register_type.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog_customer_register_type.setContentView(R.layout.custom_dialog_customer_register_type);
+
+        button_dialog_new_customer = (Button)dialog_customer_register_type.findViewById(R.id.button_new_customer);
+        button_dialog_existing_customer = (Button)dialog_customer_register_type.findViewById(R.id.button_existing_customer);
+
+        button_dialog_new_customer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                is_new_customer = true;
+                dialog_customer_register_type.dismiss();
+            }
+        });
+
+        button_dialog_existing_customer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCustomDialogListCustomer();
+            }
+        });
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager windowmanager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        windowmanager.getDefaultDisplay().getMetrics(displayMetrics);
+        int deviceWidth = displayMetrics.widthPixels;
+        int deviceHeight = displayMetrics.heightPixels;
+        dialog_customer_register_type.getWindow().setLayout(deviceWidth - 20, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog_customer_register_type.setCancelable(false);
+        dialog_customer_register_type.show();
+    }
+
+    List<CustomerModel> modelRequestList;
+    CustomerDialogAdapter customerDialogAdapter;
+    private void showCustomDialogListCustomer(){
+        final Dialog dialog_list_customer = new Dialog(FormCustomerActivity.this);
+        dialog_list_customer.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog_list_customer.setContentView(R.layout.custom_dialog_list_customer);
+
+        recyclerView_customer = (RecyclerView)dialog_list_customer.findViewById(R.id.recycleView_customer);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(FormCustomerActivity.this);
+        recyclerView_customer.setLayoutManager(mLayoutManager);
+        recyclerView_customer.setItemAnimator(new DefaultItemAnimator());
+        modelRequestList = new ArrayList<>();
+        customerDialogAdapter = new CustomerDialogAdapter(FormCustomerActivity.this, modelRequestList);
+        recyclerView_customer.setAdapter(customerDialogAdapter);
+
+        Call<RequestListCustomerResponse> requestListCustomerResponseCall = RestClient.getRestClient().getAllRequestCustomer("Bearer "+new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"));
+        requestListCustomerResponseCall.enqueue(new Callback<RequestListCustomerResponse>() {
+            @Override
+            public void onResponse(Call<RequestListCustomerResponse> call, Response<RequestListCustomerResponse> response) {
+                if(response.isSuccessful()){
+                    modelRequestList = response.body().getData();
+                    customerDialogAdapter.updateList(modelRequestList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RequestListCustomerResponse> call, Throwable t) {
+
+            }
+        });
+
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager windowmanager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        windowmanager.getDefaultDisplay().getMetrics(displayMetrics);
+        int deviceWidth = displayMetrics.widthPixels;
+        int deviceHeight = displayMetrics.heightPixels;
+        dialog_list_customer.getWindow().setLayout(deviceWidth - 20, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog_list_customer.setCancelable(true);
+        dialog_list_customer.show();
+    }
 }

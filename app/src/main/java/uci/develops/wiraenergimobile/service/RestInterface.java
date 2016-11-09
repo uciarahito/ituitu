@@ -9,6 +9,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Streaming;
 import uci.develops.wiraenergimobile.response.ApproveResponse;
 import uci.develops.wiraenergimobile.response.CustomerResponse;
 import uci.develops.wiraenergimobile.response.ListRoleResponse;
@@ -54,6 +55,21 @@ public interface RestInterface {
                                               @Field("mobile1") String mobile1, @Field("mobile2") String mobile2, @Field("mobile3") String mobile3, @Field("email1") String email1,
                                               @Field("email2") String email2, @Field("email3") String email3, @Field("jabatan1") String jabatan1, @Field("jabatan2") String jabatan2,
                                               @Field("jabatan3") String jabatan3);
+
+    @FormUrlEncoded
+    @PUT("customer/{decode}")
+    Call<ApproveResponse> updateContactInfo1(@Header("Authorization") String token, @Path("decode") String decode, @Field("name1") String name1, @Field("phone1") String phone1,
+                                             @Field("mobile1") String mobile1, @Field("email1") String email1, @Field("jabatan1") String jabatan1);
+
+    @FormUrlEncoded
+    @PUT("customer/{decode}")
+    Call<ApproveResponse> updateContactInfo2(@Header("Authorization") String token, @Path("decode") String decode, @Field("name2") String name2, @Field("phone2") String phone2,
+                                             @Field("mobile2") String mobile2, @Field("email2") String email2, @Field("jabatan2") String jabatan2);
+
+    @FormUrlEncoded
+    @PUT("customer/{decode}")
+    Call<ApproveResponse> updateContactInfo3(@Header("Authorization") String token, @Path("decode") String decode, @Field("name3") String name3, @Field("phone3") String phone3,
+                                             @Field("mobile3") String mobile3, @Field("email3") String email3, @Field("jabatan3") String jabatan3);
 
     @FormUrlEncoded
     @PUT("customer/{decode}")

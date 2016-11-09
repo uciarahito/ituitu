@@ -1,8 +1,11 @@
 package uci.develops.wiraenergimobile.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +17,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.activity.DashboardAdminActivity;
 import uci.develops.wiraenergimobile.activity.FormCustomerActivity;
+import uci.develops.wiraenergimobile.activity.HomeActivity;
+import uci.develops.wiraenergimobile.helper.Constant;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerModel;
+import uci.develops.wiraenergimobile.response.ApproveResponse;
+import uci.develops.wiraenergimobile.response.UserResponse;
+import uci.develops.wiraenergimobile.service.RestClient;
 
 /**
  * Created by ArahitoPC on 10/24/2016.
