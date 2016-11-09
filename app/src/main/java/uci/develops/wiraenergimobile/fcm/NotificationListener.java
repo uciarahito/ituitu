@@ -19,8 +19,9 @@ import java.util.concurrent.ExecutionException;
 
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.activity.DashboardActivity;
-import uci.develops.wiraenergimobile.activity.DashboardAdminActivity;
 import uci.develops.wiraenergimobile.activity.DashboardCustomerActivity;
+import uci.develops.wiraenergimobile.activity.HomeActivity;
+import uci.develops.wiraenergimobile.activity.ListRequestCustomerActivity;
 import uci.develops.wiraenergimobile.activity.LoginActivity;
 import uci.develops.wiraenergimobile.activity.WaitingApprovalActivity;
 import uci.develops.wiraenergimobile.helper.Constant;
@@ -113,7 +114,7 @@ public class NotificationListener extends Service {
 
             Intent intent;
             if(new SharedPreferenceManager().getPreferences(this, "is_login").equals("true")){
-                intent = new Intent(this, DashboardCustomerActivity.class);
+                intent = new Intent(this, HomeActivity.class);
             } else {
                 intent = new Intent(this, LoginActivity.class);
             }
@@ -158,7 +159,7 @@ public class NotificationListener extends Service {
         if(tipe.equals("reject_customer")) {
             Intent intent;
             if(new SharedPreferenceManager().getPreferences(this, "is_login").equals("true")){
-                intent = new Intent(this, DashboardActivity.class);
+                intent = new Intent(this, HomeActivity.class);
             } else {
                 intent = new Intent(this, LoginActivity.class);
             }
@@ -180,7 +181,7 @@ public class NotificationListener extends Service {
         if(tipe.equals("request_customer")) {
             Intent intent;
             if(new SharedPreferenceManager().getPreferences(this, "is_login").equals("true")){
-                intent = new Intent(this, DashboardActivity.class);
+                intent = new Intent(this, ListRequestCustomerActivity.class);
             } else {
                 intent = new Intent(this, LoginActivity.class);
             }

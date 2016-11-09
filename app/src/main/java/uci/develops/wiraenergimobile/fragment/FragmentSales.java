@@ -9,7 +9,12 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.activity.DeliveryOrderActivity;
+import uci.develops.wiraenergimobile.activity.InvoiceActivity;
+import uci.develops.wiraenergimobile.activity.PaymentActivity;
 import uci.develops.wiraenergimobile.activity.RequestQuotationActivity;
+import uci.develops.wiraenergimobile.activity.SalesOrderActivity;
+import uci.develops.wiraenergimobile.activity.SalesQuotationActivity;
 
 /**
  * Created by user on 11/3/2016.
@@ -82,7 +87,27 @@ public class FragmentSales extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if (v == linearLayout_menu_sales_quotation) {
-            Intent intent = new Intent(getActivity().getApplicationContext(), RequestQuotationActivity.class);
+            Intent intent = new Intent(getActivity().getApplicationContext(), SalesQuotationActivity.class);
+            startActivity(intent);
+        }
+
+        if (v == linearLayout_menu_sales_order) {
+            Intent intent = new Intent(getActivity().getApplicationContext(), SalesOrderActivity.class);
+            startActivity(intent);
+        }
+
+        if (v == linearLayout_menu_delivery_order) {
+            Intent intent = new Intent(getActivity().getApplicationContext(), DeliveryOrderActivity.class);
+            startActivity(intent);
+        }
+
+        if (v == linearLayout_menu_invoicing) {
+            Intent intent = new Intent(getActivity().getApplicationContext(), InvoiceActivity.class);
+            startActivity(intent);
+        }
+
+        if (v == linearLayout_menu_payment) {
+            Intent intent = new Intent(getActivity().getApplicationContext(), PaymentActivity.class);
             startActivity(intent);
         }
     }

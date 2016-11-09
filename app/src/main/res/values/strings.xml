@@ -271,5 +271,6 @@
     <string name="title_activity_delivery_order">DeliveryOrderActivity</string>
     <string name="title_activity_invoice">InvoiceActivity</string>
     <string name="title_activity_payment">PaymentActivity</string>
+    <string name="title_activity_profile">ProfileActivity</string>
 
 </resources>

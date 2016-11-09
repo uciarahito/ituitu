@@ -167,6 +167,10 @@
         <activity
             android:name=".activity.PaymentActivity"
             android:label="@string/title_activity_payment"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.ProfileActivity"
+            android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
