@@ -125,10 +125,11 @@ public class HomeActivity extends AppCompatActivity {
         if(roles != "" && roles.equals("admin")) {
             adapter.addFragment(new FragmentCustomer(), "");
             adapter.addFragment(new FragmentPurchasing(), "");
-        } else if(roles != "" && roles.equals("customer")){
-            adapter.addFragment(new FragmentCustomer(), "");
+            adapter.addFragment(new FragmentSales(), "");
         }
-        adapter.addFragment(new FragmentSales(), "");
+//        else if(roles != "" && roles.equals("customer")){
+//            adapter.addFragment(new FragmentCustomer(), "");
+//        }
 
         viewPager.setAdapter(adapter);
     }
@@ -356,7 +357,13 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initItems() {
-        items = getResources().getStringArray(R.array.general);
+        if(new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("admin")) {
+            items = getResources().getStringArray(R.array.general);
+        }
+//        else if(new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("customer")) {
+//            items = getResources().getStringArray(R.array.general_customer);
+//        }
+
     }
 
 }

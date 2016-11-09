@@ -28,7 +28,6 @@ import uci.develops.wiraenergimobile.adapter.CustomExpandableListAdapter;
 import uci.develops.wiraenergimobile.fragment.FragmentNavInventory;
 import uci.develops.wiraenergimobile.fragment.FragmentNavMasterSetup;
 import uci.develops.wiraenergimobile.fragment.FragmentNavPurchasing;
-import uci.develops.wiraenergimobile.fragment.navigation.FragmentNavigationManager;
 import uci.develops.wiraenergimobile.fragment.navigation.NavigationManager;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
 
