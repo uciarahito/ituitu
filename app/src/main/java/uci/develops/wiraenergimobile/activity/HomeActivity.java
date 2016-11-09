@@ -355,7 +355,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initItems() {
-        items = getResources().getStringArray(R.array.general);
+        items = ExpandableListDataSource.getArrayTitle(HomeActivity.this);
     }
 
 }
