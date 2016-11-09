@@ -529,41 +529,25 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
-                        Call<ApproveResponse> rejectResponseCall = RestClient.getRestClient().requestCustomerAction("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
-                                new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), 0, 0);
-                        rejectResponseCall.enqueue(new Callback<ApproveResponse>() {
+                        Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_user_id")));
+                        userResponseCall.enqueue(new Callback<UserResponse>() {
                             @Override
-                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                                 if (response.isSuccessful()) {
-                                    Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_user_id")));
-                                    userResponseCall.enqueue(new Callback<UserResponse>() {
-                                        @Override
-                                        public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                                            if (response.isSuccessful()) {
-                                                if (response.body().getData().getRegistration_key() != null) {
-                                                    Toast.makeText(FormCustomerActivity.this, "Reject request successfull", Toast.LENGTH_SHORT).show();
-                                                    Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
-                                                    Constant.sendNotification(response.body().getData().getRegistration_key(), "Request telah di tolak", "reject_customer");
-                                                    Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
-                                                    startActivity(intent);
-                                                    finish();
-                                                }
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<UserResponse> call, Throwable t) {
-
-                                        }
-                                    });
-                                } else {
-                                    Toast.makeText(FormCustomerActivity.this, "Unable to reject request", Toast.LENGTH_SHORT).show();
+                                    if (response.body().getData().getRegistration_key() != null) {
+                                        Toast.makeText(FormCustomerActivity.this, "Reject request successfull", Toast.LENGTH_SHORT).show();
+                                        Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
+                                        Constant.sendNotification(response.body().getData().getRegistration_key(), "Request telah di tolak", "reject_customer");
+                                        Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
                                 }
                             }
 
                             @Override
-                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
-                                Toast.makeText(FormCustomerActivity.this, "Unable to reject request", Toast.LENGTH_SHORT).show();
+                            public void onFailure(Call<UserResponse> call, Throwable t) {
+
                             }
                         });
                     }
