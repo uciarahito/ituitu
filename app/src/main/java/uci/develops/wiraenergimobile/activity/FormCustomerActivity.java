@@ -1,7 +1,9 @@
 package uci.develops.wiraenergimobile.activity;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -234,48 +236,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
             });
         }
         if (v == linearLayout_button_reject) {
-            Call<ApproveResponse> rejectResponseCall = RestClient.getRestClient().requestCustomerAction("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
-                    new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), 0, 0);
-            rejectResponseCall.enqueue(new Callback<ApproveResponse>() {
-                @Override
-                public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                    if (response.isSuccessful()) {
-                        Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_user_id")));
-                        userResponseCall.enqueue(new Callback<UserResponse>() {
-                            @Override
-                            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                                if (response.isSuccessful()) {
-                                    if (response.body().getData().getRegistration_key() != null) {
-                                        Toast.makeText(FormCustomerActivity.this, "Reject request successfull", Toast.LENGTH_SHORT).show();
-                                        Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
-                                        Constant.sendNotification(response.body().getData().getRegistration_key(), "Request telah di tolak", "reject_customer");
-                                        Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<UserResponse> call, Throwable t) {
-
-                            }
-                        });
-                        /*
-                        Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
-                        startActivity(intent);
-                        finish();
-                        */
-                    } else {
-                        Toast.makeText(FormCustomerActivity.this, "Unable to reject request", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ApproveResponse> call, Throwable t) {
-                    Toast.makeText(FormCustomerActivity.this, "Unable to reject request", Toast.LENGTH_SHORT).show();
-                }
-            });
+            alertDialogReject();
         }
         if (v == linearLayout_button_next) {
             if (index_fragment <= 2) {
@@ -559,6 +520,64 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         dialog_feedback.getWindow().setLayout(deviceWidth - 20, WindowManager.LayoutParams.WRAP_CONTENT);
         dialog_feedback.setCancelable(true);
         dialog_feedback.show();
+    }
+
+    private void alertDialogReject(){
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Are you sure want to reject the customer?");
+        alertDialogBuilder.setPositiveButton("Yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Call<ApproveResponse> rejectResponseCall = RestClient.getRestClient().requestCustomerAction("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
+                                new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), 0, 0);
+                        rejectResponseCall.enqueue(new Callback<ApproveResponse>() {
+                            @Override
+                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                                if (response.isSuccessful()) {
+                                    Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_user_id")));
+                                    userResponseCall.enqueue(new Callback<UserResponse>() {
+                                        @Override
+                                        public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                                            if (response.isSuccessful()) {
+                                                if (response.body().getData().getRegistration_key() != null) {
+                                                    Toast.makeText(FormCustomerActivity.this, "Reject request successfull", Toast.LENGTH_SHORT).show();
+                                                    Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
+                                                    Constant.sendNotification(response.body().getData().getRegistration_key(), "Request telah di tolak", "reject_customer");
+                                                    Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<UserResponse> call, Throwable t) {
+
+                                        }
+                                    });
+                                } else {
+                                    Toast.makeText(FormCustomerActivity.this, "Unable to reject request", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
+                                Toast.makeText(FormCustomerActivity.this, "Unable to reject request", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+        alertDialogBuilder.setNegativeButton("No",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                    }
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
 }
