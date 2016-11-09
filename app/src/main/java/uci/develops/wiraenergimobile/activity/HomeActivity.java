@@ -88,6 +88,7 @@ public class HomeActivity extends AppCompatActivity {
             rootMenu.add("Logout");
         } else if(new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("customer")){
             rootMenu.add("Dashboard");
+            rootMenu.add("Customer");
             rootMenu.add("Sales");
             rootMenu.add("Logout");
         } else {

@@ -38,6 +38,7 @@ public class ExpandableListDataSource {
             rootMenu.add("Logout");
         } else if(new SharedPreferenceManager().getPreferences(context, "roles").equals("customer")){
             rootMenu.add("Dashboard");
+            rootMenu.add("Customer");
             rootMenu.add("Sales");
             rootMenu.add("Logout");
         } else {
@@ -78,6 +79,7 @@ public class ExpandableListDataSource {
             rootMenu.add("Logout");
         } else if(new SharedPreferenceManager().getPreferences(context, "roles").equals("customer")){
             rootMenu.add("Dashboard");
+            rootMenu.add("Customer");
             rootMenu.add("Sales");
             rootMenu.add("Logout");
         } else {
@@ -97,8 +99,9 @@ public class ExpandableListDataSource {
             rootMenu[4] = "Logout";
         } else if(new SharedPreferenceManager().getPreferences(context, "roles").equals("customer")){
             rootMenu[0] = "Dashboard";
-            rootMenu[1] = "Sales";
-            rootMenu[2] = "Logout";
+            rootMenu[0] = "Customer";
+            rootMenu[2] = "Sales";
+            rootMenu[3] = "Logout";
         } else {
             rootMenu[0] = "Dashboard";
             rootMenu[1] = "Logout";

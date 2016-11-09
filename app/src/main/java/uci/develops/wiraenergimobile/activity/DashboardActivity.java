@@ -80,7 +80,7 @@ public class DashboardActivity extends AppCompatActivity{
         mExpandableListView.addHeaderView(listHeaderView);
 
         mExpandableListData = ExpandableListDataSource.getData(this);
-        mExpandableListTitle = new ArrayList(mExpandableListData.keySet());
+        mExpandableListTitle = new ArrayList(ExpandableListDataSource.getTitle(DashboardActivity.this));
 
         addDrawerItems();
         setupDrawer();
