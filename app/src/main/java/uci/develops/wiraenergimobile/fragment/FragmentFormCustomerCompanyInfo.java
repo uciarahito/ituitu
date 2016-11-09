@@ -206,6 +206,10 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
                             if (customerModel.getApprove() == 0) {
                                 readOnly();
                             }
+                        } else if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")) {
+                            if (customerModel.getApprove() == 1) {
+                                readOnly();
+                            }
                         }
                     }
 

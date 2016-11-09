@@ -68,14 +68,15 @@
             android:weightSum="5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right">
+            android:gravity="right"
+            android:layout_marginBottom="5dp">
             <Button
                 android:textAllCaps="false"
                 android:text="Detail"
                 android:id="@+id/buttonDetail"
                 android:layout_weight="1"
                 android:layout_marginRight="10dp"
-                android:background="@color/OrangeColor"
+                android:background="@drawable/rounded_rectangle_orange"
                 android:layout_width="0dp"
                 android:layout_height="30dp" />
         </LinearLayout>

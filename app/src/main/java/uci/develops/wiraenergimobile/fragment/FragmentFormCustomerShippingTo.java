@@ -101,7 +101,7 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, city);
         autoComplete_city.setAdapter(cityAdapter);
 
-        if(!new SharedPreferenceManager().getPreferences(getContext(), "roles").equals("customer")){
+        if(new SharedPreferenceManager().getPreferences(getContext(), "roles").equals("customer")){
             linear_layout_eta.setVisibility(View.GONE);
             linear_layout_note.setVisibility(View.GONE);
             linear_layout_tax.setVisibility(View.GONE);
@@ -180,6 +180,10 @@ public class FragmentFormCustomerShippingTo extends Fragment {
 
                         if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
                             if (customerModel.getApprove() == 0) {
+                                readOnly();
+                            }
+                        } else if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")) {
+                            if (customerModel.getApprove() == 1) {
                                 readOnly();
                             }
                         }

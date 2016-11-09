@@ -331,7 +331,7 @@ public class HomeActivity extends AppCompatActivity {
 //            return true;
 //        }
 
-        switch (id){
+//        switch (id){
 //            case R.id.action_login:
 //                intentLogin = new Intent(HomeActivity.this, LoginActivity.class);
 //                startActivity(intentLogin);
@@ -340,9 +340,9 @@ public class HomeActivity extends AppCompatActivity {
 //                intentRegister = new Intent(HomeActivity.this, RegisterActivity.class);
 //                startActivity(intentRegister );
 //                return true;
-            default:
+//            default:
                 return super.onOptionsItemSelected(item);
-        }
+//        }
     }
 
     private void initItems() {

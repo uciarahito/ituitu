@@ -61,7 +61,7 @@
                 android:gravity="center"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:src="@android:drawable/ic_menu_call"
+                    android:src="@drawable/ic_phone_24dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -99,7 +99,7 @@
                 android:gravity="center"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:src="@android:drawable/ic_menu_call"
+                    android:src="@drawable/ic_mobile_24dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -213,7 +213,7 @@
                 android:gravity="center"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:src="@android:drawable/ic_menu_call"
+                    android:src="@drawable/ic_phone_24dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -251,7 +251,7 @@
                 android:gravity="center"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:src="@android:drawable/ic_menu_call"
+                    android:src="@drawable/ic_mobile_24dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -365,7 +365,7 @@
                 android:gravity="center"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:src="@android:drawable/ic_menu_call"
+                    android:src="@drawable/ic_phone_24dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -403,7 +403,7 @@
                 android:gravity="center"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:src="@android:drawable/ic_menu_call"
+                    android:src="@drawable/ic_mobile_24dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>

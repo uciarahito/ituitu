@@ -279,19 +279,19 @@ public class DashboardActivity extends AppCompatActivity{
             return true;
         }
 
-        switch (id){
-            case R.id.action_login:
-                intentLogin = new Intent(DashboardActivity.this, LoginActivity.class);
-                startActivity(intentLogin);
-                return true;
-            case R.id.action_register:
-                intentRegister = new Intent(DashboardActivity.this, RegisterActivity.class);
-                startActivity(intentRegister );
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+//        switch (id){
+//            case R.id.action_login:
+//                intentLogin = new Intent(DashboardActivity.this, LoginActivity.class);
+//                startActivity(intentLogin);
+//                return true;
+//            case R.id.action_register:
+//                intentRegister = new Intent(DashboardActivity.this, RegisterActivity.class);
+//                startActivity(intentRegister );
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
 
-//        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
 }

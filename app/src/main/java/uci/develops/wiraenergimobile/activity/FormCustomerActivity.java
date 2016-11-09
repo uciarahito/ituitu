@@ -335,26 +335,26 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                                     if (response.isSuccessful()) {
                                         Toast.makeText(FormCustomerActivity.this, "Successfully inserted", Toast.LENGTH_SHORT).show();
                                         //baru ditambah
-                                        Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_user_id")));
-                                        userResponseCall.enqueue(new Callback<UserResponse>() {
-                                            @Override
-                                            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                                                if (response.isSuccessful()) {
-                                                    if (response.body().getData().getRegistration_key() != null) {
-                                                        Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
-                                                        Constant.sendNotification(response.body().getData().getRegistration_key(), "Ada request customer yang masuk", "request_customer");
-                                                        Intent intent = new Intent(FormCustomerActivity.this, ListRequestCustomerActivity.class);
-                                                        startActivity(intent);
-                                                        finish();
-                                                    }
-                                                }
-                                            }
-
-                                            @Override
-                                            public void onFailure(Call<UserResponse> call, Throwable t) {
-
-                                            }
-                                        });
+//                                        Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_user_id")));
+//                                        userResponseCall.enqueue(new Callback<UserResponse>() {
+//                                            @Override
+//                                            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+//                                                if (response.isSuccessful()) {
+//                                                    if (response.body().getData().getRegistration_key() != null) {
+//                                                        Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
+//                                                        Constant.sendNotification(response.body().getData().getRegistration_key(), "Ada request customer yang masuk", "request_customer");
+//                                                        Intent intent = new Intent(FormCustomerActivity.this, ListRequestCustomerActivity.class);
+//                                                        startActivity(intent);
+//                                                        finish();
+//                                                    }
+//                                                }
+//                                            }
+//
+//                                            @Override
+//                                            public void onFailure(Call<UserResponse> call, Throwable t) {
+//
+//                                            }
+//                                        });
                                     } else {
                                         Toast.makeText(FormCustomerActivity.this, "" + response.errorBody().toString(), Toast.LENGTH_SHORT).show();
                                         Toast.makeText(FormCustomerActivity.this, "Not successfull", Toast.LENGTH_SHORT).show();
