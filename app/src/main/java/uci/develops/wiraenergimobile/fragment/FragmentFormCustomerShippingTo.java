@@ -28,12 +28,12 @@ import uci.develops.wiraenergimobile.service.RestClient;
 
 public class FragmentFormCustomerShippingTo extends Fragment {
 
-    private EditText editText_pic_name, editText_address, editText_postcode, editText_eta,
+    private EditText editText_pic_name, editText_address_name, editText_address, editText_postcode, editText_eta,
             editText_email, editText_phone, editText_mobile, editText_fax, editText_tax, editText_map_cordinate, editText_note;
     private AutoCompleteTextView autoComplete_city, autoComplete_province;
     private LinearLayout linear_layout_eta, linear_layout_note, linear_layout_tax;
 
-    String pic_name = "", address = "", city = "", province = "", postcode = "", eta = "", map = "", email = "", phone = "", mobile = "", fax = "", tax = "", note = "";
+    String pic_name = "", address_name = "", address = "", city = "", province = "", postcode = "", eta = "", map = "", email = "", phone = "", mobile = "", fax = "", tax = "", note = "";
 
     private String decode = "", token = "";
 
@@ -74,6 +74,7 @@ public class FragmentFormCustomerShippingTo extends Fragment {
 
     private void initializeComponent(View view) {
         editText_pic_name = (EditText) view.findViewById(R.id.editText_pic_name);
+        editText_address_name = (EditText) view.findViewById(R.id.editText_address_name);
         editText_address = (EditText) view.findViewById(R.id.editText_address);
         autoComplete_city = (AutoCompleteTextView) view.findViewById(R.id.autoComplete_city);
         autoComplete_province = (AutoCompleteTextView) view.findViewById(R.id.autoComplete_province);
@@ -109,6 +110,7 @@ public class FragmentFormCustomerShippingTo extends Fragment {
 
     public boolean isNotEmpty() {
         pic_name = editText_pic_name.getText().toString();
+//        address_name = editText_address_name.getText().toString();
         address = editText_address.getText().toString();
         city = autoComplete_city.getText().toString();
         province = autoComplete_province.getText().toString();
@@ -126,8 +128,8 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         editText_eta.setVisibility(View.INVISIBLE);
 
         boolean result = false;
-        if (!pic_name.equals("") && !address.equals("") && !city.equals("") && !province.equals("") && !postcode.equals("")
-                && !eta.equals("") && !email.equals("") && !phone.equals("") && !mobile.equals("")) {
+        if (!pic_name.equals("") && !address.equals("") && !city.equals("") && !province.equals("") &&
+                !postcode.equals("") && !email.equals("") && !phone.equals("") && !mobile.equals("")) {
 
             result = true;
         }

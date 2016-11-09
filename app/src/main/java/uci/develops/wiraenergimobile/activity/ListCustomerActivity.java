@@ -21,6 +21,7 @@ import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.adapter.CustomerAdapter;
 import uci.develops.wiraenergimobile.helper.Constant;
+import uci.develops.wiraenergimobile.helper.DividerItemDecoration;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerModel;
 import uci.develops.wiraenergimobile.response.RequestListCustomerResponse;
@@ -45,7 +46,7 @@ public class ListCustomerActivity extends AppCompatActivity {
         recycleViewRequest.setItemAnimator(new DefaultItemAnimator());
         modelRequestList = new ArrayList<>();
         customerAdapter = new CustomerAdapter(ListCustomerActivity.this, modelRequestList);
-
+        recycleViewRequest.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recycleViewRequest.setAdapter(customerAdapter);
 
         Call<RequestListCustomerResponse> requestListCustomerResponseCall = RestClient.getRestClient()

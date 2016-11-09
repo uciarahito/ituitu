@@ -135,13 +135,20 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                             } else if (customerModel.getApprove() == 0 && customerModel.getActive() == 0) {
                                 linearLayout_button_approve.setVisibility(View.VISIBLE);
                                 linearLayout_button_reject.setVisibility(View.VISIBLE);
-                                linearLayout_button_back.setVisibility(View.VISIBLE);
-                                linearLayout_button_next.setVisibility(View.VISIBLE);
+                                linearLayout_button_back.setVisibility(View.GONE);
+                                linearLayout_button_next.setVisibility(View.GONE);
+                            } else if (customerModel.getApprove() == 2 && customerModel.getActive() == 0) {
+                                linearLayout_button_approve.setVisibility(View.VISIBLE);
+                                linearLayout_button_reject.setVisibility(View.VISIBLE);
+                                linearLayout_button_back.setVisibility(View.GONE);
+                                linearLayout_button_next.setVisibility(View.GONE);
                             }
                         } else if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("customer")) {
                             if (customerModel.getApprove() == 1 && customerModel.getActive() == 1) {
                                 linearLayout_button_back.setVisibility(View.GONE);
                                 linearLayout_button_next.setVisibility(View.GONE);
+                                linearLayout_button_approve.setVisibility(View.GONE);
+                                linearLayout_button_reject.setVisibility(View.GONE);
                             } else if (customerModel.getApprove() == 2 && customerModel.getActive() == 0) {
                                 linearLayout_button_approve.setVisibility(View.GONE);
                                 linearLayout_button_reject.setVisibility(View.GONE);

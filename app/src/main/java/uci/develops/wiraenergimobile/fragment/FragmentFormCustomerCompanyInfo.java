@@ -151,7 +151,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         boolean result = false;
 
         if (!name.equals("") && !address.equals("") && !city.equals("") && !province.equals("")
-                && !mobile.equals("") && !term.equals("") && !npwp.equals("") && !email.equals("")) {
+                && !mobile.equals("") && !npwp.equals("") && !email.equals("")) {
             result = true;
         }
         return result;

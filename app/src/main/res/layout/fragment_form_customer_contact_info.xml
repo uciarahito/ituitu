@@ -9,7 +9,7 @@
         android:layout_height="wrap_content">
         <TextView
             android:textStyle="bold"
-            android:text="Kontak Info 1"
+            android:text="Contact Info 1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <LinearLayout
@@ -26,7 +26,7 @@
             android:textStyle="bold"
             android:layout_marginRight="10dp"
             android:gravity="end"
-            android:text="Name:"
+            android:text="@string/name_contact"
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
@@ -122,7 +122,7 @@
             android:textStyle="bold"
             android:layout_marginRight="10dp"
             android:gravity="end"
-            android:text="Email:"
+            android:text="@string/email_contact"
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
@@ -143,7 +143,7 @@
             android:textStyle="bold"
             android:layout_marginRight="10dp"
             android:gravity="end"
-            android:text="Jabatan:"
+            android:text="@string/position_contact"
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
@@ -161,7 +161,7 @@
         android:layout_height="wrap_content">
         <TextView
             android:textStyle="bold"
-            android:text="Kontak Info 2"
+            android:text="Contact Info 2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <LinearLayout
@@ -178,7 +178,7 @@
             android:textStyle="bold"
             android:layout_marginRight="10dp"
             android:gravity="end"
-            android:text="Name:"
+            android:text="@string/name_contact"
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
@@ -274,7 +274,7 @@
             android:textStyle="bold"
             android:layout_marginRight="10dp"
             android:gravity="end"
-            android:text="Email:"
+            android:text="@string/email_contact"
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
@@ -295,7 +295,7 @@
             android:textStyle="bold"
             android:layout_marginRight="10dp"
             android:gravity="end"
-            android:text="Jabatan:"
+            android:text="@string/position_contact"
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
@@ -313,7 +313,7 @@
         android:layout_height="wrap_content">
         <TextView
             android:textStyle="bold"
-            android:text="Kontak Info 3"
+            android:text="Contact Info 3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <LinearLayout
@@ -330,7 +330,7 @@
             android:textStyle="bold"
             android:layout_marginRight="10dp"
             android:gravity="end"
-            android:text="Name:"
+            android:text="@string/name_contact"
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
@@ -426,7 +426,7 @@
             android:textStyle="bold"
             android:layout_marginRight="10dp"
             android:gravity="end"
-            android:text="Email:"
+            android:text="@string/email_contact"
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
@@ -447,7 +447,7 @@
             android:textStyle="bold"
             android:layout_marginRight="10dp"
             android:gravity="end"
-            android:text="Jabatan:"
+            android:text="@string/position_contact"
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />

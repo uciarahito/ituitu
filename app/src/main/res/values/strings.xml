@@ -199,6 +199,10 @@
     <string name="netto">Netto:</string>
     <string name="terbilang">Terbilang:</string>
 
+    <string name="name_contact">Name:</string>
+    <string name="email_contact">Email:</string>
+    <string name="position_contact">Position:</string>
+
     <string name="price">Price</string>
     <string name="quantity">Quantity</string>
     <string name="discount">Discount</string>

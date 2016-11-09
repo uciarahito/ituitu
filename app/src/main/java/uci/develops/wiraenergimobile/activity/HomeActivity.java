@@ -332,14 +332,14 @@ public class HomeActivity extends AppCompatActivity {
 //        }
 
         switch (id){
-            case R.id.action_login:
-                intentLogin = new Intent(HomeActivity.this, LoginActivity.class);
-                startActivity(intentLogin);
-                return true;
-            case R.id.action_register:
-                intentRegister = new Intent(HomeActivity.this, RegisterActivity.class);
-                startActivity(intentRegister );
-                return true;
+//            case R.id.action_login:
+//                intentLogin = new Intent(HomeActivity.this, LoginActivity.class);
+//                startActivity(intentLogin);
+//                return true;
+//            case R.id.action_register:
+//                intentRegister = new Intent(HomeActivity.this, RegisterActivity.class);
+//                startActivity(intentRegister );
+//                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
