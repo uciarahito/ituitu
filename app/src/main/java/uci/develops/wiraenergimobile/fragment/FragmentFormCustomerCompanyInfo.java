@@ -33,12 +33,12 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
             editText_phone, editText_mobile, editText_fax, editText_term, editText_npwp,
             editText_email, editText_website, editText_note;
     private AutoCompleteTextView autoComplete_city, autoComplete_province;
-    private Spinner spinner_valuta, spinner_tax_ppn, spinner_active;
+    private Spinner spinner_valuta, spinner_tax_ppn, spinner_active, spinner_group;
 
     private LinearLayout linear_layout_id, linear_layout_term, linear_layout_valuta, linear_layout_tax_ppn, linear_layout_active, linear_layout_note;
 
     String id = "", name = "", address = "", city = "", province = "", zip_code = "", phone = "", mobile = "", fax = "", term = "",
-            valuta = "", npwp = "", tax_ppn = "", active = "", email = "", website = "", note = "";
+            valuta = "", group = "", npwp = "", tax_ppn = "", active = "", email = "", website = "", note = "";
 
     private String decode = "", token = "";
 
@@ -82,6 +82,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         editText_npwp = (EditText) view.findViewById(R.id.editText_npwp);
         spinner_tax_ppn = (Spinner) view.findViewById(R.id.spinner_tax_ppn);
         spinner_active = (Spinner) view.findViewById(R.id.spinner_active);
+        spinner_group = (Spinner) view.findViewById(R.id.spinner_group);
         editText_email = (EditText) view.findViewById(R.id.editText_email);
         editText_website = (EditText) view.findViewById(R.id.editText_website);
         editText_note = (EditText) view.findViewById(R.id.editText_note);
@@ -119,6 +120,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_tax_ppn.setAdapter(dataAdapter);
         spinner_active.setAdapter(dataAdapter);
+        spinner_group.setAdapter(dataAdapter);
 
         String[] province = getActivity().getResources().getStringArray(R.array.list_of_province);
         String[] city = getActivity().getResources().getStringArray(R.array.list_of_city);
@@ -141,6 +143,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         fax = editText_fax.getText().toString();
         term = editText_term.getText().toString();
         valuta = spinner_valuta.getSelectedItem().toString();
+        group = spinner_group.getSelectedItem().toString();
         npwp = editText_npwp.getText().toString();
         tax_ppn = spinner_tax_ppn.getSelectedItem().toString();
         active = spinner_active.getSelectedItem().toString();
@@ -167,6 +170,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         customerModel.setPhone(phone);
         customerModel.setMobile(mobile);
         customerModel.setFax(fax);
+        customerModel.setTerm(group);
         customerModel.setTerm(term);
         customerModel.setValuta(valuta);
         customerModel.setNpwp(npwp);
@@ -233,6 +237,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         editText_phone.setEnabled(false);
         editText_mobile.setEnabled(false);
         editText_fax.setEnabled(false);
+        spinner_group.setEnabled(false);
         editText_term.setEnabled(false);
         spinner_valuta.setEnabled(false);
         editText_npwp.setEnabled(false);

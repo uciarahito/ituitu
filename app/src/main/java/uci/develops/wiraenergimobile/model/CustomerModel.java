@@ -23,6 +23,7 @@ public class CustomerModel {
     private String email;
     private String website;
     private String type;
+    private String group;
     private String detail_payment;
     private String term;
     private String npwp;
@@ -72,7 +73,7 @@ public class CustomerModel {
 
     public CustomerModel(){}
 
-    public CustomerModel(int id, int user_id, String decode, String first_name, String last_name, String address, String city, String province, String postcode, String ktp, String gender, String birthplace, String birthday, String mobile, String phone, String fax, String email, String website, String type, String detail_payment, String term, String npwp, String tax, String valuta, String note, String map, String detail_shipping, String remember_token, String created_at, String updated_at, String register_at, String created_by, String updated_by, int active, int approve, String detail, String deleted_at, String shipping_pic, String shipping_address, String shipping_city, String shipping_province, String shipping_postcode, String shipping_eta, String shipping_map, String shipping_phone, String shipping_mobile, String shipping_email, String shipping_fax, String shipping_tax, String shipping_note, String name1, String phone1, String mobile1, String email1, String jabatan1, String name2, String phone2, String mobile2, String email2, String jabatan2, String name3, String phone3, String mobile3, String email3, String jabatan3) {
+    public CustomerModel(int id, int user_id, String decode, String first_name, String last_name, String address, String city, String province, String postcode, String ktp, String gender, String birthplace, String birthday, String mobile, String phone, String fax, String email, String website, String type, String group, String detail_payment, String term, String npwp, String tax, String valuta, String note, String map, String detail_shipping, String remember_token, String created_at, String updated_at, String register_at, String created_by, String updated_by, int active, int approve, String detail, String deleted_at, String shipping_pic, String shipping_address, String shipping_city, String shipping_province, String shipping_postcode, String shipping_eta, String shipping_map, String shipping_phone, String shipping_mobile, String shipping_email, String shipping_fax, String shipping_tax, String shipping_note, String name1, String phone1, String mobile1, String email1, String jabatan1, String name2, String phone2, String mobile2, String email2, String jabatan2, String name3, String phone3, String mobile3, String email3, String jabatan3) {
         this.id = id;
         this.user_id = user_id;
         this.decode = decode;
@@ -92,6 +93,7 @@ public class CustomerModel {
         this.email = email;
         this.website = website;
         this.type = type;
+        this.group = group;
         this.detail_payment = detail_payment;
         this.term = term;
         this.npwp = npwp;
@@ -290,6 +292,14 @@ public class CustomerModel {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
     }
 
     public String getDetail_payment() {

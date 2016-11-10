@@ -173,6 +173,15 @@
     <string name="submit">Submit</string>
     <string name="view_data">View Data</string>
     <string name="name">Name</string>
+    <string name="address">Address</string>
+    <string name="city">City</string>
+    <string name="province">Province</string>
+    <string name="zip_code">Zip code</string>
+    <string name="phone">Phone</string>
+    <string name="mobile">Mobile</string>
+    <string name="fax">Fax</string>
+    <string name="npwp">NPWP</string>
+    <string name="websites">Website</string>
     <string name="wiraenergi">Wira Energi</string>
     <string name="verification">Email Verification Status</string>
     <string name="waiting">Wait For Approval</string>

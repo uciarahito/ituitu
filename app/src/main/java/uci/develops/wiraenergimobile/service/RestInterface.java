@@ -45,7 +45,7 @@ public interface RestInterface {
     @PUT("customer/{decode}")
     Call<ApproveResponse> sendDataCompanyInfo(@Header("Authorization") String token, @Path("decode") String decode, @Field("first_name") String first_name, @Field("last_name") String last_name,
                                               @Field("address") String address, @Field("city") String city, @Field("province") String province, @Field("phone") String phone,
-                                              @Field("mobile") String mobile, @Field("fax") String fax, @Field("term") String term, @Field("valuta") String valuta, @Field("npwp") String npwp,
+                                              @Field("mobile") String mobile, @Field("fax") String fax, @Field("term") String term, @Field("group") String group, @Field("valuta") String valuta, @Field("npwp") String npwp,
                                               @Field("tax") int tax, @Field("email") String email, @Field("website") String website, @Field("note") String note, @Field("postcode") String postcode);
 
     @FormUrlEncoded

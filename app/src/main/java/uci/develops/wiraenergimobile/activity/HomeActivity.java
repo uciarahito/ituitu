@@ -285,7 +285,7 @@ public class HomeActivity extends AppCompatActivity {
                         Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
                         startActivity(intent);
                     } else {
-                        Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+                        Intent intent = new Intent(HomeActivity.this, FormCustomerActivity.class);
                         startActivity(intent);
                     }
                 }

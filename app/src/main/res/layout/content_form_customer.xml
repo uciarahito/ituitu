@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="uci.develops.wiraenergimobile.activity.FormCustomerActivity"
-    tools:showIn="@layout/activity_form_customer">
+    tools:showIn="@layout/app_bar_form_customer">
 
     <LinearLayout
         android:layout_alignParentTop="true"
