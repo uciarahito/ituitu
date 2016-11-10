@@ -798,7 +798,6 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                     } else {
                         Toast.makeText(FormCustomerActivity.this, "Empty data", Toast.LENGTH_SHORT).show();
                     }
-
                 }
             }
 
