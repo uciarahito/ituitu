@@ -539,7 +539,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                                         Toast.makeText(FormCustomerActivity.this, "Reject request successfull", Toast.LENGTH_SHORT).show();
                                         Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
                                         Constant.sendNotification(response.body().getData().getRegistration_key(), "Request telah di tolak", "reject_customer");
-                                        Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
+                                        Intent intent = new Intent(FormCustomerActivity.this, HomeActivity.class);
                                         startActivity(intent);
                                         finish();
                                     }
@@ -779,8 +779,26 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onResponse(Call<RequestListCustomerResponse> call, Response<RequestListCustomerResponse> response) {
                 if(response.isSuccessful()){
-                    modelRequestList = response.body().getData();
-                    customerDialogAdapter.updateList(modelRequestList);
+//                    modelRequestList = response.body().getData();
+//                    customerDialogAdapter.updateList(modelRequestList);
+
+                    if(response.body().getData().size() > 0){
+                        modelRequestList = response.body().getData();
+                        List<CustomerModel> dataCustomer = new ArrayList<CustomerModel>();
+                        for(CustomerModel customerModel : modelRequestList){
+                            if(customerModel.getActive() == 1 && customerModel.getApprove() == 1){
+                                dataCustomer.add(customerModel);
+                            }
+                        }
+                        if(dataCustomer.size() > 0) {
+                            customerDialogAdapter.updateList(modelRequestList);
+                        } else {
+                            Toast.makeText(FormCustomerActivity.this, "Empty data", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(FormCustomerActivity.this, "Empty data", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }
 
