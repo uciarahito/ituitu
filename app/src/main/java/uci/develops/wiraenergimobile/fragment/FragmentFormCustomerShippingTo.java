@@ -179,7 +179,7 @@ public class FragmentFormCustomerShippingTo extends Fragment {
                         editText_note.setText(customerModel.getShipping_note() == null ? "" : customerModel.getShipping_note());
 
                         if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
-                            if (customerModel.getApprove() == 0) {
+                            if (customerModel.getApprove() == 0 | customerModel.getApprove() == 1) {
                                 readOnly();
                             }
                         } else if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")) {

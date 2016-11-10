@@ -203,7 +203,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
                         editText_zip_code.setText(customerModel.getPostcode() == null ? "" : customerModel.getPostcode());
 
                         if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
-                            if (customerModel.getApprove() == 0) {
+                            if (customerModel.getApprove() == 0 | customerModel.getApprove() == 1) {
                                 readOnly();
                             }
                         } else if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")) {

@@ -117,6 +117,7 @@ public class HomeActivity extends AppCompatActivity {
                     UserXModel userXModel = new UserXModel();
                     userXModel =  response.body().getData();
                     textView_name.setText(userXModel.getName() == null ? "" : userXModel.getName());
+
                 }
             }
 

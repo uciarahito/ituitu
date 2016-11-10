@@ -145,7 +145,7 @@ public class FragmentFormCustomerContactInfo extends Fragment {
                         editText_jabatan3.setText(customerModel.getJabatan3() == null ? "" : customerModel.getJabatan3());
 
                         if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
-                            if (customerModel.getApprove() == 0) {
+                            if (customerModel.getApprove() == 0 | customerModel.getApprove() == 1) {
                                 readOnly();
                             }
                         } else if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")) {

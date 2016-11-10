@@ -16,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -33,7 +35,9 @@ import uci.develops.wiraenergimobile.helper.DividerItemDecoration;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerModel;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
+import uci.develops.wiraenergimobile.model.UserXModel;
 import uci.develops.wiraenergimobile.response.RequestListCustomerResponse;
+import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class ListRequestCustomerActivity extends AppCompatActivity {
@@ -132,6 +136,41 @@ public class ListRequestCustomerActivity extends AppCompatActivity {
         View listHeaderView;
         listHeaderView = inflater.inflate(R.layout.nav_header, null, false);
         mExpandableListView.addHeaderView(listHeaderView);
+
+        ImageView imageView_profile = (ImageView) listHeaderView.findViewById(R.id.imageView_profile);
+        final TextView textView_name = (TextView) listHeaderView.findViewById(R.id.textView_name);
+
+        imageView_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (new SharedPreferenceManager().getPreferences(ListRequestCustomerActivity.this, "roles").equals("admin")) {
+                    Intent intent = new Intent(ListRequestCustomerActivity.this, ListCustomerActivity.class);
+                    startActivity(intent);
+                } else if (new SharedPreferenceManager().getPreferences(ListRequestCustomerActivity.this, "roles").equals("customer")) {
+                    Intent intent = new Intent(ListRequestCustomerActivity.this, FormCustomerActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new
+                SharedPreferenceManager().getPreferences(ListRequestCustomerActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(ListRequestCustomerActivity.this, "user_id")));
+        userResponseCall.enqueue(new Callback<UserResponse>() {
+            @Override
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                if (response.isSuccessful()) {
+                    String name = "";
+                    UserXModel userXModel = new UserXModel();
+                    userXModel = response.body().getData();
+                    textView_name.setText(userXModel.getName() == null ? "" : userXModel.getName());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserResponse> call, Throwable t) {
+
+            }
+        });
 
         mExpandableListData = ExpandableListDataSource.getData(this);
         List<String> rootMenu = new ArrayList<>();

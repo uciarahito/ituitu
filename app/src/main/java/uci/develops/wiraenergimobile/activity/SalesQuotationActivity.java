@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,11 +25,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.adapter.CustomExpandableListAdapter;
 import uci.develops.wiraenergimobile.fragment.navigation.NavigationManager;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
+import uci.develops.wiraenergimobile.model.UserXModel;
+import uci.develops.wiraenergimobile.response.UserResponse;
+import uci.develops.wiraenergimobile.service.RestClient;
 
 public class SalesQuotationActivity extends AppCompatActivity implements View.OnClickListener{
     private LinearLayout linearLayout_menu_all_quotation, linearLayout_menu_new_quotation;
@@ -76,12 +83,12 @@ public class SalesQuotationActivity extends AppCompatActivity implements View.On
     public void onClick(View v) {
         Intent intent;
         if(v == linearLayout_menu_all_quotation){
-            intent = new Intent(SalesQuotationActivity.this, LoginActivity.class);
+            intent = new Intent(SalesQuotationActivity.this, HomeActivity.class);
             startActivity(intent);
         }
 
         if(v == linearLayout_menu_new_quotation){
-            intent = new Intent(SalesQuotationActivity.this, LoginActivity.class);
+            intent = new Intent(SalesQuotationActivity.this, RequestQuotationActivity.class);
             startActivity(intent);
         }
     }
@@ -105,6 +112,41 @@ public class SalesQuotationActivity extends AppCompatActivity implements View.On
         View listHeaderView;
         listHeaderView = inflater.inflate(R.layout.nav_header, null, false);
         mExpandableListView.addHeaderView(listHeaderView);
+
+        ImageView imageView_profile = (ImageView) listHeaderView.findViewById(R.id.imageView_profile);
+        final TextView textView_name = (TextView) listHeaderView.findViewById(R.id.textView_name);
+
+        imageView_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (new SharedPreferenceManager().getPreferences(SalesQuotationActivity.this, "roles").equals("admin")) {
+                    Intent intent = new Intent(SalesQuotationActivity.this, ListCustomerActivity.class);
+                    startActivity(intent);
+                } else if (new SharedPreferenceManager().getPreferences(SalesQuotationActivity.this, "roles").equals("customer")) {
+                    Intent intent = new Intent(SalesQuotationActivity.this, FormCustomerActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new
+                SharedPreferenceManager().getPreferences(SalesQuotationActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(SalesQuotationActivity.this, "user_id")));
+        userResponseCall.enqueue(new Callback<UserResponse>() {
+            @Override
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                if (response.isSuccessful()) {
+                    String name = "";
+                    UserXModel userXModel = new UserXModel();
+                    userXModel = response.body().getData();
+                    textView_name.setText(userXModel.getName() == null ? "" : userXModel.getName());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserResponse> call, Throwable t) {
+
+            }
+        });
 
         mExpandableListData = ExpandableListDataSource.getData(this);
         List<String> rootMenu = new ArrayList<>();
