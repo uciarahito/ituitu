@@ -791,7 +791,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                             }
                         }
                         if(dataCustomer.size() > 0) {
-                            customerDialogAdapter.updateList(modelRequestList);
+                            customerDialogAdapter.updateList(dataCustomer);
                         } else {
                             Toast.makeText(FormCustomerActivity.this, "Empty data", Toast.LENGTH_SHORT).show();
                         }

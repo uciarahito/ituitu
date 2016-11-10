@@ -116,7 +116,7 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
                                 if(response.isSuccessful()){
                                     CustomerModel customerModelX = response.body().getData().get(0);
                                     if(customerModel.getName1() == null){
-                                        Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().updateContactInfo1(
+                                        final Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().updateContactInfo1(
                                                 "Bearer "+new SharedPreferenceManager().getPreferences(context, "token"),
                                                 customerModel.getDecode(),
                                                 customerModelX.getFirst_name()+" "+customerModelX.getLast_name(),
@@ -127,6 +127,7 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
                                             @Override
                                             public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                                                 if(response.isSuccessful()){
+                                                    approveCustomer(new SharedPreferenceManager().getPreferences(context, "customer_decode"));
                                                     Toast.makeText(context, "Assign berhasil", Toast.LENGTH_SHORT).show();
                                                     Intent intent = new Intent(context, HomeActivity.class);
                                                     context.startActivity(intent);
@@ -150,6 +151,7 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
                                             @Override
                                             public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                                                 if(response.isSuccessful()){
+                                                    approveCustomer(new SharedPreferenceManager().getPreferences(context, "customer_decode"));
                                                     Toast.makeText(context, "Assign berhasil", Toast.LENGTH_SHORT).show();
                                                     Intent intent = new Intent(context, HomeActivity.class);
                                                     context.startActivity(intent);
@@ -173,6 +175,7 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
                                             @Override
                                             public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                                                 if(response.isSuccessful()){
+                                                    approveCustomer(new SharedPreferenceManager().getPreferences(context, "customer_decode"));
                                                     Toast.makeText(context, "Assign berhasil", Toast.LENGTH_SHORT).show();
                                                     Intent intent = new Intent(context, HomeActivity.class);
                                                     context.startActivity(intent);
@@ -197,6 +200,7 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
                                                 @Override
                                                 public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                                                     if(response.isSuccessful()){
+                                                        approveCustomer(new SharedPreferenceManager().getPreferences(context, "customer_decode"));
                                                         Toast.makeText(context, "Assign berhasil", Toast.LENGTH_SHORT).show();
                                                         Intent intent = new Intent(context, HomeActivity.class);
                                                         context.startActivity(intent);
@@ -220,6 +224,7 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
                                                 @Override
                                                 public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                                                     if(response.isSuccessful()){
+                                                        approveCustomer(new SharedPreferenceManager().getPreferences(context, "customer_decode"));
                                                         Toast.makeText(context, "Assign berhasil", Toast.LENGTH_SHORT).show();
                                                         Intent intent = new Intent(context, HomeActivity.class);
                                                         context.startActivity(intent);
@@ -243,6 +248,7 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
                                                 @Override
                                                 public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                                                     if(response.isSuccessful()){
+                                                        approveCustomer(new SharedPreferenceManager().getPreferences(context, "customer_decode"));
                                                         Toast.makeText(context, "Assign berhasil", Toast.LENGTH_SHORT).show();
                                                         Intent intent = new Intent(context, HomeActivity.class);
                                                         context.startActivity(intent);
@@ -433,5 +439,21 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
         dialog_contactt_info_customer.getWindow().setLayout(deviceWidth - 20, WindowManager.LayoutParams.WRAP_CONTENT);
         dialog_contactt_info_customer.setCancelable(true);
         dialog_contactt_info_customer.show();
+    }
+
+    private void approveCustomer(String customer_decode){
+        Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().requestCustomerAction("Bearer "+new SharedPreferenceManager().getPreferences(context, "token"), customer_decode, 1, 1);
+        approveResponseCall.enqueue(new Callback<ApproveResponse>() {
+            @Override
+            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                if(response.isSuccessful()){
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApproveResponse> call, Throwable t) {
+
+            }
+        });
     }
 }
