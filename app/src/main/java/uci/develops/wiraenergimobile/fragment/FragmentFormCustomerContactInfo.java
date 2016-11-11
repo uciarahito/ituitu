@@ -45,7 +45,8 @@ public class FragmentFormCustomerContactInfo extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view;
-        view = inflater.inflate(R.layout.fragment_form_customer_contact_info, container, false);
+//        view = inflater.inflate(R.layout.fragment_form_customer_contact_info, container, false);
+        view = inflater.inflate(R.layout.fragment_contact_new, container, false);
 
         decode = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode");
         token = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "token");

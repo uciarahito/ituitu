@@ -51,7 +51,8 @@ public class FragmentFormCustomerShippingTo extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view;
-        view = inflater.inflate(R.layout.fragment_form_customer_shipping_to, container, false);
+//        view = inflater.inflate(R.layout.fragment_form_customer_shipping_to, container, false);
+        view = inflater.inflate(R.layout.fragment_shipping_new, container, false);
         editText_map_cordinate = (EditText) view.findViewById(R.id.editText_map_coordinate);
 
         decode = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode");
