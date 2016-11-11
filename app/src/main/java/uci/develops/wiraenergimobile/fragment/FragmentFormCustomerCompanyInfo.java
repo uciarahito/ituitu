@@ -20,7 +20,9 @@ import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.activity.LoginActivity;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
+import uci.develops.wiraenergimobile.model.CustomerGroupModel;
 import uci.develops.wiraenergimobile.model.CustomerModel;
+import uci.develops.wiraenergimobile.response.CustomerGroupResponse;
 import uci.develops.wiraenergimobile.response.CustomerResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
@@ -121,7 +123,8 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_tax_ppn.setAdapter(dataAdapter);
         spinner_active.setAdapter(dataAdapter);
-        spinner_group.setAdapter(dataAdapter);
+
+        loadDataSpinnerGroup();
 
         String[] province = getActivity().getResources().getStringArray(R.array.list_of_province);
         String[] city = getActivity().getResources().getStringArray(R.array.list_of_city);
@@ -131,6 +134,34 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
 
         ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, city);
         autoComplete_city.setAdapter(cityAdapter);
+    }
+
+    private void loadDataSpinnerGroup(){
+        Call<CustomerGroupResponse> customerGroupResponseCall = RestClient.getRestClient().getAllCustomerGroup("Bearer "+new SharedPreferenceManager().getPreferences(getContext(), "token"));
+        customerGroupResponseCall.enqueue(new Callback<CustomerGroupResponse>() {
+            @Override
+            public void onResponse(Call<CustomerGroupResponse> call, Response<CustomerGroupResponse> response) {
+                if(response.isSuccessful()){
+                    if(response.body().getData().size() > 0) {
+                        String check_List [] = new String[response.body().getData().size()];
+                        int index=0;
+                        for(CustomerGroupModel customerGroupModel : response.body().getData()){
+                            check_List[index] = customerGroupModel.getName();
+                            index++;
+                        }
+                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
+                                android.R.layout.simple_spinner_item, check_List);
+                        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinner_group.setAdapter(dataAdapter);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CustomerGroupResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     public boolean isNotEmpty() {
