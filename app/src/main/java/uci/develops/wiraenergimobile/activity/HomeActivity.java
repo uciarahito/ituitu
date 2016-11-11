@@ -107,25 +107,29 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new
-                SharedPreferenceManager().getPreferences(HomeActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(HomeActivity.this, "user_id")));
-        userResponseCall.enqueue(new Callback<UserResponse>() {
-            @Override
-            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                if (response.isSuccessful()) {
-                    String name = "";
-                    UserXModel userXModel = new UserXModel();
-                    userXModel =  response.body().getData();
-                    textView_name.setText(userXModel.getName() == null ? "" : userXModel.getName());
+        try {
+            Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new
+                    SharedPreferenceManager().getPreferences(HomeActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(HomeActivity.this, "user_id")));
+            userResponseCall.enqueue(new Callback<UserResponse>() {
+                @Override
+                public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                    if (response.isSuccessful()) {
+                        String name = "";
+                        UserXModel userXModel = new UserXModel();
+                        userXModel = response.body().getData();
+                        textView_name.setText(userXModel.getName() == null ? "" : userXModel.getName());
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<UserResponse> call, Throwable t) {
 
                 }
-            }
-
-            @Override
-            public void onFailure(Call<UserResponse> call, Throwable t) {
-
-            }
-        });
+            });
+        } catch (Exception e){
+            logout();
+        }
 
         mExpandableListData = ExpandableListDataSource.getData(this);
         List<String> rootMenu = new ArrayList<>();
