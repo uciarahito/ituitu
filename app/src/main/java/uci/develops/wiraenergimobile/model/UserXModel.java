@@ -35,6 +35,10 @@ public class UserXModel {
         this.deleted_at = deleted_at;
     }
 
+    public UserXModel() {
+
+    }
+
     public int getId() {
         return id;
     }

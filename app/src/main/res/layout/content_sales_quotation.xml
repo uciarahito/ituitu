@@ -7,7 +7,7 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activity.SalesQuotationActivity"
-    tools:showIn="@layout/activity_sales_quotation">
+    tools:showIn="@layout/app_bar_sales_quotation">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/master_customer" />
+                    android:src="@drawable/all_quotation" />
 
                 <TextView
                     android:id="@+id/textView_label_all_quotation"
@@ -66,8 +66,8 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/new_customer" />
+                    android:layout_height="131dp"
+                    android:src="@drawable/new_quotation" />
 
                 <TextView
                     android:id="@+id/textView_label_new_quotation"

@@ -20,12 +20,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.adapter.CustomExpandableListAdapter;
 import uci.develops.wiraenergimobile.fragment.FragmentCustomer;
@@ -33,10 +38,18 @@ import uci.develops.wiraenergimobile.fragment.FragmentPurchasing;
 import uci.develops.wiraenergimobile.fragment.FragmentSales;
 import uci.develops.wiraenergimobile.fragment.navigation.FragmentNavigationManager;
 import uci.develops.wiraenergimobile.fragment.navigation.NavigationManager;
+import uci.develops.wiraenergimobile.helper.Constant;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
+import uci.develops.wiraenergimobile.model.UserXModel;
+import uci.develops.wiraenergimobile.response.UserResponse;
+import uci.develops.wiraenergimobile.service.RestClient;
 
 public class HomeActivity extends AppCompatActivity {
+
+    //utk nav header
+    ImageView imageView_profile;
+    TextView textView_name;
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -78,15 +91,51 @@ public class HomeActivity extends AppCompatActivity {
         listHeaderView = inflater.inflate(R.layout.nav_header, null, false);
         mExpandableListView.addHeaderView(listHeaderView);
 
+        imageView_profile = (ImageView) listHeaderView.findViewById(R.id.imageView_profile);
+        textView_name = (TextView) listHeaderView.findViewById(R.id.textView_name);
+
+        imageView_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("admin")) {
+                    Intent intent = new Intent(HomeActivity.this, ListCustomerActivity.class);
+                    startActivity(intent);
+                } else if (new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("customer")) {
+                    Intent intent = new Intent(HomeActivity.this, FormCustomerActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new
+                SharedPreferenceManager().getPreferences(HomeActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(HomeActivity.this, "user_id")));
+        userResponseCall.enqueue(new Callback<UserResponse>() {
+            @Override
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                if (response.isSuccessful()) {
+                    String name = "";
+                    UserXModel userXModel = new UserXModel();
+                    userXModel =  response.body().getData();
+                    textView_name.setText(userXModel.getName() == null ? "" : userXModel.getName());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserResponse> call, Throwable t) {
+
+            }
+        });
+
         mExpandableListData = ExpandableListDataSource.getData(this);
         List<String> rootMenu = new ArrayList<>();
-        if(new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("admin")) {
+        if (new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("admin")) {
             rootMenu.add("Dashboard");
             rootMenu.add("Customer");
             rootMenu.add("Purchasing");
             rootMenu.add("Sales");
             rootMenu.add("Logout");
-        } else if(new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("customer")){
+        } else if (new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("customer")) {
             rootMenu.add("Dashboard");
             rootMenu.add("Customer");
             rootMenu.add("Sales");
@@ -120,14 +169,14 @@ public class HomeActivity extends AppCompatActivity {
         String roles = "";
         try {
             roles = new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles");
-        } catch (Exception e){
+        } catch (Exception e) {
 
         }
-        if(roles != "" && roles.equals("admin")) {
+        if (roles != "" && roles.equals("admin")) {
             adapter.addFragment(new FragmentCustomer(), "");
             adapter.addFragment(new FragmentPurchasing(), "");
             adapter.addFragment(new FragmentSales(), "");
-        } else if(roles != "" && roles.equals("customer")){
+        } else if (roles != "" && roles.equals("customer")) {
             adapter.addFragment(new FragmentCustomer(), "");
             adapter.addFragment(new FragmentSales(), "");
         } else {
@@ -232,11 +281,11 @@ public class HomeActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else if (selected_item.equals("Customer")) {
-                    if(new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("admin")) {
+                    if (new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("admin")) {
                         Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
                         startActivity(intent);
                     } else {
-                        Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+                        Intent intent = new Intent(HomeActivity.this, FormCustomerActivity.class);
                         startActivity(intent);
                     }
                 }
@@ -245,7 +294,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    private void logout(){
+    private void logout() {
         new SharedPreferenceManager().setPreferences(HomeActivity.this, "is_login", "");
         new SharedPreferenceManager().setPreferences(HomeActivity.this, "token", "");
         new SharedPreferenceManager().setPreferences(HomeActivity.this, "customer_decode", "");
@@ -266,17 +315,17 @@ public class HomeActivity extends AppCompatActivity {
         String roles = "";
         try {
             roles = new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles");
-        } catch (Exception e){
+        } catch (Exception e) {
 
         }
-        if(roles != "" && roles.equals("admin")) {
+        if (roles != "" && roles.equals("admin")) {
             tabLayout.getTabAt(0).setText(R.string.tab_customer);
             tabLayout.getTabAt(1).setText(R.string.tab_purchasing);
             tabLayout.getTabAt(2).setText(R.string.tab_sales);
-        } else if(roles != "" && roles.equals("customer")){
+        } else if (roles != "" && roles.equals("customer")) {
             tabLayout.getTabAt(0).setText(R.string.tab_customer);
             tabLayout.getTabAt(1).setText(R.string.tab_sales);
-        } else if(roles != "" && roles.equals("expedition")){
+        } else if (roles != "" && roles.equals("expedition")) {
             tabLayout.getTabAt(0).setText(R.string.tab_sales);
         }
     }
@@ -338,7 +387,7 @@ public class HomeActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         Intent intentLogin, intentRegister;
-                return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
 //        }
     }
 

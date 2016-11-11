@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +29,7 @@ public class FragmentFormCustomerContactInfo extends Fragment {
             email2 = "", email3 = "", jabatan1 = "", jabatan2 = "", jabatan3 = "";
 
     private String decode = "", token = "";
+    private LinearLayout linear_layout_contact_info_2_3;
 
     public FragmentFormCustomerContactInfo() {
         // Required empty public constructor
@@ -43,7 +45,8 @@ public class FragmentFormCustomerContactInfo extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view;
-        view = inflater.inflate(R.layout.fragment_form_customer_contact_info, container, false);
+//        view = inflater.inflate(R.layout.fragment_form_customer_contact_info, container, false);
+        view = inflater.inflate(R.layout.fragment_contact_new, container, false);
 
         decode = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode");
         token = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "token");
@@ -71,6 +74,12 @@ public class FragmentFormCustomerContactInfo extends Fragment {
         editText_jabatan1 = (EditText) view.findViewById(R.id.editText_jabatan1);
         editText_jabatan2 = (EditText) view.findViewById(R.id.editText_jabatan2);
         editText_jabatan3 = (EditText) view.findViewById(R.id.editText_jabatan3);
+
+        linear_layout_contact_info_2_3 = (LinearLayout) view.findViewById(R.id.linear_layout_contact_info_2_3);
+
+        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
+            linear_layout_contact_info_2_3.setVisibility(View.GONE);
+        }
     }
 
     public boolean isNotEmpty() {
@@ -145,7 +154,7 @@ public class FragmentFormCustomerContactInfo extends Fragment {
                         editText_jabatan3.setText(customerModel.getJabatan3() == null ? "" : customerModel.getJabatan3());
 
                         if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
-                            if (customerModel.getApprove() == 0) {
+                            if (customerModel.getApprove() == 0 | customerModel.getApprove() == 1) {
                                 readOnly();
                             }
                         } else if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")) {

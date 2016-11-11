@@ -44,9 +44,18 @@ public class FragmentCustomer extends Fragment implements View.OnClickListener{
         view = inflater.inflate(R.layout.fragment_customer, container, false);
 
         initializeComponent(view);
-
         // start listening for refresh local file list in
         loadData();
+
+//        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")) {
+//            initializeComponent(view);
+//            // start listening for refresh local file list in
+//            loadData();
+//        } else if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
+//            Intent intent = new Intent(getActivity().getApplicationContext(), FormCustomerActivity.class);
+//            startActivity(intent);
+//        }
+
         return view;
         //return inflater.inflate(R.layout.activity_ongoing_order, container, false);
     }

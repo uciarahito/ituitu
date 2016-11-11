@@ -1,18 +1,26 @@
 package uci.develops.wiraenergimobile.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.activity.GoodReceivedActivity;
+import uci.develops.wiraenergimobile.activity.ListCustomerActivity;
+import uci.develops.wiraenergimobile.activity.ListRequestCustomerActivity;
+import uci.develops.wiraenergimobile.activity.PurchaseOrderActivity;
 
 /**
  * Created by user on 11/3/2016.
  */
 
-public class FragmentPurchasing extends Fragment {
+public class FragmentPurchasing extends Fragment implements View.OnClickListener{
+    private LinearLayout linearLayout_menu_purchase_order, linearLayout_menu_good_receive;
+
     private static final String KEY_MOVIE_TITLE = "key_title";
 
     public FragmentPurchasing(){}
@@ -44,12 +52,19 @@ public class FragmentPurchasing extends Fragment {
         View view;
         view = inflater.inflate(R.layout.fragment_purchasing, container, false);
 
+        initializeComponent(view);
+
         // start listening for refresh local file list in
         return view;
         //return inflater.inflate(R.layout.activity_ongoing_order, container, false);
     }
 
-    private void initializeComponent(){
+    private void initializeComponent(View view){
+        linearLayout_menu_purchase_order = (LinearLayout) view.findViewById(R.id.linearLayout_menu_purchase_order);
+        linearLayout_menu_good_receive = (LinearLayout) view.findViewById(R.id.linearLayout_menu_good_receive);
+
+        linearLayout_menu_purchase_order.setOnClickListener(this);
+        linearLayout_menu_good_receive.setOnClickListener(this);
     }
 
     /**
@@ -59,5 +74,18 @@ public class FragmentPurchasing extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == linearLayout_menu_purchase_order) {
+            Intent intent = new Intent(getActivity().getApplicationContext(), PurchaseOrderActivity.class);
+            startActivity(intent);
+        }
+
+        if (v == linearLayout_menu_good_receive) {
+            Intent intent = new Intent(getActivity().getApplicationContext(), GoodReceivedActivity.class);
+            startActivity(intent);
+        }
     }
 }
