@@ -198,6 +198,7 @@
     <string name="contact_i3">Contact Info 3</string>
     <string name="please_wait">Please Wait, we will contact you soon after your data have been verified. Thank You...</string>
     <string name="succes">Success!</string>
+    <string name="send_date">Send Date:</string>
     <string name="checkBoxLogin">Remember Me |</string>
     <string name="lost_password">Lost your password?</string>
     <string name="not_member">Not a member?</string>

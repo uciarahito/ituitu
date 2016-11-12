@@ -48,6 +48,7 @@ import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerShippingTo;
 import uci.develops.wiraenergimobile.fragment.navigation.NavigationManager;
 import uci.develops.wiraenergimobile.helper.Constant;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
+import uci.develops.wiraenergimobile.model.CustomerGroupModel;
 import uci.develops.wiraenergimobile.model.CustomerModel;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
 import uci.develops.wiraenergimobile.model.UserXModel;
@@ -100,11 +101,11 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         initializeComponent();
         buttonValidation();
 
-        navDrawer();
-
-        if (savedInstanceState == null) {
-            selectFirstItemAsDefault();
-        }
+//        navDrawer();
+//
+//        if (savedInstanceState == null) {
+//            selectFirstItemAsDefault();
+//        }
     }
 
     private void initializeComponent() {
@@ -281,10 +282,12 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
             if (index_fragment <= 2) {
                 boolean is_not_empty = false;
                 CustomerModel customerModel = new CustomerModel();
+//                CustomerGroupModel customerGroupModel = new CustomerGroupModel();
                 if (index_fragment == 0) {
                     FragmentFormCustomerCompanyInfo fragmentFormCustomerCompanyInfo = (FragmentFormCustomerCompanyInfo) getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_company_info);
                     is_not_empty = fragmentFormCustomerCompanyInfo.isNotEmpty();
                     customerModel = fragmentFormCustomerCompanyInfo.getFormValue();
+//                    customerGroupModel = fragmentFormCustomerCompanyInfo.getGroupName();
                 }
                 if (index_fragment == 1) {
                     FragmentFormCustomerContactInfo fragmentFormCustomerContactInfo = (FragmentFormCustomerContactInfo) getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_contact_info);
@@ -886,7 +889,8 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         });
 
         Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new
-                SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "user_id")));
+                SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
+                Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "user_id")));
         userResponseCall.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
@@ -1051,12 +1055,12 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
+//        mDrawerToggle.syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
+//        mDrawerToggle.onConfigurationChanged(newConfig);
     }
 }

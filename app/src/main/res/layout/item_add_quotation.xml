@@ -50,35 +50,38 @@
                         android:text="liter"
                         android:textStyle="bold" />
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView_send_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Send date: 04/01/2019"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <ImageView
                 android:id="@+id/imageView_view"
                 android:layout_marginRight="5dp"
-                android:background="@color/divider"
+                android:layout_marginTop="5dp"
+                android:background="@color/Gainsboro"
                 android:padding="@dimen/keyline_xs"
                 android:src="@drawable/ic_view_24dp" />
 
             <ImageView
                 android:id="@+id/imageView_edit"
                 android:layout_marginRight="5dp"
-                android:background="@color/divider"
+                android:layout_marginTop="5dp"
+                android:background="@color/Gainsboro"
                 android:padding="@dimen/keyline_xs"
                 android:src="@drawable/ic_edit_24dp" />
 
             <ImageView
                 android:id="@+id/imageView_delete"
                 android:layout_marginRight="5dp"
-                android:background="@color/divider"
+                android:layout_marginTop="5dp"
+                android:background="@color/Gainsboro"
                 android:padding="@dimen/keyline_xs"
                 android:src="@drawable/ic_delete_24dp" />
-
-            <ImageView
-                android:id="@+id/imageView_add"
-                android:layout_marginRight="5dp"
-                android:background="@color/divider"
-                android:padding="@dimen/keyline_xs"
-                android:src="@drawable/ic_add_24dp" />
 
         </android.support.v7.widget.GridLayout>
 

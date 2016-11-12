@@ -34,6 +34,14 @@ public class LoginResponse {
         this.registration_key = registration_key;
     }
 
+    public String getRegistration_key() {
+        return registration_key;
+    }
+
+    public void setRegistration_key(String registration_key) {
+        this.registration_key = registration_key;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -112,13 +120,5 @@ public class LoginResponse {
 
     public void setApprove(String approve) {
         this.approve = approve;
-    }
-
-    public String getRegistration_key() {
-        return registration_key;
-    }
-
-    public void setRegistration_key(String registration_key) {
-        this.registration_key = registration_key;
     }
 }
