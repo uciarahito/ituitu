@@ -35,7 +35,7 @@ public interface RestInterface {
     @GET("customer")
     Call<RequestListCustomerResponse> getAllRequestCustomer(@Header("Authorization") String token);
 
-    @GET("customer/group")
+    @GET("customers/group")
     Call<CustomerGroupResponse> getAllCustomerGroup(@Header("Authorization") String token);
 
     @GET("roleuser")
