@@ -37,7 +37,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
     private AutoCompleteTextView autoComplete_city, autoComplete_province;
     private Spinner spinner_valuta, spinner_tax_ppn, spinner_active, spinner_group;
 
-    private LinearLayout linear_layout_id, linear_layout_term, linear_layout_valuta, linear_layout_tax_ppn, linear_layout_active, linear_layout_note;
+    private LinearLayout linear_layout_id;
 
     String id = "", name = "", address = "", city = "", province = "", zip_code = "", phone = "", mobile = "", fax = "", term = "",
             valuta = "", group = "", npwp = "", tax_ppn = "", active = "", email = "", website = "", note = "";
@@ -91,20 +91,10 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         editText_note = (EditText) view.findViewById(R.id.editText_note);
 
         linear_layout_id = (LinearLayout) view.findViewById(R.id.linear_layout_id);
-        linear_layout_term = (LinearLayout) view.findViewById(R.id.linear_layout_term);
-        linear_layout_valuta = (LinearLayout) view.findViewById(R.id.linear_layout_valuta);
-        linear_layout_tax_ppn = (LinearLayout) view.findViewById(R.id.linear_layout_tax_ppn);
-        linear_layout_active = (LinearLayout) view.findViewById(R.id.linear_layout_active);
-        linear_layout_note = (LinearLayout) view.findViewById(R.id.linear_layout_note);
 
         editText_id.setText("" + new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode"));
         if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")){
             linear_layout_id.setVisibility(View.GONE);
-            linear_layout_term.setVisibility(View.GONE);
-            linear_layout_valuta.setVisibility(View.GONE);
-            linear_layout_tax_ppn.setVisibility(View.GONE);
-            linear_layout_active.setVisibility(View.GONE);
-            linear_layout_note.setVisibility(View.GONE);
         }
 
         List<String> valutas = new ArrayList<String>();

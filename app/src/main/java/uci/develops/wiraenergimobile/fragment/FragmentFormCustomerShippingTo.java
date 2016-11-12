@@ -29,9 +29,8 @@ import uci.develops.wiraenergimobile.service.RestClient;
 public class FragmentFormCustomerShippingTo extends Fragment {
 
     private EditText editText_pic_name, editText_address_name, editText_address, editText_postcode, editText_eta,
-            editText_email, editText_phone, editText_mobile, editText_fax, editText_tax, editText_map_cordinate, editText_note;
+            editText_email, editText_phone, editText_mobile, editText_fax, editText_map_cordinate, editText_note;
     private AutoCompleteTextView autoComplete_city, autoComplete_province;
-    private LinearLayout linear_layout_eta, linear_layout_note, linear_layout_tax;
 
     String pic_name = "", address_name = "", address = "", city = "", province = "", postcode = "", eta = "", map = "", email = "", phone = "", mobile = "", fax = "", tax = "", note = "";
 
@@ -74,7 +73,7 @@ public class FragmentFormCustomerShippingTo extends Fragment {
     }
 
     private void initializeComponent(View view) {
-        editText_pic_name = (EditText) view.findViewById(R.id.editText_pic_name);
+        editText_pic_name = (EditText) view.findViewById(R.id.editText_name);
         editText_address_name = (EditText) view.findViewById(R.id.editText_address_name);
         editText_address = (EditText) view.findViewById(R.id.editText_address);
         autoComplete_city = (AutoCompleteTextView) view.findViewById(R.id.autoComplete_city);
@@ -86,11 +85,7 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         editText_phone = (EditText) view.findViewById(R.id.editText_phone);
         editText_mobile = (EditText) view.findViewById(R.id.editText_mobile);
         editText_fax = (EditText) view.findViewById(R.id.editText_fax);
-        editText_tax = (EditText) view.findViewById(R.id.editText_tax);
         editText_note = (EditText) view.findViewById(R.id.editText_note);
-        linear_layout_eta = (LinearLayout) view.findViewById(R.id.linear_layout_eta);
-        linear_layout_note = (LinearLayout) view.findViewById(R.id.linear_layout_note);
-        linear_layout_tax = (LinearLayout) view.findViewById(R.id.linear_layout_tax);
 
 
         String[] province = getActivity().getResources().getStringArray(R.array.list_of_province);
@@ -101,12 +96,6 @@ public class FragmentFormCustomerShippingTo extends Fragment {
 
         ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, city);
         autoComplete_city.setAdapter(cityAdapter);
-
-        if(new SharedPreferenceManager().getPreferences(getContext(), "roles").equals("customer")){
-            linear_layout_eta.setVisibility(View.GONE);
-            linear_layout_note.setVisibility(View.GONE);
-            linear_layout_tax.setVisibility(View.GONE);
-        }
     }
 
     public boolean isNotEmpty() {
@@ -176,7 +165,6 @@ public class FragmentFormCustomerShippingTo extends Fragment {
                         editText_mobile.setText(customerModel.getShipping_mobile() == null ? "" : customerModel.getShipping_mobile());
                         editText_email.setText(customerModel.getShipping_email() == null ? "" : customerModel.getShipping_email());
                         editText_fax.setText(customerModel.getShipping_fax() == null ? "" : customerModel.getShipping_fax());
-                        editText_tax.setText(customerModel.getShipping_tax() == null ? "" : customerModel.getShipping_tax());
                         editText_note.setText(customerModel.getShipping_note() == null ? "" : customerModel.getShipping_note());
 
                         if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
@@ -211,7 +199,6 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         editText_phone.setEnabled(false);
         editText_mobile.setEnabled(false);
         editText_fax.setEnabled(false);
-        editText_tax.setEnabled(false);
         editText_note.setEnabled(false);
 
     }
