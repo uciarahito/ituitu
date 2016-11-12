@@ -265,4 +265,49 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         return uniqueId;
     }
+
+    private void getMaxMin(){
+        List<Pelajaran> list = new ArrayList<>();
+        list.add(new Pelajaran("a", "x", 100));
+        list.add(new Pelajaran("a", "x", 80));
+        list.add(new Pelajaran("a", "x", 20));
+        list.add(new Pelajaran("a", "z", 80));
+        list.add(new Pelajaran("a", "z", 90));
+        list.add(new Pelajaran("a", "z", 100));
+    }
+
+    public class Pelajaran {
+        String nama;
+        String pelajaran;
+        int nilai;
+        public Pelajaran(String nama, String pelajaran, int nilai){
+            this.nama = nama;
+            this.pelajaran = pelajaran;
+            this.nilai = nilai;
+        }
+
+        public int getMax(String pelajaran, List<Pelajaran> pelajaranList){
+            int max = 0;
+            for(Pelajaran pelajaran1 : pelajaranList){
+                if(max <= pelajaran1.nilai){
+                    max = pelajaran1.nilai;
+                }
+            }
+            return max;
+        }
+        public int getMin(String pelajaran, List<Pelajaran> pelajaranList){
+            int min = pelajaranList.get(0).nilai;
+            for(Pelajaran pelajaran1 : pelajaranList){
+                if(min >= pelajaran1.nilai){
+                    min = pelajaran1.nilai;
+                }
+            }
+            return min;
+        }
+        public List<Pelajaran> getUniquePelajaran(List<Pelajaran> pelajaranList){
+            List<Pelajaran> pelajaranUn = new ArrayList<>();
+            pelajaranUn.add(pelajaranList.get(i))
+            return pelajaranUn;
+        }
+    }
 }
