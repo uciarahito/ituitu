@@ -42,32 +42,7 @@
             app:layout_gravity="center_vertical" />
 
         <EditText
-            android:id="@+id/shipping_address"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:background="@drawable/edit_text_background"
-            android:hint="@string/address_name"
-            android:imeOptions="actionNext"
-            android:inputType="textCapWords|textPostalAddress"
-            android:textColorHint="@color/colorGray"
-            app:layout_gravity="center_vertical" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="6">
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="12dp"
-            app:layout_gravity="center_vertical" />
-
-        <EditText
-            android:id="@+id/shipping_PIC"
+            android:id="@+id/editText_shipping_address"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="5"
@@ -92,7 +67,32 @@
             app:layout_gravity="center_vertical" />
 
         <EditText
-            android:id="@+id/shipping_address_phone"
+            android:id="@+id/editText_shipping_PIC"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:background="@drawable/edit_text_background"
+            android:hint="@string/pic_name"
+            android:imeOptions="actionNext"
+            android:inputType="textCapWords|textPostalAddress"
+            android:textColorHint="@color/colorGray"
+            app:layout_gravity="center_vertical" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="6">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="12dp"
+            app:layout_gravity="center_vertical" />
+
+        <EditText
+            android:id="@+id/editText_shipping_address_phone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="5"
@@ -117,7 +117,7 @@
             app:layout_gravity="center_vertical" />
 
         <EditText
-            android:id="@+id/shipping_address_mobile"
+            android:id="@+id/editText_shipping_address_mobile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="5"

@@ -7,6 +7,8 @@ public class CustomerGroupModel {
     private String decode;
     private String name;
 
+    public CustomerGroupModel(){}
+
     public CustomerGroupModel(String decode, String name) {
         this.decode = decode;
         this.name = name;

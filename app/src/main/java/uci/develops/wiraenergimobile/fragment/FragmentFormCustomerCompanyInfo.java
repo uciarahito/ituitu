@@ -202,7 +202,6 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         customerModel.setPhone(phone);
         customerModel.setMobile(mobile);
         customerModel.setFax(fax);
-        customerModel.setTerm(group);
         customerModel.setTerm(term);
         customerModel.setValuta(valuta);
         customerModel.setNpwp(npwp);
