@@ -307,5 +307,6 @@
     <string name="title_activity_invoice">InvoiceActivity</string>
     <string name="title_activity_payment">PaymentActivity</string>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_form_request_quotation">Form Request Quotation</string>
 
 </resources>

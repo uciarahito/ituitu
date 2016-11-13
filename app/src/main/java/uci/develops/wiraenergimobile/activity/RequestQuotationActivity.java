@@ -102,8 +102,6 @@ public class RequestQuotationActivity extends AppCompatActivity implements View.
         final Spinner spinner_shipping_address_name = (Spinner) mShipping.findViewById(R.id.spinner_shipping_address_name);
         final EditText editText_shipping_address = (EditText) mShipping.findViewById(R.id.editText_shipping_address);
         final EditText editText_shipping_PIC = (EditText) mShipping.findViewById(R.id.editText_shipping_PIC);
-        final EditText editText_shipping_address_phone = (EditText) mShipping.findViewById(R.id.editText_shipping_address_phone);
-        final EditText editText_shipping_address_mobile = (EditText) mShipping.findViewById(R.id.editText_shipping_address_mobile);
 
 //        spinner_shipping_address_name.();
 
