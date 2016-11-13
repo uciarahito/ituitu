@@ -67,6 +67,10 @@ public interface RestInterface {
 
     @FormUrlEncoded
     @PUT("customer/{decode}")
+    Call<ApproveResponse> updateDecodeCustomer(@Header("Authorization") String token, @Path("decode") String decode, @Field("decode") String customer_decode);
+
+    @FormUrlEncoded
+    @PUT("customer/{decode}")
     Call<ApproveResponse> updateContactInfo2(@Header("Authorization") String token, @Path("decode") String decode, @Field("name2") String name2, @Field("phone2") String phone2,
                                              @Field("mobile2") String mobile2, @Field("email2") String email2, @Field("jabatan2") String jabatan2);
 

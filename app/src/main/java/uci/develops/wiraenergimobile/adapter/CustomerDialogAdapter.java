@@ -100,177 +100,24 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
     private void alertDialogAssign(final CustomerModel customerModel){
         Toast.makeText(context, ""+customerModel.getDecode(), Toast.LENGTH_SHORT).show();
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-        alertDialogBuilder.setMessage("Are you sure want to add contact?");
+        alertDialogBuilder.setMessage("Are you sure want to update to : \n Customer name : "+customerModel.getFirst_name()+"\n Customer code : "+customerModel.getCode());
         alertDialogBuilder.setNegativeButton("Yes",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
-                        // doing something here
-                        Toast.makeText(context, "You choose yes sir!", Toast.LENGTH_SHORT).show();
-                        // cek if full
-                        Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer "+new SharedPreferenceManager().getPreferences(context, "token"),
-                                new SharedPreferenceManager().getPreferences(context, "customer_decode"));
-                        customerResponseCall.enqueue(new Callback<CustomerResponse>() {
+                        Call<ApproveResponse> updateCustomerCodeCall = RestClient.getRestClient().updateDecodeCustomer("Bearer "+new SharedPreferenceManager().getPreferences(context, "token"),
+                                new SharedPreferenceManager().getPreferences(context, "customer_decode"), customerModel.getDecode());
+                        updateCustomerCodeCall.enqueue(new Callback<ApproveResponse>() {
                             @Override
-                            public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
+                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                                 if(response.isSuccessful()){
-                                    CustomerModel customerModelX = response.body().getData().get(0);
-                                    if(customerModel.getName1() == null){
-                                        final Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().updateContactInfo1(
-                                                "Bearer "+new SharedPreferenceManager().getPreferences(context, "token"),
-                                                customerModel.getDecode(),
-                                                customerModelX.getFirst_name()+" "+customerModelX.getLast_name(),
-                                                customerModelX.getPhone(), customerModelX.getMobile(), customerModelX.getEmail(),
-                                                "Jabatan"
-                                        );
-                                        approveResponseCall.enqueue(new Callback<ApproveResponse>() {
-                                            @Override
-                                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                                                if(response.isSuccessful()){
-                                                    approveCustomer(new SharedPreferenceManager().getPreferences(context, "customer_decode"));
-                                                    Toast.makeText(context, "Assign berhasil", Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent(context, HomeActivity.class);
-                                                    context.startActivity(intent);
-                                                }
-                                            }
-
-                                            @Override
-                                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
-                                                Toast.makeText(context, "Assign gagal", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                                    } else if(customerModel.getName2() == null){
-                                        Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().updateContactInfo2(
-                                                "Bearer "+new SharedPreferenceManager().getPreferences(context, "token"),
-                                                customerModel.getDecode(),
-                                                customerModelX.getFirst_name()+" "+customerModelX.getLast_name(),
-                                                customerModelX.getPhone(), customerModelX.getMobile(), customerModelX.getEmail(),
-                                                "Jabatan"
-                                        );
-                                        approveResponseCall.enqueue(new Callback<ApproveResponse>() {
-                                            @Override
-                                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                                                if(response.isSuccessful()){
-                                                    approveCustomer(new SharedPreferenceManager().getPreferences(context, "customer_decode"));
-                                                    Toast.makeText(context, "Assign berhasil", Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent(context, HomeActivity.class);
-                                                    context.startActivity(intent);
-                                                }
-                                            }
-
-                                            @Override
-                                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
-                                                Toast.makeText(context, "Assign gagal", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                                    } else if(customerModel.getName3() == null){
-                                        Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().updateContactInfo3(
-                                                "Bearer "+new SharedPreferenceManager().getPreferences(context, "token"),
-                                                customerModel.getDecode(),
-                                                customerModelX.getFirst_name()+" "+customerModelX.getLast_name(),
-                                                customerModelX.getPhone(), customerModelX.getMobile(), customerModelX.getEmail(),
-                                                "Jabatan"
-                                        );
-                                        approveResponseCall.enqueue(new Callback<ApproveResponse>() {
-                                            @Override
-                                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                                                if(response.isSuccessful()){
-                                                    approveCustomer(new SharedPreferenceManager().getPreferences(context, "customer_decode"));
-                                                    Toast.makeText(context, "Assign berhasil", Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent(context, HomeActivity.class);
-                                                    context.startActivity(intent);
-                                                }
-                                            }
-
-                                            @Override
-                                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
-                                                Toast.makeText(context, "Assign gagal", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                                    } else {
-                                        if(customerModel.getName1().equals("")){
-                                            Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().updateContactInfo1(
-                                                    "Bearer "+new SharedPreferenceManager().getPreferences(context, "token"),
-                                                    customerModel.getDecode(),
-                                                    customerModelX.getFirst_name()+" "+customerModelX.getLast_name(),
-                                                    customerModelX.getPhone(), customerModelX.getMobile(), customerModelX.getEmail(),
-                                                    "Jabatan"
-                                            );
-                                            approveResponseCall.enqueue(new Callback<ApproveResponse>() {
-                                                @Override
-                                                public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                                                    if(response.isSuccessful()){
-                                                        approveCustomer(new SharedPreferenceManager().getPreferences(context, "customer_decode"));
-                                                        Toast.makeText(context, "Assign berhasil", Toast.LENGTH_SHORT).show();
-                                                        Intent intent = new Intent(context, HomeActivity.class);
-                                                        context.startActivity(intent);
-                                                    }
-                                                }
-
-                                                @Override
-                                                public void onFailure(Call<ApproveResponse> call, Throwable t) {
-                                                    Toast.makeText(context, "Assign gagal", Toast.LENGTH_SHORT).show();
-                                                }
-                                            });
-                                        } else if(customerModel.getName2().equals("")){
-                                            Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().updateContactInfo2(
-                                                    "Bearer "+new SharedPreferenceManager().getPreferences(context, "token"),
-                                                    customerModel.getDecode(),
-                                                    customerModelX.getFirst_name()+" "+customerModelX.getLast_name(),
-                                                    customerModelX.getPhone(), customerModelX.getMobile(), customerModelX.getEmail(),
-                                                    "Jabatan"
-                                            );
-                                            approveResponseCall.enqueue(new Callback<ApproveResponse>() {
-                                                @Override
-                                                public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                                                    if(response.isSuccessful()){
-                                                        approveCustomer(new SharedPreferenceManager().getPreferences(context, "customer_decode"));
-                                                        Toast.makeText(context, "Assign berhasil", Toast.LENGTH_SHORT).show();
-                                                        Intent intent = new Intent(context, HomeActivity.class);
-                                                        context.startActivity(intent);
-                                                    }
-                                                }
-
-                                                @Override
-                                                public void onFailure(Call<ApproveResponse> call, Throwable t) {
-                                                    Toast.makeText(context, "Assign gagal", Toast.LENGTH_SHORT).show();
-                                                }
-                                            });
-                                        } else if(customerModel.getName3().equals("")){
-                                            Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().updateContactInfo3(
-                                                    "Bearer "+new SharedPreferenceManager().getPreferences(context, "token"),
-                                                    customerModel.getDecode(),
-                                                    customerModelX.getFirst_name()+" "+customerModelX.getLast_name(),
-                                                    customerModelX.getPhone(), customerModelX.getMobile(), customerModelX.getEmail(),
-                                                    "Jabatan"
-                                            );
-                                            approveResponseCall.enqueue(new Callback<ApproveResponse>() {
-                                                @Override
-                                                public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                                                    if(response.isSuccessful()){
-                                                        approveCustomer(new SharedPreferenceManager().getPreferences(context, "customer_decode"));
-                                                        Toast.makeText(context, "Assign berhasil", Toast.LENGTH_SHORT).show();
-                                                        Intent intent = new Intent(context, HomeActivity.class);
-                                                        context.startActivity(intent);
-                                                    }
-                                                }
-
-                                                @Override
-                                                public void onFailure(Call<ApproveResponse> call, Throwable t) {
-                                                    Toast.makeText(context, "Assign gagal", Toast.LENGTH_SHORT).show();
-                                                }
-                                            });
-                                        } else {
-                                            // it means full
-                                            Toast.makeText(context, "No slot contact available", Toast.LENGTH_SHORT).show();
-                                            showCustomDialogContactInfoCustomer(customerModel);
-                                        }
-                                    }
+                                    Intent intent = new Intent(context, HomeActivity.class);
+                                    context.startActivity(intent);
                                 }
                             }
 
                             @Override
-                            public void onFailure(Call<CustomerResponse> call, Throwable t) {
+                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
 
                             }
                         });
@@ -280,26 +127,8 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
-                        Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().requestCustomerAction("Bearer "+new SharedPreferenceManager().getPreferences(context, "token"),
-                                new SharedPreferenceManager().getPreferences(context, "customer_decode"), 1, 1);
-                        approveResponseCall.enqueue(new Callback<ApproveResponse>() {
-                            @Override
-                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                                if(response.isSuccessful()){
-                                    Toast.makeText(context, "Approve request successfull", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(context, HomeActivity.class);
-                                    context.startActivity(intent);
-                                } else {
-                                    Toast.makeText(context, "Approve request not successfull", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<ApproveResponse> call, Throwable t
-                            ) {
-                                Toast.makeText(context, "Approve request not successfull", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                        Intent intent = new Intent(context, FormCustomerActivity.class);
+                        context.startActivity(intent);
                     }
                 });
 
