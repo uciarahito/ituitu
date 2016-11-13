@@ -92,7 +92,7 @@
             app:layout_gravity="center_vertical" />
 
         <EditText
-            android:id="@+id/editText_shipping_address_phone"
+            android:id="@+id/editText_shipping_phone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="5"
@@ -117,7 +117,7 @@
             app:layout_gravity="center_vertical" />
 
         <EditText
-            android:id="@+id/editText_shipping_address_mobile"
+            android:id="@+id/editText_shipping_mobile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="5"
