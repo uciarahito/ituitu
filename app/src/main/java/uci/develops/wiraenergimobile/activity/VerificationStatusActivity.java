@@ -8,8 +8,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 
 public class VerificationStatusActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -23,6 +25,8 @@ public class VerificationStatusActivity extends AppCompatActivity implements Vie
         setSupportActionBar(toolbar);
 
         initializeComponent();
+
+        Toast.makeText(VerificationStatusActivity.this, "Roles: "+new SharedPreferenceManager().getPreferences(VerificationStatusActivity.this, "roles"), Toast.LENGTH_SHORT).show();
     }
 
     private void initializeComponent(){

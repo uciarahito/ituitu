@@ -44,19 +44,6 @@ public class CustomerModel {
     private int approve;
     private String detail;
     private String deleted_at;
-    private String shipping_pic;
-    private String shipping_address;
-    private String shipping_city;
-    private String shipping_province;
-    private String shipping_postcode;
-    private String shipping_eta;
-    private String shipping_map;
-    private String shipping_phone;
-    private String shipping_mobile;
-    private String shipping_email;
-    private String shipping_fax;
-    private String shipping_tax;
-    private String shipping_note;
     private String name1;
     private String phone1;
     private String mobile1;
@@ -75,7 +62,7 @@ public class CustomerModel {
 
     public CustomerModel(){}
 
-    public CustomerModel(int id, int user_id, String decode, String code, String first_name, String last_name, String address, String city, String province, String postcode, String ktp, String gender, String birthplace, String birthday, String mobile, String phone, String fax, String email, String website, String type, String group, String detail_payment, String term, String npwp, String tax, String valuta, String note, String admin_note, String map, String detail_shipping, String remember_token, String created_at, String updated_at, String register_at, String created_by, String updated_by, int active, int approve, String detail, String deleted_at, String shipping_pic, String shipping_address, String shipping_city, String shipping_province, String shipping_postcode, String shipping_eta, String shipping_map, String shipping_phone, String shipping_mobile, String shipping_email, String shipping_fax, String shipping_tax, String shipping_note, String name1, String phone1, String mobile1, String email1, String jabatan1, String name2, String phone2, String mobile2, String email2, String jabatan2, String name3, String phone3, String mobile3, String email3, String jabatan3) {
+    public CustomerModel(int id, int user_id, String decode, String code, String first_name, String last_name, String address, String city, String province, String postcode, String ktp, String gender, String birthplace, String birthday, String mobile, String phone, String fax, String email, String website, String type, String group, String detail_payment, String term, String npwp, String tax, String valuta, String note, String admin_note, String map, String detail_shipping, String remember_token, String created_at, String updated_at, String register_at, String created_by, String updated_by, int active, int approve, String detail, String deleted_at, String name1, String phone1, String mobile1, String email1, String jabatan1, String name2, String phone2, String mobile2, String email2, String jabatan2, String name3, String phone3, String mobile3, String email3, String jabatan3) {
         this.id = id;
         this.user_id = user_id;
         this.decode = decode;
@@ -116,19 +103,6 @@ public class CustomerModel {
         this.approve = approve;
         this.detail = detail;
         this.deleted_at = deleted_at;
-        this.shipping_pic = shipping_pic;
-        this.shipping_address = shipping_address;
-        this.shipping_city = shipping_city;
-        this.shipping_province = shipping_province;
-        this.shipping_postcode = shipping_postcode;
-        this.shipping_eta = shipping_eta;
-        this.shipping_map = shipping_map;
-        this.shipping_phone = shipping_phone;
-        this.shipping_mobile = shipping_mobile;
-        this.shipping_email = shipping_email;
-        this.shipping_fax = shipping_fax;
-        this.shipping_tax = shipping_tax;
-        this.shipping_note = shipping_note;
         this.name1 = name1;
         this.phone1 = phone1;
         this.mobile1 = mobile1;
@@ -464,110 +438,6 @@ public class CustomerModel {
 
     public void setDeleted_at(String deleted_at) {
         this.deleted_at = deleted_at;
-    }
-
-    public String getShipping_pic() {
-        return shipping_pic;
-    }
-
-    public void setShipping_pic(String shipping_pic) {
-        this.shipping_pic = shipping_pic;
-    }
-
-    public String getShipping_address() {
-        return shipping_address;
-    }
-
-    public void setShipping_address(String shipping_address) {
-        this.shipping_address = shipping_address;
-    }
-
-    public String getShipping_city() {
-        return shipping_city;
-    }
-
-    public void setShipping_city(String shipping_city) {
-        this.shipping_city = shipping_city;
-    }
-
-    public String getShipping_province() {
-        return shipping_province;
-    }
-
-    public void setShipping_province(String shipping_province) {
-        this.shipping_province = shipping_province;
-    }
-
-    public String getShipping_postcode() {
-        return shipping_postcode;
-    }
-
-    public void setShipping_postcode(String shipping_postcode) {
-        this.shipping_postcode = shipping_postcode;
-    }
-
-    public String getShipping_eta() {
-        return shipping_eta;
-    }
-
-    public void setShipping_eta(String shipping_eta) {
-        this.shipping_eta = shipping_eta;
-    }
-
-    public String getShipping_map() {
-        return shipping_map;
-    }
-
-    public void setShipping_map(String shipping_map) {
-        this.shipping_map = shipping_map;
-    }
-
-    public String getShipping_phone() {
-        return shipping_phone;
-    }
-
-    public void setShipping_phone(String shipping_phone) {
-        this.shipping_phone = shipping_phone;
-    }
-
-    public String getShipping_mobile() {
-        return shipping_mobile;
-    }
-
-    public void setShipping_mobile(String shipping_mobile) {
-        this.shipping_mobile = shipping_mobile;
-    }
-
-    public String getShipping_email() {
-        return shipping_email;
-    }
-
-    public void setShipping_email(String shipping_email) {
-        this.shipping_email = shipping_email;
-    }
-
-    public String getShipping_fax() {
-        return shipping_fax;
-    }
-
-    public void setShipping_fax(String shipping_fax) {
-        this.shipping_fax = shipping_fax;
-    }
-
-    public String getShipping_tax() {
-        return shipping_tax;
-    }
-
-    public void setShipping_tax(String shipping_tax) {
-        this.shipping_tax = shipping_tax;
-    }
-
-    public String getShipping_note() {
-        return shipping_note;
-    }
-
-    public void setShipping_note(String shipping_note) {
-        this.shipping_note = shipping_note;
     }
 
     public String getName1() {

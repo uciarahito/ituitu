@@ -272,6 +272,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linear_layout_term"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="6">
@@ -296,6 +297,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linear_layout_valuta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="6">
@@ -341,6 +343,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linear_layout_tax_ppn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="6">
@@ -362,6 +365,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linear_layout_active"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="6">
@@ -431,6 +435,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linear_layout_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="6">

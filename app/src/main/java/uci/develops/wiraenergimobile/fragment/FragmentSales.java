@@ -10,11 +10,13 @@ import android.widget.LinearLayout;
 
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.activity.DeliveryOrderActivity;
+import uci.develops.wiraenergimobile.activity.FormRequestQuotationActivity;
 import uci.develops.wiraenergimobile.activity.InvoiceActivity;
 import uci.develops.wiraenergimobile.activity.PaymentActivity;
 import uci.develops.wiraenergimobile.activity.RequestQuotationActivity;
 import uci.develops.wiraenergimobile.activity.SalesOrderActivity;
 import uci.develops.wiraenergimobile.activity.SalesQuotationActivity;
+import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 
 /**
  * Created by user on 11/3/2016.
@@ -87,8 +89,13 @@ public class FragmentSales extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if (v == linearLayout_menu_sales_quotation) {
-            Intent intent = new Intent(getActivity().getApplicationContext(), SalesQuotationActivity.class);
-            startActivity(intent);
+            if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")){
+                Intent intent = new Intent(getActivity().getApplicationContext(), SalesQuotationActivity.class);
+                startActivity(intent);
+            } else if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")){
+                Intent intent = new Intent(getActivity().getApplicationContext(), FormRequestQuotationActivity.class);
+                startActivity(intent);
+            }
         }
 
         if (v == linearLayout_menu_sales_order) {

@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.support.v4.app.Fragment;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
     private AutoCompleteTextView autoComplete_city, autoComplete_province;
     private Spinner spinner_valuta, spinner_tax_ppn, spinner_active, spinner_group;
 
-    private LinearLayout linear_layout_id;
+    private LinearLayout linear_layout_id, linear_layout_term, linear_layout_valuta, linear_layout_tax_ppn, linear_layout_active, linear_layout_note;
 
     String id = "", name = "", address = "", city = "", province = "", zip_code = "", phone = "", mobile = "", fax = "", term = "",
             valuta = "", group = "", npwp = "", tax_ppn = "", active = "", email = "", website = "", note = "";
@@ -91,10 +92,31 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         editText_note = (EditText) view.findViewById(R.id.editText_note);
 
         linear_layout_id = (LinearLayout) view.findViewById(R.id.linear_layout_id);
+        linear_layout_term = (LinearLayout) view.findViewById(R.id.linear_layout_term);
+        linear_layout_valuta = (LinearLayout) view.findViewById(R.id.linear_layout_valuta);
+        linear_layout_tax_ppn = (LinearLayout) view.findViewById(R.id.linear_layout_tax_ppn);
+        linear_layout_active = (LinearLayout) view.findViewById(R.id.linear_layout_active);
+        linear_layout_note = (LinearLayout) view.findViewById(R.id.linear_layout_note);
 
         editText_id.setText("" + new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode"));
-        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")){
+
+        CustomerModel customerModel = new CustomerModel();
+        editText_first_name.setText(customerModel.getFirst_name() == null ? "" : customerModel.getFirst_name());
+        editText_email.setText(customerModel.getEmail() == null ? "" : customerModel.getEmail());
+
+        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("")) {
             linear_layout_id.setVisibility(View.GONE);
+            linear_layout_term.setVisibility(View.GONE);
+            linear_layout_valuta.setVisibility(View.GONE);
+            linear_layout_tax_ppn.setVisibility(View.GONE);
+            linear_layout_active.setVisibility(View.GONE);
+            linear_layout_note.setVisibility(View.GONE);
+            if (Integer.parseInt(new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "approve")) == 0) {
+                readOnly();
+            }
+        } else if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer") |
+                new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")) {
+            linear_layout_id.setVisibility(View.VISIBLE);
         }
 
         List<String> valutas = new ArrayList<String>();
@@ -149,7 +171,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
 
             @Override
             public void onFailure(Call<CustomerGroupResponse> call, Throwable t) {
-
+                Toast.makeText(getActivity().getApplicationContext(), "Data Group Kosong", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -227,11 +249,12 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
                         editText_note.setText(customerModel.getNote() == null ? "" : customerModel.getNote());
                         editText_zip_code.setText(customerModel.getPostcode() == null ? "" : customerModel.getPostcode());
 
-                        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
-                            if (customerModel.getApprove() == 0 | customerModel.getApprove() == 1) {
+                        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")) {
+                            if (customerModel.getApprove() == 1){
                                 readOnly();
                             }
-                        } else if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")) {
+                        }
+                        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
                             if (customerModel.getApprove() == 1) {
                                 readOnly();
                             }

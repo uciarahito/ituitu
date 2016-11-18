@@ -166,7 +166,7 @@
                 android:layout_weight="5"
                 android:hint="@string/positions"
                 android:imeOptions="actionNext"
-                android:inputType="phone"
+                android:inputType="textCapWords|textPersonName"
                 android:textColorHint="@color/colorGray"
                 app:layout_gravity="center_vertical" />
         </LinearLayout>
@@ -319,7 +319,7 @@
                     android:layout_weight="5"
                     android:hint="@string/positions"
                     android:imeOptions="actionNext"
-                    android:inputType="phone"
+                    android:inputType="textCapWords|textPersonName"
                     android:textColorHint="@color/colorGray"
                     app:layout_gravity="center_vertical" />
             </LinearLayout>
@@ -466,7 +466,7 @@
                     android:layout_weight="5"
                     android:hint="@string/positions"
                     android:imeOptions="actionNext"
-                    android:inputType="phone"
+                    android:inputType="textCapWords|textPersonName"
                     android:textColorHint="@color/colorGray"
                     app:layout_gravity="center_vertical" />
             </LinearLayout>

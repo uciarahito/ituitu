@@ -203,7 +203,7 @@ public class NotificationListener extends Service {
         if(tipe.equals("register_customer")) {
             Intent intent;
             if(new SharedPreferenceManager().getPreferences(this, "is_login").equals("true")){
-                intent = new Intent(this, DashboardActivity.class);
+                intent = new Intent(this, ListRequestCustomerActivity.class);
             } else {
                 intent = new Intent(this, LoginActivity.class);
             }

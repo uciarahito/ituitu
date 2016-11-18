@@ -42,10 +42,10 @@
 
             <Spinner
                 android:id="@+id/spinner_item"
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="30dp"
                 app:layout_gravity="center_vertical"
-                tools:listitem="@android:layout/simple_spinner_dropdown_item" />
+                android:spinnerMode="dialog" />
 
         </LinearLayout>
 
@@ -90,10 +90,10 @@
                 android:textStyle="bold" />
             <Spinner
                 android:id="@+id/spinner_unit"
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="30dp"
                 app:layout_gravity="center_vertical"
-                tools:listitem="@android:layout/simple_spinner_dropdown_item" />
+                android:spinnerMode="dialog" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -117,6 +117,31 @@
                 android:inputType="number"
                 app:layout_gravity="center_vertical" />
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:weightSum="6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="12dp"
+            android:src="@drawable/ic_border_color_black_24dp"
+            app:layout_gravity="center" />
+
+        <EditText
+            android:id="@+id/editText_notes"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="@drawable/rounded_rectangle_gray"
+            android:hint="@string/note"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:textColorHint="@color/colorGray" />
     </LinearLayout>
 
     <LinearLayout

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -32,6 +31,8 @@
         android:layout_margin="10dp">
 
         <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/linear_layout_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="6">
@@ -41,18 +42,14 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_person_24dp"/>
+                android:src="@drawable/ic_address_24dp"/>
 
-            <EditText
-                android:id="@+id/editText_name"
+            <TextView
+                android:id="@+id/textView_address_id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
-                android:hint="@string/pic_name"
-                android:textColorHint="@color/colorGray"
-                android:imeOptions="actionNext"
-                android:inputType="textCapWords|textPersonName"
-                app:layout_gravity="center_vertical"/>
+                android:text="ID" />
         </LinearLayout>
 
         <LinearLayout
@@ -112,116 +109,18 @@
                 android:padding="12dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="45dp"
-                android:src="@drawable/ic_city"/>
-
-            <AutoCompleteTextView
-                android:id="@+id/autoComplete_city"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="5"
-                android:ems="10"
-                android:hint="@string/city"
-                android:textColorHint="@color/colorGray">
-
-                <requestFocus />
-            </AutoCompleteTextView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="6">
-
-            <ImageView
-                android:padding="12dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="45dp"
-                android:src="@drawable/ic_province" />
-
-            <AutoCompleteTextView
-                android:id="@+id/autoComplete_province"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="5"
-                android:ems="10"
-                android:hint="@string/province"
-                android:textColorHint="@color/colorGray">
-
-                <requestFocus />
-            </AutoCompleteTextView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="6">
-
-            <ImageView
-                android:padding="12dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="45dp"
-                android:src="@drawable/ic_zip_code" />
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_person_24dp"/>
 
             <EditText
-                android:id="@+id/editText_postcode"
+                android:id="@+id/editText_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
-                android:hint="@string/zip_code"
-                android:textColorHint="@color/colorGray"
-                android:imeOptions="actionNext"
-                android:inputType="textCapWords|textPostalAddress"
-                app:layout_gravity="center_vertical"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="6">
-
-            <ImageView
-                android:padding="12dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_eta_24dp"/>
-
-            <EditText
-                android:id="@+id/editText_eta"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:hint="@string/eta"
+                android:hint="@string/pic_name"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
                 android:inputType="textCapWords|textPersonName"
-                app:layout_gravity="center_vertical"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="6">
-
-            <ImageView
-                android:padding="12dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_email_24dp" />
-
-            <EditText
-                android:id="@+id/editText_email"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:hint="@string/email"
-                android:textColorHint="@color/colorGray"
-                android:imeOptions="actionNext"
-                android:inputType="textCapWords|textEmailAddress"
                 app:layout_gravity="center_vertical"/>
         </LinearLayout>
 
@@ -283,30 +182,6 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_fax_24dp" />
-
-            <EditText
-                android:id="@+id/editText_fax"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:hint="@string/fax"
-                android:textColorHint="@color/colorGray"
-                android:imeOptions="actionNext"
-                android:inputType="phone"
-                app:layout_gravity="center_vertical"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="6">
-
-            <ImageView
-                android:padding="12dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
                 android:src="@drawable/ic_maps_24dp" />
 
             <EditText
@@ -318,51 +193,6 @@
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
                 android:inputType="phone"
-                app:layout_gravity="center_vertical"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="6">
-
-            <ImageView
-                android:padding="12dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_group_24dp" />
-
-            <Spinner
-                android:id="@+id/spinner_group"
-                android:layout_width="0dp"
-                android:layout_weight="5"
-                android:layout_height="40dp"
-                app:layout_gravity="center_vertical"
-                android:spinnerMode="dialog" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="6">
-
-            <ImageView
-                android:padding="12dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_note_24dp" />
-
-            <EditText
-                android:id="@+id/editText_note"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:hint="@string/notes"
-                android:textColorHint="@color/colorGray"
-                android:imeOptions="actionNext"
-                android:inputType="textCapWords|textWebEmailAddress"
                 app:layout_gravity="center_vertical"/>
         </LinearLayout>
     </LinearLayout>

@@ -103,6 +103,9 @@ public class HomeActivity extends AppCompatActivity {
                 } else if (new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("customer")) {
                     Intent intent = new Intent(HomeActivity.this, FormCustomerActivity.class);
                     startActivity(intent);
+                } else if (new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("")) {
+                    Intent intent = new Intent(HomeActivity.this, FormCustomerActivity.class);
+                    startActivity(intent);
                 }
             }
         });
@@ -144,6 +147,8 @@ public class HomeActivity extends AppCompatActivity {
             rootMenu.add("Customer");
             rootMenu.add("Sales");
             rootMenu.add("Logout");
+        } else if (new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("")) {
+            rootMenu.add("Logout");
         } else {
             rootMenu.add("Dashboard");
             rootMenu.add("Logout");
@@ -183,7 +188,7 @@ public class HomeActivity extends AppCompatActivity {
         } else if (roles != "" && roles.equals("customer")) {
             adapter.addFragment(new FragmentCustomer(), "");
             adapter.addFragment(new FragmentSales(), "");
-        } else {
+        } else if (roles != "" && roles.equals("expedition")){
             adapter.addFragment(new FragmentSales(), "");
         }
 
@@ -279,7 +284,11 @@ public class HomeActivity extends AppCompatActivity {
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 String selected_item = getResources().getStringArray(R.array.general)[groupPosition];
                 if (selected_item.equals("Logout")) {
-                    logout();
+                    if (new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("admin") |
+                            new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("customer") |
+                            new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("")) {
+                        logout();
+                    }
                 } else if (selected_item.equals("Dashboard")) {
                     Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
                     startActivity(intent);

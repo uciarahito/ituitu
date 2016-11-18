@@ -62,26 +62,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     startActivity(intent);
                     finish();
                 }
-                if (new SharedPreferenceManager().getPreferences(LoginActivity.this, "roles").equals("customer")) {
-                    Toast.makeText(LoginActivity.this, ""+Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")), Toast.LENGTH_SHORT).show();
+                if (new SharedPreferenceManager().getPreferences(LoginActivity.this, "roles").equals("")) {
                     if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 2) {
                         Intent intent = new Intent(LoginActivity.this, VerificationStatusActivity.class);
                         startActivity(intent);
                         finish();
-                    } else if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 1) {
-                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                    if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 0) {
+                    } else if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 0) {
                         Intent intent = new Intent(LoginActivity.this, WaitingApprovalActivity.class);
                         startActivity(intent);
                         finish();
                     }
-
-//                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-//                    startActivity(intent);
-//                    finish();
+                }
+                if (new SharedPreferenceManager().getPreferences(LoginActivity.this, "roles").equals("customer")) {
+                    Toast.makeText(LoginActivity.this, "" + Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")), Toast.LENGTH_SHORT).show();
+                    if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 1) {
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
                 if (new SharedPreferenceManager().getPreferences(LoginActivity.this, "roles").equals("expedition")) {
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
@@ -162,48 +160,59 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             //Toast.makeText(LoginActivity.this, activated + "  " + token, Toast.LENGTH_SHORT).show();
                             new SharedPreferenceManager().setPreferences(LoginActivity.this, "token", token);
                             new SharedPreferenceManager().setPreferences(LoginActivity.this, "approve", approve);
-                            new SharedPreferenceManager().setPreferences(LoginActivity.this, "user_id", ""+user_id);
+                            new SharedPreferenceManager().setPreferences(LoginActivity.this, "user_id", "" + user_id);
                             new SharedPreferenceManager().setPreferences(LoginActivity.this, "customer_decode", customer_decode);
                             new SharedPreferenceManager().setPreferences(LoginActivity.this, "is_login", "true");
+
                             if (activated == true) {
-                                for (Integer ind : roles) {
+                                if (response.body().getRoles().size() > 0) {
+                                    for (Integer ind : roles) {
+                                        if (ind != null) {
+                                            if (ind == 2) {
+                                                new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "admin");
+                                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
 
-//                                    Intent intent = new Intent(LoginActivity.this, DashboardCustomerActivity.class);
-//                                    startActivity(intent);
-//                                    finish();
+                                            if (ind == 3) {
+                                                new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "customer");
+                                                if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 1) {
+                                                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                            }
 
-                                    if (ind == 2) {
-                                        new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "admin");
-                                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-
-                                    if (ind == 3) {
-                                        new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "customer");
-                                        if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 2) {
-                                            Intent intent = new Intent(LoginActivity.this, VerificationStatusActivity.class);
-                                            startActivity(intent);
-                                            finish();
-                                        } else if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 1) {
-                                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                            startActivity(intent);
-                                            finish();
+                                            if (ind == 4) {
+                                                new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "expedition");
+                                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        } else {
+                                            new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "");
+                                            if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 2) {
+                                                Intent intent = new Intent(LoginActivity.this, VerificationStatusActivity.class);
+                                                startActivity(intent);
+                                            } else if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 0) {
+                                                Intent intent = new Intent(LoginActivity.this, WaitingApprovalActivity.class);
+                                                startActivity(intent);
+                                            }
                                         }
-                                        if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 0) {
-                                            Intent intent = new Intent(LoginActivity.this, WaitingApprovalActivity.class);
-                                            startActivity(intent);
-                                            finish();
-                                        }
-                                    }
-
-                                    if (ind == 4) {
-                                        new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "expedition");
-                                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                        startActivity(intent);
-                                        finish();
                                     }
                                 }
+                                else {
+                                    new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "");
+                                    if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 2) {
+                                        Intent intent = new Intent(LoginActivity.this, VerificationStatusActivity.class);
+                                        startActivity(intent);
+                                    } else if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 0) {
+                                        Intent intent = new Intent(LoginActivity.this, WaitingApprovalActivity.class);
+                                        startActivity(intent);
+                                    }
+                                }
+
                             } else {
                                 Toast.makeText(LoginActivity.this, "Lakukan Verifikasi Email!", Toast.LENGTH_SHORT).show();
                             }

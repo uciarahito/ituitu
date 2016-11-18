@@ -77,8 +77,15 @@ public class FragmentFormCustomerContactInfo extends Fragment {
 
         linear_layout_contact_info_2_3 = (LinearLayout) view.findViewById(R.id.linear_layout_contact_info_2_3);
 
-        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
+        CustomerModel customerModel = new CustomerModel();
+        editText_name1.setText(customerModel.getFirst_name() == null ? "" : customerModel.getFirst_name()+" "+customerModel.getLast_name());
+        editText_email1.setText(customerModel.getEmail() == null ? "" : customerModel.getEmail());
+
+        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("")) {
             linear_layout_contact_info_2_3.setVisibility(View.GONE);
+            if (Integer.parseInt(new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "approve")) == 0) {
+                readOnly();
+            }
         }
     }
 
@@ -140,10 +147,10 @@ public class FragmentFormCustomerContactInfo extends Fragment {
                         editText_name1.setText(customerModel.getFirst_name() == null ? "" : customerModel.getFirst_name()+" "+customerModel.getLast_name());
                         editText_name2.setText(customerModel.getName2() == null ? "" : customerModel.getName2());
                         editText_name3.setText(customerModel.getName3() == null ? "" : customerModel.getName3());
-                        editText_phone1.setText(customerModel.getPhone() == null ? "" : customerModel.getPhone());
+                        editText_phone1.setText(customerModel.getPhone1() == null ? "" : customerModel.getPhone1());
                         editText_phone2.setText(customerModel.getPhone2() == null ? "" : customerModel.getPhone2());
                         editText_phone3.setText(customerModel.getPhone3() == null ? "" : customerModel.getPhone3());
-                        editText_mobile1.setText(customerModel.getMobile() == null ? "" : customerModel.getMobile());
+                        editText_mobile1.setText(customerModel.getMobile1() == null ? "" : customerModel.getMobile1());
                         editText_mobile2.setText(customerModel.getMobile2() == null ? "" : customerModel.getMobile2());
                         editText_mobile3.setText(customerModel.getMobile3() == null ? "" : customerModel.getMobile3());
                         editText_email1.setText(customerModel.getEmail() == null ? "" : customerModel.getEmail());
@@ -153,15 +160,32 @@ public class FragmentFormCustomerContactInfo extends Fragment {
                         editText_jabatan2.setText(customerModel.getJabatan2() == null ? "" : customerModel.getJabatan2());
                         editText_jabatan3.setText(customerModel.getJabatan3() == null ? "" : customerModel.getJabatan3());
 
-                        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
-                            if (customerModel.getApprove() == 0 | customerModel.getApprove() == 1) {
+                        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")) {
+                            if (customerModel.getApprove() == 1){
                                 readOnly();
                             }
-                        } else if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")) {
+                        }
+
+                        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
                             if (customerModel.getApprove() == 1) {
                                 readOnly();
                             }
                         }
+
+
+//                        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("")) {
+//                            if (customerModel.getApprove() == 0) {
+//                                readOnly();
+//                            }
+//                        } else if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
+//                            if (customerModel.getApprove() == 1) {
+//                                readOnly();
+//                            }
+//                        } else if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")) {
+//                            if (customerModel.getApprove() == 1) {
+//                                readOnly();
+//                            }
+//                        }
                     }
                 }
             }

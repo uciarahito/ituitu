@@ -89,7 +89,7 @@ public class ListRequestCustomerActivity extends AppCompatActivity {
                         modelRequestList = response.body().getData();
                         List<CustomerModel> dataCustomer = new ArrayList<CustomerModel>();
                         for(CustomerModel customerModel : modelRequestList){
-                            if(customerModel.getActive() == 0 && (customerModel.getApprove() == 0 || customerModel.getApprove() == 2 || customerModel.getApprove() == 3)){
+                            if(customerModel.getActive() == 0 && (customerModel.getApprove() == 0 || customerModel.getApprove() == 2 )){
                                 dataCustomer.add(customerModel);
                             }
                         }
