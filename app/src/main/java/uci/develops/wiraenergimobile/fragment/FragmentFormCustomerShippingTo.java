@@ -1,28 +1,37 @@
 package uci.develops.wiraenergimobile.fragment;
 
-import android.content.Intent;
+import android.app.Dialog;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
-import uci.develops.wiraenergimobile.activity.MapsCoordinateActivity;
+import uci.develops.wiraenergimobile.adapter.ShippingAddressAdapter;
+import uci.develops.wiraenergimobile.helper.DividerItemDecoration;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerAddressModel;
-import uci.develops.wiraenergimobile.model.CustomerModel;
-import uci.develops.wiraenergimobile.response.CustomerAddressResponse;
-import uci.develops.wiraenergimobile.response.CustomerResponse;
+import uci.develops.wiraenergimobile.response.ApproveResponse;
+import uci.develops.wiraenergimobile.response.ListCustomerAddressResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 /**
@@ -34,9 +43,15 @@ public class FragmentFormCustomerShippingTo extends Fragment {
     private EditText editText_pic_name, editText_address_name, editText_address,
             editText_phone, editText_mobile, editText_map_cordinate;
     private TextView textView_address_id;
+    private Button button_add_shipping, button_save, button_cancel;
+    private RecyclerView recyclerView;
     String pic_name = "", address_name = "", address = "", map = "", phone = "", mobile = "";
 
     private String decode = "", token = "";
+
+    int counter_list = 0;
+
+    private ShippingAddressAdapter shippingAddressAdapter;
 
     public FragmentFormCustomerShippingTo() {
         // Required empty public constructor
@@ -61,36 +76,84 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         initializeComponent(view);
         loadData();
 
-        editText_map_cordinate.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                Intent intent = new Intent(getContext(), MapsCoordinateActivity.class);
-                startActivity(intent);
-                return false;
-            }
-        });
-
         return view;
     }
 
     private void initializeComponent(View view) {
-        editText_pic_name = (EditText) view.findViewById(R.id.editText_name);
-        editText_address_name = (EditText) view.findViewById(R.id.editText_address_name);
-        editText_address = (EditText) view.findViewById(R.id.editText_address);
-        editText_map_cordinate = (EditText) view.findViewById(R.id.editText_map_coordinate);
-        editText_phone = (EditText) view.findViewById(R.id.editText_phone);
-        editText_mobile = (EditText) view.findViewById(R.id.editText_mobile);
+        button_add_shipping = (Button)view.findViewById(R.id.button_add_shipping);
+        recyclerView = (RecyclerView)view.findViewById(R.id.recycle_view);
+        List<CustomerAddressModel> customerAddressModelList = new ArrayList<>();
+        shippingAddressAdapter = new ShippingAddressAdapter(getContext(), customerAddressModelList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL));
+        recyclerView.setAdapter(shippingAddressAdapter);
 
-        textView_address_id = (TextView) view.findViewById(R.id.textView_address_id);
+        /*textView_address_id = (TextView) view.findViewById(R.id.textView_address_id);
 
         CustomerAddressModel customerAddressModel = new CustomerAddressModel();
-        textView_address_id.setText(""+customerAddressModel.getId());
+        textView_address_id.setText(""+customerAddressModel.getId());*/
 
         if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("")) {
             if (Integer.parseInt(new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "approve")) == 0) {
                 readOnly();
             }
         }
+
+        button_add_shipping.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialogAddShipping();
+            }
+        });
+    }
+
+    Dialog dialog_add_shipping;
+    private void showDialogAddShipping() {
+        dialog_add_shipping = new Dialog(getContext());
+        dialog_add_shipping.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog_add_shipping.setContentView(R.layout.custom_dialog_form_shipping_address);
+
+        editText_pic_name = (EditText) dialog_add_shipping.findViewById(R.id.editText_name);
+        editText_address_name = (EditText) dialog_add_shipping.findViewById(R.id.editText_address_name);
+        editText_address = (EditText) dialog_add_shipping.findViewById(R.id.editText_address);
+        editText_map_cordinate = (EditText) dialog_add_shipping.findViewById(R.id.editText_map_coordinate);
+        editText_phone = (EditText) dialog_add_shipping.findViewById(R.id.editText_phone);
+        editText_mobile = (EditText) dialog_add_shipping.findViewById(R.id.editText_mobile);
+        button_save = (Button)dialog_add_shipping.findViewById(R.id.button_save);
+        button_cancel = (Button)dialog_add_shipping.findViewById(R.id.button_cancel);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager windowmanager = (WindowManager) getContext().getSystemService(getContext().WINDOW_SERVICE);
+        windowmanager.getDefaultDisplay().getMetrics(displayMetrics);
+        int deviceWidth = displayMetrics.widthPixels;
+        int deviceHeight = displayMetrics.heightPixels;
+        dialog_add_shipping.getWindow().setLayout(deviceWidth - 20, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog_add_shipping.setCancelable(true);
+        dialog_add_shipping.show();
+
+        button_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isNotEmpty()){
+                    Map<String, String> params = new HashMap<String, String>();
+                    //params.put("id", );
+                    //params.put("customer_decode", customerModel.getDecode());
+                    /*Call<ApproveResponse> addShippingAddressCall = RestClient.getRestClient().sendDataShippingInfoNew("Bearer "+token, decode,
+                            )*/
+                } else {
+                    Toast.makeText(getContext(), "All field are required", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        button_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog_add_shipping.dismiss();
+            }
+        });
     }
 
     public boolean isNotEmpty() {
@@ -109,52 +172,27 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         return result;
     }
 
-    public CustomerAddressModel getFormValue() {
-        CustomerAddressModel customerAddressModel = new CustomerAddressModel();
-        customerAddressModel.setName(address_name);
-        customerAddressModel.setAddress(address);
-        customerAddressModel.setPic(pic_name);
-        customerAddressModel.setPhone(phone);
-        customerAddressModel.setMobile(mobile);
-        customerAddressModel.setMap(map);
-
-        return customerAddressModel;
-    }
-
     private void loadData() {
-        Call<CustomerAddressResponse> customerAddressResponseCall = RestClient.getRestClient().getCustomerAddress("Bearer " + token, decode);
-        customerAddressResponseCall.enqueue(new Callback<CustomerAddressResponse>() {
+        Call<ListCustomerAddressResponse> listCustomerAddressResponseCall = RestClient.getRestClient().getCustomerAddress("Bearer "+token,
+                decode);
+        listCustomerAddressResponseCall.enqueue(new Callback<ListCustomerAddressResponse>() {
             @Override
-            public void onResponse(Call<CustomerAddressResponse> call, Response<CustomerAddressResponse> response) {
-                if (response.isSuccessful()) {
-                    if (response.body().getData().size() > 0) {
-                        CustomerAddressModel customerAddressModel = new CustomerAddressModel();
-                        customerAddressModel = response.body().getData().get(0);
-                        editText_pic_name.setText(customerAddressModel.getPic() == null ? "" : customerAddressModel.getPic());
-                        editText_address_name.setText(customerAddressModel.getName() == null ? "" : customerAddressModel.getName());
-                        editText_address.setText(customerAddressModel.getAddress() == null ? "" : customerAddressModel.getAddress());
-                        editText_phone.setText(customerAddressModel.getPhone() == null ? "" : customerAddressModel.getPhone());
-                        editText_mobile.setText(customerAddressModel.getMobile() == null ? "" : customerAddressModel.getMobile());
-                        editText_map_cordinate.setText(customerAddressModel.getMap() == null ? "" : customerAddressModel.getMap());
-
-                        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")) {
-                            if (Integer.parseInt(new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "approve")) == 1) {
-                                readOnly();
-                            }
-                        }
-
-                        else if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
-                            if (Integer.parseInt(new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "approve")) == 1) {
-                                readOnly();
-                            }
-                        }
+            public void onResponse(Call<ListCustomerAddressResponse> call, Response<ListCustomerAddressResponse> response) {
+                if(response.isSuccessful()){
+                    if(response.body().getData().size() > 0){
+                        shippingAddressAdapter.updateList(response.body().getData());
+                        counter_list = response.body().getData().size();
+                    } else {
+                        Toast.makeText(getContext(), "Shipping address empty", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    Toast.makeText(getContext(), "Response not successfull", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<CustomerAddressResponse> call, Throwable t) {
-
+            public void onFailure(Call<ListCustomerAddressResponse> call, Throwable t) {
+                Toast.makeText(getContext(), "Failure service", Toast.LENGTH_SHORT).show();
             }
         });
     }

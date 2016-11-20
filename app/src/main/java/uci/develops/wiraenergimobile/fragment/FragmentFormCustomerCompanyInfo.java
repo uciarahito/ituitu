@@ -19,6 +19,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.activity.FormCustomerActivity;
 import uci.develops.wiraenergimobile.activity.LoginActivity;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerGroupModel;
@@ -248,6 +249,19 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
                         editText_website.setText(customerModel.getWebsite() == null ? "" : customerModel.getWebsite());
                         editText_note.setText(customerModel.getNote() == null ? "" : customerModel.getNote());
                         editText_zip_code.setText(customerModel.getPostcode() == null ? "" : customerModel.getPostcode());
+
+                        FormCustomerActivity.customerModel_temp.setFirst_name(customerModel.getFirst_name() == null ? "" : customerModel.getFirst_name());
+                        FormCustomerActivity.customerModel_temp.setAddress(customerModel.getAddress() == null ? "" : customerModel.getAddress());
+                        FormCustomerActivity.customerModel_temp.setCity(customerModel.getCity() == null ? "" : customerModel.getCity());
+                        FormCustomerActivity.customerModel_temp.setPhone(customerModel.getPhone() == null ? "" : customerModel.getPhone());
+                        FormCustomerActivity.customerModel_temp.setMobile(customerModel.getMobile() == null ? "" : customerModel.getMobile());
+                        FormCustomerActivity.customerModel_temp.setFax(customerModel.getFax() == null ? "" : customerModel.getFax());
+                        FormCustomerActivity.customerModel_temp.setTerm(customerModel.getTerm() == null ? "" : customerModel.getTerm());
+                        FormCustomerActivity.customerModel_temp.setNpwp(customerModel.getNpwp() == null ? "" : customerModel.getNpwp());
+                        FormCustomerActivity.customerModel_temp.setEmail(customerModel.getEmail() == null ? "" : customerModel.getEmail());
+                        FormCustomerActivity.customerModel_temp.setWebsite(customerModel.getWebsite() == null ? "" : customerModel.getWebsite());
+                        FormCustomerActivity.customerModel_temp.setNote(customerModel.getNote() == null ? "" : customerModel.getNote());
+                        FormCustomerActivity.customerModel_temp.setPostcode(customerModel.getPostcode() == null ? "" : customerModel.getPostcode());
 
                         if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")) {
                             if (customerModel.getApprove() == 1){

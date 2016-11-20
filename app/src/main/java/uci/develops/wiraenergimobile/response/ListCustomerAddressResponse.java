@@ -10,13 +10,13 @@ import uci.develops.wiraenergimobile.model.RoleModel;
 /**
  * Created by ArahitoPC .
  */
-public class CustomerAddressResponse {
+public class ListCustomerAddressResponse {
     private String status;
     private String code;
     private String info;
     private List<CustomerAddressModel> data;
 
-    public CustomerAddressResponse(String status, String code, String info, List<CustomerAddressModel> data) {
+    public ListCustomerAddressResponse(String status, String code, String info, List<CustomerAddressModel> data) {
         this.status = status;
         this.code = code;
         this.info = info;

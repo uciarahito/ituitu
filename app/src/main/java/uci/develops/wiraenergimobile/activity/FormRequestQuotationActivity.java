@@ -32,7 +32,7 @@ import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerAddressModel;
 import uci.develops.wiraenergimobile.model.CustomerModel;
-import uci.develops.wiraenergimobile.response.CustomerAddressResponse;
+import uci.develops.wiraenergimobile.response.ListCustomerAddressResponse;
 import uci.develops.wiraenergimobile.response.CustomerResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -148,12 +148,12 @@ public class FormRequestQuotationActivity extends AppCompatActivity implements V
         dialog_button_save = (Button) dialogShippingAddress.findViewById(R.id.button_save);
         dialog_button_cancel = (Button) dialogShippingAddress.findViewById(R.id.button_cancel);
 
-        Call<CustomerAddressResponse> customerAddressResponseCall = RestClient.getRestClient().getCustomerAddress("Bearer "
+        Call<ListCustomerAddressResponse> customerAddressResponseCall = RestClient.getRestClient().getCustomerAddress("Bearer "
                 + new SharedPreferenceManager().getPreferences(FormRequestQuotationActivity.this, "token"),
                 new SharedPreferenceManager().getPreferences(FormRequestQuotationActivity.this, "customer_decode"));
-        customerAddressResponseCall.enqueue(new Callback<CustomerAddressResponse>() {
+        customerAddressResponseCall.enqueue(new Callback<ListCustomerAddressResponse>() {
             @Override
-            public void onResponse(Call<CustomerAddressResponse> call, Response<CustomerAddressResponse> response) {
+            public void onResponse(Call<ListCustomerAddressResponse> call, Response<ListCustomerAddressResponse> response) {
                 if(response.isSuccessful()){
                     if(response.body().getData().size() > 0) {
                         String check_List [] = new String[response.body().getData().size()];
@@ -171,12 +171,12 @@ public class FormRequestQuotationActivity extends AppCompatActivity implements V
                         spinner_shipping_address_name.setOnItemSelectedListener(new OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
-                                Call<CustomerAddressResponse> customerAddressByIdResponseCall = RestClient.getRestClient().getCustomerAddress("Bearer "
+                                Call<ListCustomerAddressResponse> customerAddressByIdResponseCall = RestClient.getRestClient().getCustomerAddress("Bearer "
                                                 + new SharedPreferenceManager().getPreferences(FormRequestQuotationActivity.this, "token"),
                                         new SharedPreferenceManager().getPreferences(FormRequestQuotationActivity.this, "customer_decode"));
-                                customerAddressByIdResponseCall.enqueue(new Callback<CustomerAddressResponse>() {
+                                customerAddressByIdResponseCall.enqueue(new Callback<ListCustomerAddressResponse>() {
                                     @Override
-                                    public void onResponse(Call<CustomerAddressResponse> call, Response<CustomerAddressResponse> response) {
+                                    public void onResponse(Call<ListCustomerAddressResponse> call, Response<ListCustomerAddressResponse> response) {
                                         if (response.isSuccessful()) {
 //                                            if (response.body().getData().size() > 0) {
                                             CustomerAddressModel customerAddressModel = (CustomerAddressModel) spinner_shipping_address_name.getItemAtPosition(position);
@@ -191,7 +191,7 @@ public class FormRequestQuotationActivity extends AppCompatActivity implements V
                                     }
 
                                     @Override
-                                    public void onFailure(Call<CustomerAddressResponse> call, Throwable t) {
+                                    public void onFailure(Call<ListCustomerAddressResponse> call, Throwable t) {
 
                                     }
                                 });
@@ -207,7 +207,7 @@ public class FormRequestQuotationActivity extends AppCompatActivity implements V
             }
 
             @Override
-            public void onFailure(Call<CustomerAddressResponse> call, Throwable t) {
+            public void onFailure(Call<ListCustomerAddressResponse> call, Throwable t) {
 
             }
         });
