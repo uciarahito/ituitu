@@ -138,10 +138,30 @@ public class FragmentFormCustomerShippingTo extends Fragment {
             public void onClick(View v) {
                 if(isNotEmpty()){
                     Map<String, String> params = new HashMap<String, String>();
-                    //params.put("id", );
-                    //params.put("customer_decode", customerModel.getDecode());
-                    /*Call<ApproveResponse> addShippingAddressCall = RestClient.getRestClient().sendDataShippingInfoNew("Bearer "+token, decode,
-                            )*/
+                    params.put("id", "1");
+                    params.put("name", editText_address_name.getText().toString());
+                    params.put("address", editText_address.getText().toString());
+                    params.put("pic", editText_pic_name.getText().toString());
+                    params.put("phone", editText_phone.getText().toString());
+                    params.put("mobile", editText_mobile.getText().toString());
+                    params.put("map", editText_map_cordinate.getText().toString());
+                    Call<ApproveResponse> addShippingAddressCall = RestClient.getRestClient().sendDataShippingInfoNew("Bearer "+token, decode,
+                            params);
+                    addShippingAddressCall.enqueue(new Callback<ApproveResponse>() {
+                        @Override
+                        public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                            if(response.isSuccessful()){
+                                Toast.makeText(getContext(), "Sukses", Toast.LENGTH_SHORT).show();
+                                loadData();
+                                dialog_add_shipping.dismiss();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ApproveResponse> call, Throwable t) {
+
+                        }
+                    });
                 } else {
                     Toast.makeText(getContext(), "All field are required", Toast.LENGTH_SHORT).show();
                 }

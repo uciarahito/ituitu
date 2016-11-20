@@ -12,6 +12,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.activity.FormCustomerActivity;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerModel;
 import uci.develops.wiraenergimobile.response.CustomerResponse;
@@ -131,6 +132,22 @@ public class FragmentFormCustomerContactInfo extends Fragment {
         customerModel.setJabatan1(jabatan1);
         customerModel.setJabatan2(jabatan2);
         customerModel.setJabatan3(jabatan3);
+
+        FormCustomerActivity.customerModel_temp.setName1(name1);
+        FormCustomerActivity.customerModel_temp.setName2(name2);
+        FormCustomerActivity.customerModel_temp.setName3(name3);
+        FormCustomerActivity.customerModel_temp.setPhone1(phone1);
+        FormCustomerActivity.customerModel_temp.setPhone2(phone2);
+        FormCustomerActivity.customerModel_temp.setPhone3(phone3);
+        FormCustomerActivity.customerModel_temp.setMobile1(mobile1);
+        FormCustomerActivity.customerModel_temp.setMobile2(mobile2);
+        FormCustomerActivity.customerModel_temp.setMobile3(mobile3);
+        FormCustomerActivity.customerModel_temp.setEmail1(email1);
+        FormCustomerActivity.customerModel_temp.setEmail2(email2);
+        FormCustomerActivity.customerModel_temp.setEmail3(email3);
+        FormCustomerActivity.customerModel_temp.setJabatan1(jabatan1);
+        FormCustomerActivity.customerModel_temp.setJabatan2(jabatan2);
+        FormCustomerActivity.customerModel_temp.setJabatan3(jabatan3);
 
         return customerModel;
     }

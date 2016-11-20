@@ -69,15 +69,14 @@ public interface RestInterface {
 
     @FormUrlEncoded
     @PUT("customers/address/{decode}")
-    Call<ApproveResponse> sendDataShippingInfoNew(@Header("Authorization") String token, @Path("decode") String decode, @Field("id") int id, @Field("name") String name, @Field("address") String address,
-                                               @Field("pic") String pic, @Field("phone") String phone, @Field("mobile") String mobile, @Field("map") String map);
+    Call<ApproveResponse> sendDataShippingInfoNew(@Header("Authorization") String token, @Path("decode") String decode, @FieldMap Map<String, String> param);
 
     @GET("customers/address/{decode}")
     Call<ListCustomerAddressResponse> getCustomerAddress(@Header("Authorization") String token, @Path("decode") String decode);
 
-    @FormUrlEncoded
-    @POST("customers/address/{decode}")
-    Call<ListCustomerAddressResponse> getCustomerAddressById(@Header("Authorization") String token, @Path("decode") String decode, @Field("id") int id);
+    @GET("customers/address/{decode}")
+    Call<ListCustomerAddressResponse> getCustomerAddressById(@Header("Authorization") String token, @Path("decode") String decode, @FieldMap Map<String, String> param
+    );
 
     @FormUrlEncoded
     @PUT("customer/{decode}")

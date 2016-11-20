@@ -36,6 +36,7 @@ import uci.develops.wiraenergimobile.response.ListCustomerAddressResponse;
 import uci.develops.wiraenergimobile.response.CustomerResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Toast;
 
 public class FormRequestQuotationActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -135,7 +136,10 @@ public class FormRequestQuotationActivity extends AppCompatActivity implements V
     private Button dialog_button_cancel, dialog_button_save;
     private EditText editText_shipping_address, editText_shipping_PIC, editText_shipping_phone, editText_shipping_mobile;
 
+    List<CustomerAddressModel> customerAddressModels;
+    String check_List [];
     private void showDialogShippingAddress() {
+        customerAddressModels = new ArrayList<>();
         final Dialog dialogShippingAddress = new Dialog(FormRequestQuotationActivity.this);
         dialogShippingAddress.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogShippingAddress.setContentView(R.layout.shipping_address);
@@ -156,12 +160,14 @@ public class FormRequestQuotationActivity extends AppCompatActivity implements V
             public void onResponse(Call<ListCustomerAddressResponse> call, Response<ListCustomerAddressResponse> response) {
                 if(response.isSuccessful()){
                     if(response.body().getData().size() > 0) {
-                        String check_List [] = new String[response.body().getData().size()];
+                        check_List = new String[response.body().getData().size()];
                         int index=0;
                         for(CustomerAddressModel customerAddressModel : response.body().getData()){
                             check_List[index] = customerAddressModel.getName();
                             index++;
                         }
+
+                        customerAddressModels = response.body().getData();
 
                         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(FormRequestQuotationActivity.this,
                                 android.R.layout.simple_spinner_item, check_List);
@@ -170,31 +176,12 @@ public class FormRequestQuotationActivity extends AppCompatActivity implements V
 
                         spinner_shipping_address_name.setOnItemSelectedListener(new OnItemSelectedListener() {
                             @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
-                                Call<ListCustomerAddressResponse> customerAddressByIdResponseCall = RestClient.getRestClient().getCustomerAddress("Bearer "
-                                                + new SharedPreferenceManager().getPreferences(FormRequestQuotationActivity.this, "token"),
-                                        new SharedPreferenceManager().getPreferences(FormRequestQuotationActivity.this, "customer_decode"));
-                                customerAddressByIdResponseCall.enqueue(new Callback<ListCustomerAddressResponse>() {
-                                    @Override
-                                    public void onResponse(Call<ListCustomerAddressResponse> call, Response<ListCustomerAddressResponse> response) {
-                                        if (response.isSuccessful()) {
-//                                            if (response.body().getData().size() > 0) {
-                                            CustomerAddressModel customerAddressModel = (CustomerAddressModel) spinner_shipping_address_name.getItemAtPosition(position);
-//                                            CustomerAddressModel customerAddressModel = (CustomerAddressModel) spinner_shipping_address_name.getSelectedItem().toString();
-
-                                                editText_shipping_address.setText(customerAddressModel.getAddress() == null ? "" : customerAddressModel.getAddress());
-                                                editText_shipping_PIC.setText(customerAddressModel.getPic() == null ? "" : customerAddressModel.getPic());
-                                                editText_shipping_phone.setText(customerAddressModel.getPhone() == null ? "" : customerAddressModel.getPhone());
-                                                editText_shipping_mobile.setText(customerAddressModel.getMobile() == null ? "" : customerAddressModel.getMobile());
-//                                            }
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<ListCustomerAddressResponse> call, Throwable t) {
-
-                                    }
-                                });
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                Toast.makeText(FormRequestQuotationActivity.this, ""+check_List[position], Toast.LENGTH_SHORT).show();
+                                editText_shipping_address.setText(""+customerAddressModels.get(position).getAddress());
+                                editText_shipping_PIC.setText(""+customerAddressModels.get(position).getPic());
+                                editText_shipping_phone.setText(""+customerAddressModels.get(position).getPhone());
+                                editText_shipping_mobile.setText(""+customerAddressModels.get(position).getMobile());
                             }
 
                             @Override

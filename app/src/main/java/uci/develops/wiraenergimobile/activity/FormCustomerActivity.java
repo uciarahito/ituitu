@@ -401,24 +401,21 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         if (v == linearLayout_button_next) {
             if (index_fragment <= 2) {
                 boolean is_not_empty = false;
-                //CustomerModel customerModel = new CustomerModel();
+                CustomerModel customerModel = new CustomerModel();
                 CustomerAddressModel customerAddressModel = new CustomerAddressModel();
                 if (index_fragment == 0) {
                     FragmentFormCustomerCompanyInfo fragmentFormCustomerCompanyInfo = (FragmentFormCustomerCompanyInfo) getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_company_info);
                     is_not_empty = fragmentFormCustomerCompanyInfo.isNotEmpty();
-                    FormCustomerActivity.customerModel_temp = fragmentFormCustomerCompanyInfo.getFormValue();
+                    customerModel = fragmentFormCustomerCompanyInfo.getFormValue();
                 }
                 if (index_fragment == 1) {
                     FragmentFormCustomerContactInfo fragmentFormCustomerContactInfo = (FragmentFormCustomerContactInfo) getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_contact_info);
                     is_not_empty = fragmentFormCustomerContactInfo.isNotEmpty();
-                    FormCustomerActivity.customerModel_temp = fragmentFormCustomerContactInfo.getFormValue();
+                    customerModel = fragmentFormCustomerContactInfo.getFormValue();
                 }
-                /*
                 if (index_fragment == 2) {
-                    FragmentFormCustomerShippingTo fragmentFormCustomerShippingTo = (FragmentFormCustomerShippingTo) getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_shipping_to);
-                    is_not_empty = fragmentFormCustomerShippingTo.isNotEmpty();
-                    customerAddressModel = fragmentFormCustomerShippingTo.getFormValue();
-                }*/
+                    is_not_empty = true;
+                }
 
                 if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("admin")) {
                     is_not_empty = true;
@@ -499,6 +496,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                                 if (response.isSuccessful()) {
                                     Toast.makeText(FormCustomerActivity.this, "Successfully insert company info", Toast.LENGTH_SHORT).show();
                                 } else {
+                                    hideProgressLoading();
                                     Toast.makeText(FormCustomerActivity.this, "" + response.errorBody().toString(), Toast.LENGTH_SHORT).show();
                                     Toast.makeText(FormCustomerActivity.this, "Not successfull", Toast.LENGTH_SHORT).show();
                                 }
@@ -506,7 +504,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
 
                             @Override
                             public void onFailure(Call<ApproveResponse> call, Throwable t) {
-
+                                hideProgressLoading();
                             }
                         });
                             /**
@@ -520,81 +518,8 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                                 @Override
                                 public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                                     if (response.isSuccessful()) {
+                                        hideProgressLoading();
                                         Toast.makeText(FormCustomerActivity.this, "Successfully insert contact info", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(FormCustomerActivity.this, "" + response.errorBody().toString(), Toast.LENGTH_SHORT).show();
-                                        Toast.makeText(FormCustomerActivity.this, "Not successfull", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<ApproveResponse> call, Throwable t) {
-
-                                }
-                            });
-                            Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().sendDataShippingInfoNew("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
-                                    new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), 4, customerAddressModel.getName(),
-                                    customerAddressModel.getAddress(), customerAddressModel.getPic(), customerAddressModel.getPhone(),
-                                    customerAddressModel.getMobile(), customerAddressModel.getMap());
-                            approveResponseCall.enqueue(new Callback<ApproveResponse>() {
-                                @Override
-                                public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                                    if (response.isSuccessful()) {
-                                        Call<ApproveResponse> updateApproveActiveResponseCall = RestClient.getRestClient().customerUpdateApproveActive("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
-                                                new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), 0, 0);
-                                        updateApproveActiveResponseCall.enqueue(new Callback<ApproveResponse>() {
-                                            @Override
-                                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-//                                                final CustomerAddressModel customerAddressModel = new CustomerAddressModel();
-                                                Toast.makeText(FormCustomerActivity.this, "Successfully inserted", Toast.LENGTH_SHORT).show();
-                                                //baru ditambah
-                                                Call<ApproveResponse> submitCustomerResponse = RestClient.getRestClient().customerSubmit("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
-                                                        new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), 0);
-                                                submitCustomerResponse.enqueue(new Callback<ApproveResponse>() {
-                                                    @Override
-                                                    public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                                                        if (response.isSuccessful()) {
-                                                            Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
-                                                                    Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "user_id")));
-                                                            userResponseCall.enqueue(new Callback<UserResponse>() {
-                                                                @Override
-                                                                public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                                                                    if (response.isSuccessful()) {
-                                                                        hideProgressLoading();
-                                                                        String reg_key_admin = "";
-                                                                        reg_key_admin = response.body().getData().getRegistration_key();
-                                                                        Constant.sendNotification(reg_key_admin, "Ada customer baru mendaftar", "register_customer");
-                                                                        Toast.makeText(FormCustomerActivity.this, "Waiting for approval", Toast.LENGTH_SHORT).show();
-                                                                        Intent intent = new Intent(FormCustomerActivity.this, WaitingApprovalActivity.class);
-                                                                        startActivity(intent);
-                                                                        finish();
-                                                                    } else {
-                                                                        hideProgressLoading();
-                                                                    }
-                                                                }
-
-                                                                @Override
-                                                                public void onFailure(Call<UserResponse> call, Throwable t) {
-                                                                    hideProgressLoading();
-                                                                }
-                                                            });
-                                                        } else {
-                                                            hideProgressLoading();
-                                                        }
-                                                    }
-
-                                                    @Override
-                                                    public void onFailure(Call<ApproveResponse> call, Throwable t) {
-                                                        hideProgressLoading();
-                                                    }
-                                                });
-                                            }
-
-                                            @Override
-                                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
-                                                hideProgressLoading();
-                                            }
-                                        });
                                     } else {
                                         hideProgressLoading();
                                         Toast.makeText(FormCustomerActivity.this, "" + response.errorBody().toString(), Toast.LENGTH_SHORT).show();

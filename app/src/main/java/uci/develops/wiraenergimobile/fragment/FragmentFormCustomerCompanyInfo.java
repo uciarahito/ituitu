@@ -224,6 +224,23 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         customerModel.setNote(note);
         customerModel.setPostcode(zip_code);
 
+        FormCustomerActivity.customerModel_temp.setFirst_name(name);
+        FormCustomerActivity.customerModel_temp.setLast_name(name);
+        FormCustomerActivity.customerModel_temp.setAddress(address);
+        FormCustomerActivity.customerModel_temp.setCity(city);
+        FormCustomerActivity.customerModel_temp.setProvince(province);
+        FormCustomerActivity.customerModel_temp.setPhone(phone);
+        FormCustomerActivity.customerModel_temp.setMobile(mobile);
+        FormCustomerActivity.customerModel_temp.setFax(fax);
+        FormCustomerActivity.customerModel_temp.setTerm(term);
+        FormCustomerActivity.customerModel_temp.setValuta(valuta);
+        FormCustomerActivity.customerModel_temp.setNpwp(npwp);
+        FormCustomerActivity.customerModel_temp.setTax(tax_ppn);
+        FormCustomerActivity.customerModel_temp.setEmail(email);
+        FormCustomerActivity.customerModel_temp.setWebsite(website);
+        FormCustomerActivity.customerModel_temp.setNote(note);
+        FormCustomerActivity.customerModel_temp.setPostcode(zip_code);
+
         return customerModel;
     }
 
