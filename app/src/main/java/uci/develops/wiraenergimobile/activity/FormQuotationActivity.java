@@ -61,7 +61,6 @@ public class FormQuotationActivity extends AppCompatActivity implements View.OnC
         setSupportActionBar(toolbar);
 
         initializeComponent();
-
     }
 
     private void initializeComponent(){
