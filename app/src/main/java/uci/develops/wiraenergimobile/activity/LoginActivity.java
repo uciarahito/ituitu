@@ -1,5 +1,6 @@
 package uci.develops.wiraenergimobile.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -133,6 +134,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //            if (!email.equals("") && !password.equals("")) {
 
             if (!empty_email && !empty_password) {
+                showProgressLoading();
 
                 registration_key = generateUnique_id();
                 Call<LoginResponse> loginResponseCall = RestClient.getRestClient().Login(email, password, registration_key);
@@ -169,6 +171,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     for (Integer ind : roles) {
                                         if (ind != null) {
                                             if (ind == 2) {
+                                                hideProgressLoading();
                                                 new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "admin");
                                                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                                 startActivity(intent);
@@ -176,6 +179,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             }
 
                                             if (ind == 3) {
+                                                hideProgressLoading();
                                                 new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "customer");
                                                 if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 1) {
                                                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
@@ -185,12 +189,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             }
 
                                             if (ind == 4) {
+                                                hideProgressLoading();
                                                 new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "expedition");
                                                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                                 startActivity(intent);
                                                 finish();
                                             }
                                         } else {
+                                            hideProgressLoading();
                                             new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "");
                                             if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 2) {
                                                 Intent intent = new Intent(LoginActivity.this, VerificationStatusActivity.class);
@@ -203,6 +209,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     }
                                 }
                                 else {
+                                    hideProgressLoading();
                                     new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "");
                                     if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 2) {
                                         Intent intent = new Intent(LoginActivity.this, VerificationStatusActivity.class);
@@ -214,9 +221,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 }
 
                             } else {
+                                hideProgressLoading();
                                 Toast.makeText(LoginActivity.this, "Lakukan Verifikasi Email!", Toast.LENGTH_SHORT).show();
                             }
                         } else {
+                            hideProgressLoading();
                             Toast.makeText(LoginActivity.this, "Email dan Password tidak terdaftar!", Toast.LENGTH_SHORT).show();
                             Log.d("error message", "Error");
                         }
@@ -225,10 +234,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onFailure(Call<LoginResponse> call, Throwable t) {
                         Log.e("LoginActivity", "Retrofit Error");
+                        hideProgressLoading();
                     }
                 });
             } else {
                 Toast.makeText(LoginActivity.this, "Field tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                hideProgressLoading();
             }
         }
 
@@ -243,6 +254,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             startActivity(intent);
             finish();
         }
+    }
+
+    ProgressDialog progress_loading;
+    public void showProgressLoading() {
+        progress_loading = new ProgressDialog(LoginActivity.this);
+        progress_loading.setMessage("Please wait...");
+        progress_loading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progress_loading.setIndeterminate(true);
+        progress_loading.show();
+    }
+
+    public void hideProgressLoading() {
+        progress_loading.dismiss();
     }
 
     private void loadData() {

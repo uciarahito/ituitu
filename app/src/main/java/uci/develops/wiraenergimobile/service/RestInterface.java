@@ -8,13 +8,11 @@ import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
-import retrofit2.http.Streaming;
 import uci.develops.wiraenergimobile.response.ApproveResponse;
-import uci.develops.wiraenergimobile.response.CustomerAddressResponse;
+import uci.develops.wiraenergimobile.response.ListCustomerAddressResponse;
 import uci.develops.wiraenergimobile.response.CustomerGroupResponse;
 import uci.develops.wiraenergimobile.response.CustomerResponse;
 import uci.develops.wiraenergimobile.response.ListRoleResponse;
@@ -75,11 +73,11 @@ public interface RestInterface {
                                                @Field("pic") String pic, @Field("phone") String phone, @Field("mobile") String mobile, @Field("map") String map);
 
     @GET("customers/address/{decode}")
-    Call<CustomerAddressResponse> getCustomerAddress(@Header("Authorization") String token, @Path("decode") String decode);
+    Call<ListCustomerAddressResponse> getCustomerAddress(@Header("Authorization") String token, @Path("decode") String decode);
 
     @FormUrlEncoded
     @POST("customers/address/{decode}")
-    Call<CustomerAddressResponse> getCustomerAddressById(@Header("Authorization") String token, @Path("decode") String decode, @Field("id") int id);
+    Call<ListCustomerAddressResponse> getCustomerAddressById(@Header("Authorization") String token, @Path("decode") String decode, @Field("id") int id);
 
     @FormUrlEncoded
     @PUT("customer/{decode}")
