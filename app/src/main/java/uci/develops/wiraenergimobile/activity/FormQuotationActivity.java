@@ -5,12 +5,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -21,21 +18,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
-import uci.develops.wiraenergimobile.helper.Constant;
-import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
-import uci.develops.wiraenergimobile.response.ApproveResponse;
-import uci.develops.wiraenergimobile.response.UserResponse;
-import uci.develops.wiraenergimobile.service.RestClient;
 
 public class FormQuotationActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -83,7 +71,7 @@ public class FormQuotationActivity extends AppCompatActivity implements View.OnC
         spinner_tax_ppn = (Spinner) findViewById(R.id.spinner_tax_ppn);
         button_cancel = (Button) findViewById(R.id.button_cancel);
         button_save = (Button) findViewById(R.id.button_save);
-        imageView_view = (ImageView) findViewById(R.id.imageView_view);
+        imageView_view = (ImageView) findViewById(R.id.imageView_delete);
         imageView_edit = (ImageView) findViewById(R.id.imageView_edit);
         imageView_delete = (ImageView) findViewById(R.id.imageView_delete);
         imageView_add = (ImageView) findViewById(R.id.imageView_add);

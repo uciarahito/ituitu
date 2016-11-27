@@ -3,6 +3,7 @@ package uci.develops.wiraenergimobile.service;
 import java.util.Map;
 
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -12,6 +13,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import uci.develops.wiraenergimobile.response.ApproveResponse;
+import uci.develops.wiraenergimobile.response.CustomerAddressResponse;
 import uci.develops.wiraenergimobile.response.ListCustomerAddressResponse;
 import uci.develops.wiraenergimobile.response.CustomerGroupResponse;
 import uci.develops.wiraenergimobile.response.CustomerResponse;
@@ -74,9 +76,15 @@ public interface RestInterface {
     @GET("customers/address/{decode}")
     Call<ListCustomerAddressResponse> getCustomerAddress(@Header("Authorization") String token, @Path("decode") String decode);
 
-    @GET("customers/address/{decode}")
-    Call<ListCustomerAddressResponse> getCustomerAddressById(@Header("Authorization") String token, @Path("decode") String decode, @FieldMap Map<String, String> param
-    );
+    @FormUrlEncoded
+    @POST("customers/address/{decode}")
+    Call<ApproveResponse> createCustomerAddress(@Header("Authorization") String token, @Path("decode") String decode, @FieldMap Map<String, String> param);
+
+    @GET("customers/address/{decode}/{decode_customer_address}")
+    Call<CustomerAddressResponse> getCustomerAddressByDecode(@Header("Authorization") String token, @Path("decode") String decode, @Path("decode_customer_address") String decode_customer_address);
+
+    @DELETE("customers/address/{decode}/{decode_customer_address}")
+    Call<ApproveResponse> deleteCustomerAddress(@Header("Authorization") String token, @Path("decode") String decode, @Path("decode_customer_address") String decode_customer_address);
 
     @FormUrlEncoded
     @PUT("customer/{decode}")
@@ -125,9 +133,14 @@ public interface RestInterface {
 
     @FormUrlEncoded
     @POST("customers/register/reject/0")
-    Call<ApproveResponse> customerRejectDeleteCustomer(@Header("Authorization") String token, @Field("decode") String decode);
+    Call<ApproveResponse> customerRejectDeleteCustomer(@Header("Authorization") String token, @Field("decode_new") String decode_new);
 
     @FormUrlEncoded
     @POST("customers/register/reject/1")
     Call<ApproveResponse> customerRejectUpdateUser(@Header("Authorization") String token, @Field("decode_old") String decode_old, @Field("decode_new") String decode_new);
+
+//    @FormUrlEncoded
+//    @POST("customers/register/reject/1")
+//    Call<ApproveResponse> customerRejectUpdateUser(@Header("Authorization") String token, @FieldMap Map<String, String> param);
+
 }

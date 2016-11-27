@@ -60,7 +60,7 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/imageView_view"
+                android:id="@+id/imageView_delete"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
                 android:background="@color/Gainsboro"

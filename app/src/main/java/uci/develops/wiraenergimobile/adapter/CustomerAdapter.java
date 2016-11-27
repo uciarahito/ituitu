@@ -93,7 +93,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
                  * Set decode melalui data per row
                  * menampung di shared preference
                  */
-                new SharedPreferenceManager().setPreferences(context, "customer_decode", ""+customerModel.getDecode());
+                new SharedPreferenceManager().setPreferences(context, "customer_decode", "" + customerModel.getDecode());
                 new SharedPreferenceManager().setPreferences(context, "customer_user_id", ""+customerModel.getUser_id());
                 Toast.makeText(context, "User_ID: "+new SharedPreferenceManager().getPreferences(context, "customer_user_id"), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, FormCustomerActivity.class);

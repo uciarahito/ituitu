@@ -42,7 +42,6 @@ public class FragmentCustomer extends Fragment implements View.OnClickListener{
         // Inflate the layout for this fragment
         View view;
         view = inflater.inflate(R.layout.fragment_customer, container, false);
-
         initializeComponent(view);
         // start listening for refresh local file list in
         loadData();
@@ -61,7 +60,8 @@ public class FragmentCustomer extends Fragment implements View.OnClickListener{
     }
 
     private void loadData(){
-        Call<RequestListCustomerResponse> listCustomerResponse = RestClient.getRestClient().getAllRequestCustomer("Bearer "+new SharedPreferenceManager().getPreferences(getContext(), "token"));
+        Call<RequestListCustomerResponse> listCustomerResponse = RestClient.getRestClient().getAllRequestCustomer("Bearer "+
+                new SharedPreferenceManager().getPreferences(getContext(), "token"));
         listCustomerResponse.enqueue(new Callback<RequestListCustomerResponse>() {
             @Override
             public void onResponse(Call<RequestListCustomerResponse> call, Response<RequestListCustomerResponse> response) {

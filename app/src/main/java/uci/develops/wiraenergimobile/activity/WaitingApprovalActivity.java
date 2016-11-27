@@ -9,7 +9,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
+import uci.develops.wiraenergimobile.response.CustomerResponse;
+import uci.develops.wiraenergimobile.service.RestClient;
 
 public class WaitingApprovalActivity extends AppCompatActivity implements View.OnClickListener{
     private Button button_view_data;
@@ -28,6 +34,7 @@ public class WaitingApprovalActivity extends AppCompatActivity implements View.O
         button_view_data = (Button)findViewById(R.id.button_view_data);
 
         button_view_data.setOnClickListener(this);
+
     }
 
     @Override
@@ -54,10 +61,28 @@ public class WaitingApprovalActivity extends AppCompatActivity implements View.O
 
     @Override
     public void onClick(View v) {
-        Intent intent;
         if (v == button_view_data){
-            intent = new Intent(WaitingApprovalActivity.this, FormCustomerActivity.class);
-            startActivity(intent);
+            Call<CustomerResponse> customerReponseCall = RestClient.getRestClient().getCustomer("Bearer "+new SharedPreferenceManager().getPreferences(WaitingApprovalActivity.this, "token"),
+                    new SharedPreferenceManager().getPreferences(WaitingApprovalActivity.this, "customer_decode"));
+            customerReponseCall.enqueue(new Callback<CustomerResponse>() {
+                @Override
+                public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
+                    if (response.isSuccessful()) {
+                        new SharedPreferenceManager().setPreferences(WaitingApprovalActivity.this, "approve", ""+response.body().getData().get(0).getApprove());
+                        startActivity(new Intent(WaitingApprovalActivity.this, FormCustomerActivity.class));
+                        finish();
+                    } else {
+                        startActivity(new Intent(WaitingApprovalActivity.this, LoginActivity.class));
+                        finish();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<CustomerResponse> call, Throwable t) {
+                    startActivity(new Intent(WaitingApprovalActivity.this, LoginActivity.class));
+                    finish();
+                }
+            });
         }
     }
 

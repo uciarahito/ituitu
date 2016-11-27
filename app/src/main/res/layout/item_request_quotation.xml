@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -13,67 +13,133 @@
         app:cardUseCompatPadding="true">
 
         <LinearLayout
-            android:weightSum="6"
-            android:layout_margin="5dp"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/textView_name_customer"
-                    android:text="Name Customer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp">
+
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:background="@color/colorPrimary"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
+                    android:gravity="center">
                     <TextView
-                        android:id="@+id/textView_qty_item"
+                        android:id="@+id/textView_reminder"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:textColor="@color/white"
+                        android:text="10 days more"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="1000"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/textView_unit_item"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="liter"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/textView_item_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="Solar"
-                        android:textStyle="bold" />
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/textView_send_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Send date: 04/01/2019"
+                    android:text="04 Nov 2016"
+                    android:gravity="end"
+                    android:layout_gravity="bottom"
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/imageView_detail"
-                android:layout_weight="1"
-                android:layout_width="0dp"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/drop_shadow" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="7dp"
-                android:background="@color/Gainsboro"
-                android:padding="@dimen/keyline_xs"
-                android:src="@drawable/ic_view_24dp" />
+                android:orientation="horizontal"
+                android:layout_marginTop="7dp"
+                android:weightSum="6">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView_name_customer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Name Customer" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView_qty_item"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1000"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textView_unit_item"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="liter"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textView_item_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="Solar"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="3"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView_delete"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="7dp"
+                        android:layout_weight="1"
+                        android:background="@color/Gainsboro"
+                        android:padding="@dimen/keyline_xs"
+                        android:src="@drawable/ic_view_24dp" />
+
+                    <ImageView
+                        android:id="@+id/imageView_edit"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="7dp"
+                        android:layout_weight="1"
+                        android:background="@color/Gainsboro"
+                        android:padding="@dimen/keyline_xs"
+                        android:src="@drawable/ic_edit_24dp" />
+
+                    <ImageView
+                        android:id="@+id/imageView_delete"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="7dp"
+                        android:layout_weight="1"
+                        android:background="@color/Gainsboro"
+                        android:padding="@dimen/keyline_xs"
+                        android:src="@drawable/ic_delete_24dp" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

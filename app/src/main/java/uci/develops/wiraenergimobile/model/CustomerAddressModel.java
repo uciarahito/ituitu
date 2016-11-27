@@ -4,7 +4,7 @@ package uci.develops.wiraenergimobile.model;
  * Created by ArahitoPC on 10/21/2016.
  */
 public class CustomerAddressModel {
-    private int id;
+    private String decode;
     private String name;
     private String address;
     private String pic;
@@ -14,8 +14,8 @@ public class CustomerAddressModel {
 
     public CustomerAddressModel(){}
 
-    public CustomerAddressModel(int id, String name, String address, String pic, String phone, String mobile, String map) {
-        this.id = id;
+    public CustomerAddressModel(String decode, String name, String address, String pic, String phone, String mobile, String map) {
+        this.decode = decode;
         this.name = name;
         this.address = address;
         this.pic = pic;
@@ -24,12 +24,12 @@ public class CustomerAddressModel {
         this.map = map;
     }
 
-    public int getId() {
-        return id;
+    public String getDecode() {
+        return decode;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDecode(String decode) {
+        this.decode = decode;
     }
 
     public String getName() {

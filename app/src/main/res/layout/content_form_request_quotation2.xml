@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/colorBackground"
-    tools:context="uci.develops.wiraenergimobile.activity.RequestQuotationActivity"
-    tools:showIn="@layout/activity_request_quotation">
-
+    tools:context=".activity.FormRequestQuotationActivity2">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:src="@drawable/sales_quotation" />
@@ -32,16 +31,33 @@
             android:textColor="@color/primary_text"
             android:textStyle="bold" />
 
-        <ViewStub
-            android:id="@+id/shipping_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout="@layout/fragment_req_quotation_shipping_address" />
-
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:background="@drawable/drop_shadow" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:weightSum="6"
+            android:layout_marginBottom="5dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4.5"
+                android:gravity="center_vertical"
+                android:text="1. Shipping Address"
+                android:textAppearance="@style/TextAppearance.AppTheme.Title" />
+            <TextView
+                android:id="@+id/textView_choose"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="Choose"
+                android:background="@drawable/rounded_rectangle_gray"
+                android:textAppearance="@style/TextAppearance.AppTheme.Small" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textView_customer_code"
@@ -71,8 +87,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:gravity="center"
-                android:text="Billing Payments"
+                android:gravity="center_vertical"
+                android:text="2. Billing Payments"
                 android:textAppearance="@style/TextAppearance.AppTheme.Title"
                 app:layout_gravity="fill_horizontal" />
 
@@ -136,6 +152,7 @@
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/imageView_add_quotation"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_marginBottom="2dp"
@@ -185,7 +202,7 @@
                 app:layout_gravity="center" />
 
             <EditText
-                android:id="@+id/notes"
+                android:id="@+id/editText_notes"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:background="@drawable/rounded_rectangle_gray"

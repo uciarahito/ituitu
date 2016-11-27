@@ -112,7 +112,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
             linear_layout_tax_ppn.setVisibility(View.GONE);
             linear_layout_active.setVisibility(View.GONE);
             linear_layout_note.setVisibility(View.GONE);
-            if (Integer.parseInt(new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "approve")) == 0) {
+            if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "approve").equals("0")) {
                 readOnly();
             }
         } else if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer") |
@@ -234,6 +234,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         FormCustomerActivity.customerModel_temp.setFax(fax);
         FormCustomerActivity.customerModel_temp.setTerm(term);
         FormCustomerActivity.customerModel_temp.setValuta(valuta);
+        FormCustomerActivity.customerModel_temp.setGroup(spinner_group.getSelectedItem().toString());
         FormCustomerActivity.customerModel_temp.setNpwp(npwp);
         FormCustomerActivity.customerModel_temp.setTax(tax_ppn);
         FormCustomerActivity.customerModel_temp.setEmail(email);

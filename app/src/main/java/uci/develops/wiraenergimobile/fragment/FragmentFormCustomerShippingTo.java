@@ -90,14 +90,21 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(shippingAddressAdapter);
 
-        /*textView_address_id = (TextView) view.findViewById(R.id.textView_address_id);
-
-        CustomerAddressModel customerAddressModel = new CustomerAddressModel();
-        textView_address_id.setText(""+customerAddressModel.getId());*/
-
         if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("")) {
             if (Integer.parseInt(new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "approve")) == 0) {
-                readOnly();
+                button_add_shipping.setEnabled(false);
+            }
+        }
+
+        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")) {
+            if (Integer.parseInt(new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "approve")) == 1) {
+                button_add_shipping.setEnabled(false);
+            }
+        }
+
+        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
+            if (Integer.parseInt(new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "approve")) == 0) {
+                button_add_shipping.setEnabled(false);
             }
         }
 
@@ -138,15 +145,13 @@ public class FragmentFormCustomerShippingTo extends Fragment {
             public void onClick(View v) {
                 if(isNotEmpty()){
                     Map<String, String> params = new HashMap<String, String>();
-                    params.put("id", "1");
                     params.put("name", editText_address_name.getText().toString());
                     params.put("address", editText_address.getText().toString());
                     params.put("pic", editText_pic_name.getText().toString());
                     params.put("phone", editText_phone.getText().toString());
                     params.put("mobile", editText_mobile.getText().toString());
                     params.put("map", editText_map_cordinate.getText().toString());
-                    Call<ApproveResponse> addShippingAddressCall = RestClient.getRestClient().sendDataShippingInfoNew("Bearer "+token, decode,
-                            params);
+                    Call<ApproveResponse> addShippingAddressCall = RestClient.getRestClient().createCustomerAddress("Bearer "+token, decode, params);
                     addShippingAddressCall.enqueue(new Callback<ApproveResponse>() {
                         @Override
                         public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
@@ -198,8 +203,8 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         listCustomerAddressResponseCall.enqueue(new Callback<ListCustomerAddressResponse>() {
             @Override
             public void onResponse(Call<ListCustomerAddressResponse> call, Response<ListCustomerAddressResponse> response) {
-                if(response.isSuccessful()){
-                    if(response.body().getData().size() > 0){
+                if (response.isSuccessful()) {
+                    if (response.body().getData().size() > 0) {
                         shippingAddressAdapter.updateList(response.body().getData());
                         counter_list = response.body().getData().size();
                     } else {
@@ -215,14 +220,5 @@ public class FragmentFormCustomerShippingTo extends Fragment {
                 Toast.makeText(getContext(), "Failure service", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    public void readOnly() {
-        editText_pic_name.setEnabled(false);
-        editText_address_name.setEnabled(false);
-        editText_address.setEnabled(false);
-        editText_phone.setEnabled(false);
-        editText_mobile.setEnabled(false);
-        editText_map_cordinate.setEnabled(false);
     }
 }

@@ -1,20 +1,20 @@
 package uci.develops.wiraenergimobile.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.EditText;
+
 import uci.develops.wiraenergimobile.R;
-import uci.develops.wiraenergimobile.activity.DashboardAdminActivity;
 
-public class FragmentMasterSetup extends Fragment implements View.OnClickListener{
+public class FragmentQuotationNote extends Fragment{
 
-    private LinearLayout linearLayout_menu_master_customer;
+    private EditText editText_notes;
+    private String notes;
 
-    public FragmentMasterSetup(){}
+    public FragmentQuotationNote(){}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class FragmentMasterSetup extends Fragment implements View.OnClickListene
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view;
-        view = inflater.inflate(R.layout.fragment_master_setup, container, false);
+        view = inflater.inflate(R.layout.fragment_req_quotation_note, container, false);
 
         initializeComponent(view);
 
@@ -36,9 +36,7 @@ public class FragmentMasterSetup extends Fragment implements View.OnClickListene
     }
 
     private void initializeComponent(View view){
-        linearLayout_menu_master_customer = (LinearLayout) view.findViewById(R.id.linearLayout_menu_master_customer);
-
-        linearLayout_menu_master_customer.setOnClickListener(this);
+        editText_notes = (EditText) view.findViewById(R.id.editText_notes);
     }
 
     /**
@@ -50,11 +48,7 @@ public class FragmentMasterSetup extends Fragment implements View.OnClickListene
         super.onResume();
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v == linearLayout_menu_master_customer) {
-            Intent intent = new Intent(getActivity().getApplicationContext(), DashboardAdminActivity.class);
-            startActivity(intent);
-        }
+    public void readOnly() {
+        editText_notes.setEnabled(false);
     }
 }

@@ -85,7 +85,7 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final CustomerModel customerModel = customerModelList.get(position);
-        new SharedPreferenceManager().setPreferences(context, "customer_decode", customerModel.getDecode());
+        //new SharedPreferenceManager().setPreferences(context, "customer_decode", customerModel.getDecode());
         holder.txtName.setText(": " + customerModel.getFirst_name() + " " + customerModel.getLast_name());
         holder.txtEmail.setText(": " + customerModel.getEmail());
         holder.txtCompany.setText(": " + customerModel.getAddress());
@@ -109,7 +109,6 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
         alertDialogBuilder.setMessage("Are you sure want to update to : \n Customer name : " + customerModel.getFirst_name() + "\n Customer code : " + customerModel.getCode());
         final String decodeCustomerOld = customerModel.getDecode();
-        Log.e("cccccccccccc", "cccccccccccc" + new SharedPreferenceManager().getPreferences(context, "customer_decode_new"));
         alertDialogBuilder.setNegativeButton("Yes",
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -177,111 +176,51 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
 //                            }
 //                        });
 
+//                        Map<String, String> params = new HashMap<String, String>();
+//                        params.put("customer_code", customerModel.getDecode());
+//                        params.put("customer_decode", customerModel.getDecode());
 
-//                        Call<ApproveResponse> customerRejectUpdateUser = RestClient.getRestClient().customerRejectUpdateUser("Bearer " + new SharedPreferenceManager().getPreferences(context, "token"),
-//                                decodeCustomerOld, new SharedPreferenceManager().getPreferences(context, "customer_decode_new"));
-//                        Log.e("vvvvvvvvvvvvvv", customerModel.getDecode());
-//                        customerRejectUpdateUser.enqueue(new Callback<ApproveResponse>() {
-//                            @Override
-//                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-//                                Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().customerApproveActive("Bearer " + new SharedPreferenceManager().getPreferences(context, "token"),
-//                                        new SharedPreferenceManager().getPreferences(context, "customer_decode"));
-//                                approveResponseCall.enqueue(new Callback<ApproveResponse>() {
-//                                    @Override
-//                                    public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-//                                        if (response.isSuccessful()) {
-//                                            Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(context, "token"),
-//                                                    Integer.parseInt(new SharedPreferenceManager().getPreferences(context, "customer_user_id")));
-//                                            userResponseCall.enqueue(new Callback<UserResponse>() {
-//                                                @Override
-//                                                public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-//                                                    if (response.isSuccessful()) {
-//                                                        if (response.body().getData().getRegistration_key() != null) {
-//                                                            Toast.makeText(context, "Update user successfull", Toast.LENGTH_SHORT).show();
-//                                                            Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
-//                                                            Constant.sendNotification(response.body().getData().getRegistration_key(), "Request anda telah di setujui", "approve_customer");
-//                                                            Intent intent = new Intent(context, HomeActivity.class);
-//                                                            context.startActivity(intent);
-//                                                        }
-//                                                    }
-//                                                }
-//
-//                                                @Override
-//                                                public void onFailure(Call<UserResponse> call, Throwable t) {
-//
-//                                                }
-//                                            });
-//                                        } else {
-//                                            Toast.makeText(context, "Unable to update user", Toast.LENGTH_SHORT).show();
-//                                        }
-//                                    }
-//
-//                                    @Override
-//                                    public void onFailure(Call<ApproveResponse> call, Throwable t) {
-//                                        Toast.makeText(context, "Unable to update user", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                });
-//                            }
-//
-//                            //
-//                            @Override
-//                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
-//
-//                            }
-//                        });
-
-                        Call<ApproveResponse> customerRejectUpdateUser = RestClient.getRestClient().customerRejectUpdateUser("Bearer " + new SharedPreferenceManager().getPreferences(context, "token"),
-                                decodeCustomerOld, new SharedPreferenceManager().getPreferences(context, "customer_decode_new"));
-                        Log.e("vvvvvvvvvvvvvv", customerModel.getDecode());
+                        Call<ApproveResponse> customerRejectUpdateUser = RestClient.getRestClient().customerRejectUpdateUser("Bearer " +
+                                        new SharedPreferenceManager().getPreferences(context, "token"),
+                                decodeCustomerOld, new SharedPreferenceManager().getPreferences(context, "customer_decode"));
                         customerRejectUpdateUser.enqueue(new Callback<ApproveResponse>() {
                             @Override
                             public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-//                                Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().customerApproveActive("Bearer " + new SharedPreferenceManager().getPreferences(context, "token"),
-//                                        new SharedPreferenceManager().getPreferences(context, "customer_decode"));
-//                                approveResponseCall.enqueue(new Callback<ApproveResponse>() {
-//                                    @Override
-//                                    public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                                        if (response.isSuccessful()) {
-                                            Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(context, "token"),
-                                                    Integer.parseInt(new SharedPreferenceManager().getPreferences(context, "customer_user_id")));
-                                            userResponseCall.enqueue(new Callback<UserResponse>() {
-                                                @Override
-                                                public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                                                    if (response.isSuccessful()) {
-                                                        if (response.body().getData().getRegistration_key() != null) {
-                                                            Toast.makeText(context, "Update user successfull", Toast.LENGTH_SHORT).show();
-                                                            Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
-                                                            Constant.sendNotification(response.body().getData().getRegistration_key(), "Request anda telah di setujui", "approve_customer");
-                                                            Intent intent = new Intent(context, HomeActivity.class);
-                                                            context.startActivity(intent);
-                                                        }
-                                                    }
+                                if (response.isSuccessful()) {
+                                    Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(context, "token"),
+                                            Integer.parseInt(new SharedPreferenceManager().getPreferences(context, "customer_user_id")));
+                                    userResponseCall.enqueue(new Callback<UserResponse>() {
+                                        @Override
+                                        public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                                            if (response.isSuccessful()) {
+                                                if (response.body().getData().getRegistration_key() != null) {
+                                                    Toast.makeText(context, "Update user successfull", Toast.LENGTH_SHORT).show();
+                                                    Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
+                                                    Constant.sendNotification(response.body().getData().getRegistration_key(), "Request anda telah di setujui", "approve_customer");
+                                                    Intent intent = new Intent(context, HomeActivity.class);
+                                                    context.startActivity(intent);
                                                 }
-
-                                                @Override
-                                                public void onFailure(Call<UserResponse> call, Throwable t) {
-
-                                                }
-                                            });
-                                        } else {
-                                            Toast.makeText(context, "Unable to update user", Toast.LENGTH_SHORT).show();
+                                            }
                                         }
-//                                    }
-//
-//                                    @Override
-//                                    public void onFailure(Call<ApproveResponse> call, Throwable t) {
-//                                        Toast.makeText(context, "Unable to update user", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                });
+
+                                        @Override
+                                        public void onFailure(Call<UserResponse> call, Throwable t) {
+
+                                        }
+                                    });
+                                } else {
+                                    Toast.makeText(context, "Unable to update user", Toast.LENGTH_SHORT).show();
+                                }
                             }
 
-                            //
                             @Override
                             public void onFailure(Call<ApproveResponse> call, Throwable t) {
 
                             }
                         });
 
+                        Intent intent = new Intent(context, HomeActivity.class);
+                        context.startActivity(intent);
                     }
                 });
         alertDialogBuilder.setPositiveButton("No",

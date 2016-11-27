@@ -84,7 +84,7 @@ public class FragmentFormCustomerContactInfo extends Fragment {
 
         if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("")) {
             linear_layout_contact_info_2_3.setVisibility(View.GONE);
-            if (Integer.parseInt(new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "approve")) == 0) {
+            if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "approve").equals("0")) {
                 readOnly();
             }
         }

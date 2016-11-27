@@ -6,50 +6,52 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 import uci.develops.wiraenergimobile.R;
-import uci.develops.wiraenergimobile.activity.FormCustomerActivity;
-import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
-import uci.develops.wiraenergimobile.model.CustomerModel;
+import uci.develops.wiraenergimobile.activity.FormRequestQuotationActivity2;
+import uci.develops.wiraenergimobile.model.QuotationModel;
 
 /**
  * Created by ArahitoPC on 10/24/2016.
  */
 public class ItemQuotationAdapter extends RecyclerView.Adapter<ItemQuotationAdapter.MyViewHolder> {
-    private List<CustomerModel> customerModelList;
+    private List<QuotationModel> quotationModelList;
     private Context context;
 
     Map<String, List<String>> mRoles = new TreeMap<>();
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView txtIdCustomer, txtDecode, txtEmail, txtStatus;
-        public Button buttonDetail;
+        public TextView textView_reminder, textView_send_date, textView_name_customer, textView_qty_item, textView_unit_item, textView_item_name;
+        public ImageView imageView_view, imageView_edit, imageView_delete;
 
         public MyViewHolder(View view) {
             super(view);
-            txtIdCustomer = (TextView) view.findViewById(R.id.txtIdCustomer);
-            txtDecode = (TextView) view.findViewById(R.id.txtDecode);
-            txtEmail = (TextView) view.findViewById(R.id.txtEmail);
-            txtStatus = (TextView) view.findViewById(R.id.txtStatus);
-            buttonDetail = (Button) view.findViewById(R.id.buttonDetail);
+            textView_reminder = (TextView) view.findViewById(R.id.textView_reminder);
+            textView_send_date = (TextView) view.findViewById(R.id.textView_send_date);
+            textView_name_customer = (TextView) view.findViewById(R.id.textView_name_customer);
+            textView_qty_item = (TextView) view.findViewById(R.id.textView_qty_item);
+            textView_unit_item = (TextView) view.findViewById(R.id.textView_unit_item);
+            textView_item_name = (TextView) view.findViewById(R.id.textView_item_name);
+            imageView_view = (ImageView) view.findViewById(R.id.imageView_delete);
+            imageView_edit = (ImageView) view.findViewById(R.id.imageView_edit);
+            imageView_delete = (ImageView) view.findViewById(R.id.imageView_delete);
         }
     }
 
-    public ItemQuotationAdapter(Context context, List<CustomerModel> customerModelList) {
+    public ItemQuotationAdapter(Context context, List<QuotationModel> quotationModelList) {
         this.context = context;
-        this.customerModelList = customerModelList;
+        this.quotationModelList = quotationModelList;
     }
 
-    public void updateList(List<CustomerModel> newList) {
-        this.customerModelList.clear();
-        this.customerModelList = newList;
+    public void updateList(List<QuotationModel> newList) {
+        this.quotationModelList.clear();
+        this.quotationModelList = newList;
         this.notifyDataSetChanged();
     }
 
@@ -57,34 +59,61 @@ public class ItemQuotationAdapter extends RecyclerView.Adapter<ItemQuotationAdap
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView;
         itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_request_customer2, parent, false);
+                .inflate(R.layout.item_request_quotation, parent, false);
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        final CustomerModel customerModel = customerModelList.get(position);
-        holder.txtIdCustomer.setText(": " + customerModel.getFirst_name());
-        holder.txtDecode.setText(": " + customerModel.getDecode());
-        holder.txtEmail.setText(": " + customerModel.getEmail());
+        final QuotationModel quotationModel = quotationModelList.get(position);
+//        holder.textView_reminder.setText(": " + quotationModel.getFirst_name());
+//        holder.textView_send_date.setText(": " + quotationModel.getDecode());
+//        holder.textView_name_customer.setText(": " + quotationModel.getEmail());
+//        holder.textView_qty_item.setText(": " + quotationModel.getEmail());
+//        holder.textView_unit_item.setText(": " + quotationModel.getEmail());
+//        holder.textView_item_name.setText(": " + quotationModel.getEmail());
 
-        if (customerModel.getActive() == 1 && customerModel.getApprove() == 1) {
-            holder.txtStatus.setText("Active");
-        } else {
-            holder.txtStatus.setText("Inactive");
-        }
-
-        holder.buttonDetail.setOnClickListener(new View.OnClickListener() {
+        holder.imageView_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /**
                  * Set decode melalui data per row
                  * menampung di shared preference
                  */
-                new SharedPreferenceManager().setPreferences(context, "customer_decode", ""+customerModel.getDecode());
-                new SharedPreferenceManager().setPreferences(context, "customer_user_id", ""+customerModel.getUser_id());
-                Toast.makeText(context, "User_ID: "+new SharedPreferenceManager().getPreferences(context, "customer_user_id"), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, FormCustomerActivity.class);
+//                new SharedPreferenceManager().setPreferences(context, "customer_decode", ""+customerModel.getDecode());
+//                new SharedPreferenceManager().setPreferences(context, "customer_user_id", ""+customerModel.getUser_id());
+//                Toast.makeText(context, "User_ID: "+new SharedPreferenceManager().getPreferences(context, "customer_user_id"), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, FormRequestQuotationActivity2.class);
+                context.startActivity(intent);
+            }
+        });
+
+        holder.imageView_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /**
+                 * Set decode melalui data per row
+                 * menampung di shared preference
+                 */
+//                new SharedPreferenceManager().setPreferences(context, "customer_decode", ""+customerModel.getDecode());
+//                new SharedPreferenceManager().setPreferences(context, "customer_user_id", ""+customerModel.getUser_id());
+//                Toast.makeText(context, "User_ID: "+new SharedPreferenceManager().getPreferences(context, "customer_user_id"), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, FormRequestQuotationActivity2.class);
+                context.startActivity(intent);
+            }
+        });
+
+        holder.imageView_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /**
+                 * Set decode melalui data per row
+                 * menampung di shared preference
+                 */
+//                new SharedPreferenceManager().setPreferences(context, "customer_decode", ""+customerModel.getDecode());
+//                new SharedPreferenceManager().setPreferences(context, "customer_user_id", ""+customerModel.getUser_id());
+//                Toast.makeText(context, "User_ID: "+new SharedPreferenceManager().getPreferences(context, "customer_user_id"), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, FormRequestQuotationActivity2.class);
                 context.startActivity(intent);
             }
         });
@@ -92,6 +121,6 @@ public class ItemQuotationAdapter extends RecyclerView.Adapter<ItemQuotationAdap
 
     @Override
     public int getItemCount() {
-        return customerModelList.size();
+        return quotationModelList.size();
     }
 }

@@ -173,7 +173,7 @@
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".activity.FormRequestQuotationActivity">
+        <activity android:name=".activity.FormRequestQuotationActivity2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -187,6 +187,10 @@
         <activity
             android:name=".activity.ListRequestQuotationActivity"
             android:label="@string/title_activity_list_request_quotation"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.FormRequestQuotationActivity"
+            android:label="@string/title_activity_form_request_quotation"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

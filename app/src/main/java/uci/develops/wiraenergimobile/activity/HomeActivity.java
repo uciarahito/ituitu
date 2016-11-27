@@ -34,6 +34,7 @@ import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.adapter.CustomExpandableListAdapter;
 import uci.develops.wiraenergimobile.fragment.FragmentCustomer;
+import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerCompanyInfo;
 import uci.develops.wiraenergimobile.fragment.FragmentPurchasing;
 import uci.develops.wiraenergimobile.fragment.FragmentSales;
 import uci.develops.wiraenergimobile.fragment.navigation.FragmentNavigationManager;
@@ -186,6 +187,8 @@ public class HomeActivity extends AppCompatActivity {
             adapter.addFragment(new FragmentPurchasing(), "");
             adapter.addFragment(new FragmentSales(), "");
         } else if (roles != "" && roles.equals("customer")) {
+//            Intent intent = new Intent(HomeActivity.this, FormCustomerActivity.class);
+//            startActivity(intent);
             adapter.addFragment(new FragmentCustomer(), "");
             adapter.addFragment(new FragmentSales(), "");
         } else if (roles != "" && roles.equals("expedition")){
@@ -282,13 +285,16 @@ public class HomeActivity extends AppCompatActivity {
         mExpandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                String selected_item = getResources().getStringArray(R.array.general)[groupPosition];
+                String selected_item;
+                if(new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("admin")){
+                    selected_item = getResources().getStringArray(R.array.general)[groupPosition];
+                } else {
+                    selected_item = getResources().getStringArray(R.array.general_customer)[groupPosition];
+                }
+
                 if (selected_item.equals("Logout")) {
-                    if (new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("admin") |
-                            new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("customer") |
-                            new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("")) {
-                        logout();
-                    }
+                    logout();
+
                 } else if (selected_item.equals("Dashboard")) {
                     Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
                     startActivity(intent);
@@ -311,7 +317,7 @@ public class HomeActivity extends AppCompatActivity {
         new SharedPreferenceManager().setPreferences(HomeActivity.this, "is_login", "");
         new SharedPreferenceManager().setPreferences(HomeActivity.this, "token", "");
         new SharedPreferenceManager().setPreferences(HomeActivity.this, "customer_decode", "");
-        new SharedPreferenceManager().setPreferences(HomeActivity.this, "roles", "");
+        new SharedPreferenceManager().setPreferences(HomeActivity.this, "roles", "false");
 
         Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
         startActivity(intent);
