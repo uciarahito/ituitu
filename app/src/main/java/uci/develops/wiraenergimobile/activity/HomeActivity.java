@@ -35,6 +35,7 @@ import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.adapter.CustomExpandableListAdapter;
 import uci.develops.wiraenergimobile.fragment.FragmentCustomer;
 import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerCompanyInfo;
+import uci.develops.wiraenergimobile.fragment.FragmentProfileCustomer;
 import uci.develops.wiraenergimobile.fragment.FragmentPurchasing;
 import uci.develops.wiraenergimobile.fragment.FragmentSales;
 import uci.develops.wiraenergimobile.fragment.navigation.FragmentNavigationManager;
@@ -189,7 +190,7 @@ public class HomeActivity extends AppCompatActivity {
         } else if (roles != "" && roles.equals("customer")) {
 //            Intent intent = new Intent(HomeActivity.this, FormCustomerActivity.class);
 //            startActivity(intent);
-            adapter.addFragment(new FragmentCustomer(), "");
+            adapter.addFragment(new FragmentProfileCustomer(), "");
             adapter.addFragment(new FragmentSales(), "");
         } else if (roles != "" && roles.equals("expedition")){
             adapter.addFragment(new FragmentSales(), "");
