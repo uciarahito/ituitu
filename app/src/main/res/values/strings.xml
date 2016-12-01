@@ -309,5 +309,10 @@
     <string name="title_activity_form_request_quotation">Form Request Quotation</string>
     <string name="title_activity_list_quotation">ListQuotationActivity</string>
     <string name="title_activity_list_request_quotation">ListRequestQuotationActivity</string>
+    <string name="title_activity_form_quotation_order">FormQuotationOrderActivity</string>
+    <string name="title_activity_form_request_quotation_customer">
+        FormRequestQuotationCustomerActivity
+    </string>
+    <string name="title_activity_form_sales_quotation">FormSalesQuotationActivity</string>
 
 </resources>

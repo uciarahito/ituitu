@@ -34,13 +34,11 @@ import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.adapter.CustomExpandableListAdapter;
 import uci.develops.wiraenergimobile.fragment.FragmentCustomer;
-import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerCompanyInfo;
 import uci.develops.wiraenergimobile.fragment.FragmentProfileCustomer;
 import uci.develops.wiraenergimobile.fragment.FragmentPurchasing;
 import uci.develops.wiraenergimobile.fragment.FragmentSales;
 import uci.develops.wiraenergimobile.fragment.navigation.FragmentNavigationManager;
 import uci.develops.wiraenergimobile.fragment.navigation.NavigationManager;
-import uci.develops.wiraenergimobile.helper.Constant;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
 import uci.develops.wiraenergimobile.model.UserXModel;
@@ -188,8 +186,6 @@ public class HomeActivity extends AppCompatActivity {
             adapter.addFragment(new FragmentPurchasing(), "");
             adapter.addFragment(new FragmentSales(), "");
         } else if (roles != "" && roles.equals("customer")) {
-//            Intent intent = new Intent(HomeActivity.this, FormCustomerActivity.class);
-//            startActivity(intent);
             adapter.addFragment(new FragmentProfileCustomer(), "");
             adapter.addFragment(new FragmentSales(), "");
         } else if (roles != "" && roles.equals("expedition")){
@@ -289,8 +285,10 @@ public class HomeActivity extends AppCompatActivity {
                 String selected_item;
                 if(new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("admin")){
                     selected_item = getResources().getStringArray(R.array.general)[groupPosition];
-                } else {
+                } else if(new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("customer")){
                     selected_item = getResources().getStringArray(R.array.general_customer)[groupPosition];
+                } else {
+                    selected_item = getResources().getStringArray(R.array.general_expedition)[groupPosition];
                 }
 
                 if (selected_item.equals("Logout")) {
@@ -303,9 +301,6 @@ public class HomeActivity extends AppCompatActivity {
                 } else if (selected_item.equals("Customer")) {
                     if (new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("admin")) {
                         Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
-                        startActivity(intent);
-                    } else {
-                        Intent intent = new Intent(HomeActivity.this, FormCustomerActivity.class);
                         startActivity(intent);
                     }
                 }

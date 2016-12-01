@@ -18,6 +18,7 @@ public class FragmentProfileCustomer extends Fragment implements View.OnClickLis
 
     private LinearLayout linearLayoutTitle1, linearLayoutTitle2, linearLayoutTitle3;
     private LinearLayout linearLayoutContent1, linearLayoutContent2, linearLayoutContent3;
+    private LinearLayout layout_container_profil_company_info, layout_container_profil_contact_info, layout_container_profil_shipping_address;
     private ImageView imageViewTitle1, imageViewTitle2, imageViewTitle3;
 
     boolean content1=false, content2=false, content3=false;
@@ -49,6 +50,9 @@ public class FragmentProfileCustomer extends Fragment implements View.OnClickLis
         linearLayoutContent1 = (LinearLayout)view.findViewById(R.id.layoutContent1);
         linearLayoutContent2 = (LinearLayout)view.findViewById(R.id.layoutContent2);
         linearLayoutContent3 = (LinearLayout)view.findViewById(R.id.layoutContent3);
+        layout_container_profil_company_info = (LinearLayout) view.findViewById(R.id.layout_container_profil_company_info);
+        layout_container_profil_contact_info = (LinearLayout) view.findViewById(R.id.layout_container_profil_contact_info);
+        layout_container_profil_shipping_address = (LinearLayout) view.findViewById(R.id.layout_container_profil_shipping_address);
         imageViewTitle1 = (ImageView)view.findViewById(R.id.imageTitle1);
         imageViewTitle2 = (ImageView)view.findViewById(R.id.imageTitle2);
         imageViewTitle3 = (ImageView)view.findViewById(R.id.imageTitle3);
@@ -72,27 +76,33 @@ public class FragmentProfileCustomer extends Fragment implements View.OnClickLis
         if(v == linearLayoutTitle1){
             if(!content1){
                 linearLayoutContent1.setVisibility(View.VISIBLE);
+                layout_container_profil_company_info.setVisibility(View.VISIBLE);
                 content1=true;
             } else {
                 linearLayoutContent1.setVisibility(View.GONE);
+                layout_container_profil_company_info.setVisibility(View.GONE);
                 content1=false;
             }
         }
         if(v == linearLayoutTitle2){
             if(!content2){
                 linearLayoutContent2.setVisibility(View.VISIBLE);
+                layout_container_profil_contact_info.setVisibility(View.VISIBLE);
                 content2=true;
             } else {
                 linearLayoutContent2.setVisibility(View.GONE);
+                layout_container_profil_contact_info.setVisibility(View.GONE);
                 content2=false;
             }
         }
         if(v == linearLayoutTitle3){
             if(!content3){
                 linearLayoutContent3.setVisibility(View.VISIBLE);
+                layout_container_profil_shipping_address.setVisibility(View.VISIBLE);
                 content3=true;
             } else {
                 linearLayoutContent3.setVisibility(View.GONE);
+                layout_container_profil_shipping_address.setVisibility(View.GONE);
                 content3=false;
             }
         }

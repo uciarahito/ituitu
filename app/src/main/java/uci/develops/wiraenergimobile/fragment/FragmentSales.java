@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.activity.DeliveryOrderActivity;
 import uci.develops.wiraenergimobile.activity.FormRequestQuotationActivity;
-import uci.develops.wiraenergimobile.activity.FormRequestQuotationActivity2;
+import uci.develops.wiraenergimobile.activity.FormRequestQuotationCustomerActivity;
 import uci.develops.wiraenergimobile.activity.InvoiceActivity;
 import uci.develops.wiraenergimobile.activity.PaymentActivity;
 import uci.develops.wiraenergimobile.activity.SalesOrderActivity;
@@ -93,7 +93,8 @@ public class FragmentSales extends Fragment implements View.OnClickListener{
                 Intent intent = new Intent(getActivity().getApplicationContext(), SalesQuotationActivity.class);
                 startActivity(intent);
             } else if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")){
-                Intent intent = new Intent(getActivity().getApplicationContext(), FormRequestQuotationActivity.class);
+//                Intent intent = new Intent(getActivity().getApplicationContext(), FormRequestQuotationActivity.class);
+                Intent intent = new Intent(getActivity().getApplicationContext(), FormRequestQuotationCustomerActivity.class);
                 startActivity(intent);
             }
         }

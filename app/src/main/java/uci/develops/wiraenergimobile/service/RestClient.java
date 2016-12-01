@@ -12,9 +12,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RestClient {
     public static RestInterface RestClient;
-    public static String URL = "http://app.wiraenergi.co.id/api/mobile/";
+//    public static String URL = "http://app.wiraenergi.co.id/api/mobile/";
 //    public static String URL = "http://app.wira.dev/api/mobile/";
-    //public static String URL = "http://10.0.3.2/app.wira/public/api/mobile/";
+    public static String URL = "http://10.0.3.2/app.wira/public/api/mobile/";
 
     static {
         setRestClient();

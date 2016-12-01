@@ -18,13 +18,14 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import uci.develops.wiraenergimobile.R;
-import uci.develops.wiraenergimobile.adapter.ItemQuotationAdapter;
+import uci.develops.wiraenergimobile.adapter.ItemRequestQuotationAdapter;
 import uci.develops.wiraenergimobile.helper.DividerItemDecoration;
 import uci.develops.wiraenergimobile.model.QuotationModel;
 
@@ -38,7 +39,7 @@ public class FragmentQuotationItemQuotation extends Fragment{
     int counter_list = 0;
     String qty = "", note = "";
 
-    private ItemQuotationAdapter itemQuotationAdapter;
+    private ItemRequestQuotationAdapter itemRequestQuotationAdapter;
 
     public FragmentQuotationItemQuotation(){}
 
@@ -65,17 +66,18 @@ public class FragmentQuotationItemQuotation extends Fragment{
         button_add_item = (Button)view.findViewById(R.id.button_add_item);
         recyclerView = (RecyclerView)view.findViewById(R.id.recycle_view);
         List<QuotationModel> quotationModelsList = new ArrayList<>();
-        itemQuotationAdapter = new ItemQuotationAdapter(getContext(), quotationModelsList);
+        itemRequestQuotationAdapter = new ItemRequestQuotationAdapter(getContext(), quotationModelsList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL));
-        recyclerView.setAdapter(itemQuotationAdapter);
+        recyclerView.setAdapter(itemRequestQuotationAdapter);
 
         button_add_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialogAddItem();
+                Toast.makeText(getActivity().getApplicationContext(), "API belum ada", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -100,8 +102,8 @@ public class FragmentQuotationItemQuotation extends Fragment{
         listItem.add("Liter");
         listItem.add("Barrel");
         ArrayAdapter<String> itemAdapter = new ArrayAdapter<String>(getContext(),
-                android.R.layout.simple_spinner_item, listItem);
-        itemAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.layout.spinner_item, listItem);
+        itemAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner_item.setAdapter(itemAdapter);
 
         List<String> listUnit = new ArrayList<String>();
@@ -110,24 +112,29 @@ public class FragmentQuotationItemQuotation extends Fragment{
         listUnit.add("Laptop Asus");
         listUnit.add("Solar");
         ArrayAdapter<String> unitAdapter = new ArrayAdapter<String>(getContext(),
-                android.R.layout.simple_spinner_item, listUnit);
-        unitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.layout.spinner_item, listUnit);
+        unitAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner_unit.setAdapter(unitAdapter);
 
-        //utk send date
-        final Calendar calendar = Calendar.getInstance();
-        int mYear = calendar.get(Calendar.YEAR); // current year
-        int mMonth = calendar.get(Calendar.MONTH); // current month
-        int mDay = calendar.get(Calendar.DAY_OF_MONTH); // current day
-        // date picker dialog
-        datePickerDialog = new DatePickerDialog(getActivity().getApplicationContext(), new DatePickerDialog.OnDateSetListener() {
+        editText_send_date.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                // set day of month , month and year value in the edit text
-                editText_send_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+            public void onClick(View v) {
+                //utk send date
+                final Calendar calendar = Calendar.getInstance();
+                int mYear = calendar.get(Calendar.YEAR); // current year
+                int mMonth = calendar.get(Calendar.MONTH); // current month
+                int mDay = calendar.get(Calendar.DAY_OF_MONTH); // current day
+                // date picker dialog
+                datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        // set day of month , month and year value in the edit text
+                        editText_send_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                    }
+                }, mYear, mMonth, mDay);
+                datePickerDialog.show();
             }
-        }, mYear, mMonth, mDay);
-        datePickerDialog.show();
+        });
 
         button_cancel.setOnClickListener(new View.OnClickListener() {
             @Override

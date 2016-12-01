@@ -229,9 +229,6 @@ public class PurchaseOrderActivity extends AppCompatActivity {
                     if (new SharedPreferenceManager().getPreferences(PurchaseOrderActivity.this, "roles").equals("admin")) {
                         Intent intent = new Intent(PurchaseOrderActivity.this, HomeActivity.class);
                         startActivity(intent);
-                    } else {
-                        Intent intent = new Intent(PurchaseOrderActivity.this, ProfileActivity.class);
-                        startActivity(intent);
                     }
                 }
                 return false;

@@ -10,6 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="uci.develops.wiraenergimobile.activity.DeliveryOrderActivity"
-    tools:showIn="@layout/activity_delivery_order">
+    tools:showIn="@layout/app_bar_delivery_order">
 
 </RelativeLayout>

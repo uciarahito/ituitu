@@ -233,7 +233,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     @Override
                     public void onFailure(Call<LoginResponse> call, Throwable t) {
-                        Log.e("LoginActivity", "Retrofit Error");
+                        Log.e("FormCustomer", "Failure" + t.getMessage());
                         hideProgressLoading();
                     }
                 });

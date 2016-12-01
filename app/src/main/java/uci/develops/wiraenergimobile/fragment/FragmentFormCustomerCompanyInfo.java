@@ -124,16 +124,16 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         valutas.add("Rupiah");
         valutas.add("US Dollar");
         ArrayAdapter<String> valutaAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
-                android.R.layout.simple_spinner_item, valutas);
-        valutaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.layout.spinner_item, valutas);
+        valutaAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner_valuta.setAdapter(valutaAdapter);
 
         List<String> check_List = new ArrayList<String>();
         check_List.add("No");
         check_List.add("Yes");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
-                android.R.layout.simple_spinner_item, check_List);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.layout.spinner_item, check_List);
+        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner_tax_ppn.setAdapter(dataAdapter);
         spinner_active.setAdapter(dataAdapter);
 
@@ -142,10 +142,10 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         String[] province = getActivity().getResources().getStringArray(R.array.list_of_province);
         String[] city = getActivity().getResources().getStringArray(R.array.list_of_city);
 
-        ArrayAdapter<String> provinceAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, province);
+        ArrayAdapter<String> provinceAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.spinner_item, province);
         autoComplete_province.setAdapter(provinceAdapter);
 
-        ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, city);
+        ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.spinner_item, city);
         autoComplete_city.setAdapter(cityAdapter);
     }
 
@@ -163,8 +163,8 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
                             index++;
                         }
                         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
-                                android.R.layout.simple_spinner_item, check_List);
-                        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                R.layout.spinner_item, check_List);
+                        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
                         spinner_group.setAdapter(dataAdapter);
                     }
                 }

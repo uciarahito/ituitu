@@ -41,16 +41,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.adapter.CustomExpandableListAdapter;
-import uci.develops.wiraenergimobile.adapter.CustomerAdapter;
 import uci.develops.wiraenergimobile.adapter.CustomerDialogAdapter;
 import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerCompanyInfo;
 import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerContactInfo;
-import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerShippingTo;
 import uci.develops.wiraenergimobile.fragment.navigation.NavigationManager;
 import uci.develops.wiraenergimobile.helper.Constant;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerAddressModel;
-import uci.develops.wiraenergimobile.model.CustomerGroupModel;
 import uci.develops.wiraenergimobile.model.CustomerModel;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
 import uci.develops.wiraenergimobile.model.UserXModel;
@@ -265,7 +262,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                                     Toast.makeText(FormCustomerActivity.this, "Approve request successfull", Toast.LENGTH_SHORT).show();
                                     Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
                                     Constant.sendNotification(response.body().getData().getRegistration_key(), "Request anda telah di setujui", "approve_customer");
-                                    Intent intent = new Intent(FormCustomerActivity.this, DashboardAdminActivity.class);
+                                    Intent intent = new Intent(FormCustomerActivity.this, HomeActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -501,11 +498,11 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                                      * Company info
                                      */
                                     Call<ApproveResponse> approveResponseCallCompany = RestClient.getRestClient().sendDataCompanyInfo("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
-                                            new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), ""+FormCustomerActivity.customerModel_temp.getFirst_name(), FormCustomerActivity.customerModel_temp.getLast_name(),
-                                            ""+FormCustomerActivity.customerModel_temp.getAddress(), ""+FormCustomerActivity.customerModel_temp.getCity(), ""+FormCustomerActivity.customerModel_temp.getProvince(), ""+FormCustomerActivity.customerModel_temp.getPhone(),
-                                            ""+FormCustomerActivity.customerModel_temp.getMobile(), ""+FormCustomerActivity.customerModel_temp.getFax(), ""+FormCustomerActivity.customerModel_temp.getTerm(), ""+FormCustomerActivity.customerModel_temp.getGroup(),
-                                            ""+FormCustomerActivity.customerModel_temp.getValuta(), ""+FormCustomerActivity.customerModel_temp.getNpwp(), FormCustomerActivity.customerModel_temp.getTax().equals("Yes") ? 1 : 0, ""+FormCustomerActivity.customerModel_temp.getEmail(),
-                                            ""+FormCustomerActivity.customerModel_temp.getWebsite(), ""+FormCustomerActivity.customerModel_temp.getNote(), ""+FormCustomerActivity.customerModel_temp.getPostcode());
+                                            new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), "" + FormCustomerActivity.customerModel_temp.getFirst_name(), FormCustomerActivity.customerModel_temp.getLast_name(),
+                                            "" + FormCustomerActivity.customerModel_temp.getAddress(), "" + FormCustomerActivity.customerModel_temp.getCity(), "" + FormCustomerActivity.customerModel_temp.getProvince(), "" + FormCustomerActivity.customerModel_temp.getPhone(),
+                                            "" + FormCustomerActivity.customerModel_temp.getMobile(), "" + FormCustomerActivity.customerModel_temp.getFax(), "" + FormCustomerActivity.customerModel_temp.getTerm(), "" + FormCustomerActivity.customerModel_temp.getGroup(),
+                                            "" + FormCustomerActivity.customerModel_temp.getValuta(), "" + FormCustomerActivity.customerModel_temp.getNpwp(), FormCustomerActivity.customerModel_temp.getTax().equals("Yes") ? 1 : 0, "" + FormCustomerActivity.customerModel_temp.getEmail(),
+                                            "" + FormCustomerActivity.customerModel_temp.getWebsite(), "" + FormCustomerActivity.customerModel_temp.getNote(), "" + FormCustomerActivity.customerModel_temp.getPostcode());
                                     approveResponseCallCompany.enqueue(new Callback<ApproveResponse>() {
                                         @Override
                                         public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
@@ -555,7 +552,6 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                                     });
 
 
-
                                     Intent intent = new Intent(FormCustomerActivity.this, WaitingApprovalActivity.class);
                                     startActivity(intent);
                                 }
@@ -572,10 +568,6 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                         linearLayout_container_basic_info.setVisibility(View.GONE);
                         linearLayout_container_contact_info.setVisibility(View.GONE);
                         linearLayout_container_shipping_to.setVisibility(View.GONE);
-//                        linearLayout_tab_basic_info.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
-//                        linearLayout_tab_contact_info.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
-//                        linearLayout_tab_shipping_to.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
-//                        linearLayouts_tabs[index_fragment].setBackgroundResource(R.drawable.rounded_rectangle_blue);
 
                         linearLayout_tab_basic_info.setBackgroundResource(R.drawable.rounded_rectangle_dark_gray);
                         linearLayout_tab_contact_info.setBackgroundResource(R.drawable.rounded_rectangle_dark_gray);
@@ -583,23 +575,13 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                         linearLayouts_tabs[index_fragment].setBackgroundResource(R.drawable.rounded_rectangle_orange);
                         linearLayouts_fragment[index_fragment].setVisibility(View.VISIBLE);
                     } else {
-//                        Intent intent = new Intent(FormCustomerActivity.this, DashboardCustomerActivity.class);
-                        /*
-                        Intent intent = new Intent(FormCustomerActivity.this, WaitingApprovalActivity.class);
-                        startActivity(intent);
-                        finish();
-                        */
+
                     }
                 } else {
                     Toast.makeText(FormCustomerActivity.this, "All field are required!", Toast.LENGTH_SHORT).show();
                 }
             } else {
-//                Intent intent = new Intent(FormCustomerActivity.this, DashboardCustomerActivity.class);
-                /*
-                Intent intent = new Intent(FormCustomerActivity.this, WaitingApprovalActivity.class);
-                startActivity(intent);
-                finish();
-                */
+
             }
         } else if (v == linearLayout_button_back) {
             if (index_fragment >= 0) {
@@ -620,11 +602,6 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                     linearLayout_container_contact_info.setVisibility(View.GONE);
                     linearLayout_container_shipping_to.setVisibility(View.GONE);
 
-//                    linearLayout_tab_basic_info.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
-//                    linearLayout_tab_contact_info.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
-//                    linearLayout_tab_shipping_to.setBackgroundResource(R.drawable.rounded_rectangle_blue_gray);
-//                    linearLayouts_tabs[index_fragment].setBackgroundResource(R.drawable.rounded_rectangle_blue);
-
                     linearLayout_tab_basic_info.setBackgroundResource(R.drawable.rounded_rectangle_dark_gray);
                     linearLayout_tab_contact_info.setBackgroundResource(R.drawable.rounded_rectangle_dark_gray);
                     linearLayout_tab_shipping_to.setBackgroundResource(R.drawable.rounded_rectangle_dark_gray);
@@ -633,14 +610,6 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                 }
             }
         }
-//        else if (v == linearLayout_button_submit) {
-//            Intent intent = new Intent(FormCustomerActivity.this, DashboardCustomerActivity.class);
-//            startActivity(intent);
-//        } else if (v == linearLayout_button_cancel) {
-//            Intent intent = new Intent(FormCustomerActivity.this, DashboardCustomerActivity.class);
-//            startActivity(intent);
-//        }
-
     }
 
     private void showDialogNote() {
@@ -1235,6 +1204,14 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 String selected_item = getResources().getStringArray(R.array.general)[groupPosition];
+                if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("admin")) {
+                    selected_item = getResources().getStringArray(R.array.general)[groupPosition];
+                } else if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("customer")) {
+                    selected_item = getResources().getStringArray(R.array.general_customer)[groupPosition];
+                } else {
+                    selected_item = getResources().getStringArray(R.array.general_expedition)[groupPosition];
+                }
+
                 if (selected_item.equals("Logout")) {
                     logout();
                 } else if (selected_item.equals("Dashboard")) {
@@ -1244,9 +1221,6 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                 } else if (selected_item.equals("Customer")) {
                     if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("admin")) {
                         Intent intent = new Intent(FormCustomerActivity.this, HomeActivity.class);
-                        startActivity(intent);
-                    } else if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("customer")) {
-                        Intent intent = new Intent(FormCustomerActivity.this, ProfileActivity.class);
                         startActivity(intent);
                     }
                 }

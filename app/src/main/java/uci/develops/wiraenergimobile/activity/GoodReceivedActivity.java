@@ -208,6 +208,14 @@ public class GoodReceivedActivity extends AppCompatActivity {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 String selected_item = getResources().getStringArray(R.array.general)[groupPosition];
+                if(new SharedPreferenceManager().getPreferences(GoodReceivedActivity.this, "roles").equals("admin")){
+                    selected_item = getResources().getStringArray(R.array.general)[groupPosition];
+                } else if(new SharedPreferenceManager().getPreferences(GoodReceivedActivity.this, "roles").equals("customer")){
+                    selected_item = getResources().getStringArray(R.array.general_customer)[groupPosition];
+                } else {
+                    selected_item = getResources().getStringArray(R.array.general_expedition)[groupPosition];
+                }
+
                 if (selected_item.equals("Logout")) {
                     logout();
                 } else if (selected_item.equals("Dashboard")) {
@@ -217,9 +225,6 @@ public class GoodReceivedActivity extends AppCompatActivity {
                 } else if (selected_item.equals("Customer")) {
                     if (new SharedPreferenceManager().getPreferences(GoodReceivedActivity.this, "roles").equals("admin")) {
                         Intent intent = new Intent(GoodReceivedActivity.this, HomeActivity.class);
-                        startActivity(intent);
-                    } else {
-                        Intent intent = new Intent(GoodReceivedActivity.this, ProfileActivity.class);
                         startActivity(intent);
                     }
                 }

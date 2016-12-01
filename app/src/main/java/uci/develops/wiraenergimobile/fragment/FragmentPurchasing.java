@@ -29,7 +29,7 @@ public class FragmentPurchasing extends Fragment implements View.OnClickListener
      * Use this factory method to create a new instance of
      * this fragment.
      *
-     * @return A new instance of fragment FragmentNavSales.
+     *
      */
     public static FragmentPurchasing newInstance(String movieTitle) {
         FragmentPurchasing fragmentPurchasing = new FragmentPurchasing();

@@ -19,10 +19,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar">
@@ -64,14 +60,6 @@
             android:name=".activity.MapsCoordinateActivity"
             android:label="@string/title_activity_maps_coordinate" />
         <activity
-            android:name=".activity.DashboardAdminActivity"
-            android:label="@string/title_activity_dashboard_admin"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.DashboardCustomerActivity"
-            android:label="@string/title_activity_dashboard_customer"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".activity.ListCustomerActivity"
             android:label="@string/title_activity_list_customer"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -97,18 +85,6 @@
             android:label="@string/title_activity_list_request_customer"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.DetailRequestCustomerActivity"
-            android:label="@string/title_activity_detail_request_customer"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.DetailCustomerActivity"
-            android:label="@string/title_activity_detail_customer"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.DashboardActivity"
-            android:label="@string/title_activity_dashboard"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
-        <activity
             android:name=".activity.ResetPasswordActivity"
             android:label="@string/title_activity_reset_password"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -121,24 +97,12 @@
             android:label="@string/title_activity_waiting_approval"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.RequestQuotationActivity"
-            android:label="@string/title_activity_request_quotation"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".activity.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.FormQuotationActivity"
-            android:label="@string/title_activity_form_quotation"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".activity.ReportQuotationActivity"
             android:label="@string/title_activity_report_quotation"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.ItemQuotationActivity"
-            android:label="@string/title_activity_item_quotation"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.SalesQuotationActivity"
@@ -168,17 +132,14 @@
             android:name=".activity.PaymentActivity"
             android:label="@string/title_activity_payment"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.ProfileActivity"
-            android:label="@string/title_activity_profile"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".activity.FormRequestQuotationActivity2">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".activity.ListQuotationActivity"
@@ -191,6 +152,18 @@
         <activity
             android:name=".activity.FormRequestQuotationActivity"
             android:label="@string/title_activity_form_request_quotation"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.FormQuotationOrderActivity"
+            android:label="@string/title_activity_form_quotation_order"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.FormRequestQuotationCustomerActivity"
+            android:label="@string/title_activity_form_request_quotation_customer"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.FormSalesQuotationActivity"
+            android:label="@string/title_activity_form_sales_quotation"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

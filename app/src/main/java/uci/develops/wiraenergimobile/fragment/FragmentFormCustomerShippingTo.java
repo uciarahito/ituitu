@@ -80,8 +80,8 @@ public class FragmentFormCustomerShippingTo extends Fragment {
     }
 
     private void initializeComponent(View view) {
-        button_add_shipping = (Button)view.findViewById(R.id.button_add_shipping);
-        recyclerView = (RecyclerView)view.findViewById(R.id.recycle_view);
+        button_add_shipping = (Button) view.findViewById(R.id.button_add_shipping);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycle_view);
         List<CustomerAddressModel> customerAddressModelList = new ArrayList<>();
         shippingAddressAdapter = new ShippingAddressAdapter(getContext(), customerAddressModelList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
@@ -117,6 +117,7 @@ public class FragmentFormCustomerShippingTo extends Fragment {
     }
 
     Dialog dialog_add_shipping;
+
     private void showDialogAddShipping() {
         dialog_add_shipping = new Dialog(getContext());
         dialog_add_shipping.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -128,8 +129,8 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         editText_map_cordinate = (EditText) dialog_add_shipping.findViewById(R.id.editText_map_coordinate);
         editText_phone = (EditText) dialog_add_shipping.findViewById(R.id.editText_phone);
         editText_mobile = (EditText) dialog_add_shipping.findViewById(R.id.editText_mobile);
-        button_save = (Button)dialog_add_shipping.findViewById(R.id.button_save);
-        button_cancel = (Button)dialog_add_shipping.findViewById(R.id.button_cancel);
+        button_save = (Button) dialog_add_shipping.findViewById(R.id.button_save);
+        button_cancel = (Button) dialog_add_shipping.findViewById(R.id.button_cancel);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         WindowManager windowmanager = (WindowManager) getContext().getSystemService(getContext().WINDOW_SERVICE);
@@ -143,7 +144,7 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         button_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isNotEmpty()){
+                if (isNotEmpty()) {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("name", editText_address_name.getText().toString());
                     params.put("address", editText_address.getText().toString());
@@ -151,11 +152,11 @@ public class FragmentFormCustomerShippingTo extends Fragment {
                     params.put("phone", editText_phone.getText().toString());
                     params.put("mobile", editText_mobile.getText().toString());
                     params.put("map", editText_map_cordinate.getText().toString());
-                    Call<ApproveResponse> addShippingAddressCall = RestClient.getRestClient().createCustomerAddress("Bearer "+token, decode, params);
+                    Call<ApproveResponse> addShippingAddressCall = RestClient.getRestClient().createCustomerAddress("Bearer " + token, decode, params);
                     addShippingAddressCall.enqueue(new Callback<ApproveResponse>() {
                         @Override
                         public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                            if(response.isSuccessful()){
+                            if (response.isSuccessful()) {
                                 Toast.makeText(getContext(), "Sukses", Toast.LENGTH_SHORT).show();
                                 loadData();
                                 dialog_add_shipping.dismiss();
@@ -198,7 +199,7 @@ public class FragmentFormCustomerShippingTo extends Fragment {
     }
 
     private void loadData() {
-        Call<ListCustomerAddressResponse> listCustomerAddressResponseCall = RestClient.getRestClient().getCustomerAddress("Bearer "+token,
+        Call<ListCustomerAddressResponse> listCustomerAddressResponseCall = RestClient.getRestClient().getCustomerAddress("Bearer " + token,
                 decode);
         listCustomerAddressResponseCall.enqueue(new Callback<ListCustomerAddressResponse>() {
             @Override

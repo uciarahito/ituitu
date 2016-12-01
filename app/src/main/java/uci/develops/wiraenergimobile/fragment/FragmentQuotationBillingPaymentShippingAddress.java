@@ -91,8 +91,8 @@ public class FragmentQuotationBillingPaymentShippingAddress extends Fragment{
                         customerAddressModels = response.body().getData();
 
                         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
-                                android.R.layout.simple_spinner_item, check_List);
-                        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                R.layout.spinner_item, check_List);
+                        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
                         spinner_shipping_address_name.setAdapter(dataAdapter);
 
                         spinner_shipping_address_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
