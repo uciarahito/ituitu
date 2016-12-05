@@ -1,11 +1,11 @@
 package uci.develops.wiraenergimobile.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -18,17 +18,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
-import uci.develops.wiraenergimobile.activity.HomeActivity;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
-import uci.develops.wiraenergimobile.model.CustomerModel;
-import uci.develops.wiraenergimobile.response.CustomerResponse;
+import uci.develops.wiraenergimobile.model.CustomerAddressModel;
+import uci.develops.wiraenergimobile.response.ListCustomerAddressResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class FragmentSOShippingAddress extends Fragment{
 
     private TextView textView_address, textView_pic_name, textView_phone, textView_mobile;
     private Spinner spinner_customer_address;
-    List<CustomerModel> customerModelList;
+    List<CustomerAddressModel> customerAddressModels;
     String check_List [];
 
     public FragmentSOShippingAddress(){}
@@ -72,42 +71,52 @@ public class FragmentSOShippingAddress extends Fragment{
     }
 
     private void loadDataSpinnerShippingAddress(){
-        customerModelList = new ArrayList<>();
-        Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer " +
-                        new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "token"),
+        customerAddressModels = new ArrayList<>();
+        Call<ListCustomerAddressResponse> customerAddressResponseCall = RestClient.getRestClient().getCustomerAddress("Bearer "
+                        + new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "token"),
                 new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode"));
-        customerResponseCall.enqueue(new Callback<CustomerResponse>() {
+        customerAddressResponseCall.enqueue(new Callback<ListCustomerAddressResponse>() {
             @Override
-            public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
+            public void onResponse(Call<ListCustomerAddressResponse> call, Response<ListCustomerAddressResponse> response) {
                 if (response.isSuccessful()) {
-//                    final CustomerModel customerModel = response.body().getData().get(0);
-//                    Toast.makeText(getContext(), "Address: " + response.body().getData().get(0).getAddress(), Toast.LENGTH_SHORT).show();
+                    if (response.body().getData().size() > 0) {
+                        check_List = new String[response.body().getData().size()];
+                        int index = 0;
+                        for (CustomerAddressModel customerAddressModel : response.body().getData()) {
+                            check_List[index] = customerAddressModel.getName();
+                            index++;
+                        }
 
-                    if(response.body().getData().size() > 0) {
-//                        check_List = new String[response.body().getData().size()];
-                        int index=0;
-//                        for(customerModel : response.body().getData()){
-//                            check_List[index] = customerModel.getName();
-//                            index++;
-//                        }
-                        List<String> contactInfo = new ArrayList<String>();
-                        contactInfo.add("Andi");
-                        contactInfo.add("Anton");
-                        contactInfo.add("Arif");
+                        customerAddressModels = response.body().getData();
 
                         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
-                                R.layout.spinner_item, contactInfo);
+                                R.layout.spinner_item, check_List);
                         dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
                         spinner_customer_address.setAdapter(dataAdapter);
-                    }
 
+                        spinner_customer_address.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                Toast.makeText(getActivity().getApplicationContext(), "" + check_List[position], Toast.LENGTH_SHORT).show();
+                                textView_address.setText("" + customerAddressModels.get(position).getAddress());
+                                textView_pic_name.setText("" + customerAddressModels.get(position).getPic());
+                                textView_phone.setText("" + customerAddressModels.get(position).getPhone());
+                                textView_mobile.setText("" + customerAddressModels.get(position).getMobile());
+
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<CustomerResponse> call, Throwable t) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), HomeActivity.class);
-                startActivity(intent);
+            public void onFailure(Call<ListCustomerAddressResponse> call, Throwable t) {
+
             }
         });
     }

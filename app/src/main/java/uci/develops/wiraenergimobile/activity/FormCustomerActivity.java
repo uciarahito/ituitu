@@ -137,6 +137,10 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         linearLayouts_tabs[1] = linearLayout_tab_contact_info;
         linearLayouts_tabs[2] = linearLayout_tab_shipping_to;
 
+        linearLayout_tab_basic_info.setBackgroundResource(R.drawable.rounded_rectangle_orange);
+        linearLayout_tab_contact_info.setBackgroundResource(R.drawable.rounded_rectangle_dark_gray);
+        linearLayout_tab_shipping_to.setBackgroundResource(R.drawable.rounded_rectangle_dark_gray);
+
         linearLayouts_fragment[index_fragment].setVisibility(View.VISIBLE);
 
         linearLayout_button_next.setOnClickListener(this);
@@ -191,7 +195,8 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void buttonValidation() {
-        Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
+        Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer " +
+                        new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
                 new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"));
         customerResponseCall.enqueue(new Callback<CustomerResponse>() {
             @Override
@@ -267,16 +272,28 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
             linearLayouts_fragment[0].setVisibility(View.VISIBLE);
             linearLayouts_fragment[1].setVisibility(View.GONE);
             linearLayouts_fragment[2].setVisibility(View.GONE);
+
+            linearLayout_tab_basic_info.setBackgroundResource(R.drawable.rounded_rectangle_orange);
+            linearLayout_tab_contact_info.setBackgroundResource(R.drawable.rounded_rectangle_dark_gray);
+            linearLayout_tab_shipping_to.setBackgroundResource(R.drawable.rounded_rectangle_dark_gray);
         }
         if (v == linearLayout_tab_contact_info) {
             linearLayouts_fragment[0].setVisibility(View.GONE);
             linearLayouts_fragment[1].setVisibility(View.VISIBLE);
             linearLayouts_fragment[2].setVisibility(View.GONE);
+
+            linearLayout_tab_basic_info.setBackgroundResource(R.drawable.rounded_rectangle_dark_gray);
+            linearLayout_tab_contact_info.setBackgroundResource(R.drawable.rounded_rectangle_orange);
+            linearLayout_tab_shipping_to.setBackgroundResource(R.drawable.rounded_rectangle_dark_gray);
         }
         if (v == linearLayout_tab_shipping_to) {
             linearLayouts_fragment[0].setVisibility(View.GONE);
             linearLayouts_fragment[1].setVisibility(View.GONE);
             linearLayouts_fragment[2].setVisibility(View.VISIBLE);
+
+            linearLayout_tab_basic_info.setBackgroundResource(R.drawable.rounded_rectangle_dark_gray);
+            linearLayout_tab_contact_info.setBackgroundResource(R.drawable.rounded_rectangle_dark_gray);
+            linearLayout_tab_shipping_to.setBackgroundResource(R.drawable.rounded_rectangle_orange);
         }
         if (v == linearLayout_button_approve) {
             showProgressLoading();
@@ -765,13 +782,14 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
             rootMenu.add("Logout");
         } else if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("customer")) {
             rootMenu.add("Dashboard");
-            rootMenu.add("Customer");
+            rootMenu.add("Profile");
             rootMenu.add("Sales");
             rootMenu.add("Logout");
         } else if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("")) {
             rootMenu.add("Logout");
         } else if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("expedition")) {
             rootMenu.add("Dashboard");
+            rootMenu.add("Profile");
             rootMenu.add("Delivery Order");
             rootMenu.add("Logout");
         }

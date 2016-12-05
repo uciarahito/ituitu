@@ -79,15 +79,6 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         initializeComponent(view);
         loadData();
 
-        editText_map_cordinate.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                Intent intent = new Intent(getContext(), MapsCoordinateActivity.class);
-                startActivity(intent);
-                return false;
-            }
-        });
-
         return view;
     }
 
@@ -143,6 +134,15 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         editText_mobile = (EditText) dialog_add_shipping.findViewById(R.id.editText_mobile);
         button_save = (Button) dialog_add_shipping.findViewById(R.id.button_save);
         button_cancel = (Button) dialog_add_shipping.findViewById(R.id.button_cancel);
+
+        editText_map_cordinate.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Intent intent = new Intent(getActivity().getApplicationContext(), MapsCoordinateActivity.class);
+                startActivity(intent);
+                return false;
+            }
+        });
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         WindowManager windowmanager = (WindowManager) getContext().getSystemService(getContext().WINDOW_SERVICE);

@@ -4,7 +4,18 @@
     android:id="@android:id/text1"
     style="?android:attr/spinnerDropDownItemStyle"
     android:layout_width="match_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:layout_height="40dp"
     android:ellipsize="marquee"
     android:singleLine="true"
+    android:text="text"
     android:textColor="@color/GreenColor3" />
+
+<!--<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--android:id="@android:id/text1"-->
+<!--style="?android:attr/spinnerDropDownItemStyle"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="?android:attr/listPreferredItemHeight"-->
+<!--android:ellipsize="marquee"-->
+<!--android:singleLine="true"-->
+<!--android:text="text"-->
+<!--android:textColor="@color/GreenColor3" />-->

@@ -1,7 +1,9 @@
 package uci.develops.wiraenergimobile.adapter;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
@@ -62,7 +64,9 @@ public class ShippingAddressAdapter extends RecyclerView.Adapter<ShippingAddress
             }
 
             if (new SharedPreferenceManager().getPreferences(context, "roles").equals("admin")) {
-                if (Integer.parseInt(new SharedPreferenceManager().getPreferences(context, "approve")) == 1) {
+                if ((Integer.parseInt(new SharedPreferenceManager().getPreferences(context, "approve")) == 0) |
+                        (Integer.parseInt(new SharedPreferenceManager().getPreferences(context, "approve")) == 1) |
+                        (Integer.parseInt(new SharedPreferenceManager().getPreferences(context, "approve")) == 2)){
                     imageView_edit.setEnabled(false);
                     imageView_delete.setEnabled(false);
                 }
@@ -107,29 +111,75 @@ public class ShippingAddressAdapter extends RecyclerView.Adapter<ShippingAddress
         holder.imageView_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<ApproveResponse> addShippingAddressCall = RestClient.getRestClient().deleteCustomerAddress("Bearer " +
-                                new SharedPreferenceManager().getPreferences(context, "token"),
-                        new SharedPreferenceManager().getPreferences(context, "customer_decode"), customerAddressModel.getDecode());
-                addShippingAddressCall.enqueue(new Callback<ApproveResponse>() {
-                    @Override
-                    public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                        if (response.isSuccessful()) {
-                            Toast.makeText(context, "Sukses", Toast.LENGTH_SHORT).show();
-                            if (new SharedPreferenceManager().getPreferences(context, "roles").equals("")){
-                                Intent intent = new Intent(context, FormCustomerActivity.class);
-                                context.startActivity(intent);
-                            } else if (new SharedPreferenceManager().getPreferences(context, "roles").equals("customer")){
-                                Intent intent = new Intent(context, HomeActivity.class);
-                                context.startActivity(intent);
+//                alertDialogDeleteShippingAddress();
+//                Call<ApproveResponse> addShippingAddressCall = RestClient.getRestClient().deleteCustomerAddress("Bearer " +
+//                                new SharedPreferenceManager().getPreferences(context, "token"),
+//                        new SharedPreferenceManager().getPreferences(context, "customer_decode"), customerAddressModel.getDecode());
+//                addShippingAddressCall.enqueue(new Callback<ApproveResponse>() {
+//                    @Override
+//                    public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+//                        if (response.isSuccessful()) {
+//                            Toast.makeText(context, "Sukses", Toast.LENGTH_SHORT).show();
+//                            if (new SharedPreferenceManager().getPreferences(context, "roles").equals("")){
+//                                Intent intent = new Intent(context, FormCustomerActivity.class);
+//                                context.startActivity(intent);
+//                            } else if (new SharedPreferenceManager().getPreferences(context, "roles").equals("customer")){
+//                                Intent intent = new Intent(context, HomeActivity.class);
+//                                context.startActivity(intent);
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<ApproveResponse> call, Throwable t) {
+//
+//                    }
+//                });
+
+                final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                alertDialogBuilder.setMessage("Are you sure want to delete the shipping address?");
+                alertDialogBuilder.setNegativeButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                Call<ApproveResponse> addShippingAddressCall = RestClient.getRestClient().deleteCustomerAddress("Bearer " +
+                                                new SharedPreferenceManager().getPreferences(context, "token"),
+                                        new SharedPreferenceManager().getPreferences(context, "customer_decode"), customerAddressModel.getDecode());
+                                addShippingAddressCall.enqueue(new Callback<ApproveResponse>() {
+                                    @Override
+                                    public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                                        if (response.isSuccessful()) {
+                                            Toast.makeText(context, "Sukses", Toast.LENGTH_SHORT).show();
+                                            if (new SharedPreferenceManager().getPreferences(context, "roles").equals("")) {
+                                                Intent intent = new Intent(context, FormCustomerActivity.class);
+                                                context.startActivity(intent);
+                                            } else if (new SharedPreferenceManager().getPreferences(context, "roles").equals("customer")) {
+                                                Intent intent = new Intent(context, HomeActivity.class);
+                                                context.startActivity(intent);
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ApproveResponse> call, Throwable t) {
+
+                                    }
+                                });
                             }
-                        }
-                    }
+                        });
+                alertDialogBuilder.setPositiveButton("No",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface arg0, int arg1) {
+//                        Intent intent = new Intent(context, FormCustomerActivity.class);
+//                        context.startActivity(intent);
+                                arg0.dismiss();
+                            }
+                        });
 
-                    @Override
-                    public void onFailure(Call<ApproveResponse> call, Throwable t) {
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
 
-                    }
-                });
             }
         });
 
@@ -230,8 +280,16 @@ public class ShippingAddressAdapter extends RecyclerView.Adapter<ShippingAddress
                         public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                             if (response.isSuccessful()) {
                                 Toast.makeText(context, "Sukses", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(context, FormCustomerActivity.class);
-                                context.startActivity(intent);
+                                if (new SharedPreferenceManager().getPreferences(context, "roles").equals("")) {
+                                    Intent intent = new Intent(context, FormCustomerActivity.class);
+                                    context.startActivity(intent);
+                                } else if (new SharedPreferenceManager().getPreferences(context, "roles").equals("customer")) {
+                                    Intent intent = new Intent(context, HomeActivity.class);
+                                    context.startActivity(intent);
+                                }
+
+//                                Intent intent = new Intent(context, FormCustomerActivity.class);
+//                                context.startActivity(intent);
                                 dialog_add_shipping.dismiss();
                             } else {
                                 Toast.makeText(context, "" + response.errorBody().toString(), Toast.LENGTH_SHORT).show();
@@ -287,4 +345,51 @@ public class ShippingAddressAdapter extends RecyclerView.Adapter<ShippingAddress
     public int getItemCount() {
         return customerAddressModelList.size();
     }
+
+//    private void alertDialogDeleteShippingAddress() {
+//        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+//        alertDialogBuilder.setMessage("Are you sure want to delete the shipping address?");
+//        alertDialogBuilder.setNegativeButton("Yes",
+//                new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface arg0, int arg1) {
+//                        final CustomerAddressModel customerAddressModel = new CustomerAddressModel();
+//                        Call<ApproveResponse> addShippingAddressCall = RestClient.getRestClient().deleteCustomerAddress("Bearer " +
+//                                        new SharedPreferenceManager().getPreferences(context, "token"),
+//                                new SharedPreferenceManager().getPreferences(context, "customer_decode"), customerAddressModel.getDecode());
+//                        addShippingAddressCall.enqueue(new Callback<ApproveResponse>() {
+//                            @Override
+//                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+//                                if (response.isSuccessful()) {
+//                                    Toast.makeText(context, "Sukses", Toast.LENGTH_SHORT).show();
+//                                    if (new SharedPreferenceManager().getPreferences(context, "roles").equals("")) {
+//                                        Intent intent = new Intent(context, FormCustomerActivity.class);
+//                                        context.startActivity(intent);
+//                                    } else if (new SharedPreferenceManager().getPreferences(context, "roles").equals("customer")) {
+//                                        Intent intent = new Intent(context, HomeActivity.class);
+//                                        context.startActivity(intent);
+//                                    }
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
+//
+//                            }
+//                        });
+//                    }
+//                });
+//        alertDialogBuilder.setPositiveButton("No",
+//                new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface arg0, int arg1) {
+////                        Intent intent = new Intent(context, FormCustomerActivity.class);
+////                        context.startActivity(intent);
+//                       arg0.dismiss();
+//                    }
+//                });
+//
+//        AlertDialog alertDialog = alertDialogBuilder.create();
+//        alertDialog.show();
+//    }
 }

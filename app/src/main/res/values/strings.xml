@@ -231,8 +231,7 @@
     <string name="already_member">Already a member?</string>
     <string name="footer">2016 All Rights Reserved. PT. Wiraenergi</string>
 
-
-
+    <string name="spinner_group">List of Group</string>
 
     <string name="qty_no">QT No:</string>
     <string name="qty_date">QT Date:</string>

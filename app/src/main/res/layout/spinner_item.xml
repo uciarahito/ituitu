@@ -7,4 +7,6 @@
     android:layout_height="wrap_content"
     android:ellipsize="marquee"
     android:singleLine="true"
-    android:textColor="@color/Black" />
+    android:text="text"
+    android:textColor="@color/secondary_text"
+    android:textSize="@dimen/textView_transaction"/>

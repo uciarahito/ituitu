@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/rounded_rectangle_gray">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,7 +23,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:gravity="left|center"
-                android:text="Customer              :"
+                android:text="Customer"
                 android:textStyle="bold" />
 
             <TextView
@@ -44,7 +45,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:gravity="left|center"
-                android:text="Request Number :"
+                android:text="Request Number"
                 android:textStyle="bold" />
 
             <TextView
@@ -66,7 +67,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:gravity="left|center"
-                android:text="Request Date       :"
+                android:text="Request Date"
                 android:textStyle="bold" />
 
             <TextView
@@ -88,7 +89,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:gravity="left|center"
-                android:text="Approve Date       :"
+                android:text="Approve Date"
                 android:textStyle="bold" />
 
             <TextView

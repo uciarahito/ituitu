@@ -144,13 +144,15 @@ public class HomeActivity extends AppCompatActivity {
             rootMenu.add("Logout");
         } else if (new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("customer")) {
             rootMenu.add("Dashboard");
-            rootMenu.add("Customer");
+            rootMenu.add("Profile");
             rootMenu.add("Sales");
             rootMenu.add("Logout");
         } else if (new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("")) {
             rootMenu.add("Logout");
-        } else {
+        } else if (new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("expedition")) {
             rootMenu.add("Dashboard");
+            rootMenu.add("Profile");
+            rootMenu.add("Delivery Order");
             rootMenu.add("Logout");
         }
         mExpandableListTitle = rootMenu;
@@ -301,6 +303,11 @@ public class HomeActivity extends AppCompatActivity {
                 } else if (selected_item.equals("Customer")) {
                     if (new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("admin")) {
                         Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                    }
+                } else if (selected_item.equals("Profile")) {
+                    if (new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("customer")) {
+                        Intent intent = new Intent(HomeActivity.this, FormCustomerActivity.class);
                         startActivity(intent);
                     }
                 }

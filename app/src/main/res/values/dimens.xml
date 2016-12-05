@@ -27,4 +27,6 @@
     <dimen name="footer_bar_height">56dp</dimen>
     <dimen name="narrow_container">320dp</dimen>
     <dimen name="narrow_container_request_penawaran">350dp</dimen>
+
+    <dimen name="textView_transaction">14sp</dimen>
 </resources>

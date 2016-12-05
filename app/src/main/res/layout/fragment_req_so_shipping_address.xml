@@ -23,15 +23,15 @@
                 android:layout_weight="2"
                 android:text="Choose Address:"
                 android:layout_gravity="center"
-                android:textAppearance="@style/TextAppearance.AppTheme.Small"
                 android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/spinner_customer_address"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
+                android:layout_weight="2"
                 android:layout_gravity="left|center"
+                android:prompt="@string/spinner_group"
                 tools:listitem="@android:layout/simple_spinner_dropdown_item" />
         </LinearLayout>
 
@@ -58,7 +58,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
-                        android:text="@string/address" />
+                        android:text="@string/address"
+                        android:textStyle="bold"/>
 
                     <TextView
                         android:id="@+id/textView_address"
@@ -78,7 +79,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
-                        android:text="@string/pic_name" />
+                        android:text="@string/pic_name"
+                        android:textStyle="bold"/>
 
                     <TextView
                         android:id="@+id/textView_pic_name"
@@ -98,7 +100,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
-                        android:text="@string/phone" />
+                        android:text="@string/phone"
+                        android:textStyle="bold"/>
 
                     <TextView
                         android:id="@+id/textView_phone"
@@ -118,7 +121,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
-                        android:text="@string/mobile" />
+                        android:text="@string/mobile"
+                        android:textStyle="bold"/>
 
                     <TextView
                         android:id="@+id/textView_mobile"

@@ -38,7 +38,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="35dp"
                         android:weightSum="6">
 
                         <TextView
@@ -56,7 +56,8 @@
                             android:hint="@string/address"
                             android:imeOptions="actionNext"
                             android:inputType="textCapWords|textPersonName"
-                            android:textColorHint="@color/colorGray" />
+                            android:textColorHint="@color/colorGray"
+                            android:textSize="@dimen/textView_transaction"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -78,12 +79,12 @@
                             android:layout_height="30dp"
                             android:layout_gravity="left|center"
                             android:layout_weight="4.25"
-                            tools:listitem="@android:layout/simple_spinner_dropdown_item" />
+                            tools:listitem="@android:layout/simple_spinner_dropdown_item"/>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="35dp"
                         android:weightSum="6">
 
                         <TextView
@@ -100,12 +101,13 @@
                             android:layout_weight="4.25"
                             android:hint="SO Date"
                             android:imeOptions="actionNext"
-                            android:textColorHint="@color/colorGray" />
+                            android:textColorHint="@color/colorGray"
+                            android:textSize="@dimen/textView_transaction"/>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="35dp"
                         android:weightSum="6">
 
                         <TextView
@@ -120,10 +122,9 @@
                             android:id="@+id/editText_payment_term"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1.5"
-                            android:hint="Payment"
+                            android:layout_weight="1"
                             android:inputType="number"
-                            android:textColorHint="@color/colorGray" />
+                            android:textSize="@dimen/textView_transaction"/>
 
                         <TextView
                             android:layout_width="0dp"
@@ -131,7 +132,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:text="Days"
-                            android:textSize="18dp" />
+                            android:textSize="@dimen/textView_transaction"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -261,7 +262,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_rectangle_gray"
+                    android:background="@drawable/rounded_rectangle_new"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -289,7 +290,8 @@
                                 android:layout_marginLeft="10dp"
                                 android:background="@drawable/rounded_rectangle_gray"
                                 android:inputType="numberDecimal"
-                                app:layout_gravity="center_vertical" />
+                                app:layout_gravity="center_vertical"
+                                android:textSize="@dimen/textView_transaction"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -367,7 +369,8 @@
                                 android:layout_marginLeft="10dp"
                                 android:background="@drawable/rounded_rectangle_gray"
                                 android:inputType="numberDecimal"
-                                app:layout_gravity="center_vertical" />
+                                app:layout_gravity="center_vertical"
+                                android:textSize="@dimen/textView_transaction"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -390,7 +393,8 @@
                                 android:layout_marginLeft="10dp"
                                 android:background="@drawable/rounded_rectangle_gray"
                                 android:inputType="numberDecimal"
-                                app:layout_gravity="center_vertical" />
+                                app:layout_gravity="center_vertical"
+                                android:textSize="@dimen/textView_transaction"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -426,7 +430,8 @@
                                 android:layout_marginLeft="10dp"
                                 android:background="@drawable/rounded_rectangle_gray"
                                 android:inputType="numberDecimal"
-                                app:layout_gravity="center_vertical" />
+                                app:layout_gravity="center_vertical"
+                                android:textSize="@dimen/textView_transaction"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -449,7 +454,8 @@
                                 android:layout_marginLeft="10dp"
                                 android:background="@drawable/rounded_rectangle_gray"
                                 android:inputType="numberDecimal"
-                                app:layout_gravity="center_vertical" />
+                                app:layout_gravity="center_vertical"
+                                android:textSize="@dimen/textView_transaction"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -472,7 +478,8 @@
                                 android:layout_marginLeft="10dp"
                                 android:background="@drawable/rounded_rectangle_gray"
                                 android:inputType="numberDecimal"
-                                app:layout_gravity="center_vertical" />
+                                app:layout_gravity="center_vertical"
+                                android:textSize="@dimen/textView_transaction"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -486,20 +493,20 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:padding="12dp"
                             android:src="@drawable/ic_border_color_black_24dp"
-                            app:layout_gravity="center" />
+                            android:layout_gravity="center" />
 
                         <EditText
                             android:id="@+id/editText_note_item"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="5"
+                            android:layout_height="60dp"
+                            android:layout_weight="4.75"
                             android:background="@drawable/rounded_rectangle_gray"
                             android:hint="@string/note"
                             android:imeOptions="actionNext"
                             android:inputType="text"
-                            android:textColorHint="@color/colorGray" />
+                            android:textColorHint="@color/colorGray"
+                            android:textSize="@dimen/textView_transaction"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -515,18 +522,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_rectangle_new"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_margin="5dp"
+                        android:layout_height="35dp"
                         android:weightSum="6">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1.5"
+                            android:layout_weight="1.45"
                             android:gravity="center_vertical"
                             android:text="Bruto"
                             android:textStyle="bold" />
@@ -535,24 +542,24 @@
                             android:id="@+id/editText_bruto"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="4.5"
+                            android:layout_weight="4.6"
                             android:gravity="left|center"
                             android:hint="@string/bruto"
                             android:imeOptions="actionNext"
                             android:inputType="number"
-                            android:textColorHint="@color/colorGray" />
+                            android:textColorHint="@color/colorGray"
+                            android:textSize="@dimen/textView_transaction"/>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_margin="5dp"
+                        android:layout_height="35dp"
                         android:weightSum="6">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1.5"
+                            android:layout_weight="1.45"
                             android:gravity="left|center"
                             android:text="Disc.(%)"
                             android:textStyle="bold" />
@@ -561,36 +568,45 @@
                             android:id="@+id/editText_disc2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="20dp"
-                            android:layout_weight="1.5"
-                            android:hint="@string/discount"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="0.75"
+                            android:hint="100"
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:textColorHint="@color/colorGray"
-                            app:layout_gravity="center_vertical" />
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/textView_transaction"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:gravity="center_vertical"
+                            android:text="%"
+                            android:textStyle="bold" />
 
                         <EditText
                             android:id="@+id/editText_disc_value"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"
-                            android:hint="@string/discount"
+                            android:layout_weight="3.3"
+                            android:hint="Discount Value"
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:textColorHint="@color/colorGray"
-                            app:layout_gravity="center_vertical" />
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/textView_transaction"/>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:layout_margin="5dp"
                         android:weightSum="6">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1.5"
+                            android:layout_weight="1.45"
                             android:gravity="left|center"
                             android:text="PPN"
                             android:textStyle="bold" />
@@ -599,36 +615,45 @@
                             android:id="@+id/editText_ppn"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="20dp"
-                            android:layout_weight="1.5"
-                            android:hint="@string/discount"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="0.75"
+                            android:hint="100"
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:textColorHint="@color/colorGray"
-                            app:layout_gravity="center_vertical" />
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/textView_transaction"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:gravity="center_vertical"
+                            android:text="%"
+                            android:textStyle="bold" />
 
                         <EditText
                             android:id="@+id/editText_ppn_value"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"
-                            android:hint="@string/discount"
+                            android:layout_weight="3.3"
+                            android:hint="Discount Value"
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:textColorHint="@color/colorGray"
-                            app:layout_gravity="center_vertical" />
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/textView_transaction"/>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:layout_margin="5dp"
                         android:weightSum="6">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1.5"
+                            android:layout_weight="1.45"
                             android:gravity="left|center"
                             android:text="PPH"
                             android:textStyle="bold" />
@@ -637,74 +662,92 @@
                             android:id="@+id/editText_pph"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="20dp"
-                            android:layout_weight="1.5"
-                            android:hint="@string/discount"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="0.75"
+                            android:hint="100"
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:textColorHint="@color/colorGray"
-                            app:layout_gravity="center_vertical" />
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/textView_transaction"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:gravity="center_vertical"
+                            android:text="%"
+                            android:textStyle="bold" />
 
                         <EditText
                             android:id="@+id/editText_pph_value"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"
-                            android:hint="@string/discount"
+                            android:layout_weight="3.3"
+                            android:hint="PPH Value"
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:textColorHint="@color/colorGray"
-                            app:layout_gravity="center_vertical" />
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/textView_transaction"/>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:layout_margin="5dp"
                         android:weightSum="6">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1.5"
+                            android:layout_weight="1.45"
                             android:gravity="left|center"
-                            android:text="PPH"
+                            android:text="PBBKB"
                             android:textStyle="bold" />
 
                         <EditText
                             android:id="@+id/editText_pbbkb"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="20dp"
-                            android:layout_weight="1.5"
-                            android:hint="@string/discount"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="0.75"
+                            android:hint="100"
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:textColorHint="@color/colorGray"
-                            app:layout_gravity="center_vertical" />
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/textView_transaction"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:gravity="center_vertical"
+                            android:text="%"
+                            android:textStyle="bold" />
 
                         <EditText
                             android:id="@+id/editText_pbbkb_value"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"
-                            android:hint="@string/discount"
+                            android:layout_weight="3.3"
+                            android:hint="PBBKB Value"
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:textColorHint="@color/colorGray"
-                            app:layout_gravity="center_vertical" />
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/textView_transaction"/>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:layout_margin="5dp"
                         android:weightSum="6">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1.5"
+                            android:layout_weight="1.4"
                             android:gravity="left|center"
                             android:text="Other Cost:"
                             android:textStyle="bold" />
@@ -713,24 +756,24 @@
                             android:id="@+id/editText_other_cost"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="4.5"
-                            android:hint="@string/other_cost"
+                            android:layout_weight="4.6"
+                            android:hint="Other Cost"
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:textColorHint="@color/colorGray"
-                            app:layout_gravity="center_vertical" />
+                            app:layout_gravity="center_vertical"
+                            android:textSize="@dimen/textView_transaction"/>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:layout_margin="5dp"
                         android:weightSum="6">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1.5"
+                            android:layout_weight="1.4"
                             android:gravity="left|center"
                             android:text="Netto:"
                             android:textStyle="bold" />
@@ -739,18 +782,19 @@
                             android:id="@+id/editText_netto"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="4.5"
-                            android:hint="@string/netto"
+                            android:layout_weight="4.6"
+                            android:hint="Netto"
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:textColorHint="@color/colorGray"
-                            app:layout_gravity="center_vertical" />
+                            app:layout_gravity="center_vertical"
+                            android:textSize="@dimen/textView_transaction"/>
                     </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="35dp"
                     android:weightSum="6">
 
                     <TextView
@@ -794,7 +838,8 @@
                         android:imeOptions="actionNext"
                         android:inputType="textCapWords|textPostalAddress"
                         android:textColorHint="@color/colorGray"
-                        app:layout_gravity="center_vertical" />
+                        app:layout_gravity="center_vertical"
+                        android:textSize="@dimen/textView_transaction"/>
                 </LinearLayout>
             </LinearLayout>
 

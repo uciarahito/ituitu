@@ -1,6 +1,7 @@
 package uci.develops.wiraenergimobile.fragment;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,7 +20,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.activity.FormCustomerActivity;
-import uci.develops.wiraenergimobile.activity.LoginActivity;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerGroupModel;
 import uci.develops.wiraenergimobile.model.CustomerModel;
