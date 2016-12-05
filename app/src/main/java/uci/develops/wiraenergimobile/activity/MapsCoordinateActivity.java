@@ -2,9 +2,15 @@ package uci.develops.wiraenergimobile.activity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -15,12 +21,20 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 
 public class MapsCoordinateActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     Marker marker;
+    private Button buttonSubmitLocation, buttonFind;
+    EditText editTextSearchLocation;
+    TextView textViewAlamat, textViewLatitude, textViewLongitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +44,76 @@ public class MapsCoordinateActivity extends FragmentActivity implements OnMapRea
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        initializeComponent();
+
+        buttonFind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!editTextSearchLocation.getText().toString().equals("")) {
+                    textViewAlamat.setText("" + editTextSearchLocation.getText().toString());
+                    LatLng inputLocation = null;
+                    inputLocation = getLocationFromAddress(editTextSearchLocation.getText().toString());
+                    if (inputLocation != null) {
+                        textViewLatitude.setText("Lat: " + inputLocation.latitude);
+                        textViewLongitude.setText("Long: " + inputLocation.longitude);
+
+                        String address = "";
+                        address = getAddressFromLocation(inputLocation);
+                        textViewAlamat.setText("" + address);
+                        marker.setPosition(inputLocation);
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(inputLocation, 16));
+                    }
+                }
+            }
+        });
     }
 
+    private void initializeComponent() {
+        buttonSubmitLocation = (Button) findViewById(R.id.button_submit_location);
+        buttonFind = (Button) findViewById(R.id.buttonFind);
+        editTextSearchLocation = (EditText) findViewById(R.id.editTExtLocation);
+        textViewAlamat = (TextView) findViewById(R.id.textViewAlamat);
+        textViewLatitude = (TextView) findViewById(R.id.textViewLatitude);
+        textViewLongitude = (TextView) findViewById(R.id.textViewLongitude);
+    }
+
+    private LatLng getLocationFromAddress(String _address) {
+        Double _latitude = 0.0, _longitude = 0.0;
+        if (Geocoder.isPresent()) {
+            try {
+                String location = _address;
+                Geocoder gc = new Geocoder(this);
+                List<Address> addresses = gc.getFromLocationName(location, 5); // get the found Address Objects
+
+                List<LatLng> ll = new ArrayList<LatLng>(addresses.size()); // A list to save the coordinates if they are available
+                for (Address a : addresses) {
+                    if (a.hasLatitude() && a.hasLongitude()) {
+                        ll.add(new LatLng(a.getLatitude(), a.getLongitude()));
+                        _latitude = a.getLatitude();
+                        _longitude = a.getLongitude();
+                    }
+                }
+            } catch (IOException e) {
+                // handle the exception
+            }
+        }
+        return new LatLng(_latitude, _longitude);
+    }
+
+    private String getAddressFromLocation(LatLng location) {
+        String address = "";
+        List<Address> geocodeMatches = null;
+        try {
+            geocodeMatches = new Geocoder(MapsCoordinateActivity.this).getFromLocation(location.latitude, location.longitude, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (!geocodeMatches.isEmpty()) {
+            address = geocodeMatches.get(0).getAddressLine(0);
+        }
+        return address;
+    }
 
     /**
      * Manipulates the map once available.
@@ -47,10 +129,11 @@ public class MapsCoordinateActivity extends FragmentActivity implements OnMapRea
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
+        final LatLng sydney = new LatLng(-34, 151);
         marker = mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -65,7 +148,13 @@ public class MapsCoordinateActivity extends FragmentActivity implements OnMapRea
             @Override
             public void onMapClick(LatLng latLng) {
                 marker.setPosition(latLng);
-                Toast.makeText(MapsCoordinateActivity.this, ""+latLng.latitude, Toast.LENGTH_SHORT).show();
+                new SharedPreferenceManager().setPreferences(MapsCoordinateActivity.this, "latitude_shipping_address", "" + latLng.latitude);
+                new SharedPreferenceManager().setPreferences(MapsCoordinateActivity.this, "longitude_shipping_address", "" + latLng.longitude);
+                textViewLatitude.setText("Lat: " + latLng.latitude);
+                textViewLongitude.setText("Long: " + latLng.longitude);
+                String address = "";
+                address = getAddressFromLocation(latLng);
+                textViewAlamat.setText("" + address);
             }
         });
     }

@@ -9,9 +9,14 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
@@ -28,14 +33,20 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.adapter.CustomExpandableListAdapter;
+import uci.develops.wiraenergimobile.adapter.SalesQuotationAdapter;
 import uci.develops.wiraenergimobile.fragment.navigation.NavigationManager;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
+import uci.develops.wiraenergimobile.model.QuotationModel;
 import uci.develops.wiraenergimobile.model.UserXModel;
 import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class ListQuotationActivity extends AppCompatActivity {
+
+    RecyclerView recycleViewListQuotation;
+    List<QuotationModel> quotationModelList;
+    SalesQuotationAdapter salesQuotationAdapter;
 
     //utk nav drawer
     private DrawerLayout mDrawerLayout;
@@ -62,6 +73,16 @@ public class ListQuotationActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             selectFirstItemAsDefault();
         }
+
+        recycleViewListQuotation = (RecyclerView)findViewById(R.id.recycleListQuotation);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(ListQuotationActivity.this);
+        recycleViewListQuotation.setLayoutManager(mLayoutManager);
+        recycleViewListQuotation.setItemAnimator(new DefaultItemAnimator());
+        quotationModelList = new ArrayList<>();
+        salesQuotationAdapter = new SalesQuotationAdapter(ListQuotationActivity.this, quotationModelList);
+        recycleViewListQuotation.setAdapter(salesQuotationAdapter);
+
+        //.....lanjut
     }
 
     private void selectFirstItemAsDefault() {
@@ -279,6 +300,28 @@ public class ListQuotationActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        Intent intentLogin, intentRegister;
+
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

@@ -9,7 +9,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,7 +18,6 @@ import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,17 +37,7 @@ import uci.develops.wiraenergimobile.model.UserXModel;
 import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
-public class FormQuotationOrderActivity extends AppCompatActivity implements View.OnClickListener{
-
-    private TextView textView_button_send_quotation, textView_button_cancel;
-    private LinearLayout layout_button_previous, layout_button_next;
-    private LinearLayout layout_tab_quotation_order, layout_tab_item_requitition;
-    private LinearLayout layout_container_quotation_order, layout_container_item_requitition;
-    private LinearLayout layout_button_cancel, layout_button_send_quotation;
-    private LinearLayout[] linearLayouts_fragment = new LinearLayout[2];
-    private LinearLayout[] linearLayouts_tabs = new LinearLayout[2];
-
-    int index_fragment = 0;
+public class FormSalesOrderActivity extends AppCompatActivity {
 
     //utk nav drawer
     private DrawerLayout mDrawerLayout;
@@ -67,143 +55,16 @@ public class FormQuotationOrderActivity extends AppCompatActivity implements Vie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_form_quotation_order);
+        setContentView(R.layout.activity_form_sales_order);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        initializeComponent();
 
         navDrawer();
 
         if (savedInstanceState == null) {
             selectFirstItemAsDefault();
         }
-    }
 
-    private void initializeComponent(){
-        layout_button_previous = (LinearLayout) findViewById(R.id.layout_button_previous);
-        layout_button_next = (LinearLayout) findViewById(R.id.layout_button_next);
-        layout_tab_quotation_order = (LinearLayout) findViewById(R.id.layout_tab_quotation_order);
-        layout_tab_item_requitition = (LinearLayout) findViewById(R.id.layout_tab_item_requitition);
-        layout_container_quotation_order = (LinearLayout) findViewById(R.id.layout_container_quotation_order);
-        layout_container_item_requitition = (LinearLayout) findViewById(R.id.layout_container_item_requitition);
-        layout_button_cancel = (LinearLayout) findViewById(R.id.layout_button_cancel);
-        layout_button_send_quotation = (LinearLayout) findViewById(R.id.layout_button_send_quotation);
-        textView_button_cancel = (TextView) findViewById(R.id.textView_button_cancel);
-        textView_button_send_quotation = (TextView) findViewById(R.id.textView_button_send_quotation);
-
-        linearLayouts_fragment[0] = layout_container_quotation_order;
-        linearLayouts_fragment[1] = layout_container_item_requitition;
-
-        linearLayouts_tabs[0] = layout_tab_quotation_order;
-        linearLayouts_tabs[1] = layout_tab_item_requitition;
-
-        linearLayouts_fragment[index_fragment].setVisibility(View.VISIBLE);
-
-        layout_button_previous.setOnClickListener(this);
-        layout_button_next.setOnClickListener(this);
-        layout_button_send_quotation.setOnClickListener(this);
-        layout_button_cancel.setOnClickListener(this);
-        layout_tab_quotation_order.setOnClickListener(this);
-        layout_tab_item_requitition.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-
-//        if(v == layout_tab_quotation_order){
-//            layout_container_item_requitition.setVisibility(View.GONE);
-//            layout_container_quotation_order.setVisibility(View.VISIBLE);
-//
-//            layout_tab_quotation_order.setBackgroundResource(R.drawable.rounded_rectangle_org);
-//            layout_tab_item_requitition.setBackgroundResource(R.drawable.rounded_rectangle_gray);
-//        }
-
-//        if(v == layout_tab_item_requitition){
-//            layout_container_item_requitition.setVisibility(View.VISIBLE);
-//            layout_container_quotation_order.setVisibility(View.GONE);
-//
-//            layout_tab_quotation_order.setBackgroundResource(R.drawable.rounded_rectangle_gray);
-//            layout_tab_item_requitition.setBackgroundResource(R.drawable.rounded_rectangle_org);
-//        }
-
-        if (v == layout_button_next) {
-            if(index_fragment <=1) {
-                for (int i = 0; i < 2; i++) {
-                    if (index_fragment == i) {
-                        linearLayouts_fragment[i].setVisibility(View.VISIBLE);
-                    } else {
-                        linearLayouts_fragment[i].setVisibility(View.GONE);
-                    }
-                }
-                if (index_fragment == 0) {
-                    layout_button_previous.setVisibility(View.VISIBLE);
-                    layout_button_next.setVisibility(View.GONE);
-                }
-
-                if (index_fragment < 1) {
-                    index_fragment++;
-                    layout_container_item_requitition.setVisibility(View.GONE);
-                    layout_container_quotation_order.setVisibility(View.GONE);
-
-                    layout_tab_quotation_order.setBackgroundResource(R.drawable.rounded_rectangle_gray);
-                    layout_tab_item_requitition.setBackgroundResource(R.drawable.rounded_rectangle_gray);
-                    linearLayouts_tabs[index_fragment].setBackgroundResource(R.drawable.rounded_rectangle_org);
-                    linearLayouts_fragment[index_fragment].setVisibility(View.VISIBLE);
-                }
-            }
-        } else if (v == layout_button_previous) {
-            if(index_fragment >=0) {
-                if(index_fragment == 1) {
-                    layout_button_next.setVisibility(View.VISIBLE);
-                    layout_button_previous.setVisibility(View.GONE);
-                }
-                if(index_fragment == 0){
-                    layout_button_next.setVisibility(View.VISIBLE);
-                }
-
-                for (int i = 0; i < 2; i++) {
-                    if (index_fragment == i) {
-                        linearLayouts_fragment[i].setVisibility(View.VISIBLE);
-                    } else {
-                        linearLayouts_fragment[i].setVisibility(View.GONE);
-                    }
-                }
-
-                if (index_fragment > 0) {
-                    index_fragment--;
-                    layout_container_item_requitition.setVisibility(View.GONE);
-                    layout_container_quotation_order.setVisibility(View.GONE);
-
-                    layout_tab_quotation_order.setBackgroundResource(R.drawable.rounded_rectangle_gray);
-                    layout_tab_item_requitition.setBackgroundResource(R.drawable.rounded_rectangle_gray);
-                    linearLayouts_tabs[index_fragment].setBackgroundResource(R.drawable.rounded_rectangle_org);
-                    linearLayouts_fragment[index_fragment].setVisibility(View.VISIBLE);
-                }
-            }
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private void selectFirstItemAsDefault() {
@@ -232,19 +93,19 @@ public class FormQuotationOrderActivity extends AppCompatActivity implements Vie
         imageView_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (new SharedPreferenceManager().getPreferences(FormQuotationOrderActivity.this, "roles").equals("admin")) {
-                    Intent intent = new Intent(FormQuotationOrderActivity.this, ListCustomerActivity.class);
+                if (new SharedPreferenceManager().getPreferences(FormSalesOrderActivity.this, "roles").equals("admin")) {
+                    Intent intent = new Intent(FormSalesOrderActivity.this, ListCustomerActivity.class);
                     startActivity(intent);
-                } else if (new SharedPreferenceManager().getPreferences(FormQuotationOrderActivity.this, "roles").equals("customer")) {
-                    Intent intent = new Intent(FormQuotationOrderActivity.this, FormCustomerActivity.class);
+                } else if (new SharedPreferenceManager().getPreferences(FormSalesOrderActivity.this, "roles").equals("customer")) {
+                    Intent intent = new Intent(FormSalesOrderActivity.this, FormCustomerActivity.class);
                     startActivity(intent);
                 }
             }
         });
 
         Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new
-                        SharedPreferenceManager().getPreferences(FormQuotationOrderActivity.this, "token"),
-                Integer.parseInt(new SharedPreferenceManager().getPreferences(FormQuotationOrderActivity.this, "user_id")));
+                        SharedPreferenceManager().getPreferences(FormSalesOrderActivity.this, "token"),
+                Integer.parseInt(new SharedPreferenceManager().getPreferences(FormSalesOrderActivity.this, "user_id")));
         userResponseCall.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
@@ -265,13 +126,13 @@ public class FormQuotationOrderActivity extends AppCompatActivity implements Vie
         mExpandableListData = ExpandableListDataSource.getData(this);
         List<String> rootMenu = new ArrayList<>();
 
-        if (new SharedPreferenceManager().getPreferences(FormQuotationOrderActivity.this, "roles").equals("admin")) {
+        if (new SharedPreferenceManager().getPreferences(FormSalesOrderActivity.this, "roles").equals("admin")) {
             rootMenu.add("Dashboard");
             rootMenu.add("Customer");
             rootMenu.add("Purchasing");
             rootMenu.add("Sales");
             rootMenu.add("Logout");
-        } else if (new SharedPreferenceManager().getPreferences(FormQuotationOrderActivity.this, "roles").equals("customer")) {
+        } else if (new SharedPreferenceManager().getPreferences(FormSalesOrderActivity.this, "roles").equals("customer")) {
             rootMenu.add("Dashboard");
             rootMenu.add("Customer");
             rootMenu.add("Sales");
@@ -290,7 +151,7 @@ public class FormQuotationOrderActivity extends AppCompatActivity implements Vie
     }
 
     private void initItems() {
-        items = ExpandableListDataSource.getArrayTitle(FormQuotationOrderActivity.this);
+        items = ExpandableListDataSource.getArrayTitle(FormSalesOrderActivity.this);
     }
 
     private void addDrawerItems() {
@@ -305,7 +166,7 @@ public class FormQuotationOrderActivity extends AppCompatActivity implements Vie
                         .get(childPosition).toString();
                 getSupportActionBar().setTitle(selectedItem);
 
-                Toast.makeText(FormQuotationOrderActivity.this, "" + selectedItem, Toast.LENGTH_SHORT).show();
+                Toast.makeText(FormSalesOrderActivity.this, "" + selectedItem, Toast.LENGTH_SHORT).show();
                 /*
                 if (items[0].equals(mExpandableListTitle.get(groupPosition))) {
                     mNavigationManager.showFragmentNavPurchasing(selectedItem);
@@ -318,28 +179,28 @@ public class FormQuotationOrderActivity extends AppCompatActivity implements Vie
                 //utk menu purchasing
                 if (selectedItem.equals("Purchase Order [PO]")) {
                     Log.e("Cekkkkkk", selectedItem + "qqqqqqqqqqqqqqqq");
-                    Intent intent = new Intent(FormQuotationOrderActivity.this, PurchaseOrderActivity.class);
+                    Intent intent = new Intent(FormSalesOrderActivity.this, PurchaseOrderActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Good Received [GR]")) {
-                    Intent intent = new Intent(FormQuotationOrderActivity.this, GoodReceivedActivity.class);
+                    Intent intent = new Intent(FormSalesOrderActivity.this, GoodReceivedActivity.class);
                     startActivity(intent);
                 }
 
                 //utk menu sales
                 if (selectedItem.equals("Quotation")) {
-                    Intent intent = new Intent(FormQuotationOrderActivity.this, SalesQuotationActivity.class);
+                    Intent intent = new Intent(FormSalesOrderActivity.this, SalesQuotationActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Sales Order [SO]")) {
-                    Intent intent = new Intent(FormQuotationOrderActivity.this, SalesOrderActivity.class);
+                    Intent intent = new Intent(FormSalesOrderActivity.this, SalesOrderActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Delivery Order [DO]")) {
-                    Intent intent = new Intent(FormQuotationOrderActivity.this, DeliveryOrderActivity.class);
+                    Intent intent = new Intent(FormSalesOrderActivity.this, DeliveryOrderActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Invoice")) {
-                    Intent intent = new Intent(FormQuotationOrderActivity.this, InvoiceActivity.class);
+                    Intent intent = new Intent(FormSalesOrderActivity.this, InvoiceActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Payment")) {
-                    Intent intent = new Intent(FormQuotationOrderActivity.this, PaymentActivity.class);
+                    Intent intent = new Intent(FormSalesOrderActivity.this, PaymentActivity.class);
                     startActivity(intent);
                 }
 
@@ -352,9 +213,9 @@ public class FormQuotationOrderActivity extends AppCompatActivity implements Vie
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 String selected_item = getResources().getStringArray(R.array.general)[groupPosition];
-                if (new SharedPreferenceManager().getPreferences(FormQuotationOrderActivity.this, "roles").equals("admin")) {
+                if(new SharedPreferenceManager().getPreferences(FormSalesOrderActivity.this, "roles").equals("admin")){
                     selected_item = getResources().getStringArray(R.array.general)[groupPosition];
-                } else if (new SharedPreferenceManager().getPreferences(FormQuotationOrderActivity.this, "roles").equals("customer")) {
+                } else if(new SharedPreferenceManager().getPreferences(FormSalesOrderActivity.this, "roles").equals("customer")){
                     selected_item = getResources().getStringArray(R.array.general_customer)[groupPosition];
                 } else {
                     selected_item = getResources().getStringArray(R.array.general_expedition)[groupPosition];
@@ -363,12 +224,12 @@ public class FormQuotationOrderActivity extends AppCompatActivity implements Vie
                 if (selected_item.equals("Logout")) {
                     logout();
                 } else if (selected_item.equals("Dashboard")) {
-                    Intent intent = new Intent(FormQuotationOrderActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(FormSalesOrderActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
                 } else if (selected_item.equals("Customer")) {
-                    if (new SharedPreferenceManager().getPreferences(FormQuotationOrderActivity.this, "roles").equals("admin")) {
-                        Intent intent = new Intent(FormQuotationOrderActivity.this, HomeActivity.class);
+                    if (new SharedPreferenceManager().getPreferences(FormSalesOrderActivity.this, "roles").equals("admin")) {
+                        Intent intent = new Intent(FormSalesOrderActivity.this, HomeActivity.class);
                         startActivity(intent);
                     }
                 }
@@ -378,12 +239,12 @@ public class FormQuotationOrderActivity extends AppCompatActivity implements Vie
     }
 
     private void logout() {
-        new SharedPreferenceManager().setPreferences(FormQuotationOrderActivity.this, "is_login", "");
-        new SharedPreferenceManager().setPreferences(FormQuotationOrderActivity.this, "token", "");
-        new SharedPreferenceManager().setPreferences(FormQuotationOrderActivity.this, "customer_decode", "");
-        new SharedPreferenceManager().setPreferences(FormQuotationOrderActivity.this, "roles", "");
+        new SharedPreferenceManager().setPreferences(FormSalesOrderActivity.this, "is_login", "");
+        new SharedPreferenceManager().setPreferences(FormSalesOrderActivity.this, "token", "");
+        new SharedPreferenceManager().setPreferences(FormSalesOrderActivity.this, "customer_decode", "");
+        new SharedPreferenceManager().setPreferences(FormSalesOrderActivity.this, "roles", "");
 
-        Intent intent = new Intent(FormQuotationOrderActivity.this, LoginActivity.class);
+        Intent intent = new Intent(FormSalesOrderActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
@@ -422,4 +283,27 @@ public class FormQuotationOrderActivity extends AppCompatActivity implements Vie
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        Intent intentLogin, intentRegister;
+
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }

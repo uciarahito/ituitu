@@ -1,5 +1,6 @@
 package uci.develops.wiraenergimobile.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
@@ -46,6 +49,7 @@ public class ListRequestCustomerActivity extends AppCompatActivity {
     List<CustomerModel> modelRequestList;
     CustomerAdapter customerAdapter;
 
+    //utk nav drawer
     private DrawerLayout mDrawerLayout;
     private String[] items;
 
@@ -71,6 +75,7 @@ public class ListRequestCustomerActivity extends AppCompatActivity {
             selectFirstItemAsDefault();
         }
 
+        showProgressLoading();
         recycleViewRequest = (RecyclerView)findViewById(R.id.recycleListRequestCustomer);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(ListRequestCustomerActivity.this);
         recycleViewRequest.setLayoutManager(mLayoutManager);
@@ -94,20 +99,25 @@ public class ListRequestCustomerActivity extends AppCompatActivity {
                             }
                         }
                         if(dataCustomer.size() > 0) {
+                            hideProgressLoading();
                             customerAdapter.updateList(dataCustomer);
                         } else {
+                            hideProgressLoading();
                             Toast.makeText(ListRequestCustomerActivity.this, "Empty data", Toast.LENGTH_SHORT).show();
                         }
                     } else {
+                        hideProgressLoading();
                         Toast.makeText(ListRequestCustomerActivity.this, "Empty data", Toast.LENGTH_SHORT).show();
                     }
                 } else {
+                    hideProgressLoading();
                     Toast.makeText(ListRequestCustomerActivity.this, "Not successfull", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<RequestListCustomerResponse> call, Throwable t) {
+                hideProgressLoading();
                 Toast.makeText(ListRequestCustomerActivity.this, "Failure", Toast.LENGTH_SHORT).show();
                 Log.e("ListRequest", ""+t.getMessage());
             }
@@ -115,6 +125,20 @@ public class ListRequestCustomerActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+    }
+
+    ProgressDialog progress_loading;
+
+    public void showProgressLoading() {
+        progress_loading = new ProgressDialog(ListRequestCustomerActivity.this);
+        progress_loading.setMessage("Please wait...");
+        progress_loading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progress_loading.setIndeterminate(true);
+        progress_loading.show();
+    }
+
+    public void hideProgressLoading() {
+        progress_loading.dismiss();
     }
 
     private void selectFirstItemAsDefault() {
@@ -328,6 +352,28 @@ public class ListRequestCustomerActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        Intent intentLogin, intentRegister;
+
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

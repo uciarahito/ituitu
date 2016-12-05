@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -40,7 +39,7 @@
             <ImageView
                 android:padding="12dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.75"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_code_24dp"/>
 
@@ -64,7 +63,7 @@
             <ImageView
                 android:padding="12dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.75"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_person_24dp"/>
 
@@ -88,7 +87,7 @@
             <ImageView
                 android:padding="12dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.75"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_address_24dp"/>
 
@@ -112,7 +111,7 @@
             <ImageView
                 android:padding="12dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.75"
                 android:layout_height="45dp"
                 android:src="@drawable/ic_city"/>
 
@@ -137,7 +136,7 @@
             <ImageView
                 android:padding="12dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.75"
                 android:layout_height="45dp"
                 android:src="@drawable/ic_province" />
 
@@ -162,7 +161,7 @@
             <ImageView
                 android:padding="12dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.75"
                 android:layout_height="45dp"
                 android:src="@drawable/ic_zip_code" />
 
@@ -186,7 +185,7 @@
             <ImageView
                 android:padding="12dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.75"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_phone_24dp" />
 
@@ -210,7 +209,7 @@
             <ImageView
                 android:padding="12dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.75"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_mobile_24dp" />
 
@@ -234,7 +233,7 @@
             <ImageView
                 android:padding="12dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.75"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_fax_24dp" />
 
@@ -258,7 +257,7 @@
             <ImageView
                 android:padding="12dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.75"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_group_24dp" />
 
@@ -280,7 +279,7 @@
             <ImageView
                 android:padding="12dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.75"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_npwp_24dp" />
 
@@ -305,7 +304,7 @@
             <ImageView
                 android:padding="12dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.75"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_valuta_24dp" />
 
@@ -326,7 +325,7 @@
             <ImageView
                 android:padding="12dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.75"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_npwp_24dp" />
 
@@ -351,7 +350,7 @@
             <ImageView
                 android:padding="12dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.75"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_group_24dp" />
 
@@ -373,7 +372,7 @@
             <ImageView
                 android:padding="12dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.75"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_group_24dp" />
 
@@ -394,7 +393,7 @@
             <ImageView
                 android:padding="12dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.75"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_email_24dp" />
 
@@ -418,7 +417,7 @@
             <ImageView
                 android:padding="12dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.75"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_website_24dp" />
 
@@ -443,7 +442,7 @@
             <ImageView
                 android:padding="12dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.75"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_note_24dp" />
 

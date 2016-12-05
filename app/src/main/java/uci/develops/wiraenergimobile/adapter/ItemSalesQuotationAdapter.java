@@ -18,7 +18,7 @@ import uci.develops.wiraenergimobile.model.QuotationModel;
 /**
  * Created by ArahitoPC on 10/24/2016.
  */
-public class ItemSalesQuotationOrderAdapter extends RecyclerView.Adapter<ItemSalesQuotationOrderAdapter.MyViewHolder> {
+public class ItemSalesQuotationAdapter extends RecyclerView.Adapter<ItemSalesQuotationAdapter.MyViewHolder> {
     private List<QuotationModel> quotationModelList;
     private Context context;
 
@@ -42,7 +42,7 @@ public class ItemSalesQuotationOrderAdapter extends RecyclerView.Adapter<ItemSal
         }
     }
 
-    public ItemSalesQuotationOrderAdapter(Context context, List<QuotationModel> quotationModelList) {
+    public ItemSalesQuotationAdapter(Context context, List<QuotationModel> quotationModelList) {
         this.context = context;
         this.quotationModelList = quotationModelList;
     }
@@ -57,7 +57,7 @@ public class ItemSalesQuotationOrderAdapter extends RecyclerView.Adapter<ItemSal
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView;
         itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_sales_quotation_order, parent, false);
+                .inflate(R.layout.item_sales_quotation, parent, false);
         return new MyViewHolder(itemView);
     }
 

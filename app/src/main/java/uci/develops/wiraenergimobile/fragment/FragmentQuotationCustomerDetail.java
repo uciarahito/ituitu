@@ -28,7 +28,7 @@ public class FragmentQuotationCustomerDetail extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view;
-        view = inflater.inflate(R.layout.fragment_quotation_order, container, false);
+        view = inflater.inflate(R.layout.fragment_quotation_customer_detail, container, false);
 
         initializeComponent(view);
         loadDataCustomerDetail();

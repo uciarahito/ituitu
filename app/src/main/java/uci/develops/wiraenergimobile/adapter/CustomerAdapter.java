@@ -1,11 +1,8 @@
 package uci.develops.wiraenergimobile.adapter;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +29,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
     Map<String, List<String>> mRoles = new TreeMap<>();
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView txtIdCustomer, txtDecode, txtEmail, txtStatus;
+        public TextView txtIdCustomer, txtDecode, txtEmail;
         public Button buttonDetail;
 
         public MyViewHolder(View view) {
@@ -40,7 +37,6 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
             txtIdCustomer = (TextView) view.findViewById(R.id.txtIdCustomer);
             txtDecode = (TextView) view.findViewById(R.id.txtDecode);
             txtEmail = (TextView) view.findViewById(R.id.txtEmail);
-            txtStatus = (TextView) view.findViewById(R.id.txtStatus);
             buttonDetail = (Button) view.findViewById(R.id.buttonDetail);
         }
     }
@@ -60,7 +56,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView;
         itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_request_customer2, parent, false);
+                .inflate(R.layout.item_list_customer, parent, false);
         return new MyViewHolder(itemView);
     }
 
@@ -70,12 +66,6 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
         holder.txtIdCustomer.setText(": " + customerModel.getFirst_name());
         holder.txtDecode.setText(": " + customerModel.getDecode());
         holder.txtEmail.setText(": " + customerModel.getEmail());
-
-        if (customerModel.getActive() == 1 && customerModel.getApprove() == 1) {
-            holder.txtStatus.setText("Active");
-        } else {
-            holder.txtStatus.setText("Inactive");
-        }
 
         holder.buttonDetail.setOnClickListener(new View.OnClickListener() {
             @Override

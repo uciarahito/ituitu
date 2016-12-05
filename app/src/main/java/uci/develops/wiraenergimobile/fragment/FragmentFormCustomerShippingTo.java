@@ -1,6 +1,7 @@
 package uci.develops.wiraenergimobile.fragment;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -8,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -26,6 +28,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.activity.MapsCoordinateActivity;
 import uci.develops.wiraenergimobile.adapter.ShippingAddressAdapter;
 import uci.develops.wiraenergimobile.helper.DividerItemDecoration;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
@@ -76,6 +79,15 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         initializeComponent(view);
         loadData();
 
+        editText_map_cordinate.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Intent intent = new Intent(getContext(), MapsCoordinateActivity.class);
+                startActivity(intent);
+                return false;
+            }
+        });
+
         return view;
     }
 
@@ -103,7 +115,7 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         }
 
         if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
-            if (Integer.parseInt(new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "approve")) == 0) {
+            if (Integer.parseInt(new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "approve")) == 1) {
                 button_add_shipping.setEnabled(false);
             }
         }

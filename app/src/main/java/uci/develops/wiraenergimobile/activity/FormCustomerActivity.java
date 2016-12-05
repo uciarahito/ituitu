@@ -19,6 +19,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -245,45 +247,6 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         });
     }
 
-    public void approveActiveCustomer(String customer_code) {
-        Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().requestCustomerAction("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
-                customer_code, 1, 1);
-        approveResponseCall.enqueue(new Callback<ApproveResponse>() {
-            @Override
-            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                if (response.isSuccessful()) {
-                    Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
-                            Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_user_id")));
-                    userResponseCall.enqueue(new Callback<UserResponse>() {
-                        @Override
-                        public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                            if (response.isSuccessful()) {
-                                if (response.body().getData().getRegistration_key() != null) {
-                                    Toast.makeText(FormCustomerActivity.this, "Approve request successfull", Toast.LENGTH_SHORT).show();
-                                    Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
-                                    Constant.sendNotification(response.body().getData().getRegistration_key(), "Request anda telah di setujui", "approve_customer");
-                                    Intent intent = new Intent(FormCustomerActivity.this, HomeActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<UserResponse> call, Throwable t) {
-
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ApproveResponse> call, Throwable t) {
-
-            }
-        });
-    }
-
     ProgressDialog progress_loading;
 
     public void showProgressLoading() {
@@ -316,7 +279,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
             linearLayouts_fragment[2].setVisibility(View.VISIBLE);
         }
         if (v == linearLayout_button_approve) {
-//            approveActiveCustomer(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_code"));
+            showProgressLoading();
 
             Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().customerApproveActive("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
                     new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"));
@@ -331,6 +294,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                                 if (response.isSuccessful()) {
                                     if (response.body().getData().getRegistration_key() != null) {
+                                        hideProgressLoading();
                                         Toast.makeText(FormCustomerActivity.this, "Approve request successfull", Toast.LENGTH_SHORT).show();
                                         Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
                                         Constant.sendNotification(response.body().getData().getRegistration_key(), "Request anda telah di setujui", "approve_customer");
@@ -343,7 +307,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
 
                             @Override
                             public void onFailure(Call<UserResponse> call, Throwable t) {
-
+                                hideProgressLoading();
                             }
                         });
 
@@ -351,54 +315,17 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                         startActivity(intent);
                         finish();
                     } else {
+                        hideProgressLoading();
                         Toast.makeText(FormCustomerActivity.this, "Unable to approve request", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ApproveResponse> call, Throwable t) {
+                    hideProgressLoading();
                     Toast.makeText(FormCustomerActivity.this, "Unable to approve request", Toast.LENGTH_SHORT).show();
                 }
             });
-
-//            Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().requestCustomerAction("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
-//                    new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), 1, 1);
-//            approveResponseCall.enqueue(new Callback<ApproveResponse>() {
-//                @Override
-//                public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-//                    if (response.isSuccessful()) {
-//                        Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
-//                                Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_user_id")));
-//                        userResponseCall.enqueue(new Callback<UserResponse>() {
-//                            @Override
-//                            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-//                                if (response.isSuccessful()) {
-//                                    if (response.body().getData().getRegistration_key() != null) {
-//                                        Toast.makeText(FormCustomerActivity.this, "Approve request successfull", Toast.LENGTH_SHORT).show();
-//                                        Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
-//                                        Constant.sendNotification(response.body().getData().getRegistration_key(), "Request anda telah di setujui", "approve_customer");
-//                                        Intent intent = new Intent(FormCustomerActivity.this, HomeActivity.class);
-//                                        startActivity(intent);
-//                                        finish();
-//                                    }
-//                                }
-//                            }
-//
-//                            @Override
-//                            public void onFailure(Call<UserResponse> call, Throwable t) {
-//
-//                            }
-//                        });
-//                    } else {
-//                        Toast.makeText(FormCustomerActivity.this, "Unable to approve request", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<ApproveResponse> call, Throwable t) {
-//                    Toast.makeText(FormCustomerActivity.this, "Unable to approve request", Toast.LENGTH_SHORT).show();
-//                }
-//            });
         }
         if (v == linearLayout_button_reject) {
             showCustomDialogCustomerUsername();
@@ -612,110 +539,6 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    private void showDialogNote() {
-        dialog_feedback = new Dialog(FormCustomerActivity.this);
-        dialog_feedback.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog_feedback.setContentView(R.layout.custom_dialog_add_feedback);
-
-        editText_feedback = (EditText) dialog_feedback.findViewById(R.id.editText_feedback);
-        button_submit_feedback = (Button) dialog_feedback.findViewById(R.id.button_submit_feedback);
-
-        button_submit_feedback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!editText_feedback.getText().toString().equals("")) {
-                    Call<ApproveResponse> addFeedbackResponseCall = RestClient.getRestClient().addFeedback("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
-                            new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), editText_feedback.getText().toString(), 2, 0);
-                    addFeedbackResponseCall.enqueue(new Callback<ApproveResponse>() {
-                        @Override
-                        public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                            if (response.isSuccessful()) {
-                                //baru ditambah
-                                Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_user_id")));
-                                userResponseCall.enqueue(new Callback<UserResponse>() {
-                                    @Override
-                                    public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                                        if (response.isSuccessful()) {
-                                            if (response.body().getData().getRegistration_key() != null) {
-                                                Constant.sendNotification(response.body().getData().getRegistration_key(), "" + editText_feedback.getText().toString(), "feedback_customer");
-                                                Intent intent = new Intent(FormCustomerActivity.this, HomeActivity.class);
-                                                startActivity(intent);
-                                                finish();
-                                            }
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<UserResponse> call, Throwable t) {
-
-                                    }
-                                });
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<ApproveResponse> call, Throwable t) {
-
-                        }
-                    });
-                } else {
-                    Toast.makeText(FormCustomerActivity.this, "Field feedback tidak boleh kosong", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        WindowManager windowmanager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
-        windowmanager.getDefaultDisplay().getMetrics(displayMetrics);
-        int deviceWidth = displayMetrics.widthPixels;
-        int deviceHeight = displayMetrics.heightPixels;
-        dialog_feedback.getWindow().setLayout(deviceWidth - 20, WindowManager.LayoutParams.WRAP_CONTENT);
-        dialog_feedback.setCancelable(true);
-        dialog_feedback.show();
-    }
-
-    private void alertDialogReject() {
-        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage("Are you sure want to reject the customer?");
-        alertDialogBuilder.setNegativeButton("Yes",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_user_id")));
-                        userResponseCall.enqueue(new Callback<UserResponse>() {
-                            @Override
-                            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                                if (response.isSuccessful()) {
-                                    if (response.body().getData().getRegistration_key() != null) {
-                                        Toast.makeText(FormCustomerActivity.this, "Reject request successfull", Toast.LENGTH_SHORT).show();
-                                        Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
-                                        Constant.sendNotification(response.body().getData().getRegistration_key(), "Request telah di tolak", "reject_customer");
-                                        Intent intent = new Intent(FormCustomerActivity.this, HomeActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<UserResponse> call, Throwable t) {
-
-                            }
-                        });
-                    }
-                });
-        alertDialogBuilder.setPositiveButton("No",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-
-                    }
-                });
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
-    }
-
     private EditText editText_dialog_customer_code;
     private Button button_dialog_save, button_dialog_cancel, button_dialog_contact1_delete, button_dialog_contact2_delete,
             button_dialog_contact3_delete, button_dialog_submit, button_dialog_new_customer, button_dialog_existing_customer,
@@ -777,9 +600,13 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                         customerRejectUpdateUser.enqueue(new Callback<ApproveResponse>() {
                             @Override
                             public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                                Intent intent = new Intent(FormCustomerActivity.this, HomeActivity.class);
-                                startActivity(intent);
-                                finish();
+                                if (response.isSuccessful()) {
+                                    Intent intent = new Intent(FormCustomerActivity.this, HomeActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else{
+
+                                }
                             }
 
                             @Override
@@ -807,191 +634,6 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         alertDialog.show();
     }
 
-    private void showCustomDialogCustomerCode() {
-        final Dialog dialog_customer_code = new Dialog(FormCustomerActivity.this);
-        dialog_customer_code.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog_customer_code.setContentView(R.layout.custom_dialog_customer_code_input);
-
-        editText_dialog_customer_code = (EditText) dialog_customer_code.findViewById(R.id.editText_customer_code);
-        button_dialog_save = (Button) dialog_customer_code.findViewById(R.id.button_save);
-        button_dialog_cancel = (Button) dialog_customer_code.findViewById(R.id.button_cancel);
-
-        editText_dialog_customer_code.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (!is_new_customer) {
-                    showCustomDialogCustomerRegisterType();
-                }
-                return false;
-            }
-        });
-
-        button_dialog_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog_customer_code.dismiss();
-            }
-        });
-
-        button_dialog_save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (editText_dialog_customer_code.getText().toString().equals("")) {
-                    Toast.makeText(FormCustomerActivity.this, "Field customer code is required", Toast.LENGTH_SHORT).show();
-                } else {
-                    Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().requestCustomerAction("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
-                            new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"), 1, 1);
-                    approveResponseCall.enqueue(new Callback<ApproveResponse>() {
-                        @Override
-                        public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                            if (response.isSuccessful()) {
-                                Toast.makeText(FormCustomerActivity.this, "Approve response success", Toast.LENGTH_SHORT).show();
-                                Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_user_id")));
-                                userResponseCall.enqueue(new Callback<UserResponse>() {
-                                    @Override
-                                    public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                                        if (response.isSuccessful()) {
-                                            if (response.body().getData().getRegistration_key() != null) {
-                                                Toast.makeText(FormCustomerActivity.this, "Approve request successfull", Toast.LENGTH_SHORT).show();
-                                                Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
-                                                Constant.sendNotification(response.body().getData().getRegistration_key(), "Request anda telah di setujui", "approve_customer");
-                                                Intent intent = new Intent(FormCustomerActivity.this, HomeActivity.class);
-                                                startActivity(intent);
-                                                finish();
-                                            }
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<UserResponse> call, Throwable t) {
-
-                                    }
-                                });
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<ApproveResponse> call, Throwable t) {
-
-                        }
-                    });
-                }
-            }
-        });
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        WindowManager windowmanager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
-        windowmanager.getDefaultDisplay().getMetrics(displayMetrics);
-        int deviceWidth = displayMetrics.widthPixels;
-        int deviceHeight = displayMetrics.heightPixels;
-        dialog_customer_code.getWindow().setLayout(deviceWidth - 20, WindowManager.LayoutParams.WRAP_CONTENT);
-        dialog_customer_code.setCancelable(true);
-        dialog_customer_code.show();
-    }
-
-    private void showCustomDialogContactInfoCustomer() {
-        final Dialog dialog_contactt_info_customer = new Dialog(FormCustomerActivity.this);
-        dialog_contactt_info_customer.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog_contactt_info_customer.setContentView(R.layout.custom_dialog_contact_info_customer);
-
-        textView_dialog_contact1_name = (TextView) dialog_contactt_info_customer.findViewById(R.id.textView_contact1_name);
-        textView_dialog_contact2_name = (TextView) dialog_contactt_info_customer.findViewById(R.id.textView_contact2_name);
-        textView_dialog_contact3_name = (TextView) dialog_contactt_info_customer.findViewById(R.id.textView_contact3_name);
-        textView_dialog_contact1_email = (TextView) dialog_contactt_info_customer.findViewById(R.id.textView_contact1_email);
-        textView_dialog_contact2_email = (TextView) dialog_contactt_info_customer.findViewById(R.id.textView_contact2_email);
-        textView_dialog_contact3_email = (TextView) dialog_contactt_info_customer.findViewById(R.id.textView_contact3_email);
-        button_dialog_contact1_delete = (Button) dialog_contactt_info_customer.findViewById(R.id.button_delete_contact_1);
-        button_dialog_contact2_delete = (Button) dialog_contactt_info_customer.findViewById(R.id.button_delete_contact_2);
-        button_dialog_contact3_delete = (Button) dialog_contactt_info_customer.findViewById(R.id.button_delete_contact_3);
-        button_dialog_submit = (Button) dialog_contactt_info_customer.findViewById(R.id.button_submit);
-
-        Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"),
-                new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "customer_decode"));
-        customerResponseCall.enqueue(new Callback<CustomerResponse>() {
-            @Override
-            public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
-                if (response.isSuccessful()) {
-                    CustomerModel customerModel = response.body().getData().get(0);
-                    textView_dialog_contact1_name.setText("" + (customerModel.getName1()));
-                    textView_dialog_contact2_name.setText("" + (customerModel.getName2()));
-                    textView_dialog_contact3_name.setText("" + (customerModel.getName3()));
-                    textView_dialog_contact1_email.setText("" + (customerModel.getEmail1()));
-                    textView_dialog_contact2_email.setText("" + (customerModel.getEmail2()));
-                    textView_dialog_contact3_email.setText("" + (customerModel.getEmail3()));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CustomerResponse> call, Throwable t) {
-
-            }
-        });
-
-        button_dialog_contact1_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // delete contact 1
-                dialog_contactt_info_customer.dismiss();
-            }
-        });
-        button_dialog_contact2_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // delete contact 2
-                dialog_contactt_info_customer.dismiss();
-            }
-        });
-        button_dialog_contact3_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // delete contact 3
-                dialog_contactt_info_customer.dismiss();
-            }
-        });
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        WindowManager windowmanager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
-        windowmanager.getDefaultDisplay().getMetrics(displayMetrics);
-        int deviceWidth = displayMetrics.widthPixels;
-        int deviceHeight = displayMetrics.heightPixels;
-        dialog_contactt_info_customer.getWindow().setLayout(deviceWidth - 20, WindowManager.LayoutParams.WRAP_CONTENT);
-        dialog_contactt_info_customer.setCancelable(true);
-        dialog_contactt_info_customer.show();
-    }
-
-    private void showCustomDialogCustomerRegisterType() {
-        final Dialog dialog_customer_register_type = new Dialog(FormCustomerActivity.this);
-        dialog_customer_register_type.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog_customer_register_type.setContentView(R.layout.custom_dialog_customer_register_type);
-
-        button_dialog_new_customer = (Button) dialog_customer_register_type.findViewById(R.id.button_new_customer);
-        button_dialog_existing_customer = (Button) dialog_customer_register_type.findViewById(R.id.button_existing_customer);
-
-        button_dialog_new_customer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                is_new_customer = true;
-                dialog_customer_register_type.dismiss();
-            }
-        });
-
-        button_dialog_existing_customer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showCustomDialogListCustomer();
-            }
-        });
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        WindowManager windowmanager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
-        windowmanager.getDefaultDisplay().getMetrics(displayMetrics);
-        int deviceWidth = displayMetrics.widthPixels;
-        int deviceHeight = displayMetrics.heightPixels;
-        dialog_customer_register_type.getWindow().setLayout(deviceWidth - 20, WindowManager.LayoutParams.WRAP_CONTENT);
-        dialog_customer_register_type.setCancelable(false);
-        dialog_customer_register_type.show();
-    }
-
     List<CustomerModel> modelRequestList;
     CustomerDialogAdapter customerDialogAdapter;
 
@@ -1008,29 +650,30 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         customerDialogAdapter = new CustomerDialogAdapter(FormCustomerActivity.this, modelRequestList);
         recyclerView_customer.setAdapter(customerDialogAdapter);
 
+        showProgressLoading();
         Call<RequestListCustomerResponse> requestListCustomerResponseCall = RestClient.getRestClient().getAllRequestCustomer("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"));
         requestListCustomerResponseCall.enqueue(new Callback<RequestListCustomerResponse>() {
             @Override
             public void onResponse(Call<RequestListCustomerResponse> call, Response<RequestListCustomerResponse> response) {
                 if (response.isSuccessful()) {
-//                    modelRequestList = response.body().getData();
-//                    customerDialogAdapter.updateList(modelRequestList);
-
                     if (response.body().getData().size() > 0) {
                         modelRequestList = response.body().getData();
                         List<CustomerModel> dataCustomer = new ArrayList<CustomerModel>();
                         for (CustomerModel customerModel : modelRequestList) {
                             if (customerModel.getActive() == 1 && customerModel.getApprove() == 1) {
+                                hideProgressLoading();
                                 dataCustomer.add(customerModel);
-
                             }
                         }
                         if (dataCustomer.size() > 0) {
+                            hideProgressLoading();
                             customerDialogAdapter.updateList(dataCustomer);
                         } else {
+                            hideProgressLoading();
                             Toast.makeText(FormCustomerActivity.this, "Empty data", Toast.LENGTH_SHORT).show();
                         }
                     } else {
+                        hideProgressLoading();
                         Toast.makeText(FormCustomerActivity.this, "Empty data", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -1038,7 +681,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
 
             @Override
             public void onFailure(Call<RequestListCustomerResponse> call, Throwable t) {
-
+                hideProgressLoading();
             }
         });
 
@@ -1273,5 +916,27 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        Intent intentLogin, intentRegister;
+
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

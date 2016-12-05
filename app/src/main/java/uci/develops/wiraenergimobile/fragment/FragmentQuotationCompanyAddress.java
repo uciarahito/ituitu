@@ -6,10 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +24,7 @@ import uci.develops.wiraenergimobile.model.CustomerModel;
 import uci.develops.wiraenergimobile.response.CustomerResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
-public class FragmentQuotationBillingPaymentCompanyAddress extends Fragment{
+public class FragmentQuotationCompanyAddress extends Fragment{
 
     private TextView textView_company_address, textView_name_pic, textView_position,
             textView_phone, textView_mobile, textView_email;
@@ -37,7 +34,7 @@ public class FragmentQuotationBillingPaymentCompanyAddress extends Fragment{
 
 //    private LinearLayout linear_layout_contact_info_1, linear_layout_contact_info_2, linear_layout_contact_info_3;
 
-    public FragmentQuotationBillingPaymentCompanyAddress(){}
+    public FragmentQuotationCompanyAddress(){}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +46,7 @@ public class FragmentQuotationBillingPaymentCompanyAddress extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view;
-        view = inflater.inflate(R.layout.fragment_req_quotation_billpayment_company_address, container, false);
+        view = inflater.inflate(R.layout.fragment_req_quotation_company_address, container, false);
 
         initializeComponent(view);
         loadDataSpinnerCompanyAddress();
@@ -94,10 +91,11 @@ public class FragmentQuotationBillingPaymentCompanyAddress extends Fragment{
             @Override
             public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
                 if (response.isSuccessful()) {
-                    final CustomerModel customerModel = response.body().getData().get(0);
-                    Toast.makeText(getContext(), "Address: " + response.body().getData().get(0).getAddress(), Toast.LENGTH_SHORT).show();
-                    textView_company_address.setText(customerModel.getAddress() == null ? "" : customerModel.getAddress()
-                            +" "+customerModel.getCity()+" "+customerModel.getProvince());
+//                    CustomerModel customerModel = new CustomerModel();
+//                    customerModel = response.body().getData().get(0);
+//                    Toast.makeText(getContext(), "Address: " + customerModel.getAddress(), Toast.LENGTH_SHORT).show();
+//                    textView_company_address.setText(customerModel.getAddress() == null ? "" : customerModel.getAddress()
+//                            +" "+customerModel.getCity()+" "+customerModel.getProvince());
 
                     if(response.body().getData().size() > 0) {
 //                        check_List = new String[response.body().getData().size()];
@@ -127,4 +125,6 @@ public class FragmentQuotationBillingPaymentCompanyAddress extends Fragment{
             }
         });
     }
+
+
 }

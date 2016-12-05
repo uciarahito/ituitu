@@ -58,7 +58,13 @@
 
         <activity
             android:name=".activity.MapsCoordinateActivity"
-            android:label="@string/title_activity_maps_coordinate" />
+            android:label="@string/title_activity_maps_coordinate" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.ListCustomerActivity"
             android:label="@string/title_activity_list_customer"
@@ -132,15 +138,6 @@
             android:name=".activity.PaymentActivity"
             android:label="@string/title_activity_payment"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.FormRequestQuotationActivity2">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
         <activity
             android:name=".activity.ListQuotationActivity"
             android:label="@string/title_activity_list_quotation"
@@ -150,20 +147,20 @@
             android:label="@string/title_activity_list_request_quotation"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.FormRequestQuotationActivity"
-            android:label="@string/title_activity_form_request_quotation"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.FormQuotationOrderActivity"
-            android:label="@string/title_activity_form_quotation_order"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".activity.FormRequestQuotationCustomerActivity"
             android:label="@string/title_activity_form_request_quotation_customer"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.FormSalesQuotationActivity"
             android:label="@string/title_activity_form_sales_quotation"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.FormRequestSalesOrderActivity"
+            android:label="@string/title_activity_form_request_sales_order"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.FormSalesOrderActivity"
+            android:label="@string/title_activity_form_sales_order"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

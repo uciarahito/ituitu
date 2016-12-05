@@ -25,6 +25,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.activity.FormCustomerActivity;
+import uci.develops.wiraenergimobile.activity.HomeActivity;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerAddressModel;
 import uci.develops.wiraenergimobile.response.ApproveResponse;
@@ -69,8 +70,8 @@ public class ShippingAddressAdapter extends RecyclerView.Adapter<ShippingAddress
 
             if (new SharedPreferenceManager().getPreferences(context, "roles").equals("customer")) {
                 if (Integer.parseInt(new SharedPreferenceManager().getPreferences(context, "approve")) == 1) {
-                    imageView_edit.setEnabled(false);
-                    imageView_delete.setEnabled(false);
+                    imageView_edit.setEnabled(true);
+                    imageView_delete.setEnabled(true);
                 }
             }
         }
@@ -106,8 +107,6 @@ public class ShippingAddressAdapter extends RecyclerView.Adapter<ShippingAddress
         holder.imageView_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("decode", customerAddressModel.getDecode());
                 Call<ApproveResponse> addShippingAddressCall = RestClient.getRestClient().deleteCustomerAddress("Bearer " +
                                 new SharedPreferenceManager().getPreferences(context, "token"),
                         new SharedPreferenceManager().getPreferences(context, "customer_decode"), customerAddressModel.getDecode());
@@ -116,8 +115,13 @@ public class ShippingAddressAdapter extends RecyclerView.Adapter<ShippingAddress
                     public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                         if (response.isSuccessful()) {
                             Toast.makeText(context, "Sukses", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(context, FormCustomerActivity.class);
-                            context.startActivity(intent);
+                            if (new SharedPreferenceManager().getPreferences(context, "roles").equals("")){
+                                Intent intent = new Intent(context, FormCustomerActivity.class);
+                                context.startActivity(intent);
+                            } else if (new SharedPreferenceManager().getPreferences(context, "roles").equals("customer")){
+                                Intent intent = new Intent(context, HomeActivity.class);
+                                context.startActivity(intent);
+                            }
                         }
                     }
 
@@ -132,7 +136,7 @@ public class ShippingAddressAdapter extends RecyclerView.Adapter<ShippingAddress
         holder.imageView_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialogAddShipping(customerAddressModel);
+                showDialogEditShipping(customerAddressModel);
             }
         });
     }
@@ -144,7 +148,7 @@ public class ShippingAddressAdapter extends RecyclerView.Adapter<ShippingAddress
 
     Dialog dialog_add_shipping;
 
-    private void showDialogAddShipping(final CustomerAddressModel customerAddressModel) {
+    private void showDialogEditShipping(final CustomerAddressModel customerAddressModel) {
         dialog_add_shipping = new Dialog(context);
         dialog_add_shipping.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog_add_shipping.setContentView(R.layout.custom_dialog_form_shipping_address);
@@ -180,12 +184,6 @@ public class ShippingAddressAdapter extends RecyclerView.Adapter<ShippingAddress
                     }
 
                     if (new SharedPreferenceManager().getPreferences(context, "roles").equals("admin")) {
-                        if (Integer.parseInt(new SharedPreferenceManager().getPreferences(context, "approve")) == 1) {
-                            readOnly();
-                        }
-                    }
-
-                    if (new SharedPreferenceManager().getPreferences(context, "roles").equals("customer")) {
                         if (Integer.parseInt(new SharedPreferenceManager().getPreferences(context, "approve")) == 1) {
                             readOnly();
                         }

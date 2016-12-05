@@ -23,16 +23,17 @@ import uci.develops.wiraenergimobile.model.CustomerAddressModel;
 import uci.develops.wiraenergimobile.response.ListCustomerAddressResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
-public class FragmentQuotationShippingAddress extends Fragment{
+public class FragmentQuotationShippingAddress extends Fragment {
 
     private Spinner spinner_shipping_address_name;
     private EditText editText_shipping_address, editText_shipping_PIC, editText_shipping_phone, editText_shipping_mobile;
 
     private String address_name = "", address = "", pic = "", phone = "", mobile = "";
     List<CustomerAddressModel> customerAddressModels;
-    String check_List [];
+    String check_List[];
 
-    public FragmentQuotationShippingAddress(){}
+    public FragmentQuotationShippingAddress() {
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,12 +55,20 @@ public class FragmentQuotationShippingAddress extends Fragment{
         //return inflater.inflate(R.layout.activity_ongoing_order, container, false);
     }
 
-    private void initializeComponent(View view){
+    private void initializeComponent(View view) {
         spinner_shipping_address_name = (Spinner) view.findViewById(R.id.spinner_shipping_address_name);
         editText_shipping_address = (EditText) view.findViewById(R.id.editText_shipping_address);
         editText_shipping_PIC = (EditText) view.findViewById(R.id.editText_shipping_PIC);
         editText_shipping_phone = (EditText) view.findViewById(R.id.editText_shipping_phone);
         editText_shipping_mobile = (EditText) view.findViewById(R.id.editText_shipping_mobile);
+
+        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
+            readOnlyCustomer();
+        }
+
+        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")) {
+            readOnlyAdmin();
+        }
     }
 
     /**
@@ -71,7 +80,7 @@ public class FragmentQuotationShippingAddress extends Fragment{
         super.onResume();
     }
 
-    private void loadDataSpinnerAddressName(){
+    private void loadDataSpinnerAddressName() {
         customerAddressModels = new ArrayList<>();
         Call<ListCustomerAddressResponse> customerAddressResponseCall = RestClient.getRestClient().getCustomerAddress("Bearer "
                         + new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "token"),
@@ -79,11 +88,11 @@ public class FragmentQuotationShippingAddress extends Fragment{
         customerAddressResponseCall.enqueue(new Callback<ListCustomerAddressResponse>() {
             @Override
             public void onResponse(Call<ListCustomerAddressResponse> call, Response<ListCustomerAddressResponse> response) {
-                if(response.isSuccessful()){
-                    if(response.body().getData().size() > 0) {
+                if (response.isSuccessful()) {
+                    if (response.body().getData().size() > 0) {
                         check_List = new String[response.body().getData().size()];
-                        int index=0;
-                        for(CustomerAddressModel customerAddressModel : response.body().getData()){
+                        int index = 0;
+                        for (CustomerAddressModel customerAddressModel : response.body().getData()) {
                             check_List[index] = customerAddressModel.getName();
                             index++;
                         }
@@ -99,10 +108,11 @@ public class FragmentQuotationShippingAddress extends Fragment{
                             @Override
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                 Toast.makeText(getActivity().getApplicationContext(), "" + check_List[position], Toast.LENGTH_SHORT).show();
-                                editText_shipping_address.setText(""+customerAddressModels.get(position).getAddress());
-                                editText_shipping_PIC.setText(""+customerAddressModels.get(position).getPic());
-                                editText_shipping_phone.setText(""+customerAddressModels.get(position).getPhone());
-                                editText_shipping_mobile.setText(""+customerAddressModels.get(position).getMobile());
+                                editText_shipping_address.setText("" + customerAddressModels.get(position).getAddress());
+                                editText_shipping_PIC.setText("" + customerAddressModels.get(position).getPic());
+                                editText_shipping_phone.setText("" + customerAddressModels.get(position).getPhone());
+                                editText_shipping_mobile.setText("" + customerAddressModels.get(position).getMobile());
+
                             }
 
                             @Override
@@ -146,8 +156,15 @@ public class FragmentQuotationShippingAddress extends Fragment{
         return customerAddressModel;
     }
 
-    public void readOnly() {
+    public void readOnlyAdmin() {
         spinner_shipping_address_name.setEnabled(false);
+        editText_shipping_address.setEnabled(false);
+        editText_shipping_PIC.setEnabled(false);
+        editText_shipping_phone.setEnabled(false);
+        editText_shipping_mobile.setEnabled(false);
+    }
+
+    public void readOnlyCustomer() {
         editText_shipping_address.setEnabled(false);
         editText_shipping_PIC.setEnabled(false);
         editText_shipping_phone.setEnabled(false);

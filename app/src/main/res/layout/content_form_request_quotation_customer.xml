@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="uci.develops.wiraenergimobile.activity.FormRequestQuotationCustomerActivity"
-    tools:showIn="@layout/activity_form_request_quotation_customer">
+    tools:showIn="@layout/app_bar_form_request_quotation_customer">
 
     <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -88,9 +88,17 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="9"
+                        android:layout_weight="3"
                         android:text="Billing Address"
                         android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:text="(Please choose one, can't choose both of them)"
+                        android:textSize="10dp"
+                        android:textStyle="italic" />
 
                     <ImageView
                         android:id="@+id/imageTitle2"

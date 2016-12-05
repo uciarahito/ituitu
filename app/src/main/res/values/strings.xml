@@ -1,13 +1,43 @@
 <resources>
     <string name="app_name">WiraEnergiMobile</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="title_activity_register">RegisterActivity</string>
-    <string name="title_activity_form_customer">FormCustomerActivity</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_form_customer">Form Customer</string>
     <string name="title_activity_maps_coordinate">Map</string>
-    <string name="title_activity_dashboard_admin">DashboardAdmin</string>
-    <string name="title_activity_dashboard_customer">DashboardCustomerActivity</string>
-    <string name="title_activity_list_customer">ListCustomerActivity</string>
+    <string name="title_activity_dashboard_admin">Dashboard Admin</string>
+    <string name="title_activity_dashboard_customer">Dashboard Customer</string>
+    <string name="title_activity_list_customer">List Customer</string>
+    <string name="title_activity_reset_password">Reset Password</string>
+    <string name="title_activity_verification_status">Verification Status</string>
+    <string name="title_activity_waiting_approval">Waiting for Approval</string>
+    <string name="title_activity_request_quotation">Request Quotation</string>
+    <string name="title_activity_home">Home</string>
+    <string name="title_activity_form_quotation">Form Quotation</string>
+    <string name="title_activity_report_quotation">Report Quotation</string>
+    <string name="title_activity_item_quotation">Item Quotation</string>
+    <string name="title_activity_sales_quotation">Sales Quotation</string>
+    <string name="title_activity_purchase_order">Purchase Order</string>
+    <string name="title_activity_good_receive">Good Receive</string>
+    <string name="title_activity_sales_order">Sales Order</string>
+    <string name="title_activity_delivery_order">Delivery Order</string>
+    <string name="title_activity_invoice">Invoice</string>
+    <string name="title_activity_payment">Payment</string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_form_request_quotation">Form Request Quotation</string>
+    <string name="title_activity_list_quotation">List Quotation</string>
+    <string name="title_activity_list_request_quotation">List Request Quotation</string>
+    <string name="title_activity_form_quotation_order">Form Quotation Order</string>
+    <string name="title_activity_form_request_quotation_customer">
+        Form Request Quotation Customer
+    </string>
+    <string name="title_activity_form_sales_quotation">Form Sales Quotation</string>
+    <string name="title_activity_form_request_sales_order">Form Request Sales Order</string>
+    <string name="title_activity_form_sales_order">Form Sales Order</string>
+    <string name="title_activity_list_request_customer">List Request Customer</string>
+    <string name="title_activity_detail_request_customer">Detail Request Customer</string>
+    <string name="title_activity_detail_customer">Detail Customer</string>
+    <string name="title_activity_dashboard">Dashboard</string>
 
     <string-array name="list_of_province">
         <item>Aceh</item>
@@ -147,9 +177,6 @@
         <item>Tebingtinggi</item>
         <item>Yogyakarta</item>
     </string-array>
-    <string name="title_activity_list_request_customer">ListRequestCustomerActivity</string>
-    <string name="title_activity_detail_request_customer">DetailRequestCustomerActivity</string>
-    <string name="title_activity_detail_customer">DetailCustomerActivity</string>
 
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -203,7 +230,9 @@
     <string name="not_member">Not a member?</string>
     <string name="already_member">Already a member?</string>
     <string name="footer">2016 All Rights Reserved. PT. Wiraenergi</string>
-    <string name="title_activity_dashboard">DashboardActivity</string>
+
+
+
 
     <string name="qty_no">QT No:</string>
     <string name="qty_date">QT Date:</string>
@@ -290,29 +319,6 @@
     <string name="comedy_movies">Comedy</string>
     <string name="thriller_movies">Thriller</string>
     <string name="movie_genre">genre</string>
-    <string name="title_activity_reset_password">ResetPasswordActivity</string>
-    <string name="title_activity_verification_status">VerificationStatusActivity</string>
-    <string name="title_activity_waiting_approval">WaitingApprovalActivity</string>
-    <string name="title_activity_request_quotation">RequestQuotationActivity</string>
-    <string name="title_activity_home">Home</string>
-    <string name="title_activity_form_quotation">FormQuotationActivity</string>
-    <string name="title_activity_report_quotation">ReportQuotationActivity</string>
-    <string name="title_activity_item_quotation">ItemQuotationActivity</string>
-    <string name="title_activity_sales_quotation">SalesQuotationActivity</string>
-    <string name="title_activity_purchase_order">PurchaseOrderActivity</string>
-    <string name="title_activity_good_receive">GoodReceiveActivity</string>
-    <string name="title_activity_sales_order">SalesOrderActivity</string>
-    <string name="title_activity_delivery_order">DeliveryOrderActivity</string>
-    <string name="title_activity_invoice">InvoiceActivity</string>
-    <string name="title_activity_payment">PaymentActivity</string>
-    <string name="title_activity_profile">ProfileActivity</string>
-    <string name="title_activity_form_request_quotation">Form Request Quotation</string>
-    <string name="title_activity_list_quotation">ListQuotationActivity</string>
-    <string name="title_activity_list_request_quotation">ListRequestQuotationActivity</string>
-    <string name="title_activity_form_quotation_order">FormQuotationOrderActivity</string>
-    <string name="title_activity_form_request_quotation_customer">
-        FormRequestQuotationCustomerActivity
-    </string>
-    <string name="title_activity_form_sales_quotation">FormSalesQuotationActivity</string>
+
 
 </resources>
