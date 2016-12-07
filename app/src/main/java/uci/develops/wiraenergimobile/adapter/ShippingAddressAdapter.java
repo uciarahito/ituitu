@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -280,16 +281,17 @@ public class ShippingAddressAdapter extends RecyclerView.Adapter<ShippingAddress
                         public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                             if (response.isSuccessful()) {
                                 Toast.makeText(context, "Sukses", Toast.LENGTH_SHORT).show();
-                                if (new SharedPreferenceManager().getPreferences(context, "roles").equals("")) {
-                                    Intent intent = new Intent(context, FormCustomerActivity.class);
-                                    context.startActivity(intent);
-                                } else if (new SharedPreferenceManager().getPreferences(context, "roles").equals("customer")) {
-                                    Intent intent = new Intent(context, HomeActivity.class);
-                                    context.startActivity(intent);
-                                }
+                                // ini untuk mengirim notifikasi
+                                // ini disebut custom broadcast intent (kalo gak salah)
+                                // intent actionnya, pushNotification (cuma contoh)
+                                Intent pushNotification = new Intent("pushNotification");
+                                // trus, kita selipkan string (kayak ngirim intent biasa)
+                                // itulah yang di buat banyak ban
+                                // misalnya ada refresh apalah gitu
+                                // atau apalah terserah,
 
-//                                Intent intent = new Intent(context, FormCustomerActivity.class);
-//                                context.startActivity(intent);
+                                pushNotification.putExtra("type", "refresh_list_shipping");
+                                LocalBroadcastManager.getInstance(context).sendBroadcast(pushNotification);
                                 dialog_add_shipping.dismiss();
                             } else {
                                 Toast.makeText(context, "" + response.errorBody().toString(), Toast.LENGTH_SHORT).show();
@@ -346,50 +348,4 @@ public class ShippingAddressAdapter extends RecyclerView.Adapter<ShippingAddress
         return customerAddressModelList.size();
     }
 
-//    private void alertDialogDeleteShippingAddress() {
-//        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-//        alertDialogBuilder.setMessage("Are you sure want to delete the shipping address?");
-//        alertDialogBuilder.setNegativeButton("Yes",
-//                new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface arg0, int arg1) {
-//                        final CustomerAddressModel customerAddressModel = new CustomerAddressModel();
-//                        Call<ApproveResponse> addShippingAddressCall = RestClient.getRestClient().deleteCustomerAddress("Bearer " +
-//                                        new SharedPreferenceManager().getPreferences(context, "token"),
-//                                new SharedPreferenceManager().getPreferences(context, "customer_decode"), customerAddressModel.getDecode());
-//                        addShippingAddressCall.enqueue(new Callback<ApproveResponse>() {
-//                            @Override
-//                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-//                                if (response.isSuccessful()) {
-//                                    Toast.makeText(context, "Sukses", Toast.LENGTH_SHORT).show();
-//                                    if (new SharedPreferenceManager().getPreferences(context, "roles").equals("")) {
-//                                        Intent intent = new Intent(context, FormCustomerActivity.class);
-//                                        context.startActivity(intent);
-//                                    } else if (new SharedPreferenceManager().getPreferences(context, "roles").equals("customer")) {
-//                                        Intent intent = new Intent(context, HomeActivity.class);
-//                                        context.startActivity(intent);
-//                                    }
-//                                }
-//                            }
-//
-//                            @Override
-//                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
-//
-//                            }
-//                        });
-//                    }
-//                });
-//        alertDialogBuilder.setPositiveButton("No",
-//                new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface arg0, int arg1) {
-////                        Intent intent = new Intent(context, FormCustomerActivity.class);
-////                        context.startActivity(intent);
-//                       arg0.dismiss();
-//                    }
-//                });
-//
-//        AlertDialog alertDialog = alertDialogBuilder.create();
-//        alertDialog.show();
-//    }
 }

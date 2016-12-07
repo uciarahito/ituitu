@@ -9,9 +9,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,20 +30,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.adapter.CustomExpandableListAdapter;
-import uci.develops.wiraenergimobile.adapter.SalesQuotationAdapter;
 import uci.develops.wiraenergimobile.fragment.navigation.NavigationManager;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
-import uci.develops.wiraenergimobile.model.QuotationModel;
 import uci.develops.wiraenergimobile.model.UserXModel;
 import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
-public class ListQuotationActivity extends AppCompatActivity {
-
-    RecyclerView recycleViewListQuotation;
-    List<QuotationModel> quotationModelList;
-    SalesQuotationAdapter salesQuotationAdapter;
+public class DashboardAdminActivity extends AppCompatActivity {
 
     //utk nav drawer
     private DrawerLayout mDrawerLayout;
@@ -64,7 +55,7 @@ public class ListQuotationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_quotation);
+        setContentView(R.layout.activity_dashboard_admin);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -73,16 +64,6 @@ public class ListQuotationActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             selectFirstItemAsDefault();
         }
-
-        recycleViewListQuotation = (RecyclerView)findViewById(R.id.recycleListQuotation);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(ListQuotationActivity.this);
-        recycleViewListQuotation.setLayoutManager(mLayoutManager);
-        recycleViewListQuotation.setItemAnimator(new DefaultItemAnimator());
-        quotationModelList = new ArrayList<>();
-        salesQuotationAdapter = new SalesQuotationAdapter(ListQuotationActivity.this, quotationModelList);
-        recycleViewListQuotation.setAdapter(salesQuotationAdapter);
-
-        //.....lanjut
     }
 
     private void selectFirstItemAsDefault() {
@@ -111,19 +92,19 @@ public class ListQuotationActivity extends AppCompatActivity {
         imageView_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (new SharedPreferenceManager().getPreferences(ListQuotationActivity.this, "roles").equals("admin")) {
-                    Intent intent = new Intent(ListQuotationActivity.this, ListCustomerActivity.class);
+                if (new SharedPreferenceManager().getPreferences(DashboardAdminActivity.this, "roles").equals("admin")) {
+                    Intent intent = new Intent(DashboardAdminActivity.this, ListCustomerActivity.class);
                     startActivity(intent);
-                } else if (new SharedPreferenceManager().getPreferences(ListQuotationActivity.this, "roles").equals("customer")) {
-                    Intent intent = new Intent(ListQuotationActivity.this, FormCustomerActivity.class);
+                } else if (new SharedPreferenceManager().getPreferences(DashboardAdminActivity.this, "roles").equals("customer")) {
+                    Intent intent = new Intent(DashboardAdminActivity.this, FormCustomerActivity.class);
                     startActivity(intent);
                 }
             }
         });
 
         Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new
-                        SharedPreferenceManager().getPreferences(ListQuotationActivity.this, "token"),
-                Integer.parseInt(new SharedPreferenceManager().getPreferences(ListQuotationActivity.this, "user_id")));
+                        SharedPreferenceManager().getPreferences(DashboardAdminActivity.this, "token"),
+                Integer.parseInt(new SharedPreferenceManager().getPreferences(DashboardAdminActivity.this, "user_id")));
         userResponseCall.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
@@ -144,20 +125,20 @@ public class ListQuotationActivity extends AppCompatActivity {
         mExpandableListData = ExpandableListDataSource.getData(this);
         List<String> rootMenu = new ArrayList<>();
 
-        if (new SharedPreferenceManager().getPreferences(ListQuotationActivity.this, "roles").equals("admin")) {
+        if (new SharedPreferenceManager().getPreferences(DashboardAdminActivity.this, "roles").equals("admin")) {
             rootMenu.add("Dashboard");
             rootMenu.add("Customer");
             rootMenu.add("Purchasing");
             rootMenu.add("Sales");
             rootMenu.add("Logout");
-        } else if (new SharedPreferenceManager().getPreferences(ListQuotationActivity.this, "roles").equals("customer")) {
+        } else if (new SharedPreferenceManager().getPreferences(DashboardAdminActivity.this, "roles").equals("customer")) {
             rootMenu.add("Dashboard");
             rootMenu.add("Profile");
             rootMenu.add("Sales");
             rootMenu.add("Logout");
-        } else if (new SharedPreferenceManager().getPreferences(ListQuotationActivity.this, "roles").equals("")) {
+        } else if (new SharedPreferenceManager().getPreferences(DashboardAdminActivity.this, "roles").equals("")) {
             rootMenu.add("Logout");
-        } else if (new SharedPreferenceManager().getPreferences(ListQuotationActivity.this, "roles").equals("expedition")) {
+        } else if (new SharedPreferenceManager().getPreferences(DashboardAdminActivity.this, "roles").equals("expedition")) {
             rootMenu.add("Dashboard");
             rootMenu.add("Profile");
             rootMenu.add("Delivery Order");
@@ -173,7 +154,7 @@ public class ListQuotationActivity extends AppCompatActivity {
     }
 
     private void initItems() {
-        items = ExpandableListDataSource.getArrayTitle(ListQuotationActivity.this);
+        items = ExpandableListDataSource.getArrayTitle(DashboardAdminActivity.this);
     }
 
     private void addDrawerItems() {
@@ -188,7 +169,7 @@ public class ListQuotationActivity extends AppCompatActivity {
                         .get(childPosition).toString();
                 getSupportActionBar().setTitle(selectedItem);
 
-                Toast.makeText(ListQuotationActivity.this, "" + selectedItem, Toast.LENGTH_SHORT).show();
+                Toast.makeText(DashboardAdminActivity.this, "" + selectedItem, Toast.LENGTH_SHORT).show();
                 /*
                 if (items[0].equals(mExpandableListTitle.get(groupPosition))) {
                     mNavigationManager.showFragmentNavPurchasing(selectedItem);
@@ -201,28 +182,28 @@ public class ListQuotationActivity extends AppCompatActivity {
                 //utk menu purchasing
                 if (selectedItem.equals("Purchase Order [PO]")) {
                     Log.e("Cekkkkkk", selectedItem + "qqqqqqqqqqqqqqqq");
-                    Intent intent = new Intent(ListQuotationActivity.this, PurchaseOrderActivity.class);
+                    Intent intent = new Intent(DashboardAdminActivity.this, PurchaseOrderActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Good Received [GR]")) {
-                    Intent intent = new Intent(ListQuotationActivity.this, GoodReceivedActivity.class);
+                    Intent intent = new Intent(DashboardAdminActivity.this, GoodReceivedActivity.class);
                     startActivity(intent);
                 }
 
                 //utk menu sales
                 if (selectedItem.equals("Quotation")) {
-                    Intent intent = new Intent(ListQuotationActivity.this, SalesQuotationActivity.class);
+                    Intent intent = new Intent(DashboardAdminActivity.this, SalesQuotationActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Sales Order [SO]")) {
-                    Intent intent = new Intent(ListQuotationActivity.this, SalesOrderActivity.class);
+                    Intent intent = new Intent(DashboardAdminActivity.this, SalesOrderActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Delivery Order [DO]")) {
-                    Intent intent = new Intent(ListQuotationActivity.this, DeliveryOrderActivity.class);
+                    Intent intent = new Intent(DashboardAdminActivity.this, DeliveryOrderActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Invoice")) {
-                    Intent intent = new Intent(ListQuotationActivity.this, InvoiceActivity.class);
+                    Intent intent = new Intent(DashboardAdminActivity.this, InvoiceActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Payment")) {
-                    Intent intent = new Intent(ListQuotationActivity.this, PaymentActivity.class);
+                    Intent intent = new Intent(DashboardAdminActivity.this, PaymentActivity.class);
                     startActivity(intent);
                 }
 
@@ -235,30 +216,30 @@ public class ListQuotationActivity extends AppCompatActivity {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 String selected_item = getResources().getStringArray(R.array.general)[groupPosition];
-                if(new SharedPreferenceManager().getPreferences(ListQuotationActivity.this, "roles").equals("admin")){
+                if(new SharedPreferenceManager().getPreferences(DashboardAdminActivity.this, "roles").equals("admin")){
                     selected_item = getResources().getStringArray(R.array.general)[groupPosition];
-                } else if(new SharedPreferenceManager().getPreferences(ListQuotationActivity.this, "roles").equals("customer")){
+                } else if(new SharedPreferenceManager().getPreferences(DashboardAdminActivity.this, "roles").equals("customer")){
                     selected_item = getResources().getStringArray(R.array.general_customer)[groupPosition];
-                } else if (new SharedPreferenceManager().getPreferences(ListQuotationActivity.this, "roles").equals("expedition")){
+                } else if (new SharedPreferenceManager().getPreferences(DashboardAdminActivity.this, "roles").equals("expedition")){
                     selected_item = getResources().getStringArray(R.array.general_expedition)[groupPosition];
-                } else if (new SharedPreferenceManager().getPreferences(ListQuotationActivity.this, "roles").equals("")){
+                } else if (new SharedPreferenceManager().getPreferences(DashboardAdminActivity.this, "roles").equals("")){
                     selected_item = getResources().getStringArray(R.array.general_guest)[groupPosition];
                 }
 
                 if (selected_item.equals("Logout")) {
                     logout();
                 } else if (selected_item.equals("Dashboard")) {
-                    Intent intent = new Intent(ListQuotationActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(DashboardAdminActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
                 } else if (selected_item.equals("Customer")) {
-                    if (new SharedPreferenceManager().getPreferences(ListQuotationActivity.this, "roles").equals("admin")) {
-                        Intent intent = new Intent(ListQuotationActivity.this, HomeActivity.class);
+                    if (new SharedPreferenceManager().getPreferences(DashboardAdminActivity.this, "roles").equals("admin")) {
+                        Intent intent = new Intent(DashboardAdminActivity.this, HomeActivity.class);
                         startActivity(intent);
                     }
-                } else if (selected_item.equals("Profile")) {
-                    if (new SharedPreferenceManager().getPreferences(ListQuotationActivity.this, "roles").equals("customer")) {
-                        Intent intent = new Intent(ListQuotationActivity.this, FormCustomerActivity.class);
+                }  else if (selected_item.equals("Profile")) {
+                    if (new SharedPreferenceManager().getPreferences(DashboardAdminActivity.this, "roles").equals("customer")) {
+                        Intent intent = new Intent(DashboardAdminActivity.this, FormCustomerActivity.class);
                         startActivity(intent);
                     }
                 }
@@ -268,12 +249,12 @@ public class ListQuotationActivity extends AppCompatActivity {
     }
 
     private void logout() {
-        new SharedPreferenceManager().setPreferences(ListQuotationActivity.this, "is_login", "");
-        new SharedPreferenceManager().setPreferences(ListQuotationActivity.this, "token", "");
-        new SharedPreferenceManager().setPreferences(ListQuotationActivity.this, "customer_decode", "");
-        new SharedPreferenceManager().setPreferences(ListQuotationActivity.this, "roles", "");
+        new SharedPreferenceManager().setPreferences(DashboardAdminActivity.this, "is_login", "");
+        new SharedPreferenceManager().setPreferences(DashboardAdminActivity.this, "token", "");
+        new SharedPreferenceManager().setPreferences(DashboardAdminActivity.this, "customer_decode", "");
+        new SharedPreferenceManager().setPreferences(DashboardAdminActivity.this, "roles", "");
 
-        Intent intent = new Intent(ListQuotationActivity.this, LoginActivity.class);
+        Intent intent = new Intent(DashboardAdminActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }

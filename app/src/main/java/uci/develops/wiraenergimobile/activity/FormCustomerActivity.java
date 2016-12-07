@@ -188,6 +188,8 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("customer")) {
             linearLayout_button_approve.setVisibility(View.GONE);
             linearLayout_button_reject.setVisibility(View.GONE);
+            linearLayout_button_back.setVisibility(View.GONE);
+            linearLayout_button_next.setVisibility(View.GONE);
             linearLayout_tab_basic_info.setOnClickListener(this);
             linearLayout_tab_contact_info.setOnClickListener(this);
             linearLayout_tab_shipping_to.setOnClickListener(this);
@@ -869,8 +871,10 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                     selected_item = getResources().getStringArray(R.array.general)[groupPosition];
                 } else if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("customer")) {
                     selected_item = getResources().getStringArray(R.array.general_customer)[groupPosition];
-                } else {
+                } else if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("expedition")){
                     selected_item = getResources().getStringArray(R.array.general_expedition)[groupPosition];
+                } else if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("")){
+                    selected_item = getResources().getStringArray(R.array.general_guest)[groupPosition];
                 }
 
                 if (selected_item.equals("Logout")) {
@@ -882,6 +886,11 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
                 } else if (selected_item.equals("Customer")) {
                     if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("admin")) {
                         Intent intent = new Intent(FormCustomerActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                    }
+                } else if (selected_item.equals("Profile")) {
+                    if (new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "roles").equals("customer")) {
+                        Intent intent = new Intent(FormCustomerActivity.this, FormCustomerActivity.class);
                         startActivity(intent);
                     }
                 }

@@ -329,11 +329,15 @@ public class FormRequestQuotationCustomerActivity extends AppCompatActivity impl
             rootMenu.add("Logout");
         } else if (new SharedPreferenceManager().getPreferences(FormRequestQuotationCustomerActivity.this, "roles").equals("customer")) {
             rootMenu.add("Dashboard");
-            rootMenu.add("Customer");
+            rootMenu.add("Profile");
             rootMenu.add("Sales");
             rootMenu.add("Logout");
-        } else {
+        } else if (new SharedPreferenceManager().getPreferences(FormRequestQuotationCustomerActivity.this, "roles").equals("")) {
+            rootMenu.add("Logout");
+        } else if (new SharedPreferenceManager().getPreferences(FormRequestQuotationCustomerActivity.this, "roles").equals("expedition")) {
             rootMenu.add("Dashboard");
+            rootMenu.add("Profile");
+            rootMenu.add("Delivery Order");
             rootMenu.add("Logout");
         }
         mExpandableListTitle = rootMenu;
@@ -412,8 +416,10 @@ public class FormRequestQuotationCustomerActivity extends AppCompatActivity impl
                     selected_item = getResources().getStringArray(R.array.general)[groupPosition];
                 } else if(new SharedPreferenceManager().getPreferences(FormRequestQuotationCustomerActivity.this, "roles").equals("customer")){
                     selected_item = getResources().getStringArray(R.array.general_customer)[groupPosition];
-                } else {
+                } else if (new SharedPreferenceManager().getPreferences(FormRequestQuotationCustomerActivity.this, "roles").equals("expedition")){
                     selected_item = getResources().getStringArray(R.array.general_expedition)[groupPosition];
+                } else if (new SharedPreferenceManager().getPreferences(FormRequestQuotationCustomerActivity.this, "roles").equals("")){
+                    selected_item = getResources().getStringArray(R.array.general_guest)[groupPosition];
                 }
 
                 if (selected_item.equals("Logout")) {
@@ -425,6 +431,11 @@ public class FormRequestQuotationCustomerActivity extends AppCompatActivity impl
                 } else if (selected_item.equals("Customer")) {
                     if (new SharedPreferenceManager().getPreferences(FormRequestQuotationCustomerActivity.this, "roles").equals("admin")) {
                         Intent intent = new Intent(FormRequestQuotationCustomerActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                    }
+                } else if (selected_item.equals("Profile")) {
+                    if (new SharedPreferenceManager().getPreferences(FormRequestQuotationCustomerActivity.this, "roles").equals("customer")) {
+                        Intent intent = new Intent(FormRequestQuotationCustomerActivity.this, FormCustomerActivity.class);
                         startActivity(intent);
                     }
                 }

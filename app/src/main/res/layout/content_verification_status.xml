@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="?android:attr/colorBackground"
-    tools:context=".activity.VerificationStatusActivity">
+    tools:context=".activity.VerificationStatusActivity"
+    tools:showIn="@layout/app_bar_verification_status">
 
     <LinearLayout
         android:layout_width="@dimen/narrow_container"

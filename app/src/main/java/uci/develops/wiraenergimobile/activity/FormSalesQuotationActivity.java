@@ -36,6 +36,7 @@ import uci.develops.wiraenergimobile.adapter.CustomExpandableListAdapter;
 import uci.develops.wiraenergimobile.adapter.ItemSalesQuotationAdapter;
 import uci.develops.wiraenergimobile.fragment.navigation.NavigationManager;
 import uci.develops.wiraenergimobile.helper.DividerItemDecoration;
+import uci.develops.wiraenergimobile.helper.NumberTextWatcher;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
 import uci.develops.wiraenergimobile.model.QuotationModel;
@@ -129,9 +130,13 @@ public class FormSalesQuotationActivity extends AppCompatActivity implements Vie
         recyclerView.setAdapter(itemSalesQuotationAdapter);
 
         linearLayoutTitle1.setOnClickListener(this);
+
+        layout_tab_shipping_address.setBackgroundResource(R.drawable.rounded_rectangle_org);
+        layout_tab_billing_address.setBackgroundResource(R.drawable.rounded_rectangle_gray);
+
         layout_tab_shipping_address.setOnClickListener(this);
         layout_tab_billing_address.setOnClickListener(this);
-
+        editText_bruto.addTextChangedListener(new NumberTextWatcher(editText_bruto));
     }
 
     @Override
@@ -254,11 +259,15 @@ public class FormSalesQuotationActivity extends AppCompatActivity implements Vie
             rootMenu.add("Logout");
         } else if (new SharedPreferenceManager().getPreferences(FormSalesQuotationActivity.this, "roles").equals("customer")) {
             rootMenu.add("Dashboard");
-            rootMenu.add("Customer");
+            rootMenu.add("Profile");
             rootMenu.add("Sales");
             rootMenu.add("Logout");
-        } else {
+        } else if (new SharedPreferenceManager().getPreferences(FormSalesQuotationActivity.this, "roles").equals("")) {
+            rootMenu.add("Logout");
+        } else if (new SharedPreferenceManager().getPreferences(FormSalesQuotationActivity.this, "roles").equals("expedition")) {
             rootMenu.add("Dashboard");
+            rootMenu.add("Profile");
+            rootMenu.add("Delivery Order");
             rootMenu.add("Logout");
         }
         mExpandableListTitle = rootMenu;
@@ -337,8 +346,10 @@ public class FormSalesQuotationActivity extends AppCompatActivity implements Vie
                     selected_item = getResources().getStringArray(R.array.general)[groupPosition];
                 } else if (new SharedPreferenceManager().getPreferences(FormSalesQuotationActivity.this, "roles").equals("customer")) {
                     selected_item = getResources().getStringArray(R.array.general_customer)[groupPosition];
-                } else {
+                } else if (new SharedPreferenceManager().getPreferences(FormSalesQuotationActivity.this, "roles").equals("expedition")){
                     selected_item = getResources().getStringArray(R.array.general_expedition)[groupPosition];
+                } else if (new SharedPreferenceManager().getPreferences(FormSalesQuotationActivity.this, "roles").equals("")){
+                    selected_item = getResources().getStringArray(R.array.general_guest)[groupPosition];
                 }
 
                 if (selected_item.equals("Logout")) {
@@ -350,6 +361,11 @@ public class FormSalesQuotationActivity extends AppCompatActivity implements Vie
                 } else if (selected_item.equals("Customer")) {
                     if (new SharedPreferenceManager().getPreferences(FormSalesQuotationActivity.this, "roles").equals("admin")) {
                         Intent intent = new Intent(FormSalesQuotationActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                    }
+                } else if (selected_item.equals("Profile")) {
+                    if (new SharedPreferenceManager().getPreferences(FormSalesQuotationActivity.this, "roles").equals("customer")) {
+                        Intent intent = new Intent(FormSalesQuotationActivity.this, FormCustomerActivity.class);
                         startActivity(intent);
                     }
                 }

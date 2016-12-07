@@ -284,13 +284,15 @@ public class HomeActivity extends AppCompatActivity {
         mExpandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                String selected_item;
-                if(new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("admin")){
+                String selected_item  = getResources().getStringArray(R.array.general)[groupPosition];
+                if (new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("admin")) {
                     selected_item = getResources().getStringArray(R.array.general)[groupPosition];
-                } else if(new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("customer")){
+                } else if (new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("customer")) {
                     selected_item = getResources().getStringArray(R.array.general_customer)[groupPosition];
-                } else {
+                } else if (new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("expedition")){
                     selected_item = getResources().getStringArray(R.array.general_expedition)[groupPosition];
+                } else if (new SharedPreferenceManager().getPreferences(HomeActivity.this, "roles").equals("")){
+                    selected_item = getResources().getStringArray(R.array.general_guest)[groupPosition];
                 }
 
                 if (selected_item.equals("Logout")) {
@@ -320,7 +322,7 @@ public class HomeActivity extends AppCompatActivity {
         new SharedPreferenceManager().setPreferences(HomeActivity.this, "is_login", "");
         new SharedPreferenceManager().setPreferences(HomeActivity.this, "token", "");
         new SharedPreferenceManager().setPreferences(HomeActivity.this, "customer_decode", "");
-        new SharedPreferenceManager().setPreferences(HomeActivity.this, "roles", "false");
+        new SharedPreferenceManager().setPreferences(HomeActivity.this, "roles", "");
 
         Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
         startActivity(intent);

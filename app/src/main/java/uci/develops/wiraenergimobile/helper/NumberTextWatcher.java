@@ -2,11 +2,15 @@ package uci.develops.wiraenergimobile.helper;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.EditText;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.FieldPosition;
+import java.text.NumberFormat;
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.util.Locale;
 
 /**
@@ -14,13 +18,16 @@ import java.util.Locale;
  */
 public class NumberTextWatcher implements TextWatcher {
 
+    private NumberFormat nf;
     private DecimalFormat df;
     private DecimalFormat dfnd;
     private boolean hasFractionalPart;
+    String formatString = "#,###,###,###.00";
+    String formatString2 = "#,###.0#";
 
     private EditText et;
 
-    private final Locale locale = new Locale("pt", "ID");
+    private final Locale locale = new Locale("id", "ID");
 
     public NumberTextWatcher(EditText et)
     {
@@ -28,8 +35,15 @@ public class NumberTextWatcher implements TextWatcher {
 //        df.setDecimalSeparatorAlwaysShown(true);
 //        dfnd = new DecimalFormat("#.###");
 
-        df = new DecimalFormat("##.###.###,##", new DecimalFormatSymbols(locale));
-        dfnd = new DecimalFormat("#.###.###,##", new DecimalFormatSymbols(locale));
+        df = new DecimalFormat("##,###,###.##", new DecimalFormatSymbols(locale));
+        dfnd = new DecimalFormat("#.###", new DecimalFormatSymbols(locale));
+        nf = NumberFormat.getNumberInstance(locale);
+
+        DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(locale);
+        otherSymbols.setDecimalSeparator(',');
+        otherSymbols.setGroupingSeparator('.');
+        df = new DecimalFormat(formatString, otherSymbols);
+        dfnd = new DecimalFormat(formatString2, otherSymbols);
 
         this.et = et;
         hasFractionalPart = false;

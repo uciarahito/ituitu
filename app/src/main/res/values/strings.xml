@@ -28,9 +28,7 @@
     <string name="title_activity_list_quotation">List Quotation</string>
     <string name="title_activity_list_request_quotation">List Request Quotation</string>
     <string name="title_activity_form_quotation_order">Form Quotation Order</string>
-    <string name="title_activity_form_request_quotation_customer">
-        Form Request Quotation Customer
-    </string>
+    <string name="title_activity_form_request_quotation_customer">Form Request Quotation Customer</string>
     <string name="title_activity_form_sales_quotation">Form Sales Quotation</string>
     <string name="title_activity_form_request_sales_order">Form Request Sales Order</string>
     <string name="title_activity_form_sales_order">Form Sales Order</string>
@@ -293,6 +291,10 @@
         <item>Dashboard</item>
         <item>Profile</item>
         <item>Delivery Order [DO]</item>
+        <item>Logout</item>
+    </string-array>
+
+    <string-array name="general_guest">
         <item>Logout</item>
     </string-array>
 

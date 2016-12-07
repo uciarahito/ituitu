@@ -2,7 +2,9 @@
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/colorBackground">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?android:attr/colorBackground"
+    tools:showIn="@layout/app_bar_waiting_approval">
 
     <LinearLayout
         android:layout_width="@dimen/narrow_container"

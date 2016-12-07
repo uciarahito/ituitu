@@ -38,11 +38,15 @@ public class ExpandableListDataSource {
             rootMenu.add("Logout");
         } else if(new SharedPreferenceManager().getPreferences(context, "roles").equals("customer")){
             rootMenu.add("Dashboard");
-            rootMenu.add("Customer");
+            rootMenu.add("Profile");
             rootMenu.add("Sales");
             rootMenu.add("Logout");
-        } else {
+        }  else if (new SharedPreferenceManager().getPreferences(context, "roles").equals("")) {
+            rootMenu.add("Logout");
+        } else if (new SharedPreferenceManager().getPreferences(context, "roles").equals("expedition")) {
             rootMenu.add("Dashboard");
+            rootMenu.add("Profile");
+            rootMenu.add("Delivery Order");
             rootMenu.add("Logout");
         }
 
@@ -79,11 +83,15 @@ public class ExpandableListDataSource {
             rootMenu.add("Logout");
         } else if(new SharedPreferenceManager().getPreferences(context, "roles").equals("customer")){
             rootMenu.add("Dashboard");
-            rootMenu.add("Customer");
+            rootMenu.add("Profile");
             rootMenu.add("Sales");
             rootMenu.add("Logout");
-        } else {
+        } else if (new SharedPreferenceManager().getPreferences(context, "roles").equals("")) {
+            rootMenu.add("Logout");
+        } else if (new SharedPreferenceManager().getPreferences(context, "roles").equals("expedition")) {
             rootMenu.add("Dashboard");
+            rootMenu.add("Profile");
+            rootMenu.add("Delivery Order");
             rootMenu.add("Logout");
         }
         return  rootMenu;
@@ -99,12 +107,16 @@ public class ExpandableListDataSource {
             rootMenu[4] = "Logout";
         } else if(new SharedPreferenceManager().getPreferences(context, "roles").equals("customer")){
             rootMenu[0] = "Dashboard";
-            rootMenu[0] = "Customer";
+            rootMenu[1] = "Profile";
             rootMenu[2] = "Sales";
             rootMenu[3] = "Logout";
-        } else {
+        } else if (new SharedPreferenceManager().getPreferences(context, "roles").equals("")){
+            rootMenu[0] = "Logout";
+        } else if (new SharedPreferenceManager().getPreferences(context, "roles").equals("expedition")) {
             rootMenu[0] = "Dashboard";
-            rootMenu[1] = "Logout";
+            rootMenu[1] = "Profile";
+            rootMenu[2] = "Delivery Order";
+            rootMenu[3] = "Logout";
         }
         return  rootMenu;
     }

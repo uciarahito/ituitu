@@ -55,10 +55,16 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
         <activity
             android:name=".activity.MapsCoordinateActivity"
-            android:label="@string/title_activity_maps_coordinate" >
+            android:label="@string/title_activity_maps_coordinate">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -161,6 +167,10 @@
         <activity
             android:name=".activity.FormSalesOrderActivity"
             android:label="@string/title_activity_form_sales_order"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.DashboardAdminActivity"
+            android:label="@string/title_activity_dashboard_admin"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

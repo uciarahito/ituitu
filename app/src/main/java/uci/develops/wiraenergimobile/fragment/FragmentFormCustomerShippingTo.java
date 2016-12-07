@@ -1,9 +1,13 @@
 package uci.develops.wiraenergimobile.fragment;
 
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -56,6 +60,8 @@ public class FragmentFormCustomerShippingTo extends Fragment {
 
     private ShippingAddressAdapter shippingAddressAdapter;
 
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
+
     public FragmentFormCustomerShippingTo() {
         // Required empty public constructor
     }
@@ -79,7 +85,48 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         initializeComponent(view);
         loadData();
 
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                //If the broadcast has received with success
+                //that means device is registered successfully
+                // di sini ada data2 yang dikirim melalui fcm
+                // ini action intentnya
+                if (intent.getAction().equals("pushNotification")) {
+                    // ini valuenya
+                    // jadi tadi kita ngirim broadcast refresh_list_shipping
+                    // yang kita MAU, dia refresh kan
+                    // code REFRESH di class ini, loadData
+                    // paham?
+                    String broadcastNotification = intent.getStringExtra("type");
+                    if (broadcastNotification.equals("refresh_list_shipping")) {
+                        // eksekusi sesuatu ketika ada data broadcast sesuai kondisi
+                        loadData();
+                    } else if (broadcastNotification.equals("whatever")) {
+                    }
+                } else {
+                }
+            }
+        };
+
+        // ini untuk mendaftarkan object broadcast receiver di fragment ini
+        // jadi ketika fragment ini aktif, dan ada broadcast dari mana pun (fcm, gcm, dialog, activity, dll)
+        // bakalan di proses
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter("pushNotification"));
+
         return view;
+    }
+
+    Dialog dialogMaps;
+
+    void showDialogMaps() {
+        dialogMaps = new Dialog(getContext());
+        dialogMaps.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogMaps.setContentView(R.layout.custom_dialog_maps);
+        dialogMaps.setCancelable(true);
+        dialogMaps.show();
     }
 
     private void initializeComponent(View view) {
@@ -138,8 +185,7 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         editText_map_cordinate.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), MapsCoordinateActivity.class);
-                startActivity(intent);
+                showDialogMaps();
                 return false;
             }
         });

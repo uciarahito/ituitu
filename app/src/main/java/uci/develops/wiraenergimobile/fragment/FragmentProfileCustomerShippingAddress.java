@@ -1,8 +1,13 @@
 package uci.develops.wiraenergimobile.fragment;
 
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -48,6 +53,8 @@ public class FragmentProfileCustomerShippingAddress extends Fragment {
 
     private ShippingAddressAdapter shippingAddressAdapter;
 
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
+
     public FragmentProfileCustomerShippingAddress() {
         // Required empty public constructor
     }
@@ -69,6 +76,25 @@ public class FragmentProfileCustomerShippingAddress extends Fragment {
 
         initializeComponent(view);
         loadData();
+
+        //Broadcast Receiver
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (intent.getAction().equals("pushNotification")){
+                    String broadcastNofitication = intent.getStringExtra("type");
+                    if (broadcastNofitication.equals("refresh_list_shipping")){
+                        loadData();
+                    } else if (broadcastNofitication.equals("sesuatu")){
+                    }
+                } else {
+
+                }
+            }
+        };
+
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter("pushNotification"));
 
         return view;
     }

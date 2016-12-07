@@ -117,11 +117,15 @@ public class PurchaseOrderActivity extends AppCompatActivity {
             rootMenu.add("Logout");
         } else if (new SharedPreferenceManager().getPreferences(PurchaseOrderActivity.this, "roles").equals("customer")) {
             rootMenu.add("Dashboard");
-            rootMenu.add("Customer");
+            rootMenu.add("Profile");
             rootMenu.add("Sales");
             rootMenu.add("Logout");
-        } else {
+        } else if (new SharedPreferenceManager().getPreferences(PurchaseOrderActivity.this, "roles").equals("")) {
+            rootMenu.add("Logout");
+        } else if (new SharedPreferenceManager().getPreferences(PurchaseOrderActivity.this, "roles").equals("expedition")) {
             rootMenu.add("Dashboard");
+            rootMenu.add("Profile");
+            rootMenu.add("Delivery Order");
             rootMenu.add("Logout");
         }
         mExpandableListTitle = rootMenu;
@@ -221,6 +225,15 @@ public class PurchaseOrderActivity extends AppCompatActivity {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 String selected_item = getResources().getStringArray(R.array.general)[groupPosition];
+                if (new SharedPreferenceManager().getPreferences(PurchaseOrderActivity.this, "roles").equals("admin")) {
+                    selected_item = getResources().getStringArray(R.array.general)[groupPosition];
+                } else if (new SharedPreferenceManager().getPreferences(PurchaseOrderActivity.this, "roles").equals("customer")) {
+                    selected_item = getResources().getStringArray(R.array.general_customer)[groupPosition];
+                } else if (new SharedPreferenceManager().getPreferences(PurchaseOrderActivity.this, "roles").equals("expedition")){
+                    selected_item = getResources().getStringArray(R.array.general_expedition)[groupPosition];
+                } else if (new SharedPreferenceManager().getPreferences(PurchaseOrderActivity.this, "roles").equals("")){
+                    selected_item = getResources().getStringArray(R.array.general_guest)[groupPosition];
+                }
                 if (selected_item.equals("Logout")) {
                     logout();
                 } else if (selected_item.equals("Dashboard")) {
@@ -230,6 +243,11 @@ public class PurchaseOrderActivity extends AppCompatActivity {
                 } else if (selected_item.equals("Customer")) {
                     if (new SharedPreferenceManager().getPreferences(PurchaseOrderActivity.this, "roles").equals("admin")) {
                         Intent intent = new Intent(PurchaseOrderActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                    }
+                } else if (selected_item.equals("Profile")) {
+                    if (new SharedPreferenceManager().getPreferences(PurchaseOrderActivity.this, "roles").equals("customer")) {
+                        Intent intent = new Intent(PurchaseOrderActivity.this, FormCustomerActivity.class);
                         startActivity(intent);
                     }
                 }
