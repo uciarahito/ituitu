@@ -55,12 +55,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="@string/google_maps_key" />
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
 
         <activity
             android:name=".activity.MapsCoordinateActivity"
@@ -74,7 +68,19 @@
         <activity
             android:name=".activity.ListCustomerActivity"
             android:label="@string/title_activity_list_customer"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"
+                android:value=".TestingSearchActivity" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <!-- FCM Receiver Service -->
         <service android:name=".fcm.NotificationListener" />
@@ -117,7 +123,7 @@
             android:label="@string/title_activity_report_quotation"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.SalesQuotationActivity"
+            android:name=".activity.SalesQuotationAdminActivity"
             android:label="@string/title_activity_sales_quotation"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -171,7 +177,21 @@
         <activity
             android:name=".activity.DashboardAdminActivity"
             android:label="@string/title_activity_dashboard_admin"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.FormRequestQuotationAdminActivity"
+            android:label="@string/title_activity_form_request_quotation_admin"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.SalesQuotationCustomerActivity"
+            android:label="@string/title_activity_sales_quotation_customer"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

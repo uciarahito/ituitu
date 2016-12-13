@@ -229,7 +229,7 @@ public class WaitingApprovalActivity extends AppCompatActivity implements View.O
 
                 //utk menu sales
                 if (selectedItem.equals("Quotation")) {
-                    Intent intent = new Intent(WaitingApprovalActivity.this, SalesQuotationActivity.class);
+                    Intent intent = new Intent(WaitingApprovalActivity.this, SalesQuotationAdminActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Sales Order [SO]")) {
                     Intent intent = new Intent(WaitingApprovalActivity.this, SalesOrderActivity.class);

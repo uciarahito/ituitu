@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,7 +19,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -73,7 +71,7 @@ public class MapsCoordinateActivity extends FragmentActivity implements OnMapRea
     private void initializeComponent() {
         buttonSubmitLocation = (Button) findViewById(R.id.button_submit_location);
         buttonFind = (Button) findViewById(R.id.buttonFind);
-        editTextSearchLocation = (EditText) findViewById(R.id.editTExtLocation);
+        editTextSearchLocation = (EditText) findViewById(R.id.editTextLocation);
         textViewAlamat = (TextView) findViewById(R.id.textViewAlamat);
         textViewLatitude = (TextView) findViewById(R.id.textViewLatitude);
         textViewLongitude = (TextView) findViewById(R.id.textViewLongitude);

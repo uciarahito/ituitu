@@ -135,11 +135,37 @@
                             android:weightSum="6">
 
                             <TextView
-                                android:id="@+id/textView_create_date"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="2.5"
-                                android:text="Create Date" />
+                                android:text="Create Date"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:id="@+id/textView_create_date"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3.5"
+                                android:text="Send Date" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="6">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:weightSum="6">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2.5"
+                                android:text="Send Date"
+                                android:textStyle="bold"/>
 
                             <TextView
                                 android:id="@+id/textView_send_date"

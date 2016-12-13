@@ -14,7 +14,8 @@ import uci.develops.wiraenergimobile.activity.FormRequestQuotationCustomerActivi
 import uci.develops.wiraenergimobile.activity.InvoiceActivity;
 import uci.develops.wiraenergimobile.activity.PaymentActivity;
 import uci.develops.wiraenergimobile.activity.SalesOrderActivity;
-import uci.develops.wiraenergimobile.activity.SalesQuotationActivity;
+import uci.develops.wiraenergimobile.activity.SalesQuotationAdminActivity;
+import uci.develops.wiraenergimobile.activity.SalesQuotationCustomerActivity;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 
 /**
@@ -89,10 +90,10 @@ public class FragmentSales extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         if (v == linearLayout_menu_sales_quotation) {
             if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")){
-                Intent intent = new Intent(getActivity().getApplicationContext(), SalesQuotationActivity.class);
+                Intent intent = new Intent(getActivity().getApplicationContext(), SalesQuotationAdminActivity.class);
                 startActivity(intent);
             } else if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")){
-                Intent intent = new Intent(getActivity().getApplicationContext(), FormRequestQuotationCustomerActivity.class);
+                Intent intent = new Intent(getActivity().getApplicationContext(), SalesQuotationCustomerActivity.class);
                 startActivity(intent);
             }
         }

@@ -1,22 +1,25 @@
 package uci.develops.wiraenergimobile.activity;
 
 import android.app.ProgressDialog;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
@@ -36,8 +39,6 @@ import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.adapter.CustomExpandableListAdapter;
 import uci.develops.wiraenergimobile.adapter.CustomerAdapter;
 import uci.develops.wiraenergimobile.fragment.navigation.NavigationManager;
-import uci.develops.wiraenergimobile.helper.Constant;
-import uci.develops.wiraenergimobile.helper.DividerItemDecoration;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerModel;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
@@ -70,7 +71,7 @@ public class ListCustomerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_customer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        handleIntent(getIntent());
         navDrawer();
 
         if (savedInstanceState == null) {
@@ -264,7 +265,7 @@ public class ListCustomerActivity extends AppCompatActivity {
 
                 //utk menu sales
                 if (selectedItem.equals("Quotation")) {
-                    Intent intent = new Intent(ListCustomerActivity.this, SalesQuotationActivity.class);
+                    Intent intent = new Intent(ListCustomerActivity.this, SalesQuotationAdminActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Sales Order [SO]")) {
                     Intent intent = new Intent(ListCustomerActivity.this, SalesOrderActivity.class);
@@ -370,8 +371,38 @@ public class ListCustomerActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuInflater inflater = getMenuInflater();
+        // Inflate menu to add items to action bar if it is present.
+        inflater.inflate(R.menu.menu_main, menu);
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
         return true;
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent){
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent){
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())){
+            String query = intent.getStringExtra(SearchManager.QUERY);
+        }
     }
 
     @Override

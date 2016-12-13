@@ -50,6 +50,16 @@ public class FragmentCustomer extends Fragment implements View.OnClickListener{
         //return inflater.inflate(R.layout.activity_ongoing_order, container, false);
     }
 
+    private void initializeComponent(View view){
+        linearLayout_menu_all_customer = (LinearLayout) view.findViewById(R.id.linearLayout_menu_all_customer);
+        linearLayout_menu_new_customer = (LinearLayout) view.findViewById(R.id.linearLayout_menu_new_customer);
+        textView_label_all_customer = (TextView)view.findViewById(R.id.textView_label_all_customer);
+        textView_label_new_customer = (TextView)view.findViewById(R.id.textView_label_new_customer);
+
+        linearLayout_menu_all_customer.setOnClickListener(this);
+        linearLayout_menu_new_customer.setOnClickListener(this);
+    }
+
     private void loadData(){
         Call<RequestListCustomerResponse> listCustomerResponse = RestClient.getRestClient().getAllRequestCustomer("Bearer "+
                 new SharedPreferenceManager().getPreferences(getContext(), "token"));
@@ -78,16 +88,6 @@ public class FragmentCustomer extends Fragment implements View.OnClickListener{
 
             }
         });
-    }
-
-    private void initializeComponent(View view){
-        linearLayout_menu_all_customer = (LinearLayout) view.findViewById(R.id.linearLayout_menu_all_customer);
-        linearLayout_menu_new_customer = (LinearLayout) view.findViewById(R.id.linearLayout_menu_new_customer);
-        textView_label_all_customer = (TextView)view.findViewById(R.id.textView_label_all_customer);
-        textView_label_new_customer = (TextView)view.findViewById(R.id.textView_label_new_customer);
-
-        linearLayout_menu_all_customer.setOnClickListener(this);
-        linearLayout_menu_new_customer.setOnClickListener(this);
     }
 
     /**

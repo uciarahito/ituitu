@@ -13,7 +13,7 @@
         <EditText
             android:layout_weight="8"
             android:hint="Input location ..."
-            android:id="@+id/editTExtLocation"
+            android:id="@+id/editTextLocation"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <Button

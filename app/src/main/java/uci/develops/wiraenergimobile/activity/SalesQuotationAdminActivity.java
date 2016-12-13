@@ -3,8 +3,6 @@ package uci.develops.wiraenergimobile.activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -27,6 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,10 +39,15 @@ import uci.develops.wiraenergimobile.model.UserXModel;
 import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
-public class SalesQuotationActivity extends AppCompatActivity implements View.OnClickListener{
-    private LinearLayout linearLayout_menu_all_quotation, linearLayout_menu_new_quotation;
-    private TextView textView_label_all_quotation, textView_label_new_quotation;
+public class SalesQuotationAdminActivity extends AppCompatActivity implements View.OnClickListener{
 
+    @BindView(R.id.button_add_quotation) Button button_add_quotation;
+    @BindView(R.id.linearLayout_menu_all_quotation) LinearLayout linearLayout_menu_all_quotation;
+    @BindView(R.id.linearLayout_menu_new_quotation) LinearLayout linearLayout_menu_new_quotation;
+    @BindView(R.id.textView_label_all_quotation) TextView textView_label_all_quotation;
+    @BindView(R.id.textView_label_new_quotation) TextView textView_label_new_quotation;
+
+    //utk nav drawer
     private DrawerLayout mDrawerLayout;
     private String[] items;
 
@@ -58,9 +63,11 @@ public class SalesQuotationActivity extends AppCompatActivity implements View.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sales_quotation);
+        setContentView(R.layout.activity_sales_quotation_admin);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ButterKnife.bind(this);
 
         initializeComponent();
 
@@ -72,25 +79,26 @@ public class SalesQuotationActivity extends AppCompatActivity implements View.On
     }
 
     private void initializeComponent(){
-        linearLayout_menu_all_quotation = (LinearLayout) findViewById(R.id.linearLayout_menu_all_quotation);
-        linearLayout_menu_new_quotation = (LinearLayout) findViewById(R.id.linearLayout_menu_new_quotation);
-        textView_label_all_quotation = (TextView) findViewById(R.id.textView_label_all_quotation);
-        textView_label_new_quotation = (TextView) findViewById(R.id.textView_label_new_quotation);
-
         linearLayout_menu_all_quotation.setOnClickListener(this);
         linearLayout_menu_new_quotation.setOnClickListener(this);
+        button_add_quotation.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         Intent intent;
         if(v == linearLayout_menu_all_quotation){
-            intent = new Intent(SalesQuotationActivity.this, ListQuotationActivity.class);
+            intent = new Intent(SalesQuotationAdminActivity.this, ListQuotationActivity.class);
             startActivity(intent);
         }
 
         if(v == linearLayout_menu_new_quotation){
-            intent = new Intent(SalesQuotationActivity.this, ListRequestQuotationActivity.class);
+            intent = new Intent(SalesQuotationAdminActivity.this, ListRequestQuotationActivity.class);
+            startActivity(intent);
+        }
+
+        if(v == button_add_quotation){
+            intent = new Intent(SalesQuotationAdminActivity.this, FormRequestQuotationAdminActivity.class);
             startActivity(intent);
         }
     }
@@ -121,18 +129,18 @@ public class SalesQuotationActivity extends AppCompatActivity implements View.On
         imageView_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (new SharedPreferenceManager().getPreferences(SalesQuotationActivity.this, "roles").equals("admin")) {
-                    Intent intent = new Intent(SalesQuotationActivity.this, ListCustomerActivity.class);
+                if (new SharedPreferenceManager().getPreferences(SalesQuotationAdminActivity.this, "roles").equals("admin")) {
+                    Intent intent = new Intent(SalesQuotationAdminActivity.this, ListCustomerActivity.class);
                     startActivity(intent);
-                } else if (new SharedPreferenceManager().getPreferences(SalesQuotationActivity.this, "roles").equals("customer")) {
-                    Intent intent = new Intent(SalesQuotationActivity.this, FormCustomerActivity.class);
+                } else if (new SharedPreferenceManager().getPreferences(SalesQuotationAdminActivity.this, "roles").equals("customer")) {
+                    Intent intent = new Intent(SalesQuotationAdminActivity.this, FormCustomerActivity.class);
                     startActivity(intent);
                 }
             }
         });
 
         Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new
-                SharedPreferenceManager().getPreferences(SalesQuotationActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(SalesQuotationActivity.this, "user_id")));
+                SharedPreferenceManager().getPreferences(SalesQuotationAdminActivity.this, "token"), Integer.parseInt(new SharedPreferenceManager().getPreferences(SalesQuotationAdminActivity.this, "user_id")));
         userResponseCall.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
@@ -153,20 +161,20 @@ public class SalesQuotationActivity extends AppCompatActivity implements View.On
         mExpandableListData = ExpandableListDataSource.getData(this);
         List<String> rootMenu = new ArrayList<>();
 
-        if (new SharedPreferenceManager().getPreferences(SalesQuotationActivity.this, "roles").equals("admin")) {
+        if (new SharedPreferenceManager().getPreferences(SalesQuotationAdminActivity.this, "roles").equals("admin")) {
             rootMenu.add("Dashboard");
             rootMenu.add("Customer");
             rootMenu.add("Purchasing");
             rootMenu.add("Sales");
             rootMenu.add("Logout");
-        } else if (new SharedPreferenceManager().getPreferences(SalesQuotationActivity.this, "roles").equals("customer")) {
+        } else if (new SharedPreferenceManager().getPreferences(SalesQuotationAdminActivity.this, "roles").equals("customer")) {
             rootMenu.add("Dashboard");
             rootMenu.add("Profile");
             rootMenu.add("Sales");
             rootMenu.add("Logout");
-        } else if (new SharedPreferenceManager().getPreferences(SalesQuotationActivity.this, "roles").equals("")) {
+        } else if (new SharedPreferenceManager().getPreferences(SalesQuotationAdminActivity.this, "roles").equals("")) {
             rootMenu.add("Logout");
-        } else if (new SharedPreferenceManager().getPreferences(SalesQuotationActivity.this, "roles").equals("expedition")) {
+        } else if (new SharedPreferenceManager().getPreferences(SalesQuotationAdminActivity.this, "roles").equals("expedition")) {
             rootMenu.add("Dashboard");
             rootMenu.add("Profile");
             rootMenu.add("Delivery Order");
@@ -182,7 +190,7 @@ public class SalesQuotationActivity extends AppCompatActivity implements View.On
     }
 
     private void initItems() {
-        items = ExpandableListDataSource.getArrayTitle(SalesQuotationActivity.this);
+        items = ExpandableListDataSource.getArrayTitle(SalesQuotationAdminActivity.this);
     }
 
     private void addDrawerItems() {
@@ -197,7 +205,7 @@ public class SalesQuotationActivity extends AppCompatActivity implements View.On
                         .get(childPosition).toString();
                 getSupportActionBar().setTitle(selectedItem);
 
-                Toast.makeText(SalesQuotationActivity.this, "" + selectedItem, Toast.LENGTH_SHORT).show();
+                Toast.makeText(SalesQuotationAdminActivity.this, "" + selectedItem, Toast.LENGTH_SHORT).show();
                 /*
                 if (items[0].equals(mExpandableListTitle.get(groupPosition))) {
                     mNavigationManager.showFragmentNavPurchasing(selectedItem);
@@ -210,28 +218,28 @@ public class SalesQuotationActivity extends AppCompatActivity implements View.On
                 //utk menu purchasing
                 if (selectedItem.equals("Purchase Order [PO]")) {
                     Log.e("Cekkkkkk", selectedItem + "qqqqqqqqqqqqqqqq");
-                    Intent intent = new Intent(SalesQuotationActivity.this, PurchaseOrderActivity.class);
+                    Intent intent = new Intent(SalesQuotationAdminActivity.this, PurchaseOrderActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Good Received [GR]")) {
-                    Intent intent = new Intent(SalesQuotationActivity.this, GoodReceivedActivity.class);
+                    Intent intent = new Intent(SalesQuotationAdminActivity.this, GoodReceivedActivity.class);
                     startActivity(intent);
                 }
 
                 //utk menu sales
                 if (selectedItem.equals("Quotation")) {
-                    Intent intent = new Intent(SalesQuotationActivity.this, SalesQuotationActivity.class);
+                    Intent intent = new Intent(SalesQuotationAdminActivity.this, SalesQuotationAdminActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Sales Order [SO]")) {
-                    Intent intent = new Intent(SalesQuotationActivity.this, SalesOrderActivity.class);
+                    Intent intent = new Intent(SalesQuotationAdminActivity.this, SalesOrderActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Delivery Order [DO]")) {
-                    Intent intent = new Intent(SalesQuotationActivity.this, DeliveryOrderActivity.class);
+                    Intent intent = new Intent(SalesQuotationAdminActivity.this, DeliveryOrderActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Invoice")) {
-                    Intent intent = new Intent(SalesQuotationActivity.this, InvoiceActivity.class);
+                    Intent intent = new Intent(SalesQuotationAdminActivity.this, InvoiceActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Payment")) {
-                    Intent intent = new Intent(SalesQuotationActivity.this, PaymentActivity.class);
+                    Intent intent = new Intent(SalesQuotationAdminActivity.this, PaymentActivity.class);
                     startActivity(intent);
                 }
 
@@ -244,30 +252,30 @@ public class SalesQuotationActivity extends AppCompatActivity implements View.On
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 String selected_item = getResources().getStringArray(R.array.general)[groupPosition];
-                if(new SharedPreferenceManager().getPreferences(SalesQuotationActivity.this, "roles").equals("admin")){
+                if(new SharedPreferenceManager().getPreferences(SalesQuotationAdminActivity.this, "roles").equals("admin")){
                     selected_item = getResources().getStringArray(R.array.general)[groupPosition];
-                } else if(new SharedPreferenceManager().getPreferences(SalesQuotationActivity.this, "roles").equals("customer")){
+                } else if(new SharedPreferenceManager().getPreferences(SalesQuotationAdminActivity.this, "roles").equals("customer")){
                     selected_item = getResources().getStringArray(R.array.general_customer)[groupPosition];
-                } else if (new SharedPreferenceManager().getPreferences(SalesQuotationActivity.this, "roles").equals("expedition")){
+                } else if (new SharedPreferenceManager().getPreferences(SalesQuotationAdminActivity.this, "roles").equals("expedition")){
                     selected_item = getResources().getStringArray(R.array.general_expedition)[groupPosition];
-                } else if (new SharedPreferenceManager().getPreferences(SalesQuotationActivity.this, "roles").equals("")){
+                } else if (new SharedPreferenceManager().getPreferences(SalesQuotationAdminActivity.this, "roles").equals("")){
                     selected_item = getResources().getStringArray(R.array.general_guest)[groupPosition];
                 }
 
                 if (selected_item.equals("Logout")) {
                     logout();
                 } else if (selected_item.equals("Dashboard")) {
-                    Intent intent = new Intent(SalesQuotationActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(SalesQuotationAdminActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
                 } else if (selected_item.equals("Customer")) {
-                    if (new SharedPreferenceManager().getPreferences(SalesQuotationActivity.this, "roles").equals("admin")) {
-                        Intent intent = new Intent(SalesQuotationActivity.this, HomeActivity.class);
+                    if (new SharedPreferenceManager().getPreferences(SalesQuotationAdminActivity.this, "roles").equals("admin")) {
+                        Intent intent = new Intent(SalesQuotationAdminActivity.this, HomeActivity.class);
                         startActivity(intent);
                     }
                 } else if (selected_item.equals("Profile")) {
-                    if (new SharedPreferenceManager().getPreferences(SalesQuotationActivity.this, "roles").equals("customer")) {
-                        Intent intent = new Intent(SalesQuotationActivity.this, FormCustomerActivity.class);
+                    if (new SharedPreferenceManager().getPreferences(SalesQuotationAdminActivity.this, "roles").equals("customer")) {
+                        Intent intent = new Intent(SalesQuotationAdminActivity.this, FormCustomerActivity.class);
                         startActivity(intent);
                     }
                 }
@@ -277,12 +285,12 @@ public class SalesQuotationActivity extends AppCompatActivity implements View.On
     }
 
     private void logout(){
-        new SharedPreferenceManager().setPreferences(SalesQuotationActivity.this, "is_login", "");
-        new SharedPreferenceManager().setPreferences(SalesQuotationActivity.this, "token", "");
-        new SharedPreferenceManager().setPreferences(SalesQuotationActivity.this, "customer_decode", "");
-        new SharedPreferenceManager().setPreferences(SalesQuotationActivity.this, "roles", "");
+        new SharedPreferenceManager().setPreferences(SalesQuotationAdminActivity.this, "is_login", "");
+        new SharedPreferenceManager().setPreferences(SalesQuotationAdminActivity.this, "token", "");
+        new SharedPreferenceManager().setPreferences(SalesQuotationAdminActivity.this, "customer_decode", "");
+        new SharedPreferenceManager().setPreferences(SalesQuotationAdminActivity.this, "roles", "");
 
-        Intent intent = new Intent(SalesQuotationActivity.this, LoginActivity.class);
+        Intent intent = new Intent(SalesQuotationAdminActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }

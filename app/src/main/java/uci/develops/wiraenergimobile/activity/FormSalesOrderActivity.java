@@ -3,21 +3,22 @@ package uci.develops.wiraenergimobile.activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,11 +26,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.adapter.CustomExpandableListAdapter;
+import uci.develops.wiraenergimobile.adapter.ItemSalesOrderAdapter;
 import uci.develops.wiraenergimobile.fragment.navigation.NavigationManager;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
@@ -37,7 +41,38 @@ import uci.develops.wiraenergimobile.model.UserXModel;
 import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
-public class FormSalesOrderActivity extends AppCompatActivity {
+public class FormSalesOrderActivity extends AppCompatActivity implements View.OnClickListener{
+
+    @BindView(R.id.linear_layout_title1) LinearLayout linearLayoutTitle1;
+    @BindView(R.id.linear_layout_content1) LinearLayout linearLayoutContent1;
+    @BindView(R.id.linear_layout_container_so_customer_detail) LinearLayout linearLayoutContainer1;
+    @BindView(R.id.linear_layout_title2) LinearLayout linearLayoutTitle2;
+    @BindView(R.id.linear_layout_content2) LinearLayout linearLayoutContent2;
+    @BindView(R.id.linear_layout_container_so_item_so) LinearLayout linearLayoutContainer2;
+    @BindView(R.id.layout_tab_shipping_address) LinearLayout layout_tab_shipping_address;
+    @BindView(R.id.layout_tab_payment_address) LinearLayout layout_tab_payment_address;
+    @BindView(R.id.layout_container_shipping_address) LinearLayout layout_container_shipping_address;
+    @BindView(R.id.layout_container_payment_address) LinearLayout layout_container_payment_address;
+    @BindView(R.id.linear_layout_button_cancel) LinearLayout linear_layout_button_cancel;
+    @BindView(R.id.linear_layout_button_send_so) LinearLayout linear_layout_button_send_so;
+    @BindView(R.id.editText_bruto) EditText editText_bruto;
+    @BindView(R.id.editText_disc) EditText editText_disc;
+    @BindView(R.id.editText_disc_value) EditText editText_disc_value;
+    @BindView(R.id.editText_ppn) EditText editText_ppn;
+    @BindView(R.id.editText_ppn_value) EditText editText_ppn_value;
+    @BindView(R.id.editText_pph) EditText editText_pph;
+    @BindView(R.id.editText_pph_value) EditText editText_pph_value;
+    @BindView(R.id.editText_pbbkb) EditText editText_pbbkb;
+    @BindView(R.id.editText_pbbkb_value) EditText editText_pbbkb_value;
+    @BindView(R.id.editText_other_cost) EditText editText_other_cost;
+    @BindView(R.id.editText_netto) EditText editText_netto;
+    @BindView(R.id.editText_note) EditText editText_note;
+    @BindView(R.id.textView_terbilang) TextView textView_terbilang;
+
+    private LinearLayout[] linearLayouts_fragment = new LinearLayout[2];
+    private LinearLayout[] linearLayouts_tabs = new LinearLayout[2];
+    int index_fragment = 0;
+    boolean content1=false, content2=false;
 
     //utk nav drawer
     private DrawerLayout mDrawerLayout;
@@ -59,12 +94,76 @@ public class FormSalesOrderActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        ButterKnife.bind(this);
+        initializeComponent();
+
         navDrawer();
 
         if (savedInstanceState == null) {
             selectFirstItemAsDefault();
         }
 
+    }
+
+    private void initializeComponent(){
+        linearLayouts_fragment[0] = layout_container_shipping_address;
+        linearLayouts_fragment[1] = layout_container_payment_address;
+
+        linearLayouts_tabs[0] = layout_tab_shipping_address;
+        linearLayouts_tabs[1] = layout_tab_payment_address;
+
+        linearLayouts_fragment[index_fragment].setVisibility(View.VISIBLE);
+
+        layout_tab_shipping_address.setBackgroundResource(R.drawable.rounded_rectangle_org);
+        layout_tab_payment_address.setBackgroundResource(R.drawable.rounded_rectangle_gray);
+
+        layout_tab_shipping_address.setOnClickListener(this);
+        layout_tab_payment_address.setOnClickListener(this);
+        linearLayoutTitle1.setOnClickListener(this);
+        linearLayoutTitle2.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == linearLayoutTitle1){
+            if(!content1){
+                linearLayoutContent1.setVisibility(View.VISIBLE);
+                linearLayoutContainer1.setVisibility(View.VISIBLE);
+                content1=true;
+            } else {
+                linearLayoutContent1.setVisibility(View.GONE);
+                linearLayoutContainer1.setVisibility(View.GONE);
+                content1=false;
+            }
+        }
+
+        if(v == linearLayoutTitle2){
+            if(!content2){
+                linearLayoutContent2.setVisibility(View.VISIBLE);
+                linearLayoutContainer2.setVisibility(View.VISIBLE);
+                content2=true;
+            } else {
+                linearLayoutContent2.setVisibility(View.GONE);
+                linearLayoutContainer2.setVisibility(View.GONE);
+                content2=false;
+            }
+        }
+
+        if (v == layout_tab_shipping_address) {
+            layout_container_shipping_address.setVisibility(View.VISIBLE);
+            layout_container_payment_address.setVisibility(View.GONE);
+
+            layout_tab_shipping_address.setBackgroundResource(R.drawable.rounded_rectangle_org);
+            layout_tab_payment_address.setBackgroundResource(R.drawable.rounded_rectangle_gray);
+        }
+
+        if (v == layout_tab_payment_address) {
+            layout_container_shipping_address.setVisibility(View.GONE);
+            layout_container_payment_address.setVisibility(View.VISIBLE);
+
+            layout_tab_shipping_address.setBackgroundResource(R.drawable.rounded_rectangle_gray);
+            layout_tab_payment_address.setBackgroundResource(R.drawable.rounded_rectangle_org);
+        }
     }
 
     private void selectFirstItemAsDefault() {
@@ -192,7 +291,7 @@ public class FormSalesOrderActivity extends AppCompatActivity {
 
                 //utk menu sales
                 if (selectedItem.equals("Quotation")) {
-                    Intent intent = new Intent(FormSalesOrderActivity.this, SalesQuotationActivity.class);
+                    Intent intent = new Intent(FormSalesOrderActivity.this, SalesQuotationAdminActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Sales Order [SO]")) {
                     Intent intent = new Intent(FormSalesOrderActivity.this, SalesOrderActivity.class);
@@ -316,5 +415,4 @@ public class FormSalesOrderActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }

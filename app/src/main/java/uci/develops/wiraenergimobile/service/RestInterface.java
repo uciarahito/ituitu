@@ -139,8 +139,6 @@ public interface RestInterface {
     @POST("customers/register/reject/1")
     Call<ApproveResponse> customerRejectUpdateUser(@Header("Authorization") String token, @Field("decode_old") String decode_old, @Field("decode_new") String decode_new);
 
-//    @FormUrlEncoded
-//    @POST("customers/register/reject/1")
-//    Call<ApproveResponse> customerRejectUpdateUser(@Header("Authorization") String token, @FieldMap Map<String, String> param);
+
 
 }

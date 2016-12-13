@@ -189,7 +189,7 @@ public class DeliveryOrderActivity extends AppCompatActivity {
 
                 //utk menu sales
                 if (selectedItem.equals("Quotation")) {
-                    Intent intent = new Intent(DeliveryOrderActivity.this, SalesQuotationActivity.class);
+                    Intent intent = new Intent(DeliveryOrderActivity.this, SalesQuotationAdminActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Sales Order [SO]")) {
                     Intent intent = new Intent(DeliveryOrderActivity.this, SalesOrderActivity.class);

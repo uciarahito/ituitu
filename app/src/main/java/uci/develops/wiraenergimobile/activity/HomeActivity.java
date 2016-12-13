@@ -46,15 +46,15 @@ import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class HomeActivity extends AppCompatActivity {
-
-    //utk nav header
-    ImageView imageView_profile;
-    TextView textView_name;
-
+    //utk buat tab
     private TabLayout tabLayout;
     private ViewPager viewPager;
+
+    //utk nav header
     private DrawerLayout mDrawerLayout;
     private String[] items;
+    ImageView imageView_profile;
+    TextView textView_name;
 
     private ExpandableListView mExpandableListView;
     private ExpandableListAdapter mExpandableListAdapter;
@@ -260,7 +260,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 //utk menu sales
                 if (selectedItem.equals("Quotation")) {
-                    Intent intent = new Intent(HomeActivity.this, SalesQuotationActivity.class);
+                    Intent intent = new Intent(HomeActivity.this, SalesQuotationAdminActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Sales Order [SO]")) {
                     Intent intent = new Intent(HomeActivity.this, SalesOrderActivity.class);

@@ -6,8 +6,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activity.SalesQuotationActivity"
-    tools:showIn="@layout/app_bar_sales_quotation">
+    tools:context=".activity.SalesQuotationAdminActivity"
+    tools:showIn="@layout/app_bar_sales_quotation_admin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="end"
+        android:layout_marginRight="5dp"
+        android:weightSum="1.8">
+
+        <Button
+            android:id="@+id/button_add_quotation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:drawableRight="@android:drawable/ic_input_add"
+            android:text="Add Quotation"
+            android:textAllCaps="false"
+            android:layout_marginRight="5dp"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

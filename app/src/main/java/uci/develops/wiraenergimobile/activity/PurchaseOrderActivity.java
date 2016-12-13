@@ -3,9 +3,6 @@ package uci.develops.wiraenergimobile.activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -31,7 +28,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.adapter.CustomExpandableListAdapter;
-import uci.develops.wiraenergimobile.fragment.navigation.FragmentNavigationManager;
 import uci.develops.wiraenergimobile.fragment.navigation.NavigationManager;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
@@ -200,7 +196,7 @@ public class PurchaseOrderActivity extends AppCompatActivity {
 
                 //utk menu sales
                 if (selectedItem.equals("Quotation")) {
-                    Intent intent = new Intent(PurchaseOrderActivity.this, SalesQuotationActivity.class);
+                    Intent intent = new Intent(PurchaseOrderActivity.this, SalesQuotationAdminActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Sales Order [SO]")) {
                     Intent intent = new Intent(PurchaseOrderActivity.this, SalesOrderActivity.class);

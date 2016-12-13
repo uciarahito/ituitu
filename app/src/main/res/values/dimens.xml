@@ -28,5 +28,15 @@
     <dimen name="narrow_container">320dp</dimen>
     <dimen name="narrow_container_request_penawaran">350dp</dimen>
 
+    <dimen name="textView_gudang">12sp</dimen>
     <dimen name="textView_transaction">14sp</dimen>
+    <dimen name="textView_spinner">18sp</dimen>
+    <dimen name="textView_number">20sp</dimen>
+    <dimen name="textView_text">15sp</dimen>
+
+    //utk searchablespinner
+    <dimen name="item_height">40dp</dimen>
+    <dimen name="item_margin">0dp</dimen>
+    <dimen name="item_inset">2dp</dimen>
+    <dimen name="recycler_height">200dp</dimen>
 </resources>

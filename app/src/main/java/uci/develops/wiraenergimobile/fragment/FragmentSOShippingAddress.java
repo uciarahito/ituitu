@@ -2,6 +2,7 @@ package uci.develops.wiraenergimobile.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,11 +23,14 @@ import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerAddressModel;
 import uci.develops.wiraenergimobile.response.ListCustomerAddressResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
+import uci.develops.wiraenergimobile.library.SearchableSpinner;
+
 
 public class FragmentSOShippingAddress extends Fragment{
 
     private TextView textView_address, textView_pic_name, textView_phone, textView_mobile;
-    private Spinner spinner_customer_address;
+//    private Spinner spinner_customer_address;
+    private SearchableSpinner spinner_customer_address;
     List<CustomerAddressModel> customerAddressModels;
     String check_List [];
 
@@ -57,7 +61,7 @@ public class FragmentSOShippingAddress extends Fragment{
         textView_pic_name = (TextView) view.findViewById(R.id.textView_pic_name);
         textView_phone = (TextView) view.findViewById(R.id.textView_phone);
         textView_mobile = (TextView) view.findViewById(R.id.textView_mobile);
-        spinner_customer_address = (Spinner) view.findViewById(R.id.spinner_customer_address);
+        spinner_customer_address = (SearchableSpinner) view.findViewById(R.id.spinner_customer_address);
 
     }
 
@@ -87,13 +91,35 @@ public class FragmentSOShippingAddress extends Fragment{
                             index++;
                         }
 
+//                        spinner_customer_address.setList(check_List);
+                        Log.e("Cekkkkkkk", "vvvvvvvvvvvvvvvvvvvvv");
                         customerAddressModels = response.body().getData();
 
+                        // code spinner yg baru
+//                        spinner_customer_address.setOnItemSelectedListener(new SearchableSpinner.OnItemSelectedListener() {
+//                            @Override
+//                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                                Log.e("Cekkkkkkk", ""+ customerAddressModels.get(position).getAddress());
+//                                Toast.makeText(getActivity().getApplicationContext(), "Cekkkkkk"+ customerAddressModels.get(position).getAddress() + check_List[position], Toast.LENGTH_SHORT).show();
+//                                textView_address.setText("" + customerAddressModels.get(position).getAddress());
+//                                textView_pic_name.setText("" + customerAddressModels.get(position).getPic());
+//                                textView_phone.setText("" + customerAddressModels.get(position).getPhone());
+//                                textView_mobile.setText("" + customerAddressModels.get(position).getMobile());
+//                            }
+//
+//                            @Override
+//                            public void onNothingSelected(AdapterView<?> parent) {
+//                                Log.e("Cekkkkkkk", "qqqqqqqqqqqqqqqqqqqqqqqqqq");
+//                            }
+//                        });
+
+                        // code spinner yg lama
                         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
                                 R.layout.spinner_item, check_List);
-                        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+//                        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
                         spinner_customer_address.setAdapter(dataAdapter);
-
+//                        spinner_customer_address.setAdapter(dataAdapter);
+//
                         spinner_customer_address.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -110,13 +136,14 @@ public class FragmentSOShippingAddress extends Fragment{
 
                             }
                         });
+
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<ListCustomerAddressResponse> call, Throwable t) {
-
+                Log.e("Cekkkkkkk", "wwwwwwwwwwwwwwwwwwwww");
             }
         });
     }

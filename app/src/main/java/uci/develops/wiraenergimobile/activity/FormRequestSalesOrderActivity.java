@@ -5,8 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -34,6 +32,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,21 +50,31 @@ import uci.develops.wiraenergimobile.service.RestClient;
 
 public class FormRequestSalesOrderActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private LinearLayout linearLayoutTitle1, linearLayoutTitle2;
-    private LinearLayout linearLayoutContent1, linearLayoutContent2;
-    private LinearLayout linearLayoutContainer1, linearLayoutContainer2;
-    private LinearLayout linearLayoutButtonCancel, linearLayoutButtonSaveAsDraft, linearLayoutButtonProcess;
-    private TextView textView_terbilang, textView_button_cancel, textView_button_save_as_draft, textView_button_process;
-    private EditText editText_so_number, editText_so_date, editText_payment_term, editText_quantity, editText_item_source,
-            editText_sub_total, editText_disc1, editText_disc_amount, editText_unit_price, editText_note_item, editText_bruto,
-            editText_disc2, editText_disc_value, editText_ppn, editText_ppn_value, editText_pph, editText_pph_value,
-            editText_pbbkb, editText_pbbkb_value, editText_other_cost, editText_netto, editText_note;
-    private Spinner spinner_customer_name, spinner_unit, spinner_item;
-    private DatePickerDialog datePickerDialog;
-    List<CustomerModel> customerModelList;
-    String check_List[];
+    @BindView(R.id.linear_layout_title1) LinearLayout linearLayoutTitle1;
+    @BindView(R.id.linear_layout_content1) LinearLayout linearLayoutContent1;
+    @BindView(R.id.linear_layout_container_so_customer_detail) LinearLayout linearLayoutContainer1;
+    @BindView(R.id.linear_layout_title2) LinearLayout linearLayoutTitle2;
+    @BindView(R.id.linear_layout_content2) LinearLayout linearLayoutContent2;
+    @BindView(R.id.linear_layout_container_so_shipping_address) LinearLayout linearLayoutContainer2;
+    @BindView(R.id.linear_layout_title3) LinearLayout linearLayoutTitle3;
+    @BindView(R.id.linear_layout_content3) LinearLayout linearLayoutContent3;
+    @BindView(R.id.linear_layout_container_so_payment__pic_address) LinearLayout linearLayoutContainer3;
+    @BindView(R.id.linear_layout_title4) LinearLayout linearLayoutTitle4;
+    @BindView(R.id.linear_layout_content4) LinearLayout linearLayoutContent4;
+    @BindView(R.id.linear_layout_container_so_item_so) LinearLayout linearLayoutContainer4;
+    @BindView(R.id.linear_layout_button_cancel) LinearLayout linear_layout_button_cancel;
+    @BindView(R.id.linear_layout_button_save) LinearLayout linear_layout_button_save;
+    @BindView(R.id.editText_bruto) EditText editText_bruto;
+    @BindView(R.id.editText_disc) EditText editText_disc;
+    @BindView(R.id.editText_disc_value) EditText editText_disc_value;
+    @BindView(R.id.editText_ppn) EditText editText_ppn;
+    @BindView(R.id.editText_ppn_value) EditText editText_ppn_value;
+    @BindView(R.id.editText_other_cost) EditText editText_other_cost;
+    @BindView(R.id.editText_netto) EditText editText_netto;
+    @BindView(R.id.editText_note) EditText editText_note;
+    @BindView(R.id.textView_terbilang) TextView textView_terbilang;
 
-    boolean content1=false, content2=false;
+    boolean content1=false, content2=false, content3=false, content4=false;
 
     //utk nav drawer
     private DrawerLayout mDrawerLayout;
@@ -86,6 +96,8 @@ public class FormRequestSalesOrderActivity extends AppCompatActivity implements 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        ButterKnife.bind(this);
+
         initializeComponent();
 
         navDrawer();
@@ -97,89 +109,14 @@ public class FormRequestSalesOrderActivity extends AppCompatActivity implements 
     }
 
     private void initializeComponent(){
-        linearLayoutTitle1 = (LinearLayout)findViewById(R.id.linear_layout_title1);
-        linearLayoutTitle2 = (LinearLayout)findViewById(R.id.linear_layout_title2);
-        linearLayoutContent1 = (LinearLayout)findViewById(R.id.linear_layout_content1);
-        linearLayoutContent2 = (LinearLayout)findViewById(R.id.linear_layout_content2);
-        linearLayoutContainer1 = (LinearLayout)findViewById(R.id.linear_layout_container_so_shipping_address);
-        linearLayoutContainer2 = (LinearLayout)findViewById(R.id.linear_layout_container_so_payment_address);
-        linearLayoutButtonCancel = (LinearLayout)findViewById(R.id.linear_layout_button_cancel);
-        linearLayoutButtonSaveAsDraft = (LinearLayout)findViewById(R.id.linear_layout_button_save_as_draft);
-        linearLayoutButtonProcess = (LinearLayout)findViewById(R.id.linear_layout_button_process);
-        editText_so_number = (EditText)findViewById(R.id.editText_so_number);
-        editText_so_date = (EditText)findViewById(R.id.editText_so_date);
-        editText_payment_term = (EditText)findViewById(R.id.editText_payment_term);
-        editText_quantity = (EditText)findViewById(R.id.editText_quantity);
-        editText_item_source = (EditText)findViewById(R.id.editText_item_source);
-        editText_sub_total = (EditText)findViewById(R.id.editText_sub_total);
-        editText_disc1 = (EditText)findViewById(R.id.editText_disc1);
-        editText_disc_amount = (EditText)findViewById(R.id.editText_disc_amount);
-        editText_unit_price = (EditText)findViewById(R.id.editText_unit_price);
-        editText_note_item = (EditText)findViewById(R.id.editText_note_item);
-        editText_bruto = (EditText)findViewById(R.id.editText_bruto);
-        editText_disc2 = (EditText)findViewById(R.id.editText_disc2);
-        editText_disc_value = (EditText)findViewById(R.id.editText_disc_value);
-        editText_ppn = (EditText)findViewById(R.id.editText_ppn);
-        editText_ppn_value = (EditText)findViewById(R.id.editText_ppn_value);
-        editText_pph = (EditText)findViewById(R.id.editText_pph);
-        editText_pph_value = (EditText)findViewById(R.id.editText_pph_value);
-        editText_pbbkb = (EditText)findViewById(R.id.editText_pbbkb);
-        editText_pbbkb_value = (EditText)findViewById(R.id.editText_pbbkb_value);
-        editText_other_cost = (EditText)findViewById(R.id.editText_other_cost);
-        editText_netto = (EditText)findViewById(R.id.editText_netto);
-        editText_note = (EditText)findViewById(R.id.editText_note);
-        spinner_customer_name = (Spinner)findViewById(R.id.spinner_customer_name);
-        spinner_unit = (Spinner)findViewById(R.id.spinner_unit);
-        spinner_item = (Spinner)findViewById(R.id.spinner_item);
-        textView_terbilang = (TextView)findViewById(R.id.textView_terbilang);
-        textView_button_cancel = (TextView)findViewById(R.id.textView_button_cancel);
-        textView_button_save_as_draft = (TextView)findViewById(R.id.textView_button_save_as_draft);
-        textView_button_process = (TextView)findViewById(R.id.textView_button_process);
-
-        List<String> listItem = new ArrayList<String>();
-        listItem.add("Solar");
-        listItem.add("Bensin");
-        listItem.add("Pertamax");
-        listItem.add("Barrel");
-        ArrayAdapter<String> itemAdapter = new ArrayAdapter<String>(FormRequestSalesOrderActivity.this,
-                R.layout.spinner_item, listItem);
-        itemAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        spinner_item.setAdapter(itemAdapter);
-
-        List<String> listUnit = new ArrayList<String>();
-        listUnit.add("Liter");
-        listUnit.add("Kilo Liter");
-        listUnit.add("Mili Liter");
-        ArrayAdapter<String> unitAdapter = new ArrayAdapter<String>(FormRequestSalesOrderActivity.this,
-                R.layout.spinner_item, listUnit);
-        unitAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        spinner_unit.setAdapter(unitAdapter);
-
-        editText_so_date.setOnClickListener(this);
         linearLayoutTitle1.setOnClickListener(this);
         linearLayoutTitle2.setOnClickListener(this);
-
+        linearLayoutTitle3.setOnClickListener(this);
+        linearLayoutTitle4.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-
-        if (v == editText_so_date){
-            //utk send date
-            final Calendar calendar = Calendar.getInstance();
-            int mYear = calendar.get(Calendar.YEAR); // current year
-            int mMonth = calendar.get(Calendar.MONTH); // current month
-            int mDay = calendar.get(Calendar.DAY_OF_MONTH); // current day
-            // date picker dialog
-            datePickerDialog = new DatePickerDialog(FormRequestSalesOrderActivity.this, new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    // set day of month , month and year value in the edit text
-                    editText_so_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                }
-            }, mYear, mMonth, mDay);
-            datePickerDialog.show();
-        }
 
         if(v == linearLayoutTitle1){
             if(!content1){
@@ -205,57 +142,29 @@ public class FormRequestSalesOrderActivity extends AppCompatActivity implements 
             }
         }
 
-    }
-
-    private void loadDataSpinnerCustomerName() {
-        customerModelList = new ArrayList<>();
-        Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer "
-                        + new SharedPreferenceManager().getPreferences(FormRequestSalesOrderActivity.this, "token"),
-                new SharedPreferenceManager().getPreferences(FormRequestSalesOrderActivity.this, "customer_decode"));
-        customerResponseCall.enqueue(new Callback<CustomerResponse>() {
-            @Override
-            public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
-                if (response.isSuccessful()) {
-                    if (response.body().getData().size() > 0) {
-                        check_List = new String[response.body().getData().size()];
-                        int index = 0;
-                        for (CustomerModel customerModel : response.body().getData()) {
-                            check_List[index] = customerModel.getFirst_name();
-                            index++;
-                        }
-
-                        customerModelList = response.body().getData();
-
-                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(FormRequestSalesOrderActivity.this,
-                                R.layout.spinner_item, check_List);
-                        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-                        spinner_customer_name.setAdapter(dataAdapter);
-
-                        spinner_customer_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                Toast.makeText(FormRequestSalesOrderActivity.this, "" + check_List[position], Toast.LENGTH_SHORT).show();
-//                                editText_shipping_address.setText("" + customerAddressModels.get(position).getAddress());
-//                                editText_shipping_PIC.setText("" + customerAddressModels.get(position).getPic());
-//                                editText_shipping_phone.setText("" + customerAddressModels.get(position).getPhone());
-//                                editText_shipping_mobile.setText("" + customerAddressModels.get(position).getMobile());
-
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> parent) {
-
-                            }
-                        });
-                    }
-                }
+        if(v == linearLayoutTitle3){
+            if(!content3){
+                linearLayoutContent3.setVisibility(View.VISIBLE);
+                linearLayoutContainer3.setVisibility(View.VISIBLE);
+                content3=true;
+            } else {
+                linearLayoutContent3.setVisibility(View.GONE);
+                linearLayoutContainer3.setVisibility(View.GONE);
+                content3=false;
             }
+        }
 
-            @Override
-            public void onFailure(Call<CustomerResponse> call, Throwable t) {
-
+        if(v == linearLayoutTitle4){
+            if(!content4){
+                linearLayoutContent4.setVisibility(View.VISIBLE);
+                linearLayoutContainer4.setVisibility(View.VISIBLE);
+                content4=true;
+            } else {
+                linearLayoutContent4.setVisibility(View.GONE);
+                linearLayoutContainer4.setVisibility(View.GONE);
+                content4=false;
             }
-        });
+        }
     }
 
     ProgressDialog progress_loading;
@@ -397,7 +306,7 @@ public class FormRequestSalesOrderActivity extends AppCompatActivity implements 
 
                 //utk menu sales
                 if (selectedItem.equals("Quotation")) {
-                    Intent intent = new Intent(FormRequestSalesOrderActivity.this, SalesQuotationActivity.class);
+                    Intent intent = new Intent(FormRequestSalesOrderActivity.this, SalesQuotationAdminActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Sales Order [SO]")) {
                     Intent intent = new Intent(FormRequestSalesOrderActivity.this, SalesOrderActivity.class);

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_sales_quotation_customer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="uci.develops.wiraenergimobile.activity.SalesQuotationCustomerActivity"
+    tools:showIn="@layout/app_bar_sales_quotation_customer">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="end"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/button_add_quotation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:drawableRight="@android:drawable/ic_input_add"
+            android:text="Add Quotation"
+            android:textAllCaps="false"
+            android:layout_marginRight="5dp"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:scrollbars="vertical"
+        android:id="@+id/recycleListQuotation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

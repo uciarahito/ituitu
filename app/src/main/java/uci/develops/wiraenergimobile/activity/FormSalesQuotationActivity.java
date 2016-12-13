@@ -47,7 +47,7 @@ import uci.develops.wiraenergimobile.service.RestClient;
 public class FormSalesQuotationActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView textView_customer_note, textView_terbilang;
-    private EditText editText_bruto, editText_disc, editText_disc_value, editText_other_cost, editText_netto, editText_admin_note;
+    private EditText editText_bruto, editText_disc, editText_disc_value, editText_ppn, editText_ppn_value, editText_other_cost, editText_netto, editText_admin_note;
     private LinearLayout linearLayoutTitle1;
     private LinearLayout linearLayoutContent1;
     private LinearLayout linearLayoutContainer1;
@@ -98,6 +98,8 @@ public class FormSalesQuotationActivity extends AppCompatActivity implements Vie
         editText_bruto = (EditText) findViewById(R.id.editText_bruto);
         editText_disc = (EditText) findViewById(R.id.editText_disc);
         editText_disc_value = (EditText) findViewById(R.id.editText_disc_value);
+        editText_ppn = (EditText) findViewById(R.id.editText_ppn);
+        editText_ppn_value = (EditText) findViewById(R.id.editText_ppn_value);
         editText_other_cost = (EditText) findViewById(R.id.editText_other_cost);
         editText_netto = (EditText) findViewById(R.id.editText_netto);
         editText_admin_note = (EditText) findViewById(R.id.editText_admin_note);
@@ -317,7 +319,7 @@ public class FormSalesQuotationActivity extends AppCompatActivity implements Vie
 
                 //utk menu sales
                 if (selectedItem.equals("Quotation")) {
-                    Intent intent = new Intent(FormSalesQuotationActivity.this, SalesQuotationActivity.class);
+                    Intent intent = new Intent(FormSalesQuotationActivity.this, SalesQuotationAdminActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Sales Order [SO]")) {
                     Intent intent = new Intent(FormSalesQuotationActivity.this, SalesOrderActivity.class);

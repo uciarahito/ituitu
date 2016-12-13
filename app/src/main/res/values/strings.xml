@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">WiraEnergiMobile</string>
     <string name="action_settings">Settings</string>
+    <string name="menu_search">Search</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_register">Register</string>
     <string name="title_activity_form_customer">Form Customer</string>
@@ -176,6 +177,8 @@
         <item>Yogyakarta</item>
     </string-array>
 
+    <string name="search_hint">Search.....</string>
+
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="password_confirm">Password Confirmation</string>
@@ -264,11 +267,34 @@
     <string name="website">PT. Wira Energi</string>
     <string name="welcome">Welcome, </string>
     <string name="selected_item">Selected item</string>
+    <string name="select_one">Select One</string>
+
+    //utk dashboard
+    <string name="stock_all_warehouse">Stock all warehouse (KL)</string>
+    <string name="stock_per_warehouse">Stock per warehouse (KL)</string>
+    <string name="last_purchase">Last purchase (Rp/Liter)</string>
+    <string name="last_purchase_from">  Last  purchase  from</string>
+    <string name="average_price_all">Average Price all w/h (Rp/Liter)</string>
+    <string name="average_price_per">Average Price per w/h (Rp/Liter)</string>
+    <string name="average_margin">Average Margin (Rp/Liter)</string>
+    <string name="this_month_margin">This month Margin (Rp)</string>
+    <string name="average_price_per_month">Average Price per month (Rp)</string>
+    <string name="sales_order">Sales Order (KL)</string>
+    <string name="average_sales_price">Average Sales Price (Rp)</string>
+    <string name="delivey_order">Delivey Order (KL)</string>
+    <string name="this_month_delivery_order">This Month Delivery Order (Rp)</string>
+    <string name="average_sales_price_this_year">Average sales price for this year (Rp)</string>
+    <string name="top_5_customer">Top 5 Customer (base on price)</string>
+    <string name="average_sales_margin">Average sales Margin for this year (Rp)</string>
+    <string name="total">1.000.000,00</string>
 
     //utk tab-tab
     <string name="tab_customer">Customer</string>
     <string name="tab_purchasing">Purchasing</string>
     <string name="tab_sales">Sales</string>
+    <string name="tab_inventory">Inventory</string>
+    <string name="tab_hpp_margin">Hpp Margin</string>
+    <string name="tab_sales_customer">Sales Customer</string>
 
     <string name="title_request_penawaran">Request Quotation</string>
 
@@ -313,13 +339,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="movie_title">movie title</string>
-    <string name="action_movies">Action</string>
-    <string name="musical_movies">Musical</string>
-    <string name="drama_movies">Drama</string>
-    <string name="comedy_movies">Comedy</string>
-    <string name="thriller_movies">Thriller</string>
-    <string name="movie_genre">genre</string>
+    <string name="title_activity_form_request_quotation_admin">FormRequestQuotationAdminActivity
+    </string>
+    <string name="title_activity_sales_quotation_customer">SalesQuotationCustomerActivity</string>
+    <string name="title_activity_list_sales_order">ListSalesOrderActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
 
 
 </resources>

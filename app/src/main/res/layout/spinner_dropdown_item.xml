@@ -8,6 +8,7 @@
     android:ellipsize="marquee"
     android:singleLine="true"
     android:text="text"
+    android:textSize="14sp"
     android:textColor="@color/GreenColor3" />
 
 <!--<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"-->

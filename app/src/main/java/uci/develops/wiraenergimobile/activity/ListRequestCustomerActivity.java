@@ -34,7 +34,6 @@ import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.adapter.CustomExpandableListAdapter;
 import uci.develops.wiraenergimobile.adapter.CustomerAdapter;
 import uci.develops.wiraenergimobile.fragment.navigation.NavigationManager;
-import uci.develops.wiraenergimobile.helper.DividerItemDecoration;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerModel;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
@@ -262,7 +261,7 @@ public class ListRequestCustomerActivity extends AppCompatActivity {
 
                 //utk menu sales
                 if (selectedItem.equals("Quotation")) {
-                    Intent intent = new Intent(ListRequestCustomerActivity.this, SalesQuotationActivity.class);
+                    Intent intent = new Intent(ListRequestCustomerActivity.this, SalesQuotationAdminActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Sales Order [SO]")) {
                     Intent intent = new Intent(ListRequestCustomerActivity.this, SalesOrderActivity.class);

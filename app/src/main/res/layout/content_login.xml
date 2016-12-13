@@ -180,7 +180,7 @@
             android:layout_height="35dp"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
-            android:background="@color/GreenColor"
+            android:background="@color/Green"
             android:text="@string/register"
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.AppTheme.Small"

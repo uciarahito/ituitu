@@ -208,7 +208,7 @@ public class ListRequestQuotationActivity extends AppCompatActivity {
 
                 //utk menu sales
                 if (selectedItem.equals("Quotation")) {
-                    Intent intent = new Intent(ListRequestQuotationActivity.this, SalesQuotationActivity.class);
+                    Intent intent = new Intent(ListRequestQuotationActivity.this, SalesQuotationAdminActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Sales Order [SO]")) {
                     Intent intent = new Intent(ListRequestQuotationActivity.this, SalesOrderActivity.class);

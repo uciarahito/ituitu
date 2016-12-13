@@ -211,7 +211,7 @@ public class VerificationStatusActivity extends AppCompatActivity implements Vie
 
                 //utk menu sales
                 if (selectedItem.equals("Quotation")) {
-                    Intent intent = new Intent(VerificationStatusActivity.this, SalesQuotationActivity.class);
+                    Intent intent = new Intent(VerificationStatusActivity.this, SalesQuotationAdminActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Sales Order [SO]")) {
                     Intent intent = new Intent(VerificationStatusActivity.this, SalesOrderActivity.class);

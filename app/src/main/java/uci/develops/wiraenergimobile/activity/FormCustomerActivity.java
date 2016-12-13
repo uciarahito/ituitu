@@ -21,7 +21,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -842,7 +841,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
 
                 //utk menu sales
                 if (selectedItem.equals("Quotation")) {
-                    Intent intent = new Intent(FormCustomerActivity.this, SalesQuotationActivity.class);
+                    Intent intent = new Intent(FormCustomerActivity.this, SalesQuotationAdminActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Sales Order [SO]")) {
                     Intent intent = new Intent(FormCustomerActivity.this, SalesOrderActivity.class);

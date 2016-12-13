@@ -8,135 +8,18 @@
     tools:context="uci.develops.wiraenergimobile.activity.FormRequestSalesOrderActivity"
     tools:showIn="@layout/app_bar_form_request_sales_order">
 
-    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?android:attr/colorBackground">
+        android:background="?android:attr/colorBackground"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Customer Detail"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_rectangle_gray"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="35dp"
-                        android:weightSum="6">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.5"
-                            android:text="SO No."
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/editText_so_number"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="4.25"
-                            android:hint="@string/address"
-                            android:imeOptions="actionNext"
-                            android:inputType="textCapWords|textPersonName"
-                            android:textColorHint="@color/colorGray"
-                            android:textSize="@dimen/textView_transaction"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:weightSum="6">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1.5"
-                            android:text="Customer"
-                            android:textStyle="bold" />
-
-                        <Spinner
-                            android:id="@+id/spinner_customer_name"
-                            android:layout_width="0dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="left|center"
-                            android:layout_weight="4.25"
-                            tools:listitem="@android:layout/simple_spinner_dropdown_item"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="35dp"
-                        android:weightSum="6">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.5"
-                            android:text="SO Date."
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/editText_so_date"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="4.25"
-                            android:hint="SO Date"
-                            android:imeOptions="actionNext"
-                            android:textColorHint="@color/colorGray"
-                            android:textSize="@dimen/textView_transaction"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="35dp"
-                        android:weightSum="6">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1.5"
-                            android:text="Payment Term."
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/editText_payment_term"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:inputType="number"
-                            android:textSize="@dimen/textView_transaction"/>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:text="Days"
-                            android:textSize="@dimen/textView_transaction"/>
-                    </LinearLayout>
-
-                </LinearLayout>
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -155,7 +38,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="9"
-                        android:text="Shipping Address"
+                        android:text="Customer Detail"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -173,17 +56,17 @@
                     android:visibility="gone">
 
                     <LinearLayout
-                        android:id="@+id/linear_layout_container_so_shipping_address"
+                        android:id="@+id/linear_layout_container_so_customer_detail"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:visibility="gone">
 
                         <fragment
-                            android:id="@+id/fragment_so_shipping_address"
-                            android:name="uci.develops.wiraenergimobile.fragment.FragmentSOShippingAddress"
+                            android:id="@+id/fragment_so_customer_detail"
+                            android:name="uci.develops.wiraenergimobile.fragment.FragmentSORequestCustomerDetail"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            tools:layout="@layout/fragment_req_quotation_shipping_address" />
+                            tools:layout="@layout/fragment_so_request_customer_detail" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -191,6 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="6dp"
                     android:background="@drawable/drop_shadow" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -210,7 +94,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="9"
-                        android:text="Payment Address"
+                        android:text="Shipping Address"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -228,16 +112,17 @@
                     android:visibility="gone">
 
                     <LinearLayout
-                        android:id="@+id/linear_layout_container_so_payment_address"
+                        android:id="@+id/linear_layout_container_so_shipping_address"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:visibility="gone">
 
                         <fragment
-                            android:id="@+id/fragment_so_payment_address"
-                            android:name="uci.develops.wiraenergimobile.fragment.FragmentSOPaymentAddress"
+                            android:id="@+id/fragment_so_shipping_address"
+                            android:name="uci.develops.wiraenergimobile.fragment.FragmentSOShippingAddress"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            tools:layout="@layout/fragment_req_so_shipping_address" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -253,263 +138,108 @@
                 android:layout_margin="10dp"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Item Purchase Order"
-                    android:textStyle="bold" />
-
                 <LinearLayout
+                    android:id="@+id/linear_layout_title3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_rectangle_new"
-                    android:orientation="vertical">
+                    android:orientation="horizontal"
+                    android:weightSum="10">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:weightSum="3">
+                        android:layout_weight="9"
+                        android:text="Payment PIC $amp Address"
+                        android:textStyle="bold" />
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="@string/qty"
-                                android:textStyle="bold" />
-
-                            <EditText
-                                android:id="@+id/editText_quantity"
-                                android:layout_width="100dp"
-                                android:layout_height="30dp"
-                                android:layout_marginLeft="10dp"
-                                android:background="@drawable/rounded_rectangle_gray"
-                                android:inputType="numberDecimal"
-                                app:layout_gravity="center_vertical"
-                                android:textSize="@dimen/textView_transaction"/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="@string/unit"
-                                android:textStyle="bold" />
-
-                            <Spinner
-                                android:id="@+id/spinner_unit"
-                                android:layout_width="100dp"
-                                android:layout_height="30dp"
-                                android:spinnerMode="dialog"
-                                app:layout_gravity="center_vertical" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="@string/item"
-                                android:textStyle="bold" />
-
-                            <Spinner
-                                android:id="@+id/spinner_item"
-                                android:layout_width="100dp"
-                                android:layout_height="30dp"
-                                android:spinnerMode="dialog"
-                                app:layout_gravity="center_vertical" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="6dp"
-                        android:background="@drawable/drop_shadow"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="5dp"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <ImageView
+                        android:id="@+id/imageTitle3"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:weightSum="6">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2.25"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="Item Source"
-                                android:textStyle="bold" />
-
-                            <EditText
-                                android:id="@+id/editText_item_source"
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_marginLeft="10dp"
-                                android:background="@drawable/rounded_rectangle_gray"
-                                android:inputType="numberDecimal"
-                                app:layout_gravity="center_vertical"
-                                android:textSize="@dimen/textView_transaction"/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="3.50"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="Sub Total"
-                                android:textStyle="bold" />
-
-                            <EditText
-                                android:id="@+id/editText_sub_total"
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_marginLeft="10dp"
-                                android:background="@drawable/rounded_rectangle_gray"
-                                android:inputType="numberDecimal"
-                                app:layout_gravity="center_vertical"
-                                android:textSize="@dimen/textView_transaction"/>
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="6dp"
-                        android:background="@drawable/drop_shadow"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="5dp"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:weightSum="6">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.25"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="@string/disc"
-                                android:textStyle="bold" />
-
-                            <EditText
-                                android:id="@+id/editText_disc1"
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_marginLeft="10dp"
-                                android:background="@drawable/rounded_rectangle_gray"
-                                android:inputType="numberDecimal"
-                                app:layout_gravity="center_vertical"
-                                android:textSize="@dimen/textView_transaction"/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2.25"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="Disc. Amount"
-                                android:textStyle="bold" />
-
-                            <EditText
-                                android:id="@+id/editText_disc_amount"
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_marginLeft="10dp"
-                                android:background="@drawable/rounded_rectangle_gray"
-                                android:inputType="numberDecimal"
-                                app:layout_gravity="center_vertical"
-                                android:textSize="@dimen/textView_transaction"/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2.25"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="Unit Price"
-                                android:textStyle="bold" />
-
-                            <EditText
-                                android:id="@+id/editText_unit_price"
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_marginLeft="10dp"
-                                android:background="@drawable/rounded_rectangle_gray"
-                                android:inputType="numberDecimal"
-                                app:layout_gravity="center_vertical"
-                                android:textSize="@dimen/textView_transaction"/>
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:weightSum="6">
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:src="@drawable/ic_border_color_black_24dp"
-                            android:layout_gravity="center" />
-
-                        <EditText
-                            android:id="@+id/editText_note_item"
-                            android:layout_width="0dp"
-                            android:layout_height="60dp"
-                            android:layout_weight="4.75"
-                            android:background="@drawable/rounded_rectangle_gray"
-                            android:hint="@string/note"
-                            android:imeOptions="actionNext"
-                            android:inputType="text"
-                            android:textColorHint="@color/colorGray"
-                            android:textSize="@dimen/textView_transaction"/>
-                    </LinearLayout>
-
+                        android:layout_weight="1"
+                        android:src="@android:drawable/arrow_down_float" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_content3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:id="@+id/linear_layout_container_so_payment__pic_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone">
+
+                        <fragment
+                            android:id="@+id/fragment_so_payment_pic_address"
+                            android:name="uci.develops.wiraenergimobile.fragment.FragmentSOPaymentAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            tools:layout="@layout/fragment_req_so_payment_address"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:background="@drawable/drop_shadow" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_title4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="9"
+                        android:text="Item Sales Order"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imageTitle4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/arrow_down_float" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_content4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:id="@+id/linear_layout_container_so_item_so"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone">
+
+                        <fragment
+                            android:id="@+id/fragment_so_item_so"
+                            android:name="uci.develops.wiraenergimobile.fragment.FragmentSOItemSO"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            tools:layout="@layout/fragment_so_item_so"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:background="@drawable/drop_shadow" />
             </LinearLayout>
 
             <LinearLayout
@@ -653,100 +383,6 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1.45"
-                            android:gravity="left|center"
-                            android:text="PPH"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/editText_pph"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="5dp"
-                            android:layout_weight="0.75"
-                            android:hint="100"
-                            android:imeOptions="actionNext"
-                            android:inputType="number"
-                            android:textColorHint="@color/colorGray"
-                            android:gravity="center_vertical"
-                            android:textSize="@dimen/textView_transaction"/>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.5"
-                            android:gravity="center_vertical"
-                            android:text="%"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/editText_pph_value"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="3.3"
-                            android:hint="PPH Value"
-                            android:imeOptions="actionNext"
-                            android:inputType="number"
-                            android:textColorHint="@color/colorGray"
-                            android:gravity="center_vertical"
-                            android:textSize="@dimen/textView_transaction"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:weightSum="6">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1.45"
-                            android:gravity="left|center"
-                            android:text="PBBKB"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/editText_pbbkb"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="5dp"
-                            android:layout_weight="0.75"
-                            android:hint="100"
-                            android:imeOptions="actionNext"
-                            android:inputType="number"
-                            android:textColorHint="@color/colorGray"
-                            android:gravity="center_vertical"
-                            android:textSize="@dimen/textView_transaction"/>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.5"
-                            android:gravity="center_vertical"
-                            android:text="%"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/editText_pbbkb_value"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="3.3"
-                            android:hint="PBBKB Value"
-                            android:imeOptions="actionNext"
-                            android:inputType="number"
-                            android:textColorHint="@color/colorGray"
-                            android:gravity="center_vertical"
-                            android:textSize="@dimen/textView_transaction"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:weightSum="6">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
                             android:layout_weight="1.4"
                             android:gravity="left|center"
                             android:text="Other Cost:"
@@ -849,14 +485,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:gravity="center_horizontal"
-                android:weightSum="3">
+                android:weightSum="2">
 
                 <LinearLayout
                     android:id="@+id/linear_layout_button_cancel"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/rounded_rectangle_brown"
+                    android:background="@drawable/rounded_rectangle_green"
                     android:gravity="center">
 
                     <TextView
@@ -865,41 +501,26 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="10dp"
+                        android:textColor="@color/white"
                         android:text="Cancel" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/linear_layout_button_save_as_draft"
+                    android:id="@+id/linear_layout_button_save"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/rounded_rectangle_brown"
+                    android:background="@drawable/rounded_rectangle_green"
                     android:gravity="center">
 
                     <TextView
-                        android:id="@+id/textView_button_save_as_draft"
+                        android:id="@+id/textView_button_save"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="Save As Draft" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linear_layout_button_process"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_rectangle_brown"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/textView_button_process"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Send" />
+                        android:textColor="@color/white"
+                        android:text="Save" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

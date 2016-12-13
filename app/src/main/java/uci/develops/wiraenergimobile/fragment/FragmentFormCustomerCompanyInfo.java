@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -26,6 +27,7 @@ import uci.develops.wiraenergimobile.model.CustomerModel;
 import uci.develops.wiraenergimobile.response.CustomerGroupResponse;
 import uci.develops.wiraenergimobile.response.CustomerResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
+import uci.develops.wiraenergimobile.library.SearchableSpinner;
 
 /**
  * Created by user on 10/22/2016.
@@ -36,7 +38,8 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
             editText_phone, editText_mobile, editText_fax, editText_term, editText_npwp,
             editText_email, editText_website, editText_note;
     private AutoCompleteTextView autoComplete_city, autoComplete_province;
-    private Spinner spinner_valuta, spinner_tax_ppn, spinner_active, spinner_group;
+    private Spinner spinner_valuta, spinner_tax_ppn, spinner_active;
+    private SearchableSpinner spinner_group;
 
     private LinearLayout linear_layout_id, linear_layout_term, linear_layout_valuta, linear_layout_tax_ppn, linear_layout_active, linear_layout_note;
 
@@ -86,10 +89,12 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         editText_npwp = (EditText) view.findViewById(R.id.editText_npwp);
         spinner_tax_ppn = (Spinner) view.findViewById(R.id.spinner_tax_ppn);
         spinner_active = (Spinner) view.findViewById(R.id.spinner_active);
-        spinner_group = (Spinner) view.findViewById(R.id.spinner_group);
+//        spinner_group = (Spinner) view.findViewById(R.id.spinner_group);
         editText_email = (EditText) view.findViewById(R.id.editText_email);
         editText_website = (EditText) view.findViewById(R.id.editText_website);
         editText_note = (EditText) view.findViewById(R.id.editText_note);
+
+        spinner_group = (SearchableSpinner) view.findViewById(R.id.search_spinner_group);
 
         linear_layout_id = (LinearLayout) view.findViewById(R.id.linear_layout_id);
         linear_layout_term = (LinearLayout) view.findViewById(R.id.linear_layout_term);
@@ -136,6 +141,18 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         spinner_tax_ppn.setAdapter(dataAdapter);
         spinner_active.setAdapter(dataAdapter);
 
+        spinner_active.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         loadDataSpinnerGroup();
 
         String[] province = getActivity().getResources().getStringArray(R.array.list_of_province);
@@ -149,7 +166,8 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
     }
 
     private void loadDataSpinnerGroup(){
-        Call<CustomerGroupResponse> customerGroupResponseCall = RestClient.getRestClient().getAllCustomerGroup("Bearer "+new SharedPreferenceManager().getPreferences(getContext(), "token"));
+        Call<CustomerGroupResponse> customerGroupResponseCall = RestClient.getRestClient().getAllCustomerGroup("Bearer "+
+                new SharedPreferenceManager().getPreferences(getContext(), "token"));
         customerGroupResponseCall.enqueue(new Callback<CustomerGroupResponse>() {
             @Override
             public void onResponse(Call<CustomerGroupResponse> call, Response<CustomerGroupResponse> response) {
@@ -164,6 +182,9 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
                         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
                                 R.layout.spinner_item, check_List);
                         dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+//                        spinner_group.setAdapter(dataAdapter);
+
+                        //using searcablespinner
                         spinner_group.setAdapter(dataAdapter);
                     }
                 }

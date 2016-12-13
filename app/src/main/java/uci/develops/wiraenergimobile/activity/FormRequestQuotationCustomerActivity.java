@@ -166,7 +166,7 @@ public class FormRequestQuotationCustomerActivity extends AppCompatActivity impl
     private void showDialogAddItem() {
         dialog_add_item = new Dialog(FormRequestQuotationCustomerActivity.this);
         dialog_add_item.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog_add_item.setContentView(R.layout.custom_dialog_form_item_quotation);
+        dialog_add_item.setContentView(R.layout.custom_dialog_form_req_item_quotation_customer);
 
         spinner_item = (Spinner) dialog_add_item.findViewById(R.id.spinner_item);
         spinner_unit = (Spinner) dialog_add_item.findViewById(R.id.spinner_unit);
@@ -387,7 +387,7 @@ public class FormRequestQuotationCustomerActivity extends AppCompatActivity impl
 
                 //utk menu sales
                 if (selectedItem.equals("Quotation")) {
-                    Intent intent = new Intent(FormRequestQuotationCustomerActivity.this, SalesQuotationActivity.class);
+                    Intent intent = new Intent(FormRequestQuotationCustomerActivity.this, SalesQuotationAdminActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Sales Order [SO]")) {
                     Intent intent = new Intent(FormRequestQuotationCustomerActivity.this, SalesOrderActivity.class);

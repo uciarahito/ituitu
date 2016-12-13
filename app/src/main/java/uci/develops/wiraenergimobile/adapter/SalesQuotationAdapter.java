@@ -78,11 +78,14 @@ public class SalesQuotationAdapter extends RecyclerView.Adapter<SalesQuotationAd
                  * Set decode melalui data per row
                  * menampung di shared preference
                  */
-//                new SharedPreferenceManager().setPreferences(context, "customer_decode", ""+customerModel.getDecode());
-//                new SharedPreferenceManager().setPreferences(context, "customer_user_id", ""+customerModel.getUser_id());
-//                Toast.makeText(context, "User_ID: "+new SharedPreferenceManager().getPreferences(context, "customer_user_id"), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, FormRequestQuotationCustomerActivity.class);
-                context.startActivity(intent);
+
+                /**
+                 * ada pengecekan jika status nya draft atau selain draft
+                 * jika draft, maka ke FormRequestQuotationCustomerActivity
+                 * jika selain draft, maka ke FormSalesQuotationActivity
+                 */
+//                Intent intent = new Intent(context, FormRequestQuotationCustomerActivity.class);
+//                context.startActivity(intent);
             }
         });
     }

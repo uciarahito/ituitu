@@ -3,9 +3,12 @@ package uci.develops.wiraenergimobile.activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +33,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.adapter.CustomExpandableListAdapter;
+import uci.develops.wiraenergimobile.fragment.FragmentDashboardHppMargin;
+import uci.develops.wiraenergimobile.fragment.FragmentDashboardInventory;
+import uci.develops.wiraenergimobile.fragment.FragmentDashboardSalesCustomer;
 import uci.develops.wiraenergimobile.fragment.navigation.NavigationManager;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
@@ -38,6 +44,9 @@ import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class DashboardAdminActivity extends AppCompatActivity {
+    //utk buat tab
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     //utk nav drawer
     private DrawerLayout mDrawerLayout;
@@ -59,10 +68,79 @@ public class DashboardAdminActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+//        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        tabLayout.setupWithViewPager(viewPager);
+
+        setupTabIcons();
         navDrawer();
 
         if (savedInstanceState == null) {
             selectFirstItemAsDefault();
+        }
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+
+        String roles = "";
+        try {
+            roles = new SharedPreferenceManager().getPreferences(DashboardAdminActivity.this, "roles");
+        } catch (Exception e) {
+
+        }
+        if (roles != "" && roles.equals("admin")) {
+            adapter.addFragment(new FragmentDashboardInventory(), "");
+            adapter.addFragment(new FragmentDashboardHppMargin(), "");
+            adapter.addFragment(new FragmentDashboardSalesCustomer(), "");
+        }
+
+        viewPager.setAdapter(adapter);
+    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
+    }
+
+    private void setupTabIcons() {
+        String roles = "";
+        try {
+            roles = new SharedPreferenceManager().getPreferences(DashboardAdminActivity.this, "roles");
+        } catch (Exception e) {
+
+        }
+        if (roles != "" && roles.equals("admin")) {
+            tabLayout.getTabAt(0).setText(R.string.tab_inventory);
+            tabLayout.getTabAt(1).setText(R.string.tab_hpp_margin);
+            tabLayout.getTabAt(2).setText(R.string.tab_sales_customer);
         }
     }
 
@@ -191,7 +269,7 @@ public class DashboardAdminActivity extends AppCompatActivity {
 
                 //utk menu sales
                 if (selectedItem.equals("Quotation")) {
-                    Intent intent = new Intent(DashboardAdminActivity.this, SalesQuotationActivity.class);
+                    Intent intent = new Intent(DashboardAdminActivity.this, SalesQuotationAdminActivity.class);
                     startActivity(intent);
                 } else if (selectedItem.equals("Sales Order [SO]")) {
                     Intent intent = new Intent(DashboardAdminActivity.this, SalesOrderActivity.class);
