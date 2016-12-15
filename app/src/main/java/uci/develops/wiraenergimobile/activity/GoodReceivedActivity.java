@@ -7,12 +7,14 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
@@ -23,6 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,8 +39,14 @@ import uci.develops.wiraenergimobile.model.UserXModel;
 import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
-public class GoodReceivedActivity extends AppCompatActivity {
+public class GoodReceivedActivity extends AppCompatActivity implements View.OnClickListener {
 
+    @BindView(R.id.button_add_good_receive)
+    Button button_add_good_receive;
+    @BindView(R.id.recycleListGoodReceive)
+    RecyclerView recycleListGoodReceive;
+
+    //utk nav drawer
     private DrawerLayout mDrawerLayout;
     private String[] items;
 
@@ -56,10 +66,25 @@ public class GoodReceivedActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        ButterKnife.bind(this);
+        initializeComponent();
+
         navDrawer();
 
         if (savedInstanceState == null) {
             selectFirstItemAsDefault();
+        }
+    }
+
+    private void initializeComponent() {
+        button_add_good_receive.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == button_add_good_receive) {
+            Intent intent = new Intent(GoodReceivedActivity.this, FormRequestGoodReceived.class);
+            startActivity(intent);
         }
     }
 
@@ -212,13 +237,13 @@ public class GoodReceivedActivity extends AppCompatActivity {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 String selected_item = getResources().getStringArray(R.array.general)[groupPosition];
-                if(new SharedPreferenceManager().getPreferences(GoodReceivedActivity.this, "roles").equals("admin")){
+                if (new SharedPreferenceManager().getPreferences(GoodReceivedActivity.this, "roles").equals("admin")) {
                     selected_item = getResources().getStringArray(R.array.general)[groupPosition];
-                } else if(new SharedPreferenceManager().getPreferences(GoodReceivedActivity.this, "roles").equals("customer")){
+                } else if (new SharedPreferenceManager().getPreferences(GoodReceivedActivity.this, "roles").equals("customer")) {
                     selected_item = getResources().getStringArray(R.array.general_customer)[groupPosition];
-                } else if (new SharedPreferenceManager().getPreferences(GoodReceivedActivity.this, "roles").equals("expedition")){
+                } else if (new SharedPreferenceManager().getPreferences(GoodReceivedActivity.this, "roles").equals("expedition")) {
                     selected_item = getResources().getStringArray(R.array.general_expedition)[groupPosition];
-                } else if (new SharedPreferenceManager().getPreferences(GoodReceivedActivity.this, "roles").equals("")){
+                } else if (new SharedPreferenceManager().getPreferences(GoodReceivedActivity.this, "roles").equals("")) {
                     selected_item = getResources().getStringArray(R.array.general_guest)[groupPosition];
                 }
 
@@ -311,5 +336,4 @@ public class GoodReceivedActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }

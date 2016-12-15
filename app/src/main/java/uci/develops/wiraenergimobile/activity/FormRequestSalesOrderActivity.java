@@ -58,7 +58,7 @@ public class FormRequestSalesOrderActivity extends AppCompatActivity implements 
     @BindView(R.id.linear_layout_container_so_shipping_address) LinearLayout linearLayoutContainer2;
     @BindView(R.id.linear_layout_title3) LinearLayout linearLayoutTitle3;
     @BindView(R.id.linear_layout_content3) LinearLayout linearLayoutContent3;
-    @BindView(R.id.linear_layout_container_so_payment__pic_address) LinearLayout linearLayoutContainer3;
+    @BindView(R.id.linear_layout_container_so_payment_pic_address) LinearLayout linearLayoutContainer3;
     @BindView(R.id.linear_layout_title4) LinearLayout linearLayoutTitle4;
     @BindView(R.id.linear_layout_content4) LinearLayout linearLayoutContent4;
     @BindView(R.id.linear_layout_container_so_item_so) LinearLayout linearLayoutContainer4;

@@ -58,17 +58,17 @@ public class FragmentSORequestCustomerDetail extends Fragment implements View.On
         View view;
         view = inflater.inflate(R.layout.fragment_so_request_customer_detail, container, false);
         ButterKnife.bind(this, view);
-        initializeComponent();
+        initializeComponent(view);
 
         // start listening for refresh local file list in
         return view;
         //return inflater.inflate(R.layout.activity_ongoing_order, container, false);
     }
 
-    private void initializeComponent(){
+    private void initializeComponent(View view){
         editText_so_date.setOnClickListener(this);
         editText_delivery_date.setOnClickListener(this);
-        spinner_customer_name.setOnClickListener(this);
+//        spinner_customer_name.setOnClickListener(this);
     }
 
     @Override
@@ -81,9 +81,9 @@ public class FragmentSORequestCustomerDetail extends Fragment implements View.On
             setDatePickerDialog();
         }
 
-        if (v == spinner_customer_name){
-            loadDataSpinnerCustomerName();
-        }
+//        if (v == spinner_customer_name){
+//            loadDataSpinnerCustomerName();
+//        }
 
     }
 
@@ -99,6 +99,7 @@ public class FragmentSORequestCustomerDetail extends Fragment implements View.On
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 // set day of month , month and year value in the edit text
                 editText_so_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                editText_delivery_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
             }
         }, mYear, mMonth, mDay);
         datePickerDialog.show();

@@ -46,6 +46,7 @@ import uci.develops.wiraenergimobile.adapter.CustomExpandableListAdapter;
 import uci.develops.wiraenergimobile.adapter.ItemSalesQuotationAdapter;
 import uci.develops.wiraenergimobile.fragment.navigation.NavigationManager;
 import uci.develops.wiraenergimobile.helper.DividerItemDecoration;
+import uci.develops.wiraenergimobile.helper.NumberTextWatcher;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerModel;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
@@ -134,10 +135,12 @@ public class FormRequestQuotationAdminActivity extends AppCompatActivity impleme
         recyclerView.addItemDecoration(new DividerItemDecoration(FormRequestQuotationAdminActivity.this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(itemSalesQuotationAdapter);
 
+        editText_bruto.addTextChangedListener(new NumberTextWatcher(editText_bruto));
+
         linearLayoutTitle1.setOnClickListener(this);
         linearLayoutTitle2.setOnClickListener(this);
         button_add_item.setOnClickListener(this);
-        spinner_customer_name.setOnClickListener(this);
+//        spinner_customer_name.setOnClickListener(this);
     }
 
     @Override
@@ -170,9 +173,9 @@ public class FormRequestQuotationAdminActivity extends AppCompatActivity impleme
             showDialogAddItem();
         }
 
-        if (v == spinner_customer_name){
-            loadDataSpinnerCustomerName();
-        }
+//        if (v == spinner_customer_name){
+//            loadDataSpinnerCustomerName();
+//        }
     }
 
     private void loadDataSpinnerCustomerName() {

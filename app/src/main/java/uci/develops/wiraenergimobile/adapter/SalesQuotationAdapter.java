@@ -15,6 +15,7 @@ import java.util.TreeMap;
 
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.activity.FormRequestQuotationCustomerActivity;
+import uci.develops.wiraenergimobile.activity.FormSalesQuotationActivity;
 import uci.develops.wiraenergimobile.model.QuotationModel;
 
 /**
@@ -81,11 +82,10 @@ public class SalesQuotationAdapter extends RecyclerView.Adapter<SalesQuotationAd
 
                 /**
                  * ada pengecekan jika status nya draft atau selain draft
-                 * jika draft, maka ke FormRequestQuotationCustomerActivity
                  * jika selain draft, maka ke FormSalesQuotationActivity
                  */
-//                Intent intent = new Intent(context, FormRequestQuotationCustomerActivity.class);
-//                context.startActivity(intent);
+                Intent intent = new Intent(context, FormSalesQuotationActivity.class);
+                context.startActivity(intent);
             }
         });
     }

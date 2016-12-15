@@ -242,7 +242,7 @@
                             android:gravity="left|center"
                             android:hint="@string/bruto"
                             android:imeOptions="actionNext"
-                            android:inputType="number"
+                            android:inputType="number|numberDecimal"
                             android:textColorHint="@color/colorGray"
                             android:textSize="@dimen/textView_transaction"/>
                     </LinearLayout>

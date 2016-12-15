@@ -100,11 +100,11 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.25"
+                android:layout_weight="1.35"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:text="@string/disc"
@@ -185,7 +185,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="3.5"
+                android:layout_weight="3"
                 android:orientation="vertical">
 
                 <TextView
@@ -195,21 +195,36 @@
                     android:text="Total Commission"
                     android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/editText_total_commission"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/rounded_rectangle_gray"
-                    android:inputType="numberDecimal"
-                    app:layout_gravity="center_vertical"
-                    android:textSize="@dimen/textView_transaction"/>
+                    android:layout_height="wrap_content"
+                    android:weightSum="6">
+                    <EditText
+                        android:id="@+id/editText_total_commission"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="4.5"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/rounded_rectangle_gray"
+                        android:inputType="numberDecimal"
+                        app:layout_gravity="center_vertical"
+                        android:textSize="@dimen/textView_transaction"/>
+
+                    <ImageView
+                        android:id="@+id/imageViewTotalCommission"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_total_24dp"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2.25"
+                android:layout_weight="3"
                 android:orientation="vertical">
 
                 <TextView
@@ -224,6 +239,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="15dp"
                     android:background="@drawable/rounded_rectangle_gray"
                     android:inputType="numberDecimal"
                     app:layout_gravity="center_vertical"

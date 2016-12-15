@@ -17,7 +17,7 @@
             android:textColor="@color/white"
             android:gravity="center"
             android:layout_gravity="center"
-            android:text="New Item Quotation"
+            android:text="New Item Purchase Order"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -71,7 +71,7 @@
 
                 <Spinner
                     android:id="@+id/spinner_unit"
-                    android:layout_width="match_parent"
+                    android:layout_width="100dp"
                     android:layout_height="30dp"
                     android:spinnerMode="dialog"
                     app:layout_gravity="center_vertical" />
@@ -92,7 +92,7 @@
 
                 <Spinner
                     android:id="@+id/spinner_item"
-                    android:layout_width="match_parent"
+                    android:layout_width="100dp"
                     android:layout_height="30dp"
                     android:spinnerMode="dialog"
                     app:layout_gravity="center_vertical" />
@@ -124,7 +124,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editText_disc1"
+                    android:id="@+id/editText_disc"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_marginLeft="10dp"
@@ -192,23 +192,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="6">
+            android:weightSum="6"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2.5"
+                android:layout_weight="3"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    android:text="Send Date"
+                    android:text="Item Source"
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editText_send_date"
+                    android:id="@+id/editText_item_source"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_marginLeft="10dp"
@@ -221,7 +223,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="3.35"
+                android:layout_weight="3"
                 android:orientation="vertical">
 
                 <TextView
@@ -248,9 +250,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp">
             <Button
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_margin="5dp"
                 android:background="@color/SkyBlue"
                 android:id="@+id/button_cancel"
                 android:textAllCaps="false"
@@ -259,8 +259,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
             <Button
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_margin="5dp"
                 android:background="@color/SkyBlue"
                 android:id="@+id/button_save"
                 android:textAllCaps="false"

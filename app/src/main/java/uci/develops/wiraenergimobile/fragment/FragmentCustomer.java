@@ -6,14 +6,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.activity.FormCustomerActivity;
+import uci.develops.wiraenergimobile.activity.FormRequestCustomerAdmin;
 import uci.develops.wiraenergimobile.activity.ListCustomerActivity;
 import uci.develops.wiraenergimobile.activity.ListRequestCustomerActivity;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
@@ -26,8 +30,11 @@ import uci.develops.wiraenergimobile.service.RestClient;
  */
 
 public class FragmentCustomer extends Fragment implements View.OnClickListener{
-    private LinearLayout linearLayout_menu_all_customer, linearLayout_menu_new_customer;
-    private TextView textView_label_all_customer, textView_label_new_customer;
+    @BindView(R.id.button_add_customer) Button button_add_customer;
+    @BindView(R.id.textView_label_all_customer) TextView textView_label_all_customer;
+    @BindView(R.id.textView_label_new_customer) TextView textView_label_new_customer;
+    @BindView(R.id.linearLayout_menu_all_customer) LinearLayout linearLayout_menu_all_customer;
+    @BindView(R.id.linearLayout_menu_new_customer) LinearLayout linearLayout_menu_new_customer;
 
     public FragmentCustomer(){}
 
@@ -42,6 +49,8 @@ public class FragmentCustomer extends Fragment implements View.OnClickListener{
         // Inflate the layout for this fragment
         View view;
         view = inflater.inflate(R.layout.fragment_customer, container, false);
+
+        ButterKnife.bind(this, view);
         initializeComponent(view);
         // start listening for refresh local file list in
         loadData();
@@ -51,13 +60,27 @@ public class FragmentCustomer extends Fragment implements View.OnClickListener{
     }
 
     private void initializeComponent(View view){
-        linearLayout_menu_all_customer = (LinearLayout) view.findViewById(R.id.linearLayout_menu_all_customer);
-        linearLayout_menu_new_customer = (LinearLayout) view.findViewById(R.id.linearLayout_menu_new_customer);
-        textView_label_all_customer = (TextView)view.findViewById(R.id.textView_label_all_customer);
-        textView_label_new_customer = (TextView)view.findViewById(R.id.textView_label_new_customer);
-
+        button_add_customer.setOnClickListener(this);
         linearLayout_menu_all_customer.setOnClickListener(this);
         linearLayout_menu_new_customer.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == linearLayout_menu_all_customer) {
+            Intent intent = new Intent(getActivity().getApplicationContext(), ListCustomerActivity.class);
+            startActivity(intent);
+        }
+
+        if (v == linearLayout_menu_new_customer) {
+            Intent intent = new Intent(getActivity().getApplicationContext(), ListRequestCustomerActivity.class);
+            startActivity(intent);
+        }
+
+        if (v == button_add_customer) {
+            Intent intent = new Intent(getActivity().getApplicationContext(), FormRequestCustomerAdmin.class);
+            startActivity(intent);
+        }
     }
 
     private void loadData(){
@@ -99,16 +122,4 @@ public class FragmentCustomer extends Fragment implements View.OnClickListener{
         super.onResume();
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v == linearLayout_menu_all_customer) {
-            Intent intent = new Intent(getActivity().getApplicationContext(), ListCustomerActivity.class);
-            startActivity(intent);
-        }
-
-        if (v == linearLayout_menu_new_customer) {
-            Intent intent = new Intent(getActivity().getApplicationContext(), ListRequestCustomerActivity.class);
-            startActivity(intent);
-        }
-    }
 }

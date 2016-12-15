@@ -343,6 +343,10 @@
     </string>
     <string name="title_activity_sales_quotation_customer">SalesQuotationCustomerActivity</string>
     <string name="title_activity_list_sales_order">ListSalesOrderActivity</string>
+    <string name="title_activity_form_request_purchase_order">FormRequestPurchaseOrderActivity
+    </string>
+    <string name="title_activity_form_request_customer_admin">FormRequestCustomerAdmin</string>
+    <string name="title_activity_form_request_good_received">FormRequestGoodReceived</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 

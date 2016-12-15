@@ -22,8 +22,8 @@ public class NumberTextWatcher implements TextWatcher {
     private DecimalFormat df;
     private DecimalFormat dfnd;
     private boolean hasFractionalPart;
-    String formatString = "#,###,###,###.00";
-    String formatString2 = "#,###.0#";
+    String formatString = "#,###,###,###.##";
+    String formatString2 = "#,###.##";
 
     private EditText et;
 
@@ -35,9 +35,9 @@ public class NumberTextWatcher implements TextWatcher {
 //        df.setDecimalSeparatorAlwaysShown(true);
 //        dfnd = new DecimalFormat("#.###");
 
-        df = new DecimalFormat("##,###,###.##", new DecimalFormatSymbols(locale));
-        dfnd = new DecimalFormat("#.###", new DecimalFormatSymbols(locale));
-        nf = NumberFormat.getNumberInstance(locale);
+//        df = new DecimalFormat("##,###,###.##", new DecimalFormatSymbols(locale));
+//        dfnd = new DecimalFormat("#.###", new DecimalFormatSymbols(locale));
+//        nf = NumberFormat.getNumberInstance(locale);
 
         DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(locale);
         otherSymbols.setDecimalSeparator(',');

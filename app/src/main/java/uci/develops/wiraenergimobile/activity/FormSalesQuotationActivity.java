@@ -138,7 +138,7 @@ public class FormSalesQuotationActivity extends AppCompatActivity implements Vie
 
         layout_tab_shipping_address.setOnClickListener(this);
         layout_tab_billing_address.setOnClickListener(this);
-        editText_bruto.addTextChangedListener(new NumberTextWatcher(editText_bruto));
+//        editText_bruto.addTextChangedListener(new NumberTextWatcher(editText_bruto));
     }
 
     @Override
@@ -170,28 +170,6 @@ public class FormSalesQuotationActivity extends AppCompatActivity implements Vie
             layout_tab_shipping_address.setBackgroundResource(R.drawable.rounded_rectangle_gray);
             layout_tab_billing_address.setBackgroundResource(R.drawable.rounded_rectangle_org);
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        Intent intentLogin, intentRegister;
-
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private void selectFirstItemAsDefault() {
@@ -344,9 +322,9 @@ public class FormSalesQuotationActivity extends AppCompatActivity implements Vie
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 String selected_item = getResources().getStringArray(R.array.general)[groupPosition];
-                if (new SharedPreferenceManager().getPreferences(FormSalesQuotationActivity.this, "roles").equals("admin")) {
+                if(new SharedPreferenceManager().getPreferences(FormSalesQuotationActivity.this, "roles").equals("admin")){
                     selected_item = getResources().getStringArray(R.array.general)[groupPosition];
-                } else if (new SharedPreferenceManager().getPreferences(FormSalesQuotationActivity.this, "roles").equals("customer")) {
+                } else if(new SharedPreferenceManager().getPreferences(FormSalesQuotationActivity.this, "roles").equals("customer")){
                     selected_item = getResources().getStringArray(R.array.general_customer)[groupPosition];
                 } else if (new SharedPreferenceManager().getPreferences(FormSalesQuotationActivity.this, "roles").equals("expedition")){
                     selected_item = getResources().getStringArray(R.array.general_expedition)[groupPosition];
@@ -365,7 +343,7 @@ public class FormSalesQuotationActivity extends AppCompatActivity implements Vie
                         Intent intent = new Intent(FormSalesQuotationActivity.this, HomeActivity.class);
                         startActivity(intent);
                     }
-                } else if (selected_item.equals("Profile")) {
+                }  else if (selected_item.equals("Profile")) {
                     if (new SharedPreferenceManager().getPreferences(FormSalesQuotationActivity.this, "roles").equals("customer")) {
                         Intent intent = new Intent(FormSalesQuotationActivity.this, FormCustomerActivity.class);
                         startActivity(intent);
@@ -420,5 +398,27 @@ public class FormSalesQuotationActivity extends AppCompatActivity implements Vie
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        Intent intentLogin, intentRegister;
+
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

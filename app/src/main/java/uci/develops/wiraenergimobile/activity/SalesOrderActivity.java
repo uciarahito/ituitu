@@ -17,10 +17,12 @@ import butterknife.ButterKnife;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.adapter.ItemSalesOrderAdapter;
 
-public class SalesOrderActivity extends AppCompatActivity implements View.OnClickListener{
+public class SalesOrderActivity extends AppCompatActivity implements View.OnClickListener {
 
-    @BindView(R.id.button_add_sales_order) Button button_add_sales_order;
-    @BindView(R.id.recycleListSalesOrder) RecyclerView recycleListSalesOrder;
+    @BindView(R.id.button_add_sales_order)
+    Button button_add_sales_order;
+    @BindView(R.id.recycleListSalesOrder)
+    RecyclerView recycleListSalesOrder;
     ItemSalesOrderAdapter itemSalesOrderAdapter;
 
     @Override
@@ -34,7 +36,7 @@ public class SalesOrderActivity extends AppCompatActivity implements View.OnClic
         initializeComponent();
     }
 
-    private void initializeComponent(){
+    private void initializeComponent() {
         button_add_sales_order.setOnClickListener(this);
     }
 

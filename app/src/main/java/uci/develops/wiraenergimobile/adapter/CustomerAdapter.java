@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.activity.FormCustomerActivity;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
@@ -29,15 +32,14 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
     Map<String, List<String>> mRoles = new TreeMap<>();
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView txtIdCustomer, txtDecode, txtEmail;
-        public Button buttonDetail;
+        @BindView(R.id.txtIdCustomer) TextView txtIdCustomer;
+        @BindView(R.id.txtDecode) TextView txtDecode;
+        @BindView(R.id.txtEmail) TextView txtEmail;
+        @BindView(R.id.imageView_view) ImageView imageView_view;
 
         public MyViewHolder(View view) {
             super(view);
-            txtIdCustomer = (TextView) view.findViewById(R.id.txtIdCustomer);
-            txtDecode = (TextView) view.findViewById(R.id.txtDecode);
-            txtEmail = (TextView) view.findViewById(R.id.txtEmail);
-            buttonDetail = (Button) view.findViewById(R.id.buttonDetail);
+            ButterKnife.bind(this, view);
         }
     }
 
@@ -67,7 +69,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
         holder.txtDecode.setText(": " + customerModel.getDecode());
         holder.txtEmail.setText(": " + customerModel.getEmail());
 
-        holder.buttonDetail.setOnClickListener(new View.OnClickListener() {
+        holder.imageView_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /**
