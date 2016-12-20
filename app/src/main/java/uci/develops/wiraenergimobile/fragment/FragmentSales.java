@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.activity.DeliveryOrderActivity;
 import uci.develops.wiraenergimobile.activity.FormRequestQuotationCustomerActivity;
@@ -24,7 +26,12 @@ import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 
 public class FragmentSales extends Fragment implements View.OnClickListener{
 
-    private LinearLayout linearLayout_menu_sales_quotation, linearLayout_menu_sales_order, linearLayout_menu_delivery_order, linearLayout_menu_invoicing, linearLayout_menu_payment;
+    @BindView(R.id.linearLayout_menu_sales_quotation) LinearLayout linearLayout_menu_sales_quotation;
+    @BindView(R.id.linearLayout_menu_sales_order) LinearLayout linearLayout_menu_sales_order;
+    @BindView(R.id.linearLayout_menu_delivery_order) LinearLayout linearLayout_menu_delivery_order;
+    @BindView(R.id.linearLayout_menu_invoicing) LinearLayout linearLayout_menu_invoicing;
+    @BindView(R.id.linearLayout_menu_payment) LinearLayout linearLayout_menu_payment;
+
     private static final String KEY_MOVIE_TITLE = "key_title";
 
     public FragmentSales(){}
@@ -55,7 +62,7 @@ public class FragmentSales extends Fragment implements View.OnClickListener{
         // Inflate the layout for this fragment
         View view;
         view = inflater.inflate(R.layout.fragment_sales, container, false);
-
+        ButterKnife.bind(this, view);
         initializeComponent(view);
 
         // start listening for refresh local file list in
@@ -64,12 +71,6 @@ public class FragmentSales extends Fragment implements View.OnClickListener{
     }
 
     private void initializeComponent(View view){
-        linearLayout_menu_sales_quotation = (LinearLayout) view.findViewById(R.id.linearLayout_menu_sales_quotation);
-        linearLayout_menu_sales_order = (LinearLayout) view.findViewById(R.id.linearLayout_menu_sales_order);
-        linearLayout_menu_delivery_order = (LinearLayout) view.findViewById(R.id.linearLayout_menu_delivery_order);
-        linearLayout_menu_invoicing = (LinearLayout) view.findViewById(R.id.linearLayout_menu_invoicing);
-        linearLayout_menu_payment = (LinearLayout) view.findViewById(R.id.linearLayout_menu_payment);
-
         linearLayout_menu_sales_quotation.setOnClickListener(this);
         linearLayout_menu_sales_order.setOnClickListener(this);
         linearLayout_menu_delivery_order.setOnClickListener(this);

@@ -9,17 +9,26 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import uci.develops.wiraenergimobile.R;
 
 /**
  * Created by ArahitoPC on 11/27/2016.
  */
 public class FragmentProfileCustomer extends Fragment implements View.OnClickListener{
-
-    private LinearLayout linearLayoutTitle1, linearLayoutTitle2, linearLayoutTitle3;
-    private LinearLayout linearLayoutContent1, linearLayoutContent2, linearLayoutContent3;
-    private LinearLayout layout_container_profil_company_info, layout_container_profil_contact_info, layout_container_profil_shipping_address;
-    private ImageView imageViewTitle1, imageViewTitle2, imageViewTitle3;
+    @BindView(R.id.imageTitle1) ImageView imageViewTitle1;
+    @BindView(R.id.imageTitle2) ImageView imageViewTitle2;
+    @BindView(R.id.imageTitle3) ImageView imageViewTitle3;
+    @BindView(R.id.layoutTitle1) LinearLayout linearLayoutTitle1;
+    @BindView(R.id.layoutTitle2) LinearLayout linearLayoutTitle2;
+    @BindView(R.id.layoutTitle3) LinearLayout linearLayoutTitle3;
+    @BindView(R.id.layoutContent1) LinearLayout linearLayoutContent1;
+    @BindView(R.id.layoutContent2) LinearLayout linearLayoutContent2;
+    @BindView(R.id.layoutContent3) LinearLayout linearLayoutContent3;
+    @BindView(R.id.layout_container_profil_company_info) LinearLayout layout_container_profil_company_info;
+    @BindView(R.id.layout_container_profil_contact_info) LinearLayout layout_container_profil_contact_info;
+    @BindView(R.id.layout_container_profil_shipping_address) LinearLayout layout_container_profil_shipping_address;
 
     boolean content1=false, content2=false, content3=false;
 
@@ -35,6 +44,7 @@ public class FragmentProfileCustomer extends Fragment implements View.OnClickLis
                              Bundle savedInstanceState) {
         View view;
         view = inflater.inflate(R.layout.fragment_profile_customer, container, false);
+        ButterKnife.bind(this, view);
         initializeComponent(view);
         loadData();
         return view;
@@ -44,19 +54,6 @@ public class FragmentProfileCustomer extends Fragment implements View.OnClickLis
     }
 
     private void initializeComponent(View view){
-        linearLayoutTitle1 = (LinearLayout)view.findViewById(R.id.layoutTitle1);
-        linearLayoutTitle2 = (LinearLayout)view.findViewById(R.id.layoutTitle2);
-        linearLayoutTitle3 = (LinearLayout)view.findViewById(R.id.layoutTitle3);
-        linearLayoutContent1 = (LinearLayout)view.findViewById(R.id.layoutContent1);
-        linearLayoutContent2 = (LinearLayout)view.findViewById(R.id.layoutContent2);
-        linearLayoutContent3 = (LinearLayout)view.findViewById(R.id.layoutContent3);
-        layout_container_profil_company_info = (LinearLayout) view.findViewById(R.id.layout_container_profil_company_info);
-        layout_container_profil_contact_info = (LinearLayout) view.findViewById(R.id.layout_container_profil_contact_info);
-        layout_container_profil_shipping_address = (LinearLayout) view.findViewById(R.id.layout_container_profil_shipping_address);
-        imageViewTitle1 = (ImageView)view.findViewById(R.id.imageTitle1);
-        imageViewTitle2 = (ImageView)view.findViewById(R.id.imageTitle2);
-        imageViewTitle3 = (ImageView)view.findViewById(R.id.imageTitle3);
-
         linearLayoutTitle1.setOnClickListener(this);
         linearLayoutTitle2.setOnClickListener(this);
         linearLayoutTitle3.setOnClickListener(this);

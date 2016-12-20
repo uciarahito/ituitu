@@ -39,7 +39,7 @@ public class FragmentSORequestCustomerDetail extends Fragment implements View.On
     @BindView(R.id.editText_payment_term) EditText editText_payment_term;
     @BindView(R.id.spinner_customer_name) Spinner spinner_customer_name;
 
-    private DatePickerDialog datePickerDialog;
+    private DatePickerDialog datePickerDialogSODate, datePickerDialogDeliveryDate;
     List<CustomerModel> customerModelList;
     String check_List[];
 
@@ -74,11 +74,11 @@ public class FragmentSORequestCustomerDetail extends Fragment implements View.On
     @Override
     public void onClick(View v) {
         if (v == editText_so_date){
-            setDatePickerDialog();
+            setDatePickerDialogSODate();
         }
 
         if (v == editText_delivery_date){
-            setDatePickerDialog();
+            setDatePickerDialogDeliveryDate();
         }
 
 //        if (v == spinner_customer_name){
@@ -87,22 +87,38 @@ public class FragmentSORequestCustomerDetail extends Fragment implements View.On
 
     }
 
-    public void setDatePickerDialog(){
+    public void setDatePickerDialogSODate(){
         //utk send date
-        final Calendar calendar = Calendar.getInstance();
-        int mYear = calendar.get(Calendar.YEAR); // current year
-        int mMonth = calendar.get(Calendar.MONTH); // current month
-        int mDay = calendar.get(Calendar.DAY_OF_MONTH); // current day
+        final Calendar calendarSODate = Calendar.getInstance();
+        int mYear = calendarSODate.get(Calendar.YEAR); // current year
+        int mMonth = calendarSODate.get(Calendar.MONTH); // current month
+        int mDay = calendarSODate.get(Calendar.DAY_OF_MONTH); // current day
         // date picker dialog
-        datePickerDialog = new DatePickerDialog(getActivity().getApplicationContext(), new DatePickerDialog.OnDateSetListener() {
+        datePickerDialogSODate = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 // set day of month , month and year value in the edit text
                 editText_so_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+            }
+        }, mYear, mMonth, mDay);
+        datePickerDialogSODate.show();
+    }
+
+    public void setDatePickerDialogDeliveryDate(){
+        //utk send date
+        final Calendar calendarDeliveryDate = Calendar.getInstance();
+        int mYear = calendarDeliveryDate.get(Calendar.YEAR); // current year
+        int mMonth = calendarDeliveryDate.get(Calendar.MONTH); // current month
+        int mDay = calendarDeliveryDate.get(Calendar.DAY_OF_MONTH); // current day
+        // date picker dialog
+        datePickerDialogDeliveryDate = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                // set day of month , month and year value in the edit text
                 editText_delivery_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
             }
         }, mYear, mMonth, mDay);
-        datePickerDialog.show();
+        datePickerDialogDeliveryDate.show();
     }
 
     private void loadDataSpinnerCustomerName() {

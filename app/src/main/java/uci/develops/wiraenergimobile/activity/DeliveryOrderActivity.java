@@ -7,12 +7,15 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
@@ -23,11 +26,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.adapter.CustomExpandableListAdapter;
+import uci.develops.wiraenergimobile.adapter.DeliveryOrderAdapter;
 import uci.develops.wiraenergimobile.fragment.navigation.NavigationManager;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
@@ -35,10 +41,16 @@ import uci.develops.wiraenergimobile.model.UserXModel;
 import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
-public class DeliveryOrderActivity extends AppCompatActivity {
+public class DeliveryOrderActivity extends AppCompatActivity implements View.OnClickListener{
+    @BindView(R.id.button_add_delivery_order)
+    Button button_add_delivery_order;
+    @BindView(R.id.recycleListDeliveryOrder)
+    RecyclerView recycleListDeliveryOrder;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
+    DeliveryOrderAdapter deliveryOrderAdapter;
 
     //utk nav drawer
-    private DrawerLayout mDrawerLayout;
     private String[] items;
 
     private ExpandableListView mExpandableListView;
@@ -54,13 +66,25 @@ public class DeliveryOrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delivery_order);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-
+        initializeComponent();
         navDrawer();
 
         if (savedInstanceState == null) {
             selectFirstItemAsDefault();
+        }
+    }
+
+    private void initializeComponent(){
+        button_add_delivery_order.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == button_add_delivery_order){
+            Intent intent = new Intent(DeliveryOrderActivity.this, FormRequestDeliveryOrderActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -73,9 +97,8 @@ public class DeliveryOrderActivity extends AppCompatActivity {
     }
 
     public void navDrawer() {
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mExpandableListView = ButterKnife.findById(mDrawerLayout, R.id.navList);
         mActivityTitle = getTitle().toString();
-        mExpandableListView = (ExpandableListView) mDrawerLayout.findViewById(R.id.navList);
 
         initItems();
 
@@ -84,8 +107,8 @@ public class DeliveryOrderActivity extends AppCompatActivity {
         listHeaderView = inflater.inflate(R.layout.nav_header, null, false);
         mExpandableListView.addHeaderView(listHeaderView);
 
-        ImageView imageView_profile = (ImageView) listHeaderView.findViewById(R.id.imageView_profile);
-        final TextView textView_name = (TextView) listHeaderView.findViewById(R.id.textView_name);
+        ImageView imageView_profile = ButterKnife.findById(listHeaderView, R.id.imageView_profile);
+        final TextView textView_name = ButterKnife.findById(listHeaderView, R.id.textView_name);
 
         imageView_profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -313,5 +336,4 @@ public class DeliveryOrderActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }

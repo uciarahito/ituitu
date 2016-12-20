@@ -6,38 +6,74 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:src="@drawable/shipping_address" />
-
-    <TextView
-        android:id="@+id/textView_label_new_customer"
+    <RelativeLayout
+        android:id="@+id/collapsing_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="Shipping address"
-        android:textColor="@color/primary_text"
-        android:textStyle="bold"
-        android:textAllCaps="true"
-        android:layout_marginBottom="10dp"
-        android:textAppearance="@style/TextAppearance.AppTheme.Title"/>
+        android:layout_height="@dimen/detail_background"
+        android:fitsSystemWindows="true"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-    <LinearLayout
-        android:gravity="end"
-        android:weightSum="2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/button_add_shipping"
-            android:drawableRight="@android:drawable/ic_input_add"
-            android:textAllCaps="false"
-            android:text="Add Shipping"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/invoice_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:fitsSystemWindows="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_top_protector_height"
+            android:background="@drawable/toolbar_top_protector"
+            android:fitsSystemWindows="true"
+            app:layout_collapseMode="pin" />
+
+        <LinearLayout
+            android:id="@+id/linear_layout_button_add"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="end"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentBottom="true"
+            android:weightSum="1.5">
+
+            <Button
+                android:id="@+id/button_add_shipping"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:drawableRight="@android:drawable/ic_input_add"
+                android:text="Add Shipping"
+                android:textAllCaps="false"
+                android:layout_marginRight="5dp"/>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/bg_end"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_bottom_protector_height"
+            android:layout_gravity="bottom"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/toolbar_bottom_protector" />
+
+        <LinearLayout
+            android:id="@+id/linear_layout_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <ImageView
+                android:layout_width="130dp"
+                android:layout_height="120dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/shipping_address" />
+        </LinearLayout>
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

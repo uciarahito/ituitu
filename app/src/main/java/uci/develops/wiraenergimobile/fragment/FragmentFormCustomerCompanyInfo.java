@@ -2,6 +2,8 @@ package uci.develops.wiraenergimobile.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +15,22 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.activity.FormCustomerActivity;
+import uci.develops.wiraenergimobile.helper.NumberTextWatcher;
+import uci.develops.wiraenergimobile.helper.NumberTextWatcherForThousand;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerGroupModel;
 import uci.develops.wiraenergimobile.model.CustomerModel;
@@ -33,15 +43,54 @@ import uci.develops.wiraenergimobile.library.SearchableSpinner;
  * Created by user on 10/22/2016.
  */
 public class FragmentFormCustomerCompanyInfo extends Fragment {
-
-    private EditText editText_id, editText_first_name, editText_address, editText_zip_code,
-            editText_phone, editText_mobile, editText_fax, editText_term, editText_npwp,
-            editText_email, editText_website, editText_note;
-    private AutoCompleteTextView autoComplete_city, autoComplete_province;
-    private Spinner spinner_valuta, spinner_tax_ppn, spinner_active;
-    private SearchableSpinner spinner_group;
-
-    private LinearLayout linear_layout_id, linear_layout_term, linear_layout_valuta, linear_layout_tax_ppn, linear_layout_active, linear_layout_note;
+    @BindView(R.id.editText_id)
+    EditText editText_id;
+    @BindView(R.id.editText_name)
+    EditText editText_first_name;
+    @BindView(R.id.editText_address)
+    EditText editText_address;
+    @BindView(R.id.editText_postcode)
+    EditText editText_zip_code;
+    @BindView(R.id.editText_phone)
+    EditText editText_phone;
+    @BindView(R.id.editText_mobile)
+    EditText editText_mobile;
+    @BindView(R.id.editText_fax)
+    EditText editText_fax;
+    @BindView(R.id.editText_term)
+    EditText editText_term;
+    @BindView(R.id.editText_npwp)
+    EditText editText_npwp;
+    @BindView(R.id.editText_email)
+    EditText editText_email;
+    @BindView(R.id.editText_website)
+    EditText editText_website;
+    @BindView(R.id.editText_note)
+    EditText editText_note;
+    @BindView(R.id.autoComplete_city)
+    AutoCompleteTextView autoComplete_city;
+    @BindView(R.id.autoComplete_province)
+    AutoCompleteTextView autoComplete_province;
+    @BindView(R.id.spinner_valuta)
+    Spinner spinner_valuta;
+    @BindView(R.id.spinner_tax_ppn)
+    Spinner spinner_tax_ppn;
+    @BindView(R.id.spinner_active)
+    Spinner spinner_active;
+    @BindView(R.id.search_spinner_group)
+    SearchableSpinner spinner_group;
+    @BindView(R.id.linear_layout_id)
+    LinearLayout linear_layout_id;
+    @BindView(R.id.linear_layout_term)
+    LinearLayout linear_layout_term;
+    @BindView(R.id.linear_layout_valuta)
+    LinearLayout linear_layout_valuta;
+    @BindView(R.id.linear_layout_tax_ppn)
+    LinearLayout linear_layout_tax_ppn;
+    @BindView(R.id.linear_layout_active)
+    LinearLayout linear_layout_active;
+    @BindView(R.id.linear_layout_note)
+    LinearLayout linear_layout_note;
 
     String id = "", name = "", address = "", city = "", province = "", zip_code = "", phone = "", mobile = "", fax = "", term = "",
             valuta = "", group = "", npwp = "", tax_ppn = "", active = "", email = "", website = "", note = "";
@@ -62,8 +111,8 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view;
-//        view = inflater.inflate(R.layout.fragment_form_customer_company_info, container, false);
         view = inflater.inflate(R.layout.fragment_company_new, container, false);
+        ButterKnife.bind(this, view);
 
         decode = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode");
         token = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "token");
@@ -75,34 +124,6 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
     }
 
     private void initializeComponent(View view) {
-        editText_id = (EditText) view.findViewById(R.id.editText_id);
-        editText_first_name = (EditText) view.findViewById(R.id.editText_name);
-        editText_address = (EditText) view.findViewById(R.id.editText_address);
-        autoComplete_city = (AutoCompleteTextView) view.findViewById(R.id.autoComplete_city);
-        autoComplete_province = (AutoCompleteTextView) view.findViewById(R.id.autoComplete_province);
-        editText_zip_code = (EditText) view.findViewById(R.id.editText_postcode);
-        editText_phone = (EditText) view.findViewById(R.id.editText_phone);
-        editText_mobile = (EditText) view.findViewById(R.id.editText_mobile);
-        editText_fax = (EditText) view.findViewById(R.id.editText_fax);
-        editText_term = (EditText) view.findViewById(R.id.editText_term);
-        spinner_valuta = (Spinner) view.findViewById(R.id.spinner_valuta);
-        editText_npwp = (EditText) view.findViewById(R.id.editText_npwp);
-        spinner_tax_ppn = (Spinner) view.findViewById(R.id.spinner_tax_ppn);
-        spinner_active = (Spinner) view.findViewById(R.id.spinner_active);
-//        spinner_group = (Spinner) view.findViewById(R.id.spinner_group);
-        editText_email = (EditText) view.findViewById(R.id.editText_email);
-        editText_website = (EditText) view.findViewById(R.id.editText_website);
-        editText_note = (EditText) view.findViewById(R.id.editText_note);
-
-        spinner_group = (SearchableSpinner) view.findViewById(R.id.search_spinner_group);
-
-        linear_layout_id = (LinearLayout) view.findViewById(R.id.linear_layout_id);
-        linear_layout_term = (LinearLayout) view.findViewById(R.id.linear_layout_term);
-        linear_layout_valuta = (LinearLayout) view.findViewById(R.id.linear_layout_valuta);
-        linear_layout_tax_ppn = (LinearLayout) view.findViewById(R.id.linear_layout_tax_ppn);
-        linear_layout_active = (LinearLayout) view.findViewById(R.id.linear_layout_active);
-        linear_layout_note = (LinearLayout) view.findViewById(R.id.linear_layout_note);
-
         editText_id.setText("" + new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode"));
 
         CustomerModel customerModel = new CustomerModel();
@@ -124,6 +145,9 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
             linear_layout_id.setVisibility(View.VISIBLE);
         }
 
+//        editText_phone.addTextChangedListener(new NumberTextWatcherForThousand(editText_phone));
+        editText_phone.addTextChangedListener(new NumberTextWatcher(editText_phone));
+
         List<String> valutas = new ArrayList<String>();
         valutas.add("Rupiah");
         valutas.add("US Dollar");
@@ -141,18 +165,6 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         spinner_tax_ppn.setAdapter(dataAdapter);
         spinner_active.setAdapter(dataAdapter);
 
-        spinner_active.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
         loadDataSpinnerGroup();
 
         String[] province = getActivity().getResources().getStringArray(R.array.list_of_province);
@@ -165,17 +177,17 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         autoComplete_city.setAdapter(cityAdapter);
     }
 
-    private void loadDataSpinnerGroup(){
-        Call<CustomerGroupResponse> customerGroupResponseCall = RestClient.getRestClient().getAllCustomerGroup("Bearer "+
+    private void loadDataSpinnerGroup() {
+        Call<CustomerGroupResponse> customerGroupResponseCall = RestClient.getRestClient().getAllCustomerGroup("Bearer " +
                 new SharedPreferenceManager().getPreferences(getContext(), "token"));
         customerGroupResponseCall.enqueue(new Callback<CustomerGroupResponse>() {
             @Override
             public void onResponse(Call<CustomerGroupResponse> call, Response<CustomerGroupResponse> response) {
-                if(response.isSuccessful()){
-                    if(response.body().getData().size() > 0) {
-                        String check_List [] = new String[response.body().getData().size()];
-                        int index=0;
-                        for(CustomerGroupModel customerGroupModel : response.body().getData()){
+                if (response.isSuccessful()) {
+                    if (response.body().getData().size() > 0) {
+                        String check_List[] = new String[response.body().getData().size()];
+                        int index = 0;
+                        for (CustomerGroupModel customerGroupModel : response.body().getData()) {
                             check_List[index] = customerGroupModel.getName();
                             index++;
                         }
@@ -302,7 +314,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
                         FormCustomerActivity.customerModel_temp.setPostcode(customerModel.getPostcode() == null ? "" : customerModel.getPostcode());
 
                         if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")) {
-                            if (customerModel.getApprove() == 1){
+                            if (customerModel.getApprove() == 1) {
                                 readOnly();
                             }
                         }

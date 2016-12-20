@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,8 +45,7 @@ import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class ListRequestCustomerActivity extends AppCompatActivity {
-
-    RecyclerView recycleViewRequest;
+    @BindView(R.id.recycleListRequestCustomer) RecyclerView recycleViewRequest;
     List<CustomerModel> modelRequestList;
     CustomerAdapter customerAdapter;
 
@@ -65,6 +66,7 @@ public class ListRequestCustomerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_request_customer);
+        ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

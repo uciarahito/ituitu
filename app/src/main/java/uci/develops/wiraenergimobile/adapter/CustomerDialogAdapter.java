@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,15 +49,14 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
     Map<String, List<String>> mRoles = new TreeMap<>();
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView txtName, txtEmail, txtCompany;
-        public Button button_assign;
+        @BindView(R.id.txtName) TextView txtName;
+        @BindView(R.id.txtEmail) TextView txtEmail;
+        @BindView(R.id.txtCompany) TextView txtCompany;
+        @BindView(R.id.button_assign) Button button_assign;
 
         public MyViewHolder(View view) {
             super(view);
-            txtName = (TextView) view.findViewById(R.id.txtName);
-            txtEmail = (TextView) view.findViewById(R.id.txtEmail);
-            txtCompany = (TextView) view.findViewById(R.id.txtCompany);
-            button_assign = (Button) view.findViewById(R.id.button_assign);
+            ButterKnife.bind(this, view);
         }
     }
 
@@ -104,8 +105,7 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
         alertDialogBuilder.setMessage("Are you sure want to update to : \n Customer name : " + customerModel.getFirst_name() + "\n Customer code : " + customerModel.getCode());
         final String decodeCustomerOld = customerModel.getDecode();
-        alertDialogBuilder.setNegativeButton("Yes",
-                new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
                         Call<ApproveResponse> customerRejectUpdateUser = RestClient.getRestClient().customerRejectUpdateUser("Bearer " +
@@ -115,7 +115,8 @@ public class CustomerDialogAdapter extends RecyclerView.Adapter<CustomerDialogAd
                             @Override
                             public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                                 if (response.isSuccessful()) {
-                                    Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " + new SharedPreferenceManager().getPreferences(context, "token"),
+                                    Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " +
+                                            new SharedPreferenceManager().getPreferences(context, "token"),
                                             Integer.parseInt(new SharedPreferenceManager().getPreferences(context, "customer_user_id")));
                                     userResponseCall.enqueue(new Callback<UserResponse>() {
                                         @Override

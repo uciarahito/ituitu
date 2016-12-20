@@ -14,6 +14,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,9 +28,14 @@ import uci.develops.wiraenergimobile.service.RestClient;
 
 public class FragmentQuotationCompanyAddress extends Fragment{
 
-    private TextView textView_company_address, textView_name_pic, textView_position,
-            textView_phone, textView_mobile, textView_email;
-    private Spinner spinner_shipping_contact_info;
+    @BindView(R.id.textView_company_address) TextView textView_company_address;
+    @BindView(R.id.textView_name_pic) TextView textView_name_pic;
+    @BindView(R.id.textView_position) TextView textView_position;
+    @BindView(R.id.textView_phone) TextView textView_phone;
+    @BindView(R.id.textView_mobile) TextView textView_mobile;
+    @BindView(R.id.textView_email) TextView textView_email;
+    @BindView(R.id.spinner_shipping_contact_info) Spinner spinner_shipping_contact_info;
+
     List<CustomerModel> customerModelList;
     String check_List [];
 
@@ -47,30 +54,12 @@ public class FragmentQuotationCompanyAddress extends Fragment{
         // Inflate the layout for this fragment
         View view;
         view = inflater.inflate(R.layout.fragment_req_quotation_company_address, container, false);
-
-        initializeComponent(view);
+        ButterKnife.bind(this, view);
         loadDataSpinnerCompanyAddress();
 
         // start listening for refresh local file list in
         return view;
         //return inflater.inflate(R.layout.activity_ongoing_order, container, false);
-    }
-
-    private void initializeComponent(View view){
-        textView_company_address = (TextView) view.findViewById(R.id.textView_company_address);
-        textView_name_pic = (TextView) view.findViewById(R.id.textView_name_pic);
-        textView_position = (TextView) view.findViewById(R.id.textView_position);
-        textView_phone = (TextView) view.findViewById(R.id.textView_phone);
-        textView_mobile = (TextView) view.findViewById(R.id.textView_mobile);
-        textView_email = (TextView) view.findViewById(R.id.textView_email);
-        spinner_shipping_contact_info = (Spinner) view.findViewById(R.id.spinner_shipping_contact_info);
-//        linear_layout_contact_info_1 = (LinearLayout) view.findViewById(R.id.linear_layout_contact_info_1);
-//        linear_layout_contact_info_2 = (LinearLayout) view.findViewById(R.id.linear_layout_contact_info_2);
-//        linear_layout_contact_info_3 = (LinearLayout) view.findViewById(R.id.linear_layout_contact_info_3);
-
-//        linear_layout_contact_info_1.setOnClickListener(this);
-//        linear_layout_contact_info_2.setOnClickListener(this);
-//        linear_layout_contact_info_3.setOnClickListener(this);
     }
 
     /**

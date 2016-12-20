@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,6 +40,7 @@ import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class WaitingApprovalActivity extends AppCompatActivity implements View.OnClickListener{
+    @BindView(R.id.button_view_data) Button button_view_data;
 
     //utk nav drawer
     private DrawerLayout mDrawerLayout;
@@ -52,15 +55,13 @@ public class WaitingApprovalActivity extends AppCompatActivity implements View.O
 
     private Map<String, List<String>> mExpandableListData;
 
-    private Button button_view_data;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waiting_approval);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        ButterKnife.bind(this);
         initializeComponent();
 
         navDrawer();
@@ -71,8 +72,6 @@ public class WaitingApprovalActivity extends AppCompatActivity implements View.O
     }
 
     private void initializeComponent(){
-        button_view_data = (Button)findViewById(R.id.button_view_data);
-
         button_view_data.setOnClickListener(this);
 
     }

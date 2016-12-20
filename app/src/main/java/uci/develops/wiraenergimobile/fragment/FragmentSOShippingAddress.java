@@ -15,6 +15,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,9 +30,12 @@ import uci.develops.wiraenergimobile.library.SearchableSpinner;
 
 public class FragmentSOShippingAddress extends Fragment{
 
-    private TextView textView_address, textView_pic_name, textView_phone, textView_mobile;
-//    private Spinner spinner_customer_address;
-    private SearchableSpinner spinner_customer_address;
+    @BindView(R.id.textView_address) TextView textView_address;
+    @BindView(R.id.textView_pic_name) TextView textView_pic_name;
+    @BindView(R.id.textView_phone) TextView textView_phone;
+    @BindView(R.id.textView_mobile) TextView textView_mobile;
+    @BindView(R.id.spinner_customer_address) SearchableSpinner spinner_customer_address;
+
     List<CustomerAddressModel> customerAddressModels;
     String check_List [];
 
@@ -47,22 +52,12 @@ public class FragmentSOShippingAddress extends Fragment{
         // Inflate the layout for this fragment
         View view;
         view = inflater.inflate(R.layout.fragment_req_so_shipping_address, container, false);
-
-        initializeComponent(view);
+        ButterKnife.bind(this, view);
         loadDataSpinnerShippingAddress();
 
         // start listening for refresh local file list in
         return view;
         //return inflater.inflate(R.layout.activity_ongoing_order, container, false);
-    }
-
-    private void initializeComponent(View view){
-        textView_address = (TextView) view.findViewById(R.id.textView_address);
-        textView_pic_name = (TextView) view.findViewById(R.id.textView_pic_name);
-        textView_phone = (TextView) view.findViewById(R.id.textView_phone);
-        textView_mobile = (TextView) view.findViewById(R.id.textView_mobile);
-        spinner_customer_address = (SearchableSpinner) view.findViewById(R.id.spinner_customer_address);
-
     }
 
     /**

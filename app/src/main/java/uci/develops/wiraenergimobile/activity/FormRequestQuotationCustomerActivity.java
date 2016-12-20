@@ -38,6 +38,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,22 +56,20 @@ import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class FormRequestQuotationCustomerActivity extends AppCompatActivity implements View.OnClickListener{
-
-    private LinearLayout linearLayoutTitle1, linearLayoutTitle2;
-    private LinearLayout linearLayoutContent1, linearLayoutContent2;
-    private LinearLayout linearLayoutContainer1, linearLayoutContainer2;
-    private LinearLayout linearLayoutButtonCancel, linearLayoutButtonSaveAsDraft, linearLayoutButtonSend;
-    private EditText editText_customer_note;
-
-    //utk dialog add item
-    private Spinner spinner_item, spinner_unit;
-    private EditText editText_send_date, editText_quantity, editText_notes;
-    private DatePickerDialog datePickerDialog;
-    private Button button_add_item, button_save, button_cancel;
-    private RecyclerView recyclerView;
+    @BindView(R.id.linear_layout_title1) LinearLayout linearLayoutTitle1;
+    @BindView(R.id.linear_layout_title2) LinearLayout linearLayoutTitle2;
+    @BindView(R.id.linear_layout_content1) LinearLayout linearLayoutContent1;
+    @BindView(R.id.linear_layout_content2) LinearLayout linearLayoutContent2;
+    @BindView(R.id.linear_layout_container_quotation_shipping_address) LinearLayout linearLayoutContainer1;
+    @BindView(R.id.linear_layout_container_quotation_billing_address) LinearLayout linearLayoutContainer2;
+    @BindView(R.id.linear_layout_button_cancel) LinearLayout linearLayoutButtonCancel;
+    @BindView(R.id.linear_layout_button_save_as_draft) LinearLayout linearLayoutButtonSaveAsDraft;
+    @BindView(R.id.linear_layout_button_send) LinearLayout linearLayoutButtonSend;
+    @BindView(R.id.editText_customer_note) EditText editText_customer_note;
+    @BindView(R.id.button_add_item) Button button_add_item;
+    @BindView(R.id.recycle_view) RecyclerView recyclerView;
 
     private ItemRequestQuotationAdapter itemRequestQuotationAdapter;
-
     boolean content1=false, content2=false;
 
     //utk nav drawer
@@ -91,7 +91,7 @@ public class FormRequestQuotationCustomerActivity extends AppCompatActivity impl
         setContentView(R.layout.activity_form_request_quotation_customer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        ButterKnife.bind(this);
         initializeComponent();
 
         navDrawer();
@@ -103,19 +103,6 @@ public class FormRequestQuotationCustomerActivity extends AppCompatActivity impl
     }
 
     private void initializeComponent(){
-        linearLayoutTitle1 = (LinearLayout)findViewById(R.id.linear_layout_title1);
-        linearLayoutTitle2 = (LinearLayout)findViewById(R.id.linear_layout_title2);
-        linearLayoutContent1 = (LinearLayout)findViewById(R.id.linear_layout_content1);
-        linearLayoutContent2 = (LinearLayout)findViewById(R.id.linear_layout_content2);
-        linearLayoutContainer1 = (LinearLayout)findViewById(R.id.linear_layout_container_quotation_shipping_address);
-        linearLayoutContainer2 = (LinearLayout)findViewById(R.id.linear_layout_container_quotation_billing_address);
-        linearLayoutButtonCancel = (LinearLayout)findViewById(R.id.linear_layout_button_cancel);
-        linearLayoutButtonSaveAsDraft = (LinearLayout)findViewById(R.id.linear_layout_button_save_as_draft);
-        linearLayoutButtonSend = (LinearLayout)findViewById(R.id.linear_layout_button_send);
-        editText_customer_note = (EditText)findViewById(R.id.editText_customer_note);
-
-        button_add_item = (Button)findViewById(R.id.button_add_item);
-        recyclerView = (RecyclerView)findViewById(R.id.recycle_view);
         List<QuotationModel> quotationModelsList = new ArrayList<>();
         itemRequestQuotationAdapter = new ItemRequestQuotationAdapter(FormRequestQuotationCustomerActivity.this, quotationModelsList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(FormRequestQuotationCustomerActivity.this);
@@ -162,19 +149,25 @@ public class FormRequestQuotationCustomerActivity extends AppCompatActivity impl
         }
     }
 
+    //utk dialog add item
+    private Spinner spinner_item, spinner_unit;
+    private EditText editText_send_date, editText_quantity, editText_notes;
+    private DatePickerDialog datePickerDialog;
+    private Button button_save, button_cancel;
+
     Dialog dialog_add_item;
     private void showDialogAddItem() {
         dialog_add_item = new Dialog(FormRequestQuotationCustomerActivity.this);
         dialog_add_item.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog_add_item.setContentView(R.layout.custom_dialog_form_req_item_quotation_customer);
 
-        spinner_item = (Spinner) dialog_add_item.findViewById(R.id.spinner_item);
-        spinner_unit = (Spinner) dialog_add_item.findViewById(R.id.spinner_unit);
-        editText_send_date = (EditText) dialog_add_item.findViewById(R.id.editText_send_date);
-        editText_quantity = (EditText) dialog_add_item.findViewById(R.id.editText_quantity);
-        editText_notes = (EditText) dialog_add_item.findViewById(R.id.editText_notes);
-        button_save = (Button) dialog_add_item.findViewById(R.id.button_save);
-        button_cancel = (Button) dialog_add_item.findViewById(R.id.button_cancel);
+        spinner_item = ButterKnife.findById(dialog_add_item, R.id.spinner_item);
+        spinner_unit = ButterKnife.findById(dialog_add_item, R.id.spinner_unit);
+        editText_send_date = ButterKnife.findById(dialog_add_item, R.id.editText_send_date);
+        editText_quantity = ButterKnife.findById(dialog_add_item, R.id.editText_quantity);
+        editText_notes = ButterKnife.findById(dialog_add_item, R.id.editText_notes);
+        button_save = ButterKnife.findById(dialog_add_item, R.id.button_save);
+        button_cancel = ButterKnife.findById(dialog_add_item, R.id.button_cancel);
 
         List<String> listItem = new ArrayList<String>();
         listItem.add("PCS");

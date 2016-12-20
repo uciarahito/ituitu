@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,23 +41,21 @@ import uci.develops.wiraenergimobile.service.RestClient;
  * Created by user on 11/20/2016.
  */
 
-public class ShippingAddressAdapter extends RecyclerView.Adapter<ShippingAddressAdapter.MyViewHolder> {
+public class ItemShippingAddressAdapter extends RecyclerView.Adapter<ItemShippingAddressAdapter.MyViewHolder> {
     private List<CustomerAddressModel> customerAddressModelList;
     private Context context;
 
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView textView_name, textView_phone, textView_mobile, textView_address;
-        public ImageView imageView_edit, imageView_delete;
+        @BindView(R.id.textView_name) TextView textView_name;
+        @BindView(R.id.textView_phone) TextView textView_phone;
+        @BindView(R.id.textView_mobile) TextView textView_mobile;
+        @BindView(R.id.textView_address) TextView textView_address;
+        @BindView(R.id.imageView_edit) ImageView imageView_edit;
+        @BindView(R.id.imageView_delete) ImageView imageView_delete;
 
         public MyViewHolder(View view) {
             super(view);
-            textView_name = (TextView) view.findViewById(R.id.textView_name);
-            textView_phone = (TextView) view.findViewById(R.id.textView_phone);
-            textView_mobile = (TextView) view.findViewById(R.id.textView_mobile);
-            textView_address = (TextView) view.findViewById(R.id.textView_address);
-            imageView_edit = (ImageView) view.findViewById(R.id.imageView_edit);
-            imageView_delete = (ImageView) view.findViewById(R.id.imageView_delete);
+            ButterKnife.bind(this, view);
 
             if (new SharedPreferenceManager().getPreferences(context, "roles").equals("")) {
                 if (Integer.parseInt(new SharedPreferenceManager().getPreferences(context, "approve")) == 0) {
@@ -82,7 +82,7 @@ public class ShippingAddressAdapter extends RecyclerView.Adapter<ShippingAddress
         }
     }
 
-    public ShippingAddressAdapter(Context context, List<CustomerAddressModel> customerAddressModelList) {
+    public ItemShippingAddressAdapter(Context context, List<CustomerAddressModel> customerAddressModelList) {
         this.context = context;
         this.customerAddressModelList = customerAddressModelList;
     }
@@ -152,8 +152,20 @@ public class ShippingAddressAdapter extends RecyclerView.Adapter<ShippingAddress
                                         if (response.isSuccessful()) {
                                             Toast.makeText(context, "Sukses", Toast.LENGTH_SHORT).show();
                                             if (new SharedPreferenceManager().getPreferences(context, "roles").equals("")) {
-                                                Intent intent = new Intent(context, FormCustomerActivity.class);
-                                                context.startActivity(intent);
+                                                // ini untuk mengirim notifikasi
+                                                // ini disebut custom broadcast intent (kalo gak salah)
+                                                // intent actionnya, pushNotification (cuma contoh)
+                                                Intent pushNotification = new Intent("pushNotification");
+                                                // trus, kita selipkan string (kayak ngirim intent biasa)
+                                                // itulah yang di buat banyak ban
+                                                // misalnya ada refresh apalah gitu
+                                                // atau apalah terserah,
+
+                                                pushNotification.putExtra("type", "refresh_list_shipping");
+                                                LocalBroadcastManager.getInstance(context).sendBroadcast(pushNotification);
+
+//                                                Intent intent = new Intent(context, FormCustomerActivity.class);
+//                                                context.startActivity(intent);
                                             } else if (new SharedPreferenceManager().getPreferences(context, "roles").equals("customer")) {
                                                 Intent intent = new Intent(context, HomeActivity.class);
                                                 context.startActivity(intent);
@@ -198,20 +210,19 @@ public class ShippingAddressAdapter extends RecyclerView.Adapter<ShippingAddress
     private Button button_save, button_cancel;
 
     Dialog dialog_add_shipping;
-
     private void showDialogEditShipping(final CustomerAddressModel customerAddressModel) {
         dialog_add_shipping = new Dialog(context);
         dialog_add_shipping.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog_add_shipping.setContentView(R.layout.custom_dialog_form_shipping_address);
 
-        editText_pic_name = (EditText) dialog_add_shipping.findViewById(R.id.editText_name);
-        editText_address_name = (EditText) dialog_add_shipping.findViewById(R.id.editText_address_name);
-        editText_address = (EditText) dialog_add_shipping.findViewById(R.id.editText_address);
-        editText_map_cordinate = (EditText) dialog_add_shipping.findViewById(R.id.editText_map_coordinate);
-        editText_phone = (EditText) dialog_add_shipping.findViewById(R.id.editText_phone);
-        editText_mobile = (EditText) dialog_add_shipping.findViewById(R.id.editText_mobile);
-        button_save = (Button) dialog_add_shipping.findViewById(R.id.button_save);
-        button_cancel = (Button) dialog_add_shipping.findViewById(R.id.button_cancel);
+        editText_pic_name = ButterKnife.findById(dialog_add_shipping, R.id.editText_name);
+        editText_address_name = ButterKnife.findById(dialog_add_shipping, R.id.editText_address_name);
+        editText_address = ButterKnife.findById(dialog_add_shipping, R.id.editText_address);
+        editText_map_cordinate = ButterKnife.findById(dialog_add_shipping, R.id.editText_map_coordinate);
+        editText_phone = ButterKnife.findById(dialog_add_shipping, R.id.editText_phone);
+        editText_mobile = ButterKnife.findById(dialog_add_shipping, R.id.editText_mobile);
+        button_save = ButterKnife.findById(dialog_add_shipping, R.id.button_save);
+        button_cancel = ButterKnife.findById(dialog_add_shipping, R.id.button_cancel);
 
         Call<CustomerAddressResponse> customerAddressResponseCall = RestClient.getRestClient().getCustomerAddressByDecode("Bearer " +
                         new SharedPreferenceManager().getPreferences(context, "token"),

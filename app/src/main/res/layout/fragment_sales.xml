@@ -23,7 +23,8 @@
                 android:layout_weight="1"
                 app:cardBackgroundColor="@android:color/white"
                 app:cardElevation="1dp"
-                app:cardUseCompatPadding="true">
+                app:cardUseCompatPadding="true"
+                >
 
                 <LinearLayout
                     android:id="@+id/linearLayout_menu_sales_quotation"

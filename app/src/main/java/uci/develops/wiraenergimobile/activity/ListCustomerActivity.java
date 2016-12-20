@@ -32,6 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,8 +50,8 @@ import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class ListCustomerActivity extends AppCompatActivity {
+    @BindView(R.id.recycleListCustomer) RecyclerView recycleViewRequest;
 
-    RecyclerView recycleViewRequest;
     List<CustomerModel> modelRequestList;
     CustomerAdapter customerAdapter;
 
@@ -69,6 +71,7 @@ public class ListCustomerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_customer);
+        ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         handleIntent(getIntent());
@@ -79,7 +82,6 @@ public class ListCustomerActivity extends AppCompatActivity {
         }
 
         showProgressLoading();
-        recycleViewRequest = (RecyclerView)findViewById(R.id.recycleListCustomer);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(ListCustomerActivity.this);
         recycleViewRequest.setLayoutManager(mLayoutManager);
         recycleViewRequest.setItemAnimator(new DefaultItemAnimator());

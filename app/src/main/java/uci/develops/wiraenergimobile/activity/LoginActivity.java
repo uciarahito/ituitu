@@ -3,8 +3,6 @@ package uci.develops.wiraenergimobile.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -22,6 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,11 +34,14 @@ import uci.develops.wiraenergimobile.response.LoginResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private EditText editText_login_email, editText_email_password;
-    private Button button_login_login, button_login_register;
-    private CheckBox checkBox_login;
-    private TextView lost_pasword, textView_error_email, textView_error_password;
+    @BindView(R.id.editText_login_email) EditText editText_login_email;
+    @BindView(R.id.editText_login_password) EditText editText_login_password;
+    @BindView(R.id.lost_password) TextView lost_password;
+    @BindView(R.id.textView_error_email) TextView textView_error_email;
+    @BindView(R.id.textView_error_password) TextView textView_error_password;
+    @BindView(R.id.checkBox_login) CheckBox checkBox_login;
+    @BindView(R.id.button_login_login) Button button_login_login;
+    @BindView(R.id.button_login_register) Button button_login_register;
 
     String email = "", password = "", name = "", role = "", registration_key = "";
 
@@ -48,7 +51,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        ButterKnife.bind(this);
         initializeComponent();
         loadData();
 
@@ -94,18 +97,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initializeComponent() {
-        lost_pasword = (TextView) findViewById(R.id.lost_password);
-        textView_error_email = (TextView) findViewById(R.id.textView_error_email);
-        textView_error_password = (TextView) findViewById(R.id.textView_error_password);
-        checkBox_login = (CheckBox) findViewById(R.id.checkBox_login);
-        editText_login_email = (EditText) findViewById(R.id.editText_login_email);
-        editText_email_password = (EditText) findViewById(R.id.editText_login_password);
-        button_login_login = (Button) findViewById(R.id.button_login_login);
-        button_login_register = (Button) findViewById(R.id.button_login_register);
-
         button_login_login.setOnClickListener(this);
         button_login_register.setOnClickListener(this);
-        lost_pasword.setOnClickListener(this);
+        lost_password.setOnClickListener(this);
     }
 
     @Override
@@ -113,7 +107,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (v == button_login_login) {
             Constant.role_data.clear();
             email = editText_login_email.getText().toString();
-            password = editText_email_password.getText().toString();
+            password = editText_login_password.getText().toString();
             boolean empty_email = false, empty_password = false;
 
             if (!email.contains("@") || email.equals("")) {
@@ -249,7 +243,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             finish();
         }
 
-        if (v == lost_pasword) {
+        if (v == lost_password) {
             Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
             startActivity(intent);
             finish();
@@ -272,7 +266,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void loadData() {
         UserModel userModel = new UserModel();
         editText_login_email.setText(userModel.getEmail() == null ? "" : userModel.getEmail());
-        editText_email_password.setText(userModel.getPassword() == null ? "" : userModel.getPassword());
+        editText_login_password.setText(userModel.getPassword() == null ? "" : userModel.getPassword());
     }
 
     private String generateUnique_id() {

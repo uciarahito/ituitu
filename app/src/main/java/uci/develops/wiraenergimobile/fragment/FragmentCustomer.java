@@ -60,7 +60,8 @@ public class FragmentCustomer extends Fragment implements View.OnClickListener{
     }
 
     private void initializeComponent(View view){
-        button_add_customer.setOnClickListener(this);
+//        button_add_customer.setOnClickListener(this);
+        button_add_customer.setVisibility(View.GONE);
         linearLayout_menu_all_customer.setOnClickListener(this);
         linearLayout_menu_new_customer.setOnClickListener(this);
     }
@@ -77,10 +78,10 @@ public class FragmentCustomer extends Fragment implements View.OnClickListener{
             startActivity(intent);
         }
 
-        if (v == button_add_customer) {
-            Intent intent = new Intent(getActivity().getApplicationContext(), FormRequestCustomerAdmin.class);
-            startActivity(intent);
-        }
+//        if (v == button_add_customer) {
+//            Intent intent = new Intent(getActivity().getApplicationContext(), FormRequestCustomerAdmin.class);
+//            startActivity(intent);
+//        }
     }
 
     private void loadData(){

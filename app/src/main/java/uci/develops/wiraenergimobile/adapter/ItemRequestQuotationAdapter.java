@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.activity.FormRequestQuotationCustomerActivity;
 import uci.develops.wiraenergimobile.model.QuotationModel;
@@ -27,19 +29,18 @@ public class ItemRequestQuotationAdapter extends RecyclerView.Adapter<ItemReques
     Map<String, List<String>> mRoles = new TreeMap<>();
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView textView_send_date, textView_name_customer, textView_qty_item, textView_unit_item, textView_item_name;
-        public ImageView imageView_view, imageView_edit, imageView_delete;
+        @BindView(R.id.textView_send_date) TextView textView_send_date;
+        @BindView(R.id.textView_name_customer) TextView textView_name_customer;
+        @BindView(R.id.textView_qty_item) TextView textView_qty_item;
+        @BindView(R.id.textView_unit_item) TextView textView_unit_item;
+        @BindView(R.id.textView_item_name) TextView textView_item_name;
+        @BindView(R.id.imageView_delete) ImageView imageView_delete;
+        @BindView(R.id.imageView_edit) ImageView imageView_edit;
+        @BindView(R.id.imageView_view) ImageView imageView_view;
 
         public MyViewHolder(View view) {
             super(view);
-            textView_send_date = (TextView) view.findViewById(R.id.textView_send_date);
-            textView_name_customer = (TextView) view.findViewById(R.id.textView_name_customer);
-            textView_qty_item = (TextView) view.findViewById(R.id.textView_qty_item);
-            textView_unit_item = (TextView) view.findViewById(R.id.textView_unit_item);
-            textView_item_name = (TextView) view.findViewById(R.id.textView_item_name);
-            imageView_view = (ImageView) view.findViewById(R.id.imageView_delete);
-            imageView_edit = (ImageView) view.findViewById(R.id.imageView_edit);
-            imageView_delete = (ImageView) view.findViewById(R.id.imageView_delete);
+            ButterKnife.bind(this, view);
         }
     }
 

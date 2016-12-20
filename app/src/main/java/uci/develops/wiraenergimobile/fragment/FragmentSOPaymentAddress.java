@@ -22,6 +22,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,8 +38,11 @@ import uci.develops.wiraenergimobile.response.ListCustomerAddressResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class FragmentSOPaymentAddress extends Fragment implements View.OnClickListener {
-    private TextView textView_address, textView_pic_name, textView_phone, textView_mobile;
-    private Spinner spinner_payment_address;
+    @BindView(R.id.textView_address) TextView textView_address;
+    @BindView(R.id.textView_pic_name) TextView textView_pic_name;
+    @BindView(R.id.textView_phone) TextView textView_phone;
+    @BindView(R.id.textView_mobile) TextView textView_mobile;
+    @BindView(R.id.spinner_payment_address) Spinner spinner_payment_address;
 
     public FragmentSOPaymentAddress() {
     }
@@ -54,19 +59,11 @@ public class FragmentSOPaymentAddress extends Fragment implements View.OnClickLi
         View view;
         view = inflater.inflate(R.layout.fragment_req_so_payment_address, container, false);
 
-        initializeComponent(view);
+        ButterKnife.bind(this, view);
 
         // start listening for refresh local file list in
         return view;
         //return inflater.inflate(R.layout.activity_ongoing_order, container, false);
-    }
-
-    private void initializeComponent(View view) {
-        textView_address = (TextView) view.findViewById(R.id.textView_address);
-        textView_pic_name = (TextView) view.findViewById(R.id.textView_pic_name);
-        textView_phone = (TextView) view.findViewById(R.id.textView_phone);
-        textView_mobile = (TextView) view.findViewById(R.id.textView_mobile);
-        spinner_payment_address = (Spinner) view.findViewById(R.id.spinner_payment_address);
     }
 
     /**

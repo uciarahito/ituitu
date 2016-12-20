@@ -136,7 +136,7 @@
                 android:hint="@string/phone"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
-                android:inputType="phone"
+                android:inputType="number"
                 app:layout_gravity="center_vertical"/>
         </LinearLayout>
 

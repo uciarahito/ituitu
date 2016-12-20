@@ -32,7 +32,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.adapter.CustomExpandableListAdapter;
-import uci.develops.wiraenergimobile.adapter.ItemPurchaseOrderAdapter;
+import uci.develops.wiraenergimobile.adapter.PurchaseOrderAdapter;
 import uci.develops.wiraenergimobile.fragment.navigation.NavigationManager;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
@@ -46,7 +46,7 @@ public class PurchaseOrderActivity extends AppCompatActivity implements View.OnC
     Button button_add_purchase_order;
     @BindView(R.id.recycleListPurchaseOrder)
     RecyclerView recycleListPurchaseOrder;
-    ItemPurchaseOrderAdapter itemPurchaseOrderAdapter;
+    PurchaseOrderAdapter purchaseOrderAdapter;
 
     //utk nav drawer
     private DrawerLayout mDrawerLayout;

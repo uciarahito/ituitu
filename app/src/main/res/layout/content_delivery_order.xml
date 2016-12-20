@@ -1,15 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="uci.develops.wiraenergimobile.activity.DeliveryOrderActivity"
     tools:showIn="@layout/app_bar_delivery_order">
 
-</RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/collapsing_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/detail_background"
+        android:fitsSystemWindows="true"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+        <ImageView
+            android:id="@+id/invoice_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:fitsSystemWindows="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_top_protector_height"
+            android:background="@drawable/toolbar_top_protector"
+            android:fitsSystemWindows="true"
+            app:layout_collapseMode="pin" />
+
+        <LinearLayout
+            android:id="@+id/linear_layout_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/linear_layout_button_add"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="130dp"
+                android:layout_height="110dp"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/shipping_address" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_button_add"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="end"
+            android:weightSum="1.5">
+
+            <Button
+                android:id="@+id/button_add_delivery_order"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:drawableRight="@android:drawable/ic_input_add"
+                android:text="Add Delivery Order"
+                android:textAllCaps="false" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/bg_end"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_bottom_protector_height"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:background="@drawable/toolbar_bottom_protector" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleListDeliveryOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>
+    </ScrollView>
+</LinearLayout>

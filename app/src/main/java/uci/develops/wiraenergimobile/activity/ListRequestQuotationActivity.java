@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,8 +43,7 @@ import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class ListRequestQuotationActivity extends AppCompatActivity {
-
-    RecyclerView recycleViewRequestQuoation;
+    @BindView(R.id.recycleListRequestQuotation) RecyclerView recycleViewRequestQuoation;
     List<QuotationModel> quotationModelList;
     SalesQuotationAdapter salesQuotationAdapter;
 
@@ -63,6 +64,7 @@ public class ListRequestQuotationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_request_quotation);
+        ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -72,7 +74,6 @@ public class ListRequestQuotationActivity extends AppCompatActivity {
             selectFirstItemAsDefault();
         }
 
-        recycleViewRequestQuoation = (RecyclerView)findViewById(R.id.recycleListRequestQuotation);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(ListRequestQuotationActivity.this);
         recycleViewRequestQuoation.setLayoutManager(mLayoutManager);
         recycleViewRequestQuoation.setItemAnimator(new DefaultItemAnimator());

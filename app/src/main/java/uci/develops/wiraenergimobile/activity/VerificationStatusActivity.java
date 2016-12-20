@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,7 +39,7 @@ import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class VerificationStatusActivity extends AppCompatActivity implements View.OnClickListener{
-
+    @BindView(R.id.button_view_data) Button button_next;
     //utk nav drawer
     private DrawerLayout mDrawerLayout;
     private String[] items;
@@ -51,15 +53,13 @@ public class VerificationStatusActivity extends AppCompatActivity implements Vie
 
     private Map<String, List<String>> mExpandableListData;
 
-    private Button button_next;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verification_status);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        ButterKnife.bind(this);
         initializeComponent();
 
         navDrawer();
@@ -72,8 +72,6 @@ public class VerificationStatusActivity extends AppCompatActivity implements Vie
     }
 
     private void initializeComponent(){
-        button_next = (Button)findViewById(R.id.button_view_data);
-
         button_next.setOnClickListener(this);
     }
 

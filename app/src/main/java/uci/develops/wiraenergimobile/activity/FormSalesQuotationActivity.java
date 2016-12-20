@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,21 +47,31 @@ import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class FormSalesQuotationActivity extends AppCompatActivity implements View.OnClickListener{
+    @BindView(R.id.linear_layout_title1) LinearLayout linearLayoutTitle1;
+    @BindView(R.id.linear_layout_content1) LinearLayout linearLayoutContent1;
+    @BindView(R.id.linear_layout_container_quotation_customer_detail) LinearLayout linearLayoutContainer1;
+    @BindView(R.id.linear_layout_button_cancel) LinearLayout linear_layout_button_cancel;
+    @BindView(R.id.linear_layout_button_send_quotation) LinearLayout linear_layout_button_send_quotation;
+    @BindView(R.id.layout_tab_shipping_address) LinearLayout layout_tab_shipping_address;
+    @BindView(R.id.layout_tab_billing_address) LinearLayout layout_tab_billing_address;
+    @BindView(R.id.layout_container_shipping_address) LinearLayout layout_container_shipping_address;
+    @BindView(R.id.layout_container_billing_address) LinearLayout layout_container_billing_address;
+    @BindView(R.id.textView_customer_note) TextView textView_customer_note;
+    @BindView(R.id.textView_terbilang) TextView textView_terbilang;
+    @BindView(R.id.editText_bruto) EditText editText_bruto;
+    @BindView(R.id.editText_disc) EditText editText_disc;
+    @BindView(R.id.editText_disc_value) EditText editText_disc_value;
+    @BindView(R.id.editText_ppn) EditText editText_ppn;
+    @BindView(R.id.editText_ppn_value) EditText editText_ppn_value;
+    @BindView(R.id.editText_other_cost) EditText editText_other_cost;
+    @BindView(R.id.editText_netto) EditText editText_netto;
+    @BindView(R.id.editText_admin_note) EditText editText_admin_note;
+    @BindView(R.id.recycle_view) RecyclerView recyclerView;
 
-    private TextView textView_customer_note, textView_terbilang;
-    private EditText editText_bruto, editText_disc, editText_disc_value, editText_ppn, editText_ppn_value, editText_other_cost, editText_netto, editText_admin_note;
-    private LinearLayout linearLayoutTitle1;
-    private LinearLayout linearLayoutContent1;
-    private LinearLayout linearLayoutContainer1;
-    private LinearLayout linear_layout_button_cancel, linear_layout_button_send_quotation;
-    private LinearLayout layout_tab_shipping_address, layout_tab_billing_address;
-    private LinearLayout layout_container_shipping_address, layout_container_billing_address;
     private LinearLayout[] linearLayouts_fragment = new LinearLayout[2];
     private LinearLayout[] linearLayouts_tabs = new LinearLayout[2];
     int index_fragment = 0;
     boolean content1=false;
-
-    private RecyclerView recyclerView;
     ItemSalesQuotationAdapter itemSalesQuotationAdapter;
 
     //utk nav drawer
@@ -81,7 +93,7 @@ public class FormSalesQuotationActivity extends AppCompatActivity implements Vie
         setContentView(R.layout.activity_form_sales_quotation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        ButterKnife.bind(this);
         initializeComponent();
 
         navDrawer();
@@ -93,27 +105,6 @@ public class FormSalesQuotationActivity extends AppCompatActivity implements Vie
     }
 
     private void initializeComponent(){
-        textView_customer_note = (TextView) findViewById(R.id.textView_customer_note);
-        textView_terbilang = (TextView) findViewById(R.id.textView_terbilang);
-        editText_bruto = (EditText) findViewById(R.id.editText_bruto);
-        editText_disc = (EditText) findViewById(R.id.editText_disc);
-        editText_disc_value = (EditText) findViewById(R.id.editText_disc_value);
-        editText_ppn = (EditText) findViewById(R.id.editText_ppn);
-        editText_ppn_value = (EditText) findViewById(R.id.editText_ppn_value);
-        editText_other_cost = (EditText) findViewById(R.id.editText_other_cost);
-        editText_netto = (EditText) findViewById(R.id.editText_netto);
-        editText_admin_note = (EditText) findViewById(R.id.editText_admin_note);
-
-        linearLayoutTitle1 = (LinearLayout)findViewById(R.id.linear_layout_title1);
-        linearLayoutContent1 = (LinearLayout)findViewById(R.id.linear_layout_content1);
-        linearLayoutContainer1 = (LinearLayout)findViewById(R.id.linear_layout_container_quotation_customer_detail);
-        linear_layout_button_cancel = (LinearLayout)findViewById(R.id.linear_layout_button_cancel);
-        linear_layout_button_send_quotation = (LinearLayout)findViewById(R.id.linear_layout_button_send_quotation);
-        layout_tab_shipping_address = (LinearLayout) findViewById(R.id.layout_tab_shipping_address);
-        layout_tab_billing_address = (LinearLayout) findViewById(R.id.layout_tab_billing_address);
-        layout_container_shipping_address = (LinearLayout) findViewById(R.id.layout_container_shipping_address);
-        layout_container_billing_address = (LinearLayout) findViewById(R.id.layout_container_billing_address);
-
         linearLayouts_fragment[0] = layout_container_shipping_address;
         linearLayouts_fragment[1] = layout_container_billing_address;
 
@@ -122,7 +113,6 @@ public class FormSalesQuotationActivity extends AppCompatActivity implements Vie
 
         linearLayouts_fragment[index_fragment].setVisibility(View.VISIBLE);
 
-        recyclerView = (RecyclerView)findViewById(R.id.recycle_view);
         List<QuotationModel> quotationModelsList = new ArrayList<>();
         itemSalesQuotationAdapter = new ItemSalesQuotationAdapter(FormSalesQuotationActivity.this, quotationModelsList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(FormSalesQuotationActivity.this);

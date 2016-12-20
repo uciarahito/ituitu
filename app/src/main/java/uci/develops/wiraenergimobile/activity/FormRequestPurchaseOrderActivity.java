@@ -43,6 +43,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.adapter.CustomExpandableListAdapter;
+import uci.develops.wiraenergimobile.adapter.ItemPurchaseOrderAdapter;
 import uci.develops.wiraenergimobile.fragment.navigation.NavigationManager;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
@@ -73,6 +74,7 @@ public class FormRequestPurchaseOrderActivity extends AppCompatActivity implemen
     @BindView(R.id.button_add_item) Button button_add_item;
     @BindView(R.id.recycle_view) RecyclerView recycle_view;
 
+    ItemPurchaseOrderAdapter itemPurchaseOrderAdapter;
     boolean content1=false;
 
     //utk nav drawer

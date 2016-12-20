@@ -24,6 +24,7 @@
                 android:text="Choose One:"
                 android:layout_gravity="center"
                 android:textAppearance="@style/TextAppearance.AppTheme.Small"
+                android:textColor="@color/secondary_text"
                 android:textStyle="bold" />
 
             <Spinner

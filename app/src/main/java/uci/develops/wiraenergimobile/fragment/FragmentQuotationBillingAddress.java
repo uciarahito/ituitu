@@ -7,11 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import uci.develops.wiraenergimobile.R;
 
 public class FragmentQuotationBillingAddress extends Fragment implements View.OnClickListener {
-    private LinearLayout layout_tab_shipping_address, layout_tab_company_address;
-    private LinearLayout layout_container_shipping_address, layout_container_company_address;
+    @BindView(R.id.layout_tab_shipping_address) LinearLayout layout_tab_shipping_address;
+    @BindView(R.id.layout_tab_company_address) LinearLayout layout_tab_company_address;
+    @BindView(R.id.layout_container_shipping_address) LinearLayout layout_container_shipping_address;
+    @BindView(R.id.layout_container_company_address) LinearLayout layout_container_company_address;
+
     private LinearLayout[] linearLayouts_fragment = new LinearLayout[2];
     private LinearLayout[] linearLayouts_tabs = new LinearLayout[2];
     int index_fragment = 0;
@@ -30,7 +35,7 @@ public class FragmentQuotationBillingAddress extends Fragment implements View.On
         // Inflate the layout for this fragment
         View view;
         view = inflater.inflate(R.layout.fragment_quotation_billing_address, container, false);
-
+        ButterKnife.bind(this, view);
         initializeComponent(view);
 
         // start listening for refresh local file list in
@@ -39,10 +44,6 @@ public class FragmentQuotationBillingAddress extends Fragment implements View.On
     }
 
     private void initializeComponent(View view) {
-        layout_tab_shipping_address = (LinearLayout) view.findViewById(R.id.layout_tab_shipping_address);
-        layout_tab_company_address = (LinearLayout) view.findViewById(R.id.layout_tab_company_address);
-        layout_container_shipping_address = (LinearLayout) view.findViewById(R.id.layout_container_shipping_address);
-        layout_container_company_address = (LinearLayout) view.findViewById(R.id.layout_container_company_address);
 
         linearLayouts_fragment[0] = layout_container_company_address;
         linearLayouts_fragment[1] = layout_container_shipping_address;

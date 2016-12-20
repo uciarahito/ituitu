@@ -12,11 +12,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import uci.develops.wiraenergimobile.R;
 
 public class ResetPasswordActivity extends AppCompatActivity implements View.OnClickListener{
-    private EditText editText_reset_email;
-    private Button button_reset;
+    @BindView(R.id.editText_email) EditText editText_reset_email;
+    @BindView(R.id.btn_reset) Button button_reset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,13 +26,10 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_reset_password);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        ButterKnife.bind(this);
     }
 
     private void initializeComponent(){
-        editText_reset_email = (EditText)findViewById(R.id.editText_email);
-        button_reset = (Button)findViewById(R.id.btn_reset);
-
         button_reset.setOnClickListener(this);
     }
 

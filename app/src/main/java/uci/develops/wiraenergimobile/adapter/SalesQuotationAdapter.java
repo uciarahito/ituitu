@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.activity.FormRequestQuotationCustomerActivity;
 import uci.develops.wiraenergimobile.activity.FormSalesQuotationActivity;
@@ -28,24 +30,20 @@ public class SalesQuotationAdapter extends RecyclerView.Adapter<SalesQuotationAd
     Map<String, List<String>> mRoles = new TreeMap<>();
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView textView_status, textView_code_customer, textView_name_customer,
-                textView_qty_item, textView_unit_item, textView_item_name, textView_total_price,
-                textView_create_date, textView_send_date;
-        public ImageView imageView_edit;
+        @BindView(R.id.textView_status) TextView textView_status;
+        @BindView(R.id.textView_code_customer) TextView textView_code_customer;
+        @BindView(R.id.textView_name_customer) TextView textView_name_customer;
+        @BindView(R.id.textView_qty_item) TextView textView_qty_item;
+        @BindView(R.id.textView_unit_item) TextView textView_unit_item;
+        @BindView(R.id.textView_item_name) TextView textView_item_name;
+        @BindView(R.id.textView_total_price) TextView textView_total_price;
+        @BindView(R.id.textView_create_date) TextView textView_create_date;
+        @BindView(R.id.textView_send_date) TextView textView_send_date;
+        @BindView(R.id.imageView_edit) ImageView imageView_edit;
 
         public MyViewHolder(View view) {
             super(view);
-            textView_status = (TextView) view.findViewById(R.id.textView_status);
-            textView_code_customer = (TextView) view.findViewById(R.id.textView_code_customer);
-            textView_name_customer = (TextView) view.findViewById(R.id.textView_name_customer);
-            textView_qty_item = (TextView) view.findViewById(R.id.textView_qty_item);
-            textView_unit_item = (TextView) view.findViewById(R.id.textView_unit_item);
-            textView_item_name = (TextView) view.findViewById(R.id.textView_item_name);
-            textView_total_price = (TextView) view.findViewById(R.id.textView_total_price);
-            textView_create_date = (TextView) view.findViewById(R.id.textView_create_date);
-            textView_send_date = (TextView) view.findViewById(R.id.textView_send_date);
-
-            imageView_edit = (ImageView) view.findViewById(R.id.imageView_edit);
+            ButterKnife.bind(this, view);
         }
     }
 

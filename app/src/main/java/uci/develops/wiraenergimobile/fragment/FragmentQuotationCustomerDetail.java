@@ -8,12 +8,16 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import uci.develops.wiraenergimobile.R;
 
 public class FragmentQuotationCustomerDetail extends Fragment {
 
-    private TextView textView_customer, textView_request_number, textView_request_date,
-            textView_approve_date;
+    @BindView(R.id.textView_customer) TextView textView_customer;
+    @BindView(R.id.textView_request_number) TextView textView_request_number;
+    @BindView(R.id.textView_request_date) TextView textView_request_date;
+    @BindView(R.id.textView_approve_date) TextView textView_approve_date;
 
     public FragmentQuotationCustomerDetail() {
     }
@@ -29,20 +33,12 @@ public class FragmentQuotationCustomerDetail extends Fragment {
         // Inflate the layout for this fragment
         View view;
         view = inflater.inflate(R.layout.fragment_quotation_customer_detail, container, false);
-
-        initializeComponent(view);
+        ButterKnife.bind(this, view);
         loadDataCustomerDetail();
 
         // start listening for refresh local file list in
         return view;
         //return inflater.inflate(R.layout.activity_ongoing_order, container, false);
-    }
-
-    private void initializeComponent(View view) {
-        textView_customer = (TextView) view.findViewById(R.id.textView_customer);
-        textView_request_number = (TextView) view.findViewById(R.id.textView_request_number);
-        textView_request_date = (TextView) view.findViewById(R.id.textView_request_date);
-        textView_approve_date = (TextView) view.findViewById(R.id.textView_approve_date);
     }
 
     private void loadDataCustomerDetail(){

@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?android:attr/colorBackground"
+        android:layout_marginBottom="40dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
@@ -149,7 +150,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="9"
-                        android:text="Payment PIC $amp Address"
+                        android:text="Payment PIC &amp; Address"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -276,7 +277,7 @@
                             android:gravity="left|center"
                             android:hint="@string/bruto"
                             android:imeOptions="actionNext"
-                            android:inputType="number"
+                            android:inputType="numberDecimal"
                             android:textColorHint="@color/colorGray"
                             android:textSize="@dimen/textView_transaction"/>
                     </LinearLayout>
@@ -367,7 +368,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="3.3"
-                            android:hint="Discount Value"
+                            android:hint="PPN Value"
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:textColorHint="@color/colorGray"
@@ -478,52 +479,52 @@
                         android:textSize="@dimen/textView_transaction"/>
                 </LinearLayout>
             </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linear_layout_button_action_form"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:gravity="center_horizontal"
-                android:weightSum="2">
-
-                <LinearLayout
-                    android:id="@+id/linear_layout_button_cancel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_rectangle_green"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/textView_button_cancel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="10dp"
-                        android:textColor="@color/white"
-                        android:text="Cancel" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linear_layout_button_save"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_rectangle_green"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/textView_button_save"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="10dp"
-                        android:textColor="@color/white"
-                        android:text="Save" />
-                </LinearLayout>
-            </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/linear_layout_button_action_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:id="@+id/linear_layout_button_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_rectangle_green"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textView_button_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:text="Cancel" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_button_save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_rectangle_green"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textView_button_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:text="Save" />
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

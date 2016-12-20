@@ -12,11 +12,13 @@
     tools:context="uci.develops.wiraenergimobile.activity.ListCustomerActivity"
     tools:showIn="@layout/app_bar_list_customer">
 
-    <android.support.v7.widget.RecyclerView
-        android:scrollbars="vertical"
-        android:id="@+id/recycleListCustomer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleListCustomer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>
+
 
 </RelativeLayout>

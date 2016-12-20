@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.model.CustomerAddressModel;
 
@@ -24,11 +26,11 @@ public class ItemSOShippingAddressAdapter extends RecyclerView.Adapter<ItemSOShi
     Map<String, List<String>> mRoles = new TreeMap<>();
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView textView_payment_address;
+        @BindView(R.id.textView_payment_address) TextView textView_payment_address;
 
         public MyViewHolder(View view) {
             super(view);
-            textView_payment_address = (TextView) view.findViewById(R.id.textView_payment_address);
+            ButterKnife.bind(this, view);
         }
     }
 

@@ -205,10 +205,20 @@
         <activity
             android:name=".activity.FormRequestCustomerAdmin"
             android:label="@string/title_activity_form_request_customer_admin"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.FormRequestGoodReceived"
             android:label="@string/title_activity_form_request_good_received"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.FormRequestDeliveryOrderActivity"
+            android:label="@string/title_activity_form_request_delivery_order"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

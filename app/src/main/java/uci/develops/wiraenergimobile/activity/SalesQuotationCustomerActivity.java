@@ -29,6 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,11 +46,11 @@ import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class SalesQuotationCustomerActivity extends AppCompatActivity implements View.OnClickListener{
+    @BindView(R.id.recycleListQuotation) RecyclerView recycleViewRequestQuoation;
+    @BindView(R.id.button_add_quotation) Button button_add_quotation;
 
-    RecyclerView recycleViewRequestQuoation;
     List<QuotationModel> quotationModelList;
     SalesQuotationAdapter salesQuotationAdapter;
-    private Button button_add_quotation;
 
     // utk nav drawer
     private DrawerLayout mDrawerLayout;
@@ -69,8 +71,8 @@ public class SalesQuotationCustomerActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_sales_quotation_customer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ButterKnife.bind(this);
         initializeComponent();
-
         navDrawer();
 
         if (savedInstanceState == null) {
@@ -80,15 +82,12 @@ public class SalesQuotationCustomerActivity extends AppCompatActivity implements
     }
 
     private void initializeComponent(){
-        button_add_quotation = (Button)findViewById(R.id.button_add_quotation);
-
-        recycleViewRequestQuoation = (RecyclerView)findViewById(R.id.recycleListQuotation);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(SalesQuotationCustomerActivity.this);
-        recycleViewRequestQuoation.setLayoutManager(mLayoutManager);
-        recycleViewRequestQuoation.setItemAnimator(new DefaultItemAnimator());
-        quotationModelList = new ArrayList<>();
-        salesQuotationAdapter = new SalesQuotationAdapter(SalesQuotationCustomerActivity.this, quotationModelList);
-        recycleViewRequestQuoation.setAdapter(salesQuotationAdapter);
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(SalesQuotationCustomerActivity.this);
+//        recycleViewRequestQuoation.setLayoutManager(mLayoutManager);
+//        recycleViewRequestQuoation.setItemAnimator(new DefaultItemAnimator());
+//        quotationModelList = new ArrayList<>();
+//        salesQuotationAdapter = new SalesQuotationAdapter(SalesQuotationCustomerActivity.this, quotationModelList);
+//        recycleViewRequestQuoation.setAdapter(salesQuotationAdapter);
         //.....lanjut
 
         button_add_quotation.setOnClickListener(this);

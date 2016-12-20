@@ -12,12 +12,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import uci.develops.wiraenergimobile.R;
 
 public class FragmentDashboardInventory extends Fragment implements View.OnClickListener{
 
-    private TextView textView_stock_all_warehouse, textView_stock_per_warehouse, textView_last_purchase, textView_last_purchase_from;
-    private Spinner spinner_warehouse;
+    @BindView(R.id.textView_stock_all_warehouse) TextView textView_stock_all_warehouse;
+    @BindView(R.id.textView_stock_per_warehouse) TextView textView_stock_per_warehouse;
+    @BindView(R.id.textView_last_purchase) TextView textView_last_purchase;
+    @BindView(R.id.textView_last_purchase_from) TextView textView_last_purchase_from;
+    @BindView(R.id.spinner_warehouse) Spinner spinner_warehouse;
 
     public FragmentDashboardInventory() {
         // Required empty public constructor
@@ -34,16 +39,12 @@ public class FragmentDashboardInventory extends Fragment implements View.OnClick
         // Inflate the layout for this fragment
         View view;
         view = inflater.inflate(R.layout.fragment_dashboard_inventory, container, false);
+        ButterKnife.bind(this, view);
         initializeComponent(view);
         return view;
     }
 
     private void initializeComponent(View view){
-        textView_stock_all_warehouse = (TextView)view.findViewById(R.id.textView_stock_all_warehouse);
-        textView_stock_per_warehouse = (TextView)view.findViewById(R.id.textView_stock_per_warehouse);
-        textView_last_purchase = (TextView)view.findViewById(R.id.textView_last_purchase);
-        textView_last_purchase_from = (TextView)view.findViewById(R.id.textView_last_purchase_from);
-        spinner_warehouse = (Spinner) view.findViewById(R.id.spinner_warehouse);
 
         List<String> gudang = new ArrayList<String>();
         gudang.add("Warehouse Depok");

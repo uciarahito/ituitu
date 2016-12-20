@@ -10,29 +10,82 @@
     tools:context="uci.develops.wiraenergimobile.activity.SalesQuotationCustomerActivity"
     tools:showIn="@layout/app_bar_sales_quotation_customer">
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/collapsing_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="end"
-        android:weightSum="2">
+        android:layout_height="@dimen/detail_background_do"
+        android:fitsSystemWindows="true"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-        <Button
-            android:id="@+id/button_add_quotation"
-            android:layout_width="0dp"
+        <ImageView
+            android:id="@+id/invoice_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:fitsSystemWindows="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_top_protector_height"
+            android:background="@drawable/toolbar_top_protector"
+            android:fitsSystemWindows="true"
+            app:layout_collapseMode="pin" />
+
+        <LinearLayout
+            android:id="@+id/linear_layout_image"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.8"
-            android:drawableRight="@android:drawable/ic_input_add"
-            android:text="Add Quotation"
-            android:textAllCaps="false"
-            android:layout_marginRight="5dp"/>
-    </LinearLayout>
+            android:layout_above="@+id/linear_layout_button_add"
+            android:gravity="center">
 
-    <android.support.v7.widget.RecyclerView
-        android:scrollbars="vertical"
-        android:id="@+id/recycleListQuotation"
+            <ImageView
+                android:layout_width="130dp"
+                android:layout_height="95dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/sales_quotation_new" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_button_add"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:gravity="end"
+            android:weightSum="1.5">
+
+            <Button
+                android:id="@+id/button_add_quotation"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.6"
+                android:drawableRight="@android:drawable/ic_input_add"
+                android:text="Add Quotation"
+                android:textAllCaps="false" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/bg_end"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_bottom_protector_height"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:background="@drawable/toolbar_bottom_protector" />
+    </RelativeLayout>
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_marginBottom="10dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleListQuotation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>
+    </ScrollView>
 
 </LinearLayout>

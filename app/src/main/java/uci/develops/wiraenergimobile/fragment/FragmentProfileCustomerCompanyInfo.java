@@ -17,6 +17,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,11 +35,24 @@ import uci.develops.wiraenergimobile.service.RestClient;
  * Created by user on 10/22/2016.
  */
 public class FragmentProfileCustomerCompanyInfo extends Fragment {
-
-    private TextView textView_id, textView_name, textView_address, textView_zip_code,
-            textView_phone, textView_mobile, textView_fax, textView_term, textView_npwp,
-            textView_email, textView_website, textView_note, textView_city, textView_province,
-            textView_valuta, textView_tax_ppn, textView_active, textView_group;
+    @BindView(R.id.textView_id) TextView textView_id;
+    @BindView(R.id.textView_name) TextView textView_name;
+    @BindView(R.id.textView_address) TextView textView_address;
+    @BindView(R.id.textView_postcode) TextView textView_zip_code;
+    @BindView(R.id.textView_phone) TextView textView_phone;
+    @BindView(R.id.textView_mobile) TextView textView_mobile;
+    @BindView(R.id.textView_fax) TextView textView_fax;
+    @BindView(R.id.textView_term) TextView textView_term;
+    @BindView(R.id.textView_npwp) TextView textView_npwp;
+    @BindView(R.id.textView_email) TextView textView_email;
+    @BindView(R.id.textView_website) TextView textView_website;
+    @BindView(R.id.textView_note) TextView textView_note;
+    @BindView(R.id.textView_city) TextView textView_city;
+    @BindView(R.id.textView_province) TextView textView_province;
+    @BindView(R.id.textView_valuta) TextView textView_valuta;
+    @BindView(R.id.textView_tax_ppn) TextView textView_tax_ppn;
+    @BindView(R.id.textView_active) TextView textView_active;
+    @BindView(R.id.textView_group) TextView textView_group;
 
     private String decode = "", token = "";
 
@@ -57,35 +72,13 @@ public class FragmentProfileCustomerCompanyInfo extends Fragment {
         View view;
 //        view = inflater.inflate(R.layout.fragment_form_customer_company_info, container, false);
         view = inflater.inflate(R.layout.fragment_profil_company, container, false);
-
+        ButterKnife.bind(this, view);
         decode = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode");
         token = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "token");
 
-        initializeComponent(view);
         loadData();
 
         return view;
-    }
-
-    private void initializeComponent(View view) {
-        textView_id = (TextView) view.findViewById(R.id.textView_id);
-        textView_name = (TextView) view.findViewById(R.id.textView_name);
-        textView_address = (TextView) view.findViewById(R.id.textView_address);
-        textView_city = (TextView) view.findViewById(R.id.textView_city);
-        textView_province = (TextView) view.findViewById(R.id.textView_province);
-        textView_zip_code = (TextView) view.findViewById(R.id.textView_postcode);
-        textView_phone = (TextView) view.findViewById(R.id.textView_phone);
-        textView_mobile = (TextView) view.findViewById(R.id.textView_mobile);
-        textView_fax = (TextView) view.findViewById(R.id.textView_fax);
-        textView_term = (TextView) view.findViewById(R.id.textView_term);
-        textView_valuta = (TextView) view.findViewById(R.id.textView_valuta);
-        textView_npwp = (TextView) view.findViewById(R.id.textView_npwp);
-        textView_tax_ppn = (TextView) view.findViewById(R.id.textView_tax_ppn);
-        textView_active = (TextView) view.findViewById(R.id.textView_active);
-        textView_group = (TextView) view.findViewById(R.id.textView_group);
-        textView_email = (TextView) view.findViewById(R.id.textView_email);
-        textView_website = (TextView) view.findViewById(R.id.textView_website);
-        textView_note = (TextView) view.findViewById(R.id.textView_note);
     }
 
     private void loadData() {

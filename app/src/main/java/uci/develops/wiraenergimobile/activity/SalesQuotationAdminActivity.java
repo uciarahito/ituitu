@@ -68,7 +68,6 @@ public class SalesQuotationAdminActivity extends AppCompatActivity implements Vi
         setSupportActionBar(toolbar);
 
         ButterKnife.bind(this);
-
         initializeComponent();
 
         navDrawer();

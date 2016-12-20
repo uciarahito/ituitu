@@ -38,6 +38,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,24 +59,34 @@ import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class FormRequestQuotationAdminActivity extends AppCompatActivity implements View.OnClickListener{
-    private LinearLayout linearLayoutTitle1, linearLayoutTitle2;
-    private LinearLayout linearLayoutContent1, linearLayoutContent2;
-    private LinearLayout linearLayoutContainer1, linearLayoutContainer2;
-    private LinearLayout linearLayoutButtonCancel, linearLayoutButtonSendQuotation;
-    private Spinner spinner_customer_name;
-    private TextView textView_total_qty, textView_terbilang;
-    private EditText editText_bruto, editText_disc, editText_disc_value, editText_ppn, editText_ppn_value, editText_other_cost, editText_netto, editText_admin_note;
+    @BindView(R.id.linear_layout_title1) LinearLayout linearLayoutTitle1;
+    @BindView(R.id.linear_layout_title2) LinearLayout linearLayoutTitle2;
+    @BindView(R.id.linear_layout_content1) LinearLayout linearLayoutContent1;
+    @BindView(R.id.linear_layout_content2) LinearLayout linearLayoutContent2;
+    @BindView(R.id.linear_layout_container_quotation_shipping_address) LinearLayout linearLayoutContainer1;
+    @BindView(R.id.linear_layout_container_quotation_billing_address) LinearLayout linearLayoutContainer2;
+    @BindView(R.id.linear_layout_button_cancel) LinearLayout linearLayoutButtonCancel;
+    @BindView(R.id.linear_layout_button_send_quotation) LinearLayout linearLayoutButtonSendQuotation;
+    @BindView(R.id.spinner_customer_name) Spinner spinner_customer_name;
+    @BindView(R.id.spinner_project) Spinner spinner_project;
+    @BindView(R.id.textView_total_qty) TextView textView_total_qty;
+    @BindView(R.id.textView_terbilang) TextView textView_terbilang;
+    @BindView(R.id.textView_group_customer) TextView textView_group_customer;
+    @BindView(R.id.editText_bruto) EditText editText_bruto;
+    @BindView(R.id.editText_disc) EditText editText_disc;
+    @BindView(R.id.editText_disc_value) EditText editText_disc_value;
+    @BindView(R.id.editText_ppn) EditText editText_ppn;
+    @BindView(R.id.editText_ppn_value) EditText editText_ppn_value;
+    @BindView(R.id.editText_other_cost) EditText editText_other_cost;
+    @BindView(R.id.editText_netto) EditText editText_netto;
+    @BindView(R.id.editText_admin_note) EditText editText_admin_note;
+    @BindView(R.id.button_add_item) Button button_add_item;
+    @BindView(R.id.recycle_view) RecyclerView recyclerView;
+
+    ItemSalesQuotationAdapter itemSalesQuotationAdapter;
     boolean content1=false, content2=false;
     List<CustomerModel> customerModelList;
     String check_List[];
-
-    //utk dialog add item
-    private Spinner spinner_item, spinner_unit;
-    private EditText editText_send_date, editText_quantity, editText_disc1, editText_disc_amount, editText_unit_price, editText_sub_total;
-    private DatePickerDialog datePickerDialog;
-    private Button button_add_item, button_save, button_cancel;
-    private RecyclerView recyclerView;
-    ItemSalesQuotationAdapter itemSalesQuotationAdapter;
 
     //utk nav drawer
     private DrawerLayout mDrawerLayout;
@@ -95,6 +107,7 @@ public class FormRequestQuotationAdminActivity extends AppCompatActivity impleme
         setContentView(R.layout.activity_form_request_quotation_admin);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ButterKnife.bind(this);
         initializeComponent();
 
         navDrawer();
@@ -105,28 +118,6 @@ public class FormRequestQuotationAdminActivity extends AppCompatActivity impleme
     }
 
     private void initializeComponent(){
-        spinner_customer_name = (Spinner) findViewById(R.id.spinner_customer_name);
-        button_add_item = (Button) findViewById(R.id.button_add_item);
-        textView_terbilang = (TextView) findViewById(R.id.textView_terbilang);
-        textView_total_qty = (TextView) findViewById(R.id.textView_total_qty);
-        editText_bruto = (EditText) findViewById(R.id.editText_bruto);
-        editText_disc = (EditText) findViewById(R.id.editText_disc);
-        editText_disc_value = (EditText) findViewById(R.id.editText_disc_value);
-        editText_ppn = (EditText) findViewById(R.id.editText_ppn);
-        editText_ppn_value = (EditText) findViewById(R.id.editText_ppn_value);
-        editText_other_cost = (EditText) findViewById(R.id.editText_other_cost);
-        editText_netto = (EditText) findViewById(R.id.editText_netto);
-        editText_admin_note = (EditText) findViewById(R.id.editText_admin_note);
-        linearLayoutTitle1 = (LinearLayout)findViewById(R.id.linear_layout_title1);
-        linearLayoutTitle2 = (LinearLayout)findViewById(R.id.linear_layout_title2);
-        linearLayoutContent1 = (LinearLayout)findViewById(R.id.linear_layout_content1);
-        linearLayoutContent2 = (LinearLayout)findViewById(R.id.linear_layout_content2);
-        linearLayoutContainer1 = (LinearLayout)findViewById(R.id.linear_layout_container_quotation_shipping_address);
-        linearLayoutContainer2 = (LinearLayout)findViewById(R.id.linear_layout_container_quotation_billing_address);
-        linearLayoutButtonCancel = (LinearLayout)findViewById(R.id.linear_layout_button_cancel);
-        linearLayoutButtonSendQuotation = (LinearLayout)findViewById(R.id.linear_layout_button_send_quotation);
-
-        recyclerView = (RecyclerView)findViewById(R.id.recycle_view);
         List<QuotationModel> quotationModelsList = new ArrayList<>();
         itemSalesQuotationAdapter = new ItemSalesQuotationAdapter(FormRequestQuotationAdminActivity.this, quotationModelsList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(FormRequestQuotationAdminActivity.this);
@@ -136,6 +127,16 @@ public class FormRequestQuotationAdminActivity extends AppCompatActivity impleme
         recyclerView.setAdapter(itemSalesQuotationAdapter);
 
         editText_bruto.addTextChangedListener(new NumberTextWatcher(editText_bruto));
+
+        List<String> testItem = new ArrayList<String>();
+        testItem.add("Testing1");
+        testItem.add("Testing2");
+        testItem.add("Testing3");
+        ArrayAdapter<String> itemAdapter = new ArrayAdapter<String>(FormRequestQuotationAdminActivity.this,
+                R.layout.spinner_item, testItem);
+        itemAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinner_customer_name.setAdapter(itemAdapter);
+        spinner_project.setAdapter(itemAdapter);
 
         linearLayoutTitle1.setOnClickListener(this);
         linearLayoutTitle2.setOnClickListener(this);
@@ -229,22 +230,28 @@ public class FormRequestQuotationAdminActivity extends AppCompatActivity impleme
         });
     }
 
+    //utk dialog add item
+    private Spinner spinner_item, spinner_unit;
+    private EditText editText_send_date, editText_quantity, editText_disc_item, editText_disc_amount, editText_unit_price, editText_sub_total;
+    private DatePickerDialog datePickerDialog;
+    private Button button_save, button_cancel;
+
     Dialog dialog_add_item;
     private void showDialogAddItem() {
         dialog_add_item = new Dialog(FormRequestQuotationAdminActivity.this);
         dialog_add_item.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog_add_item.setContentView(R.layout.custom_dialog_form_req_item_quotation_admin);
 
-        spinner_item = (Spinner) dialog_add_item.findViewById(R.id.spinner_item);
-        spinner_unit = (Spinner) dialog_add_item.findViewById(R.id.spinner_unit);
-        editText_send_date = (EditText) dialog_add_item.findViewById(R.id.editText_send_date);
-        editText_quantity = (EditText) dialog_add_item.findViewById(R.id.editText_quantity);
-        editText_disc1 = (EditText) dialog_add_item.findViewById(R.id.editText_disc1);
-        editText_disc_amount = (EditText) dialog_add_item.findViewById(R.id.editText_disc_amount);
-        editText_unit_price = (EditText) dialog_add_item.findViewById(R.id.editText_unit_price);
-        editText_sub_total = (EditText) dialog_add_item.findViewById(R.id.editText_sub_total);
-        button_save = (Button) dialog_add_item.findViewById(R.id.button_save);
-        button_cancel = (Button) dialog_add_item.findViewById(R.id.button_cancel);
+        spinner_item = ButterKnife.findById(dialog_add_item, R.id.spinner_item);
+        spinner_unit = ButterKnife.findById(dialog_add_item, R.id.spinner_unit);
+        editText_send_date = ButterKnife.findById(dialog_add_item, R.id.editText_send_date);
+        editText_quantity = ButterKnife.findById(dialog_add_item, R.id.editText_quantity);
+        editText_disc_item = ButterKnife.findById(dialog_add_item, R.id.editText_disc1);
+        editText_disc_amount = ButterKnife.findById(dialog_add_item, R.id.editText_disc_amount);
+        editText_unit_price = ButterKnife.findById(dialog_add_item, R.id.editText_unit_price);
+        editText_sub_total = ButterKnife.findById(dialog_add_item, R.id.editText_sub_total);
+        button_save = ButterKnife.findById(dialog_add_item, R.id.button_save);
+        button_cancel = ButterKnife.findById(dialog_add_item, R.id.button_cancel);
 
         List<String> listItem = new ArrayList<String>();
         listItem.add("PCS");

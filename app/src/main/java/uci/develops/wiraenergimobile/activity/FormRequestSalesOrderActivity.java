@@ -40,6 +40,7 @@ import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.adapter.CustomExpandableListAdapter;
 import uci.develops.wiraenergimobile.fragment.navigation.NavigationManager;
+import uci.develops.wiraenergimobile.helper.NumberTextWatcher;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerModel;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
@@ -109,6 +110,7 @@ public class FormRequestSalesOrderActivity extends AppCompatActivity implements 
     }
 
     private void initializeComponent(){
+//        editText_bruto.addTextChangedListener(new NumberTextWatcher(editText_bruto));
         linearLayoutTitle1.setOnClickListener(this);
         linearLayoutTitle2.setOnClickListener(this);
         linearLayoutTitle3.setOnClickListener(this);

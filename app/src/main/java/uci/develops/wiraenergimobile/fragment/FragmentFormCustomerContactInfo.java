@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,15 +24,26 @@ import uci.develops.wiraenergimobile.service.RestClient;
  * Created by user on 10/22/2016.
  */
 public class FragmentFormCustomerContactInfo extends Fragment {
-    private EditText editText_name1, editText_name2, editText_name3, editText_phone1, editText_phone2, editText_phone3,
-            editText_mobile1, editText_mobile2, editText_mobile3, editText_email1, editText_email2, editText_email3,
-            editText_jabatan1, editText_jabatan2, editText_jabatan3;
+    @BindView(R.id.editText_name1) EditText editText_name1;
+    @BindView(R.id.editText_name2) EditText editText_name2;
+    @BindView(R.id.editText_name3) EditText editText_name3;
+    @BindView(R.id.editText_phone1) EditText editText_phone1;
+    @BindView(R.id.editText_phone2) EditText editText_phone2;
+    @BindView(R.id.editText_phone3) EditText editText_phone3;
+    @BindView(R.id.editText_mobile1) EditText editText_mobile1;
+    @BindView(R.id.editText_mobile2) EditText editText_mobile2;
+    @BindView(R.id.editText_mobile3) EditText editText_mobile3;
+    @BindView(R.id.editText_email1) EditText editText_email1;
+    @BindView(R.id.editText_email2) EditText editText_email2;
+    @BindView(R.id.editText_email3) EditText editText_email3;
+    @BindView(R.id.editText_jabatan1) EditText editText_jabatan1;
+    @BindView(R.id.editText_jabatan2) EditText editText_jabatan2;
+    @BindView(R.id.editText_jabatan3) EditText editText_jabatan3;
+    @BindView(R.id.linear_layout_contact_info_2_3) LinearLayout linear_layout_contact_info_2_3;
 
     String name1 = "", name2 = "", name3 = "", phone1 = "", phone2 = "", phone3 = "", mobile1 = "", mobile2 = "", mobile3 = "", email1 = "",
             email2 = "", email3 = "", jabatan1 = "", jabatan2 = "", jabatan3 = "";
-
     private String decode = "", token = "";
-    private LinearLayout linear_layout_contact_info_2_3;
 
     public FragmentFormCustomerContactInfo() {
         // Required empty public constructor
@@ -48,7 +61,7 @@ public class FragmentFormCustomerContactInfo extends Fragment {
         View view;
 //        view = inflater.inflate(R.layout.fragment_form_customer_contact_info, container, false);
         view = inflater.inflate(R.layout.fragment_contact_new, container, false);
-
+        ButterKnife.bind(this, view);
         decode = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode");
         token = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "token");
 
@@ -60,24 +73,6 @@ public class FragmentFormCustomerContactInfo extends Fragment {
     }
 
     private void initializeComponent(View view) {
-        editText_name1 = (EditText) view.findViewById(R.id.editText_name1);
-        editText_name2 = (EditText) view.findViewById(R.id.editText_name2);
-        editText_name3 = (EditText) view.findViewById(R.id.editText_name3);
-        editText_phone1 = (EditText) view.findViewById(R.id.editText_phone1);
-        editText_phone2 = (EditText) view.findViewById(R.id.editText_phone2);
-        editText_phone3 = (EditText) view.findViewById(R.id.editText_phone3);
-        editText_mobile1 = (EditText) view.findViewById(R.id.editText_mobile1);
-        editText_mobile2 = (EditText) view.findViewById(R.id.editText_mobile2);
-        editText_mobile3 = (EditText) view.findViewById(R.id.editText_mobile3);
-        editText_email1 = (EditText) view.findViewById(R.id.editText_email1);
-        editText_email2 = (EditText) view.findViewById(R.id.editText_email2);
-        editText_email3 = (EditText) view.findViewById(R.id.editText_email3);
-        editText_jabatan1 = (EditText) view.findViewById(R.id.editText_jabatan1);
-        editText_jabatan2 = (EditText) view.findViewById(R.id.editText_jabatan2);
-        editText_jabatan3 = (EditText) view.findViewById(R.id.editText_jabatan3);
-
-        linear_layout_contact_info_2_3 = (LinearLayout) view.findViewById(R.id.linear_layout_contact_info_2_3);
-
         CustomerModel customerModel = new CustomerModel();
         editText_name1.setText(customerModel.getFirst_name() == null ? "" : customerModel.getFirst_name()+" "+customerModel.getLast_name());
         editText_email1.setText(customerModel.getEmail() == null ? "" : customerModel.getEmail());

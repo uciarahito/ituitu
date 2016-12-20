@@ -21,27 +21,19 @@ import android.widget.SearchView;
 import java.io.Serializable;
 import java.util.List;
 
+import butterknife.ButterKnife;
 import uci.develops.wiraenergimobile.R;
 
 public class SearchableListDialog extends DialogFragment implements
         SearchView.OnQueryTextListener, SearchView.OnCloseListener {
-
+    SearchView _searchView;
+    ListView _listViewItems;
     private static final String ITEMS = "items";
-
     private ArrayAdapter listAdapter;
-
-    private ListView _listViewItems;
-
     private SearchableItem _searchableItem;
-
     private OnSearchTextChanged _onSearchTextChanged;
-
-    private SearchView _searchView;
-
     private String _strTitle;
-
     private String _strPositiveButtonText;
-
     private DialogInterface.OnClickListener _onClickListener;
 
     public SearchableListDialog() {
@@ -140,8 +132,9 @@ public class SearchableListDialog extends DialogFragment implements
 
     private void setData(View rootView) {
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        _searchView = ButterKnife.findById(rootView, R.id.search);
+        _listViewItems = ButterKnife.findById(rootView, R.id.listItems);
 
-        _searchView = (SearchView) rootView.findViewById(R.id.search);
         _searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
         _searchView.setIconifiedByDefault(false);
         _searchView.setOnQueryTextListener(this);
@@ -153,8 +146,6 @@ public class SearchableListDialog extends DialogFragment implements
 
 
         List items = (List) getArguments().getSerializable(ITEMS);
-
-        _listViewItems = (ListView) rootView.findViewById(R.id.listItems);
 
         //create the adapter by passing your ArrayList data
         listAdapter = new ArrayAdapter(getActivity(), R.layout.spinner_item, items);

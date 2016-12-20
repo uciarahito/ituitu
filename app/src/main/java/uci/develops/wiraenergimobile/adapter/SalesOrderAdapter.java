@@ -16,14 +16,13 @@ import java.util.TreeMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import uci.develops.wiraenergimobile.R;
-import uci.develops.wiraenergimobile.activity.FormRequestQuotationCustomerActivity;
 import uci.develops.wiraenergimobile.activity.FormSalesOrderActivity;
 import uci.develops.wiraenergimobile.model.QuotationModel;
 
 /**
  * Created by ArahitoPC on 10/24/2016.
  */
-public class ItemSalesOrderAdapter extends RecyclerView.Adapter<ItemSalesOrderAdapter.MyViewHolder> {
+public class SalesOrderAdapter extends RecyclerView.Adapter<SalesOrderAdapter.MyViewHolder> {
     private List<QuotationModel> quotationModelList;
     private Context context;
 
@@ -45,7 +44,7 @@ public class ItemSalesOrderAdapter extends RecyclerView.Adapter<ItemSalesOrderAd
         }
     }
 
-    public ItemSalesOrderAdapter(Context context, List<QuotationModel> quotationModelList) {
+    public SalesOrderAdapter(Context context, List<QuotationModel> quotationModelList) {
         this.context = context;
         this.quotationModelList = quotationModelList;
     }

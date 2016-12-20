@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:paddingLeft="5dp"
+        android:background="@drawable/rounded_rectangle_new"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:weightSum="6">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:text="Supplier Name"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_supplier_name"
+                tools:listitem="@android:layout/simple_spinner_dropdown_item"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left|center"
+                android:layout_weight="3.75" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:weightSum="6">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editText_supplier_name_value"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3.8"
+                android:hint="Supplier Name"
+                android:background="@drawable/rounded_rectangle_new"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords|textPersonName"
+                android:textColorHint="@color/colorGray"
+                android:textSize="@dimen/textView_transaction" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            android:weightSum="6">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:text="Driver Name"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_driver_name"
+                tools:listitem="@android:layout/simple_spinner_dropdown_item"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left|center"
+                android:layout_weight="3.75" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:weightSum="6">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editText_driver_name_value"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3.8"
+                android:hint="Driver Name"
+                android:background="@drawable/rounded_rectangle_new"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords|textPersonName"
+                android:textColorHint="@color/colorGray"
+                android:textSize="@dimen/textView_transaction" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            android:weightSum="6">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:text="Vehicles Number"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_vehicle_number"
+                tools:listitem="@android:layout/simple_spinner_dropdown_item"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left|center"
+                android:layout_weight="3.75" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:weightSum="6">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Capacity"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editText_capacity"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3.75"
+                android:hint="Phone"
+                android:imeOptions="actionNext"
+                android:textColorHint="@color/colorGray"
+                android:textSize="@dimen/textView_transaction" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            android:weightSum="6">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:text="Shipping Costs"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_shipping_costs"
+                tools:listitem="@android:layout/simple_spinner_dropdown_item"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left|center"
+                android:layout_weight="3.75" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:weightSum="6">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Min. Quantity"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editText_min_quantity"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3.75"
+                android:hint="Min. Quantity"
+                android:imeOptions="actionNext"
+                android:textColorHint="@color/colorGray"
+                android:textSize="@dimen/textView_transaction" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:weightSum="6">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Price / Unit"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editText_price_unit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3.75"
+                android:hint="Price / Unit"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords|textPersonName"
+                android:textColorHint="@color/colorGray"
+                android:textSize="@dimen/textView_transaction" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

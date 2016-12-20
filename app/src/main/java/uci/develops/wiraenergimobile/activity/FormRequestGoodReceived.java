@@ -9,15 +9,20 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,10 +45,16 @@ import uci.develops.wiraenergimobile.model.UserXModel;
 import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
-public class FormRequestGoodReceived extends AppCompatActivity {
+public class FormRequestGoodReceived extends AppCompatActivity implements View.OnClickListener{
 
-    @BindView(R.id.spinner_supplier)
-    Spinner spinner_supplier;
+    @BindView(R.id.spinner_supplier) Spinner spinner_supplier;
+    @BindView(R.id.spinner_purchase_order) Spinner spinner_purchase_order;
+    @BindView(R.id.editText_gr_date) EditText editText_gr_date;
+    @BindView(R.id.editText_shipping_pic) EditText editText_shipping_pic;
+    @BindView(R.id.editText_supplier_number) EditText editText_sj_supplier_number;
+    @BindView(R.id.recycle_view) RecyclerView recycle_view;
+    @BindView(R.id.linear_layout_button_cancel) LinearLayout linear_layout_button_cancel;
+    @BindView(R.id.linear_layout_button_save_gr) LinearLayout linear_layout_button_save_gr;
 
     //utk nav drawer
     private DrawerLayout mDrawerLayout;
@@ -64,12 +76,30 @@ public class FormRequestGoodReceived extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        ButterKnife.bind(this);
+        initializeComponent();
         navDrawer();
 
         if (savedInstanceState == null) {
             selectFirstItemAsDefault();
         }
+    }
+
+    private void initializeComponent() {
+        List<String> test = new ArrayList<String>();
+        test.add("Test 1");
+        test.add("Test 2");
+        test.add("Test 3");
+        ArrayAdapter<String> testAdapter = new ArrayAdapter<String>(FormRequestGoodReceived.this,
+                R.layout.spinner_item, test);
+        testAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinner_supplier.setAdapter(testAdapter);
+        spinner_purchase_order.setAdapter(testAdapter);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 
     private void selectFirstItemAsDefault() {
@@ -321,5 +351,4 @@ public class FormRequestGoodReceived extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }

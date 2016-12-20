@@ -37,6 +37,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -74,22 +76,21 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
     private Map<String, List<String>> mExpandableListData;
 
     //utk tab fragment
-    private LinearLayout linearLayout_button_back, linearLayout_button_next;
-    private LinearLayout linearLayout_container_basic_info, linearLayout_container_contact_info, linearLayout_container_shipping_to;
-    private LinearLayout linearLayout_tab_basic_info, linearLayout_tab_contact_info, linearLayout_tab_shipping_to;
+    @BindView(R.id.layout_button_back) LinearLayout linearLayout_button_back;
+    @BindView(R.id.layout_button_next) LinearLayout linearLayout_button_next;
+    @BindView(R.id.layout_container_basic_info) LinearLayout linearLayout_container_basic_info;
+    @BindView(R.id.layout_container_contact_info) LinearLayout linearLayout_container_contact_info;
+    @BindView(R.id.layout_container_shipping_to) LinearLayout linearLayout_container_shipping_to;
+    @BindView(R.id.layout_tab_company_info) LinearLayout linearLayout_tab_basic_info;
+    @BindView(R.id.layout_tab_contact_info) LinearLayout linearLayout_tab_contact_info;
+    @BindView(R.id.layout_tab_shipping_to) LinearLayout linearLayout_tab_shipping_to;
+    @BindView(R.id.layout_button_approve) LinearLayout linearLayout_button_approve;
+    @BindView(R.id.layout_button_reject) LinearLayout linearLayout_button_reject;
+    @BindView(R.id.textView_button_back) TextView textView_button_back;
+    @BindView(R.id.textView_button_next) TextView textView_button_next;
+
     private LinearLayout[] linearLayouts_fragment = new LinearLayout[3];
     private LinearLayout[] linearLayouts_tabs = new LinearLayout[3];
-    private TextView textView_button_next, textView_button_back;
-
-    //utk button feedback
-    private Dialog dialog_feedback;
-    EditText editText_feedback;
-    Button button_submit_feedback;
-
-    /**
-     * Button approve reject for admin
-     */
-    private LinearLayout linearLayout_button_approve, linearLayout_button_reject;
 
     int index_fragment = 0;
 
@@ -101,7 +102,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_form_customer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        ButterKnife.bind(this);
         initializeComponent();
         buttonValidation();
 
@@ -115,19 +116,6 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void initializeComponent() {
-        linearLayout_button_back = (LinearLayout) findViewById(R.id.layout_button_back);
-        linearLayout_button_next = (LinearLayout) findViewById(R.id.layout_button_next);
-        linearLayout_container_basic_info = (LinearLayout) findViewById(R.id.layout_container_basic_info);
-        linearLayout_container_contact_info = (LinearLayout) findViewById(R.id.layout_container_contact_info);
-        linearLayout_container_shipping_to = (LinearLayout) findViewById(R.id.layout_container_shipping_to);
-        linearLayout_tab_basic_info = (LinearLayout) findViewById(R.id.layout_tab_company_info);
-        linearLayout_tab_contact_info = (LinearLayout) findViewById(R.id.layout_tab_contact_info);
-        linearLayout_tab_shipping_to = (LinearLayout) findViewById(R.id.layout_tab_shipping_to);
-        linearLayout_button_approve = (LinearLayout) findViewById(R.id.layout_button_approve);
-        linearLayout_button_reject = (LinearLayout) findViewById(R.id.layout_button_reject);
-        textView_button_back = (TextView) findViewById(R.id.textView_button_back);
-        textView_button_next = (TextView) findViewById(R.id.textView_button_next);
-
         linearLayouts_fragment[0] = linearLayout_container_basic_info;
         linearLayouts_fragment[1] = linearLayout_container_contact_info;
         linearLayouts_fragment[2] = linearLayout_container_shipping_to;
@@ -557,23 +545,17 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    private EditText editText_dialog_customer_code;
-    private Button button_dialog_save, button_dialog_cancel, button_dialog_contact1_delete, button_dialog_contact2_delete,
-            button_dialog_contact3_delete, button_dialog_submit, button_dialog_new_customer, button_dialog_existing_customer,
-            button_dialog_keep_username, button_dialog_delete_username;
-    private TextView textView_dialog_contact1_name, textView_dialog_contact1_email, textView_dialog_contact2_name,
-            textView_dialog_contact2_email, textView_dialog_contact3_name, textView_dialog_contact3_email;
+    private Button button_dialog_keep_username, button_dialog_delete_username;
     private RecyclerView recyclerView_customer;
 
     boolean is_new_customer = false;
-
     private void showCustomDialogCustomerUsername() {
         final Dialog dialog_customer_register_type = new Dialog(FormCustomerActivity.this);
         dialog_customer_register_type.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog_customer_register_type.setContentView(R.layout.custom_dialog_username_choice);
 
-        button_dialog_keep_username = (Button) dialog_customer_register_type.findViewById(R.id.button_keep_username);
-        button_dialog_delete_username = (Button) dialog_customer_register_type.findViewById(R.id.button_delete_username);
+        button_dialog_keep_username = ButterKnife.findById(dialog_customer_register_type, R.id.button_keep_username);
+        button_dialog_delete_username = ButterKnife.findById(dialog_customer_register_type, R.id.button_delete_username);
 
         button_dialog_keep_username.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -660,7 +642,7 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         dialog_list_customer.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog_list_customer.setContentView(R.layout.custom_dialog_list_customer);
 
-        recyclerView_customer = (RecyclerView) dialog_list_customer.findViewById(R.id.recycleView_customer);
+        recyclerView_customer = ButterKnife.findById(dialog_list_customer, R.id.recycleView_customer);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(FormCustomerActivity.this);
         recyclerView_customer.setLayoutManager(mLayoutManager);
         recyclerView_customer.setItemAnimator(new DefaultItemAnimator());
@@ -669,7 +651,8 @@ public class FormCustomerActivity extends AppCompatActivity implements View.OnCl
         recyclerView_customer.setAdapter(customerDialogAdapter);
 
         showProgressLoading();
-        Call<RequestListCustomerResponse> requestListCustomerResponseCall = RestClient.getRestClient().getAllRequestCustomer("Bearer " + new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"));
+        Call<RequestListCustomerResponse> requestListCustomerResponseCall = RestClient.getRestClient().getAllRequestCustomer("Bearer " +
+                new SharedPreferenceManager().getPreferences(FormCustomerActivity.this, "token"));
         requestListCustomerResponseCall.enqueue(new Callback<RequestListCustomerResponse>() {
             @Override
             public void onResponse(Call<RequestListCustomerResponse> call, Response<RequestListCustomerResponse> response) {

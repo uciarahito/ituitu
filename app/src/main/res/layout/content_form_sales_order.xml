@@ -11,6 +11,7 @@
     <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="40dp"
         android:background="?android:attr/colorBackground">
 
         <LinearLayout
@@ -468,52 +469,51 @@
                         app:layout_gravity="center_vertical" />
                 </LinearLayout>
             </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linear_layout_button_action_form"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:gravity="center_horizontal"
-                android:weightSum="3">
-
-                <LinearLayout
-                    android:id="@+id/linear_layout_button_cancel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_rectangle_green"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/textView_button_cancel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Cancel"
-                        android:textColor="@color/white" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linear_layout_button_send_so"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:background="@drawable/rounded_rectangle_green"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/textView_button_send"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Send SO"
-                        android:textColor="@color/white" />
-                </LinearLayout>
-            </LinearLayout>
-
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/linear_layout_button_action_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:weightSum="3">
+
+        <LinearLayout
+            android:id="@+id/linear_layout_button_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_rectangle_green"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textView_button_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Cancel"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_button_send_so"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@drawable/rounded_rectangle_green"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textView_button_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Send SO"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

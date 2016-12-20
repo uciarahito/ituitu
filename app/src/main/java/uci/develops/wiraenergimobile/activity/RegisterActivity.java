@@ -18,6 +18,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,10 +29,16 @@ import uci.develops.wiraenergimobile.response.RegisterResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private EditText editText_register_name, editText_register_email, editText_register_password, editText_register_password_confirmation;
-    private Button button_register_register;
-    private TextView textView_login, textView_error_full_name, textView_error_email, textView_error_password, textView_error_confirm_password;
+    @BindView(R.id.editText_register_name) EditText editText_register_name;
+    @BindView(R.id.editText_register_email) EditText editText_register_email;
+    @BindView(R.id.editText_register_password) EditText editText_register_password;
+    @BindView(R.id.editText_register_password_confirmation) EditText editText_register_password_confirmation;
+    @BindView(R.id.textView_login) TextView textView_login;
+    @BindView(R.id.textView_error_full_name) TextView textView_error_full_name;
+    @BindView(R.id.textView_error_email) TextView textView_error_email;
+    @BindView(R.id.textView_error_password) TextView textView_error_password;
+    @BindView(R.id.textView_error_confirm_password) TextView textView_error_confirm_password;
+    @BindView(R.id.button_register_register) Button button_register_register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,22 +46,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_register);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        ButterKnife.bind(this);
         initializeComponent();
     }
 
     private void initializeComponent() {
-        textView_login = (TextView) findViewById(R.id.textView_login);
-        editText_register_name = (EditText) findViewById(R.id.editText_register_name);
-        editText_register_email = (EditText) findViewById(R.id.editText_register_email);
-        editText_register_password = (EditText) findViewById(R.id.editText_register_password);
-        editText_register_password_confirmation = (EditText) findViewById(R.id.editText_register_password_confirmation);
-        textView_error_full_name = (TextView) findViewById(R.id.textView_error_full_name);
-        textView_error_email = (TextView) findViewById(R.id.textView_error_email);
-        textView_error_password = (TextView) findViewById(R.id.textView_error_password);
-        textView_error_confirm_password = (TextView) findViewById(R.id.textView_error_confirm_password);
-        button_register_register = (Button) findViewById(R.id.button_register_register);
-
         textView_login.setOnClickListener(this);
         button_register_register.setOnClickListener(this);
     }

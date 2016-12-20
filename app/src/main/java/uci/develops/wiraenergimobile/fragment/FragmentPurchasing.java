@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.activity.GoodReceivedActivity;
 import uci.develops.wiraenergimobile.activity.ListCustomerActivity;
@@ -19,7 +21,8 @@ import uci.develops.wiraenergimobile.activity.PurchaseOrderActivity;
  */
 
 public class FragmentPurchasing extends Fragment implements View.OnClickListener{
-    private LinearLayout linearLayout_menu_purchase_order, linearLayout_menu_good_receive;
+    @BindView(R.id.linearLayout_menu_purchase_order) LinearLayout linearLayout_menu_purchase_order;
+    @BindView(R.id.linearLayout_menu_good_receive) LinearLayout linearLayout_menu_good_receive;
 
     private static final String KEY_MOVIE_TITLE = "key_title";
 
@@ -51,7 +54,7 @@ public class FragmentPurchasing extends Fragment implements View.OnClickListener
         // Inflate the layout for this fragment
         View view;
         view = inflater.inflate(R.layout.fragment_purchasing, container, false);
-
+        ButterKnife.bind(this, view);
         initializeComponent(view);
 
         // start listening for refresh local file list in
@@ -60,9 +63,6 @@ public class FragmentPurchasing extends Fragment implements View.OnClickListener
     }
 
     private void initializeComponent(View view){
-        linearLayout_menu_purchase_order = (LinearLayout) view.findViewById(R.id.linearLayout_menu_purchase_order);
-        linearLayout_menu_good_receive = (LinearLayout) view.findViewById(R.id.linearLayout_menu_good_receive);
-
         linearLayout_menu_purchase_order.setOnClickListener(this);
         linearLayout_menu_good_receive.setOnClickListener(this);
     }

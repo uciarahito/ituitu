@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,9 +25,21 @@ import uci.develops.wiraenergimobile.service.RestClient;
  * Created by user on 10/22/2016.
  */
 public class FragmentProfileCustomerContactInfo extends Fragment {
-    private TextView textView_name1, textView_name2, textView_name3, textView_phone1, textView_phone2, textView_phone3,
-            textView_mobile1, textView_mobile2, textView_mobile3, textView_email1, textView_email2, textView_email3,
-            textView_jabatan1, textView_jabatan2, textView_jabatan3;
+    @BindView(R.id.textView_name1) TextView textView_name1;
+    @BindView(R.id.textView_name2) TextView textView_name2;
+    @BindView(R.id.textView_name3) TextView textView_name3;
+    @BindView(R.id.textView_phone1) TextView textView_phone1;
+    @BindView(R.id.textView_phone2) TextView textView_phone2;
+    @BindView(R.id.textView_phone3) TextView textView_phone3;
+    @BindView(R.id.textView_mobile1) TextView textView_mobile1;
+    @BindView(R.id.textView_mobile2) TextView textView_mobile2;
+    @BindView(R.id.textView_mobile3) TextView textView_mobile3;
+    @BindView(R.id.textView_email1) TextView textView_email1;
+    @BindView(R.id.textView_email2) TextView textView_email2;
+    @BindView(R.id.textView_email3) TextView textView_email3;
+    @BindView(R.id.textView_jabatan1) TextView textView_jabatan1;
+    @BindView(R.id.textView_jabatan2) TextView textView_jabatan2;
+    @BindView(R.id.textView_jabatan3) TextView textView_jabatan3;
 
     private String decode = "", token = "";
 
@@ -44,33 +58,13 @@ public class FragmentProfileCustomerContactInfo extends Fragment {
         // Inflate the layout for this fragment
         View view;
         view = inflater.inflate(R.layout.fragment_profil_contact, container, false);
-
+        ButterKnife.bind(this, view);
         decode = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode");
         token = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "token");
-
-        initializeComponent(view);
 
         loadData();
 
         return view;
-    }
-
-    private void initializeComponent(View view) {
-        textView_name1 = (TextView) view.findViewById(R.id.textView_name1);
-        textView_name2 = (TextView) view.findViewById(R.id.textView_name2);
-        textView_name3 = (TextView) view.findViewById(R.id.textView_name3);
-        textView_phone1 = (TextView) view.findViewById(R.id.textView_phone1);
-        textView_phone2 = (TextView) view.findViewById(R.id.textView_phone2);
-        textView_phone3 = (TextView) view.findViewById(R.id.textView_phone3);
-        textView_mobile1 = (TextView) view.findViewById(R.id.textView_mobile1);
-        textView_mobile2 = (TextView) view.findViewById(R.id.textView_mobile2);
-        textView_mobile3 = (TextView) view.findViewById(R.id.textView_mobile3);
-        textView_email1 = (TextView) view.findViewById(R.id.textView_email1);
-        textView_email2 = (TextView) view.findViewById(R.id.textView_email2);
-        textView_email3 = (TextView) view.findViewById(R.id.textView_email3);
-        textView_jabatan1 = (TextView) view.findViewById(R.id.textView_jabatan1);
-        textView_jabatan2 = (TextView) view.findViewById(R.id.textView_jabatan2);
-        textView_jabatan3 = (TextView) view.findViewById(R.id.textView_jabatan3);
     }
 
     private void loadData() {

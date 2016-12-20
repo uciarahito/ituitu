@@ -29,16 +29,18 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import uci.develops.wiraenergimobile.R;
 
 public class FragmentDashboardHppMargin extends Fragment implements View.OnClickListener,
         OnChartGestureListener, OnChartValueSelectedListener {
-
-    private TextView textView_stock_all_warehouse, textView_stock_per_warehouse, textView_last_purchase, textView_last_purchase_from;
-    private Spinner spinner_warehouse;
-
-    //utk line chart
-    private LineChart mChart;
+    @BindView(R.id.textView_average_price_all) TextView textView_average_price_all;
+    @BindView(R.id.textView_average_price_per) TextView textView_average_price_per;
+    @BindView(R.id.textView_average_margin) TextView textView_average_margin;
+    @BindView(R.id.textView_this_month_margin) TextView textView_this_month_margin;
+    @BindView(R.id.spinner_warehouse) Spinner spinner_warehouse;
+    @BindView(R.id.linechart_price_per_month) LineChart mChart;
 
     public FragmentDashboardHppMargin() {
         // Required empty public constructor
@@ -55,19 +57,13 @@ public class FragmentDashboardHppMargin extends Fragment implements View.OnClick
         // Inflate the layout for this fragment
         View view;
         view = inflater.inflate(R.layout.fragment_dashboard_hpp_margin, container, false);
+        ButterKnife.bind(this, view);
         initializeComponent(view);
         loadDataLineChart();
         return view;
     }
 
     private void initializeComponent(View view){
-        textView_stock_all_warehouse = (TextView)view.findViewById(R.id.textView_stock_all_warehouse);
-        textView_stock_per_warehouse = (TextView)view.findViewById(R.id.textView_stock_per_warehouse);
-        textView_last_purchase = (TextView)view.findViewById(R.id.textView_last_purchase);
-        textView_last_purchase_from = (TextView)view.findViewById(R.id.textView_last_purchase_from);
-        spinner_warehouse = (Spinner) view.findViewById(R.id.spinner_warehouse);
-        mChart = (LineChart) view.findViewById(R.id.linechart_price_per_month);
-
         List<String> gudang = new ArrayList<String>();
         gudang.add("Warehouse Depok");
         gudang.add("Warehouse Jakarta");

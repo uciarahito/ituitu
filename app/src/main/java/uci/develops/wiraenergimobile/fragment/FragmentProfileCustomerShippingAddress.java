@@ -1,6 +1,5 @@
 package uci.develops.wiraenergimobile.fragment;
 
-import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,31 +10,22 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
-import uci.develops.wiraenergimobile.adapter.ShippingAddressAdapter;
+import uci.develops.wiraenergimobile.adapter.ItemShippingAddressAdapter;
 import uci.develops.wiraenergimobile.helper.DividerItemDecoration;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerAddressModel;
-import uci.develops.wiraenergimobile.response.ApproveResponse;
 import uci.develops.wiraenergimobile.response.ListCustomerAddressResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
@@ -46,12 +36,10 @@ import uci.develops.wiraenergimobile.service.RestClient;
 public class FragmentProfileCustomerShippingAddress extends Fragment {
 
     private RecyclerView recyclerView;
-
     private String decode = "", token = "";
-
     int counter_list = 0;
 
-    private ShippingAddressAdapter shippingAddressAdapter;
+    private ItemShippingAddressAdapter itemShippingAddressAdapter;
 
     private BroadcastReceiver mRegistrationBroadcastReceiver;
 
@@ -102,12 +90,12 @@ public class FragmentProfileCustomerShippingAddress extends Fragment {
     private void initializeComponent(View view) {
         recyclerView = (RecyclerView)view.findViewById(R.id.recycle_view);
         List<CustomerAddressModel> customerAddressModelList = new ArrayList<>();
-        shippingAddressAdapter = new ShippingAddressAdapter(getContext(), customerAddressModelList);
+        itemShippingAddressAdapter = new ItemShippingAddressAdapter(getContext(), customerAddressModelList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL));
-        recyclerView.setAdapter(shippingAddressAdapter);
+        recyclerView.setAdapter(itemShippingAddressAdapter);
     }
 
     private void loadData() {
@@ -118,7 +106,7 @@ public class FragmentProfileCustomerShippingAddress extends Fragment {
             public void onResponse(Call<ListCustomerAddressResponse> call, Response<ListCustomerAddressResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getData().size() > 0) {
-                        shippingAddressAdapter.updateList(response.body().getData());
+                        itemShippingAddressAdapter.updateList(response.body().getData());
                         counter_list = response.body().getData().size();
                     } else {
                         Toast.makeText(getContext(), "Shipping address empty", Toast.LENGTH_SHORT).show();

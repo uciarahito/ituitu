@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -31,19 +33,21 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import uci.develops.wiraenergimobile.R;
 
 public class FragmentDashboardSalesCustomer extends Fragment implements
         OnChartGestureListener, OnChartValueSelectedListener {
-    private TextView textView_sales_order, textView_average_sales_price, textView_delivey_order, textView_this_month_delivery_order;
-
-    //utk bar chart
-    BarChart barChart;
-    HorizontalBarChart horizontalBarChart;
-
-    //utk line chart
-    private LineChart mChart;
+    @BindView(R.id.textView_sales_order) TextView textView_sales_order;
+    @BindView(R.id.textView_average_sales_price) TextView textView_average_sales_price;
+    @BindView(R.id.textView_delivey_order) TextView textView_delivey_order;
+    @BindView(R.id.textView_this_month_delivery_order) TextView textView_this_month_delivery_order;
+    @BindView(R.id.linechart_average_sales_margin) LineChart mChart;
+    @BindView(R.id.bar_average_sales_price) BarChart barChart;
+    @BindView(R.id.bargtop5customer) HorizontalBarChart horizontalBarChart;
 
     public FragmentDashboardSalesCustomer() {
         // Required empty public constructor
@@ -60,20 +64,10 @@ public class FragmentDashboardSalesCustomer extends Fragment implements
         // Inflate the layout for this fragment
         View view;
         view = inflater.inflate(R.layout.fragment_dashboard_sales_customer, container, false);
-        initializeComponent(view);
+        ButterKnife.bind(this, view);
         loadDataBarChart();
         loadDataLineChart();
         return view;
-    }
-
-    private void initializeComponent(View view){
-        textView_sales_order = (TextView)view.findViewById(R.id.textView_sales_order);
-        textView_average_sales_price = (TextView)view.findViewById(R.id.textView_average_sales_price);
-        textView_delivey_order = (TextView)view.findViewById(R.id.textView_delivey_order);
-        textView_this_month_delivery_order = (TextView)view.findViewById(R.id.textView_this_month_delivery_order);
-        barChart = (BarChart) view.findViewById(R.id.bar_average_sales_price);
-        horizontalBarChart = (HorizontalBarChart)view.findViewById(R.id.bargtop5customer);
-        mChart = (LineChart) view.findViewById(R.id.linechart_average_sales_margin);
     }
 
     //code utk bar chart
