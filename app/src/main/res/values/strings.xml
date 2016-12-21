@@ -177,6 +177,17 @@
         <item>Yogyakarta</item>
     </string-array>
 
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="website">PT. Wira Energi</string>
+    <string name="welcome">Welcome, </string>
+    <string name="selected_item">Selected item</string>
+    <string name="select_one">Select One</string>
+
     <string name="search_hint">Search.....</string>
 
     <string name="email">Email</string>
@@ -199,47 +210,68 @@
     <string name="save">Save</string>
     <string name="submit">Submit</string>
     <string name="view_data">View Data</string>
-    <string name="customer_code">Customer code</string>
-    <string name="name">Name</string>
-    <string name="pic_name">PIC Name</string>
-    <string name="eta">ETA</string>
-    <string name="address">Address</string>
-    <string name="address_name">Address name</string>
-    <string name="city">City</string>
-    <string name="province">Province</string>
-    <string name="zip_code">Zip code</string>
-    <string name="phone">Phone</string>
-    <string name="mobile">Mobile</string>
-    <string name="fax">Fax</string>
-    <string name="npwp">NPWP</string>
-    <string name="term">Term.</string>
-    <string name="maps">Map Coordinate</string>
-    <string name="websites">Website</string>
-    <string name="notes">Notes</string>
-    <string name="positions">Position</string>
     <string name="wiraenergi">Wira Energi</string>
     <string name="verification">Email Verification Status</string>
     <string name="waiting">Wait For Approval</string>
-    <string name="contact_i1">Contact Info 1</string>
-    <string name="contact_i2">Contact Info 2</string>
-    <string name="contact_i3">Contact Info 3</string>
     <string name="please_wait">Please Wait, we will contact you soon after your data have been verified. Thank You...</string>
     <string name="succes">Success!</string>
-    <string name="send_date">Send Date:</string>
+    <string name="send_date">Send Date</string>
     <string name="checkBoxLogin">Remember Me |</string>
     <string name="lost_password">Lost your password?</string>
     <string name="not_member">Not a member?</string>
     <string name="already_member">Already a member?</string>
     <string name="footer">2016 All Rights Reserved. PT. Wiraenergi</string>
 
+    <string name="titiktitik">........</string>
+    <string name="customer_code">Customer Code</string>
+    <string name="customer_name">Customer Name</string>
+    <string name="address">Address</string>
+    <string name="province">Province</string>
+    <string name="city">City</string>
+    <string name="zip_code">Zip code</string>
+    <string name="group">Group</string>
+    <string name="term">Term.</string>
+    <string name="valuta">Valuta</string>
+    <string name="npwp">NPWP</string>
+    <string name="phone">Phone</string>
+    <string name="mobile">Mobile</string>
+    <string name="fax">Fax</string>
+    <string name="tax">Tax/PPN</string>
+    <string name="active">Active</string>
+    <string name="websites">Website</string>
+    <string name="notes">Notes</string>
+    <string name="address_name">Address name</string>
+    <string name="contact_i1">Contact Info 1</string>
+    <string name="contact_i2">Contact Info 2</string>
+    <string name="contact_i3">Contact Info 3</string>
+    <string name="positions">Position</string>
+    <string name="btn_add_shipping">Add Shipping</string>
+    <string name="person_in_charge">Person in charge</string>
+    <string name="shipping_address">Shipping Address</string>
+
+
+    <string name="name">Name</string>
+    <string name="pic_name">PIC Name</string>
+    <string name="eta">ETA</string>
+
+
+
+    <string name="maps">Map Coordinate</string>
+
+
+
+
+
+
+
     <string name="spinner_group">List of Group</string>
 
     <string name="qty_no">QT No:</string>
     <string name="qty_date">QT Date:</string>
     <string name="customer">Customer:</string>
-    <string name="tax">Tax/PPN:</string>
+
     <string name="due_date">Due Date:</string>
-    <string name="shipping_address">Shipping Address:</string>
+
     <string name="add_row">Add Row:</string>
     <string name="bruto">Bruto:</string>
     <string name="disc">Disc (%):</string>
@@ -258,16 +290,7 @@
     <string name="disc_amount">Discount amount</string>
     <string name="sub_total">Sub total</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="drawer_open">Open navigation drawer</string>
-    <string name="drawer_close">Close navigation drawer</string>
-    <string name="dashboard">Dashboard</string>
-    <string name="website">PT. Wira Energi</string>
-    <string name="welcome">Welcome, </string>
-    <string name="selected_item">Selected item</string>
-    <string name="select_one">Select One</string>
 
     //utk dashboard
     <string name="stock_all_warehouse">Stock all warehouse (KL)</string>

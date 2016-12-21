@@ -56,6 +56,12 @@ import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class FormRequestQuotationCustomerActivity extends AppCompatActivity implements View.OnClickListener{
+    @BindView(R.id.imageTitleUp1) ImageView imageTitleUp1;
+    @BindView(R.id.imageTitleUp2) ImageView imageTitleUp2;
+    @BindView(R.id.imageTitle1)
+    ImageView imageViewTitle1;
+    @BindView(R.id.imageTitle2)
+    ImageView imageViewTitle2;
     @BindView(R.id.linear_layout_title1) LinearLayout linearLayoutTitle1;
     @BindView(R.id.linear_layout_title2) LinearLayout linearLayoutTitle2;
     @BindView(R.id.linear_layout_content1) LinearLayout linearLayoutContent1;
@@ -103,6 +109,9 @@ public class FormRequestQuotationCustomerActivity extends AppCompatActivity impl
     }
 
     private void initializeComponent(){
+        imageViewTitle1.setVisibility(View.VISIBLE);
+        imageViewTitle2.setVisibility(View.VISIBLE);
+
         List<QuotationModel> quotationModelsList = new ArrayList<>();
         itemRequestQuotationAdapter = new ItemRequestQuotationAdapter(FormRequestQuotationCustomerActivity.this, quotationModelsList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(FormRequestQuotationCustomerActivity.this);
@@ -126,10 +135,14 @@ public class FormRequestQuotationCustomerActivity extends AppCompatActivity impl
 
         if(v == linearLayoutTitle1){
             if(!content1){
+                imageViewTitle1.setVisibility(View.GONE);
+                imageTitleUp1.setVisibility(View.VISIBLE);
                 linearLayoutContent1.setVisibility(View.VISIBLE);
                 linearLayoutContainer1.setVisibility(View.VISIBLE);
                 content1=true;
             } else {
+                imageViewTitle1.setVisibility(View.VISIBLE);
+                imageTitleUp1.setVisibility(View.GONE);
                 linearLayoutContent1.setVisibility(View.GONE);
                 linearLayoutContainer1.setVisibility(View.GONE);
                 content1=false;
@@ -138,10 +151,14 @@ public class FormRequestQuotationCustomerActivity extends AppCompatActivity impl
 
         if(v == linearLayoutTitle2){
             if(!content2){
+                imageViewTitle2.setVisibility(View.GONE);
+                imageTitleUp2.setVisibility(View.VISIBLE);
                 linearLayoutContent2.setVisibility(View.VISIBLE);
                 linearLayoutContainer2.setVisibility(View.VISIBLE);
                 content2=true;
             } else {
+                imageViewTitle2.setVisibility(View.VISIBLE);
+                imageTitleUp2.setVisibility(View.GONE);
                 linearLayoutContent2.setVisibility(View.GONE);
                 linearLayoutContainer2.setVisibility(View.GONE);
                 content2=false;

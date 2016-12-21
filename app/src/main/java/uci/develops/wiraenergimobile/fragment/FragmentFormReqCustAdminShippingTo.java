@@ -5,8 +5,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,12 +22,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,7 +40,6 @@ import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.adapter.ItemShippingAddressAdapter;
 import uci.develops.wiraenergimobile.helper.DividerItemDecoration;
-import uci.develops.wiraenergimobile.helper.NumberTextWatcherForThousand;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerAddressModel;
 import uci.develops.wiraenergimobile.response.ApproveResponse;
@@ -54,14 +50,14 @@ import uci.develops.wiraenergimobile.service.RestClient;
  * Created by user on 10/22/2016.
  */
 
-public class FragmentFormCustomerShippingTo extends Fragment {
+public class FragmentFormReqCustAdminShippingTo extends Fragment {
 
     @BindView(R.id.button_add_shipping)
     Button button_add_shipping;
     @BindView(R.id.recycle_view)
     RecyclerView recyclerView;
 
-    String customer_code = "", pic_name = "", address_name = "", address = "", map = "", phone = "", mobile = "";
+    String pic_name = "", address_name = "", address = "", map = "", phone = "", mobile = "";
     private String decode = "", token = "";
     int counter_list = 0;
 
@@ -71,7 +67,7 @@ public class FragmentFormCustomerShippingTo extends Fragment {
 
     private BroadcastReceiver mRegistrationBroadcastReceiver;
 
-    public FragmentFormCustomerShippingTo() {
+    public FragmentFormReqCustAdminShippingTo() {
         // Required empty public constructor
     }
 
@@ -183,7 +179,7 @@ public class FragmentFormCustomerShippingTo extends Fragment {
     }
 
     //utk dialog add shipping
-    private EditText editText_customer_code, editText_pic_name, editText_address_name, editText_address, editText_phone, editText_mobile, editText_map_cordinate;
+    private EditText editText_pic_name, editText_address_name, editText_address, editText_phone, editText_mobile, editText_map_cordinate;
     private Button button_save, button_cancel;
     Dialog dialog_add_shipping;
     String latlong = "";
@@ -193,7 +189,6 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         dialog_add_shipping.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog_add_shipping.setContentView(R.layout.custom_dialog_form_shipping_address);
 
-        editText_customer_code = ButterKnife.findById(dialog_add_shipping, R.id.editText_customer_code);
         editText_pic_name = ButterKnife.findById(dialog_add_shipping, R.id.editText_name);
         editText_address_name = ButterKnife.findById(dialog_add_shipping, R.id.editText_address_name);
         editText_address = ButterKnife.findById(dialog_add_shipping, R.id.editText_address);
@@ -203,8 +198,6 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         button_save = ButterKnife.findById(dialog_add_shipping, R.id.button_save);
         button_cancel = ButterKnife.findById(dialog_add_shipping, R.id.button_cancel);
 
-        editText_customer_code.setText("" + new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode"));
-        editText_customer_code.setEnabled(false);
         editText_phone.addTextChangedListener(onTextChangedListener());
 
         editText_map_cordinate.setOnTouchListener(new View.OnTouchListener() {
@@ -231,7 +224,7 @@ public class FragmentFormCustomerShippingTo extends Fragment {
                 if (isNotEmpty()) {
                     latlong = "@" + latitudeDialog + "," + longitudeDialog;
                     Map<String, String> params = new HashMap<String, String>();
-                    params.put("address_name", editText_address.getText().toString());
+                    params.put("name", editText_address_name.getText().toString());
                     params.put("address", editText_address.getText().toString());
                     params.put("pic", editText_pic_name.getText().toString());
                     params.put("phone", editText_phone.getText().toString());
@@ -311,7 +304,6 @@ public class FragmentFormCustomerShippingTo extends Fragment {
     }
 
     public boolean isNotEmpty() {
-        customer_code = editText_customer_code.getText().toString();
         pic_name = editText_pic_name.getText().toString();
         address_name = editText_address_name.getText().toString();
         address = editText_address.getText().toString();
@@ -320,7 +312,7 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         map = editText_map_cordinate.getText().toString();
 
         boolean result = false;
-        if (!customer_code.equals("") && !pic_name.equals("") && !address_name.equals("") && !address.equals("") && !phone.equals("") && !mobile.equals("")) {
+        if (!pic_name.equals("") && !address_name.equals("") && !address.equals("") && !phone.equals("") && !mobile.equals("")) {
 
             result = true;
         }

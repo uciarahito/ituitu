@@ -8,8 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -26,10 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
@@ -52,13 +47,10 @@ import uci.develops.wiraenergimobile.adapter.CustomerDialogAdapter;
 import uci.develops.wiraenergimobile.fragment.navigation.NavigationManager;
 import uci.develops.wiraenergimobile.helper.Constant;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
-import uci.develops.wiraenergimobile.library.SearchableSpinner;
 import uci.develops.wiraenergimobile.model.CustomerModel;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
 import uci.develops.wiraenergimobile.model.UserXModel;
 import uci.develops.wiraenergimobile.response.ApproveResponse;
-import uci.develops.wiraenergimobile.response.CustomerGroupResponse;
-import uci.develops.wiraenergimobile.response.CustomerResponse;
 import uci.develops.wiraenergimobile.response.RequestListCustomerResponse;
 import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
@@ -75,14 +67,12 @@ public class FormRequestCustomerAdmin extends AppCompatActivity implements View.
     LinearLayout layout_tab_contact_info;
     @BindView(R.id.layout_tab_shipping_to)
     LinearLayout layout_tab_shipping_to;
-    @BindView(R.id.layout_container_company_info)
+    @BindView(R.id.layout_container_basic_info)
     LinearLayout layout_container_company_info;
     @BindView(R.id.layout_container_contact_info)
     LinearLayout layout_container_contact_info;
     @BindView(R.id.layout_container_shipping_to)
     LinearLayout layout_container_shipping_to;
-    @BindView(R.id.search_spinner_customer)
-    SearchableSpinner search_spinner_customer;
 
     private LinearLayout[] linearLayouts_fragment = new LinearLayout[3];
     private LinearLayout[] linearLayouts_tabs = new LinearLayout[3];
@@ -140,7 +130,6 @@ public class FormRequestCustomerAdmin extends AppCompatActivity implements View.
         layout_tab_shipping_to.setOnClickListener(this);
         layout_button_approve.setOnClickListener(this);
         layout_button_reject.setOnClickListener(this);
-        loadDataSpinnerCustomer();
     }
 
     @Override
@@ -226,110 +215,6 @@ public class FormRequestCustomerAdmin extends AppCompatActivity implements View.
                 }
             });
         }
-    }
-
-//    private void loadDataSpinnerCustomer(){
-//        customerModels = new ArrayList<>();
-//        Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer " +
-//                        new SharedPreferenceManager().getPreferences(FormRequestCustomerAdmin.this, "token"),
-//                new SharedPreferenceManager().getPreferences(FormRequestCustomerAdmin.this, "customer_decode"));
-//        customerResponseCall.enqueue(new Callback<CustomerResponse>() {
-//            @Override
-//            public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
-//                if (response.isSuccessful()) {
-//                    if (response.body().getData().size() > 0) {
-//                        check_List = new String[response.body().getData().size()];
-//                        int index = 0;
-//                        for (CustomerModel customerModel : response.body().getData()) {
-////                            if (customerModel.getActive() == 1 && customerModel.getApprove() == 1) {
-//                                check_List[index] = customerModel.getFirst_name();
-//                                index++;
-////                            }
-//                        }
-//
-//                        customerModels = response.body().getData();
-//
-//                        // code spinner yg lama
-//                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(FormRequestCustomerAdmin.this,
-//                                R.layout.spinner_item, check_List);
-////                        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-//                        search_spinner_customer.setAdapter(dataAdapter);
-//
-//                        search_spinner_customer.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
-//                            @Override
-//                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                                new SharedPreferenceManager().setPreferences(FormRequestCustomerAdmin.this, "customer_decode", customer_decode);
-//                            }
-//
-//                            @Override
-//                            public void onNothingSelected(AdapterView<?> parent) {
-//
-//                            }
-//                        });
-//                    }
-//                } else {
-//                    Toast.makeText(FormRequestCustomerAdmin.this, "Cek Response failure", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<CustomerResponse> call, Throwable t) {
-//                Toast.makeText(FormRequestCustomerAdmin.this, "Masuk ke onFailure", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
-
-    List<CustomerModel> customerModels;
-    private void loadDataSpinnerCustomer() {
-        customerModels = new ArrayList<>();
-        Call<RequestListCustomerResponse> requestListCustomerResponseCall = RestClient.getRestClient().getAllRequestCustomer("Bearer " +
-                new SharedPreferenceManager().getPreferences(FormRequestCustomerAdmin.this, "token"));
-        requestListCustomerResponseCall.enqueue(new Callback<RequestListCustomerResponse>() {
-            @Override
-            public void onResponse(Call<RequestListCustomerResponse> call, Response<RequestListCustomerResponse> response) {
-                if (response.isSuccessful()) {
-                    if (response.body().getData().size() > 0) {
-                        final String check_List[] = new String[response.body().getData().size()];
-                        int index = 0;
-                        for (CustomerModel customerModel : response.body().getData()) {
-//                            if (customerModel.getApprove() == 1) {
-                                check_List[index] = customerModel.getFirst_name();
-                                index++;
-//                            }
-                        }
-
-                        customerModels = response.body().getData();
-
-                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(FormRequestCustomerAdmin.this,
-                                R.layout.spinner_item, check_List);
-                        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-                        search_spinner_customer.setAdapter(dataAdapter);
-
-                        search_spinner_customer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                Toast.makeText(FormRequestCustomerAdmin.this, "" + check_List[position], Toast.LENGTH_SHORT).show();
-                                Toast.makeText(FormRequestCustomerAdmin.this, "cccccccccc" + customerModels.get(position).getDecode(), Toast.LENGTH_SHORT).show();
-
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> parent) {
-
-                            }
-                        });
-                    }
-                    Toast.makeText(FormRequestCustomerAdmin.this, "Response sukses", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(FormRequestCustomerAdmin.this, "Cek response tidak sukses", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<RequestListCustomerResponse> call, Throwable t) {
-                Toast.makeText(FormRequestCustomerAdmin.this, "Data Group Kosong", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     boolean is_new_customer = false;

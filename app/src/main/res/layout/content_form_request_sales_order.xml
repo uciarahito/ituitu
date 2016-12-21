@@ -42,12 +42,28 @@
                         android:text="Customer Detail"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:id="@+id/imageTitle1"
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="15dp"
                         android:layout_weight="1"
-                        android:src="@android:drawable/arrow_down_float" />
+                        android:weightSum="1"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/imageTitle1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/Green"
+                            android:src="@android:drawable/arrow_down_float" />
+                        <ImageView
+                            android:id="@+id/imageTitleUp1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/Green"
+                            android:src="@android:drawable/arrow_up_float" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -98,12 +114,28 @@
                         android:text="Shipping Address"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:id="@+id/imageTitle2"
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="15dp"
                         android:layout_weight="1"
-                        android:src="@android:drawable/arrow_down_float" />
+                        android:weightSum="1"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/imageTitle2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/Green"
+                            android:src="@android:drawable/arrow_down_float" />
+                        <ImageView
+                            android:id="@+id/imageTitleUp2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/Green"
+                            android:src="@android:drawable/arrow_up_float" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -153,12 +185,28 @@
                         android:text="Payment PIC &amp; Address"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:id="@+id/imageTitle3"
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="15dp"
                         android:layout_weight="1"
-                        android:src="@android:drawable/arrow_down_float" />
+                        android:weightSum="1"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/imageTitle3"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/Green"
+                            android:src="@android:drawable/arrow_down_float" />
+                        <ImageView
+                            android:id="@+id/imageTitleUp3"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/Green"
+                            android:src="@android:drawable/arrow_up_float" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -208,12 +256,28 @@
                         android:text="Item Sales Order"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:id="@+id/imageTitle4"
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="15dp"
                         android:layout_weight="1"
-                        android:src="@android:drawable/arrow_down_float" />
+                        android:weightSum="1"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/imageTitle4"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/Green"
+                            android:src="@android:drawable/arrow_down_float" />
+                        <ImageView
+                            android:id="@+id/imageTitleUp4"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/Green"
+                            android:src="@android:drawable/arrow_up_float" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout

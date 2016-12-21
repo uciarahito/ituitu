@@ -9,18 +9,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="Shipping address"
+        android:text="@string/shipping_address"
         android:textColor="@color/primary_text"
         android:textStyle="bold"
         android:textAllCaps="true"
-        android:layout_marginBottom="10dp"
-        android:textAppearance="@style/TextAppearance.AppTheme.Title"/>
+        android:layout_margin="10dp"
+        android:textAppearance="@style/TextAppearance.AppTheme.Small"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/drop_shadow" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:visibility="gone"
@@ -46,169 +52,232 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:weightSum="6">
 
-            <ImageView
-                android:padding="12dp"
+            <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="1.75"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_address_24dp"/>
+                android:text="@string/customer_code"
+                android:layout_gravity="center"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editText_customer_code"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4.25"
+                android:hint="@string/customer_code"
+                android:textColorHint="@color/colorGray"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords|textEmailAddress"
+                android:layout_gravity="center|center_vertical"
+                android:textSize="@dimen/textView_transaction"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:weightSum="6">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.75"
+                android:layout_height="wrap_content"
+                android:text="@string/address_name"
+                android:layout_gravity="center"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editText_address_name"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
+                android:layout_height="match_parent"
+                android:layout_weight="4.25"
                 android:hint="@string/address_name"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
                 android:inputType="textCapWords|textEmailAddress"
-                app:layout_gravity="center_vertical"/>
+                android:layout_gravity="center|center_vertical"
+                android:textSize="@dimen/textView_transaction"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:weightSum="6">
 
-            <ImageView
-                android:padding="12dp"
+            <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="1.75"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_address_24dp"/>
+                android:text="@string/address"
+                android:layout_gravity="center"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editText_address"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
+                android:layout_height="match_parent"
+                android:layout_weight="4.25"
                 android:hint="@string/address"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
                 android:inputType="textCapWords|textEmailAddress"
-                app:layout_gravity="center_vertical"/>
+                android:background="@drawable/rounded_rectangle_new"
+                android:padding="5dp"
+                android:layout_gravity="center|center_vertical"
+                android:textSize="@dimen/textView_transaction"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginTop="5dp"
             android:weightSum="6">
 
-            <ImageView
-                android:padding="12dp"
+            <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="1.8"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_person_24dp"/>
+                android:text="@string/person_in_charge"
+                android:layout_gravity="center"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editText_name"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:hint="@string/pic_name"
+                android:layout_height="match_parent"
+                android:layout_weight="4.2"
+                android:hint="@string/person_in_charge"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
                 android:inputType="textCapWords|textPersonName"
-                app:layout_gravity="center_vertical"/>
+                android:layout_gravity="center|center_vertical"
+                android:textSize="@dimen/textView_transaction"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:weightSum="6">
 
             <ImageView
-                android:padding="12dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:layout_gravity="end"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="0.75"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end|center"
                 android:src="@drawable/ic_phone_24dp" />
 
             <EditText
                 android:id="@+id/editText_phone"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
+                android:layout_height="match_parent"
+                android:layout_weight="4.25"
                 android:hint="@string/phone"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
                 android:inputType="number"
-                app:layout_gravity="center_vertical"/>
+                android:layout_gravity="center|center_vertical"
+                android:textSize="@dimen/textView_transaction"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:weightSum="6">
 
             <ImageView
-                android:padding="12dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:layout_gravity="end"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="0.75"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end|center"
                 android:src="@drawable/ic_mobile_24dp" />
 
             <EditText
                 android:id="@+id/editText_mobile"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"
+                android:layout_weight="4.25"
                 android:hint="@string/mobile"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
                 android:inputType="phone"
-                app:layout_gravity="center_vertical"/>
+                android:layout_gravity="center|center_vertical"
+                android:textSize="@dimen/textView_transaction"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:weightSum="6">
 
             <ImageView
-                android:padding="12dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:layout_gravity="end"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="0.75"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end|center"
                 android:src="@drawable/ic_maps_24dp" />
 
             <EditText
                 android:id="@+id/editText_map_coordinate"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
+                android:layout_height="match_parent"
+                android:layout_weight="4.25"
                 android:hint="@string/maps"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
                 android:inputType="phone"
-                app:layout_gravity="center_vertical"/>
+                android:layout_gravity="center|center_vertical"
+                android:textSize="@dimen/textView_transaction"/>
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:weightSum="2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp">
             <Button
-                android:layout_margin="5dp"
                 android:id="@+id/button_cancel"
+                android:background="@color/Green"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:textAllCaps="false"
-                android:text="Cancel"
+                android:text="@string/cancel"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
+
             <Button
-                android:layout_margin="5dp"
+                android:layout_marginLeft="5dp"
                 android:id="@+id/button_save"
+                android:background="@color/Green"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:textAllCaps="false"
-                android:text="Save"
+                android:text="@string/save"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
         </LinearLayout>
 
     </LinearLayout>

@@ -34,14 +34,24 @@ import uci.develops.wiraenergimobile.response.LoginResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    @BindView(R.id.editText_login_email) EditText editText_login_email;
-    @BindView(R.id.editText_login_password) EditText editText_login_password;
-    @BindView(R.id.lost_password) TextView lost_password;
-    @BindView(R.id.textView_error_email) TextView textView_error_email;
-    @BindView(R.id.textView_error_password) TextView textView_error_password;
-    @BindView(R.id.checkBox_login) CheckBox checkBox_login;
-    @BindView(R.id.button_login_login) Button button_login_login;
-    @BindView(R.id.button_login_register) Button button_login_register;
+    @BindView(R.id.editText_login_email)
+    EditText editText_login_email;
+    @BindView(R.id.editText_login_password)
+    EditText editText_login_password;
+    @BindView(R.id.lost_password)
+    TextView lost_password;
+    @BindView(R.id.textView_error_email)
+    TextView textView_error_email;
+    @BindView(R.id.textView_email_empty)
+    TextView textView_email_empty;
+    @BindView(R.id.textView_error_password)
+    TextView textView_error_password;
+    @BindView(R.id.checkBox_login)
+    CheckBox checkBox_login;
+    @BindView(R.id.button_login_login)
+    Button button_login_login;
+    @BindView(R.id.button_login_register)
+    Button button_login_register;
 
     String email = "", password = "", name = "", role = "", registration_key = "";
 
@@ -92,7 +102,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         } catch (Exception e) {
-
+            Toast.makeText(LoginActivity.this, "Field tidak boleh kosong", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -110,13 +120,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             password = editText_login_password.getText().toString();
             boolean empty_email = false, empty_password = false;
 
-            if (!email.contains("@") || email.equals("")) {
+            if (!email.contains("@")) {
                 textView_error_email.setVisibility(View.VISIBLE);
+                empty_email = true;
+            } else if (email.equals("")) {
+                textView_email_empty.setVisibility(View.VISIBLE);
                 empty_email = true;
             } else {
                 textView_error_email.setVisibility(View.GONE);
                 empty_email = false;
             }
+
             if (password.equals("")) {
                 textView_error_password.setVisibility(View.VISIBLE);
                 empty_password = true;
@@ -124,8 +138,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 textView_error_password.setVisibility(View.GONE);
                 empty_password = false;
             }
-
-//            if (!email.equals("") && !password.equals("")) {
 
             if (!empty_email && !empty_password) {
                 showProgressLoading();
@@ -201,8 +213,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             }
                                         }
                                     }
-                                }
-                                else {
+                                } else {
                                     hideProgressLoading();
                                     new SharedPreferenceManager().setPreferences(LoginActivity.this, "roles", "");
                                     if (Integer.parseInt(new SharedPreferenceManager().getPreferences(LoginActivity.this, "approve")) == 2) {
@@ -251,6 +262,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     ProgressDialog progress_loading;
+
     public void showProgressLoading() {
         progress_loading = new ProgressDialog(LoginActivity.this);
         progress_loading.setMessage("Please wait...");

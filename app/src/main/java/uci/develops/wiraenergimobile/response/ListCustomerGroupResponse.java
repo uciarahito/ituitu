@@ -8,13 +8,13 @@ import uci.develops.wiraenergimobile.model.CustomerGroupModel;
  * Created by user on 11/1/2016.
  */
 
-public class CustomerGroupResponse {
+public class ListCustomerGroupResponse {
     private String status;
     private String code;
     private String info;
-    private CustomerGroupModel data;
+    private List<CustomerGroupModel> data;
 
-    public CustomerGroupResponse(String status, String code, String info, CustomerGroupModel data) {
+    public ListCustomerGroupResponse(String status, String code, String info, List<CustomerGroupModel> data) {
         this.status = status;
         this.code = code;
         this.info = info;
@@ -45,11 +45,11 @@ public class CustomerGroupResponse {
         this.info = info;
     }
 
-    public CustomerGroupModel getData() {
+    public List<CustomerGroupModel> getData() {
         return data;
     }
 
-    public void setData(CustomerGroupModel data) {
+    public void setData(List<CustomerGroupModel> data) {
         this.data = data;
     }
 }

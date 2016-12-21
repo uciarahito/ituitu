@@ -14,8 +14,9 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import uci.develops.wiraenergimobile.response.ApproveResponse;
 import uci.develops.wiraenergimobile.response.CustomerAddressResponse;
-import uci.develops.wiraenergimobile.response.ListCustomerAddressResponse;
 import uci.develops.wiraenergimobile.response.CustomerGroupResponse;
+import uci.develops.wiraenergimobile.response.ListCustomerAddressResponse;
+import uci.develops.wiraenergimobile.response.ListCustomerGroupResponse;
 import uci.develops.wiraenergimobile.response.CustomerResponse;
 import uci.develops.wiraenergimobile.response.ListRoleResponse;
 import uci.develops.wiraenergimobile.response.LoginResponse;
@@ -40,7 +41,10 @@ public interface RestInterface {
     Call<RequestListCustomerResponse> getAllRequestCustomer(@Header("Authorization") String token);
 
     @GET("customers/group")
-    Call<CustomerGroupResponse> getAllCustomerGroup(@Header("Authorization") String token);
+    Call<ListCustomerGroupResponse> getAllCustomerGroup(@Header("Authorization") String token);
+
+    @GET("customers/group/{decode_group}")
+    Call<CustomerGroupResponse> getCustomerGroupByDecode(@Header("Authorization") String token, @Path("decode_group") String decode_group);
 
     @GET("roleuser")
     Call<ListRoleResponse> getAllRoles(@Header("Authorization") String token);

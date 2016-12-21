@@ -1,7 +1,12 @@
 package uci.develops.wiraenergimobile.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +43,7 @@ public class FragmentSOShippingAddress extends Fragment{
 
     List<CustomerAddressModel> customerAddressModels;
     String check_List [];
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
 
     public FragmentSOShippingAddress(){}
 
@@ -55,6 +61,26 @@ public class FragmentSOShippingAddress extends Fragment{
         ButterKnife.bind(this, view);
         loadDataSpinnerShippingAddress();
 
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                //If the broadcast has received with success
+                //that means device is registered successfully
+                if (intent.getAction().equals("pushNotification")) {
+                    String broadcastNotification = intent.getStringExtra("type");
+
+                    // process trigger (broadcast) from list price
+                    if(broadcastNotification.equals("load_data_spinner_shipping_address")){
+                        loadDataSpinnerShippingAddress();
+                    }
+                } else {
+                }
+            }
+        };
+
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter("pushNotification"));
         // start listening for refresh local file list in
         return view;
         //return inflater.inflate(R.layout.activity_ongoing_order, container, false);
@@ -71,6 +97,19 @@ public class FragmentSOShippingAddress extends Fragment{
 
     private void loadDataSpinnerShippingAddress(){
         customerAddressModels = new ArrayList<>();
+
+        // code spinner data kosong
+        List<String> listEmpty = new ArrayList<String>();
+
+        ArrayAdapter<String> dataEmptyAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
+                R.layout.spinner_item, listEmpty);
+        spinner_customer_address.setAdapter(dataEmptyAdapter);
+        textView_address.setText("");
+        textView_pic_name.setText("");
+        textView_phone.setText("");
+        textView_mobile.setText("");
+
+
         Call<ListCustomerAddressResponse> customerAddressResponseCall = RestClient.getRestClient().getCustomerAddress("Bearer "
                         + new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "token"),
                 new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode"));

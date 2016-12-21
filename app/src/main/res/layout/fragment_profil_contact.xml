@@ -41,14 +41,17 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
                 android:weightSum="6">
 
-                <ImageView
+                <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.75"
-                    android:src="@drawable/ic_person_24dp" />
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/name"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView_name1"
@@ -60,12 +63,41 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:weightSum="6">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/positions"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView_jabatan1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:gravity="left|center" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
                 android:weightSum="6">
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="0.25" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="0.75"
                     android:src="@drawable/ic_phone_24dp" />
 
@@ -79,12 +111,19 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:weightSum="6">
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="0.25" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="0.75"
                     android:src="@drawable/ic_mobile_24dp" />
 
@@ -98,36 +137,24 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:weightSum="6">
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="0.25" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="0.75"
                     android:src="@drawable/ic_email_24dp" />
 
                 <TextView
                     android:id="@+id/textView_email1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="5"
-                    android:gravity="left|center" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="6">
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.75"
-                    android:src="@drawable/ic_position_24dp" />
-
-                <TextView
-                    android:id="@+id/textView_jabatan1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="5"
@@ -165,19 +192,22 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/OrangeColor"/>
+                    android:background="@color/OrangeColor" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
                 android:weightSum="6">
 
-                <ImageView
+                <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.75"
-                    android:src="@drawable/ic_person_24dp" />
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/name"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView_name2"
@@ -189,12 +219,41 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:weightSum="6">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/positions"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView_jabatan2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:gravity="left|center" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
                 android:weightSum="6">
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="0.25" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="0.75"
                     android:src="@drawable/ic_phone_24dp" />
 
@@ -208,12 +267,19 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:weightSum="6">
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="0.25" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="0.75"
                     android:src="@drawable/ic_mobile_24dp" />
 
@@ -227,36 +293,24 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:weightSum="6">
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="0.25" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="0.75"
                     android:src="@drawable/ic_email_24dp" />
 
                 <TextView
                     android:id="@+id/textView_email2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="5"
-                    android:gravity="left|center" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="6">
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.75"
-                    android:src="@drawable/ic_position_24dp" />
-
-                <TextView
-                    android:id="@+id/textView_jabatan2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="5"
@@ -294,19 +348,22 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/OrangeColor"></LinearLayout>
+                    android:background="@color/OrangeColor" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
                 android:weightSum="6">
 
-                <ImageView
+                <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.75"
-                    android:src="@drawable/ic_person_24dp" />
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/name"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView_name3"
@@ -318,12 +375,41 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:weightSum="6">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/positions"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView_jabatan3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:gravity="left|center" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
                 android:weightSum="6">
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="0.25" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="0.75"
                     android:src="@drawable/ic_phone_24dp" />
 
@@ -337,12 +423,19 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:weightSum="6">
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="0.25" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="0.75"
                     android:src="@drawable/ic_mobile_24dp" />
 
@@ -356,36 +449,24 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:weightSum="6">
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="0.25" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="0.75"
                     android:src="@drawable/ic_email_24dp" />
 
                 <TextView
                     android:id="@+id/textView_email3"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="5"
-                    android:gravity="left|center" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="6">
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.75"
-                    android:src="@drawable/ic_position_24dp" />
-
-                <TextView
-                    android:id="@+id/textView_jabatan3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="5"

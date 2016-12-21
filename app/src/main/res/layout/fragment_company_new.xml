@@ -62,121 +62,105 @@
         <LinearLayout
             android:id="@+id/linear_layout_id"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:weightSum="6">
 
-            <ImageView
-                android:padding="12dp"
+            <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.75"
+                android:layout_weight="1.75"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_code_24dp"/>
+                android:text="@string/customer_code"
+                android:layout_gravity="center"
+                android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText_id"
+                android:id="@+id/editText_customer_code"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
+                android:layout_height="match_parent"
+                android:layout_weight="4.25"
                 android:hint="@string/customer_code"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
                 android:inputType="textCapWords|textPersonName"
-                app:layout_gravity="center_vertical"/>
+                android:layout_gravity="center|center_vertical"
+                android:textSize="@dimen/textView_transaction"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:weightSum="6">
 
-            <ImageView
-                android:padding="12dp"
+            <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.75"
+                android:layout_weight="1.75"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_person_24dp"
-                android:id="@+id/imageView2" />
+                android:text="@string/customer_name"
+                android:layout_gravity="center"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editText_name"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:hint="@string/name"
+                android:layout_height="match_parent"
+                android:layout_weight="4.25"
+                android:hint="@string/customer_name"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
                 android:inputType="textCapWords|textPersonName"
-                app:layout_gravity="center_vertical"/>
+                android:layout_gravity="center|center_vertical"
+                android:textSize="@dimen/textView_transaction"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:weightSum="6">
 
-            <ImageView
-                android:padding="12dp"
+            <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.75"
+                android:layout_weight="1.75"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_address_24dp"/>
+                android:text="@string/address"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:id="@+id/textView3" />
 
             <EditText
                 android:id="@+id/editText_address"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"
+                android:layout_weight="4.25"
                 android:hint="@string/address"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
                 android:inputType="textCapWords|textEmailAddress"
-                app:layout_gravity="center_vertical"/>
+                android:layout_gravity="center|center_vertical"
+                android:textSize="@dimen/textView_transaction"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:weightSum="6">
 
-            <ImageView
-                android:padding="12dp"
+            <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.75"
-                android:layout_height="45dp"
-                android:src="@drawable/ic_city"/>
-
-            <AutoCompleteTextView
-                android:id="@+id/autoComplete_city"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="5"
-                android:ems="10"
-                android:hint="@string/city"
-                android:textColorHint="@color/colorGray">
-
-                <requestFocus />
-            </AutoCompleteTextView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="6">
-
-            <ImageView
-                android:padding="12dp"
-                android:layout_width="0dp"
-                android:layout_weight="0.75"
-                android:layout_height="45dp"
-                android:src="@drawable/ic_province" />
+                android:layout_weight="1.75"
+                android:layout_height="wrap_content"
+                android:text="@string/province"
+                android:layout_gravity="center"
+                android:textStyle="bold" />
 
             <AutoCompleteTextView
                 android:id="@+id/autoComplete_province"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="5"
+                android:layout_height="match_parent"
+                android:layout_weight="4.25"
                 android:ems="10"
                 android:hint="@string/province"
+                android:layout_gravity="center|center_vertical"
+                android:textSize="@dimen/textView_transaction"
                 android:textColorHint="@color/colorGray">
 
                 <requestFocus />
@@ -185,319 +169,385 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:weightSum="6">
 
-            <ImageView
-                android:padding="12dp"
+            <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.75"
-                android:layout_height="45dp"
-                android:src="@drawable/ic_zip_code" />
-
-            <EditText
-                android:id="@+id/editText_postcode"
-                android:layout_width="0dp"
+                android:layout_weight="1.75"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:hint="@string/zip_code"
-                android:textColorHint="@color/colorGray"
-                android:imeOptions="actionNext"
-                android:inputType="textCapWords|textPostalAddress"
-                app:layout_gravity="center_vertical"/>
+                android:text="@string/city"
+                android:layout_gravity="center"
+                android:textStyle="bold" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoComplete_city"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4.25"
+                android:ems="10"
+                android:hint="@string/city"
+                android:layout_gravity="center|center_vertical"
+                android:textSize="@dimen/textView_transaction"
+                android:textColorHint="@color/colorGray">
+
+                <requestFocus />
+            </AutoCompleteTextView>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
+            android:weightSum="6">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.75"
+                android:layout_height="wrap_content"
+                android:text="@string/zip_code"
+                android:layout_gravity="center"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editText_postcode"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4.25"
+                android:hint="@string/zip_code"
+                android:textColorHint="@color/colorGray"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords|textPostalAddress"
+                android:layout_gravity="center|center_vertical"
+                android:textSize="@dimen/textView_transaction"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:weightSum="6">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.75"
+                android:layout_height="wrap_content"
+                android:text="@string/group"
+                android:layout_gravity="center"
+                android:textStyle="bold" />
+
+            <uci.develops.wiraenergimobile.library.SearchableSpinner
+                android:id="@+id/search_spinner_group"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="match_parent"
+                app:hintText="@string/select_one"
+                android:layout_gravity="center|center_vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_term"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:weightSum="6">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.75"
+                android:layout_height="wrap_content"
+                android:text="@string/term"
+                android:layout_gravity="center"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editText_term"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4.25"
+                android:hint="@string/term"
+                android:textColorHint="@color/colorGray"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:layout_gravity="center|center_vertical"
+                android:textSize="@dimen/textView_transaction"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_valuta"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:weightSum="6">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.75"
+                android:layout_height="wrap_content"
+                android:text="@string/valuta"
+                android:layout_gravity="center"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_valuta"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="match_parent"
+                app:layout_gravity="left|center"
+                android:spinnerMode="dialog"
+                android:layout_gravity="center|center_vertical"
+                android:prompt="@string/select_one"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:weightSum="6">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.75"
+                android:layout_height="wrap_content"
+                android:text="@string/npwp"
+                android:layout_gravity="center"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editText_npwp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4.25"
+                android:hint="@string/npwp"
+                android:textColorHint="@color/colorGray"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:layout_gravity="center|center_vertical"
+                android:textSize="@dimen/textView_transaction"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
             android:weightSum="6">
 
             <ImageView
-                android:padding="12dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="end"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="0.75"
+                android:layout_gravity="end|center"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_phone_24dp" />
 
             <EditText
                 android:id="@+id/editText_phone"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
+                android:layout_height="match_parent"
+                android:layout_weight="4.25"
                 android:hint="@string/phone"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
-                android:inputType="phone"
-                app:layout_gravity="center_vertical"/>
+                android:inputType="numberDecimal"
+                android:digits="0123456789.,"
+                android:layout_gravity="center|center_vertical"
+                android:textSize="@dimen/textView_transaction"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:weightSum="6">
 
             <ImageView
-                android:padding="12dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="end"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="0.75"
+                android:layout_gravity="end|center"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_mobile_24dp" />
 
             <EditText
                 android:id="@+id/editText_mobile"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
+                android:layout_height="match_parent"
+                android:layout_weight="4.25"
                 android:hint="@string/mobile"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
                 android:inputType="phone"
-                app:layout_gravity="center_vertical"/>
+                android:layout_gravity="center|center_vertical"
+                android:textSize="@dimen/textView_transaction"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:weightSum="6">
 
             <ImageView
-                android:padding="12dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="end"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="0.75"
+                android:layout_gravity="end|center"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_fax_24dp" />
 
             <EditText
                 android:id="@+id/editText_fax"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
+                android:layout_height="match_parent"
+                android:layout_weight="4.25"
                 android:hint="@string/fax"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
                 android:inputType="phone"
-                app:layout_gravity="center_vertical"/>
+                android:layout_gravity="center|center_vertical"
+                android:textSize="@dimen/textView_transaction"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:weightSum="6">
 
             <ImageView
-                android:padding="12dp"
                 android:layout_width="0dp"
-                android:layout_weight="0.75"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_group_24dp" />
-
-            <uci.develops.wiraenergimobile.library.SearchableSpinner
-                android:id="@+id/search_spinner_group"
-                android:layout_width="0dp"
-                android:layout_weight="5"
-                android:layout_height="40dp"
-                app:hintText="@string/select_one"
-                android:layout_gravity="left|center" />
-            <!--<Spinner-->
-                <!--android:id="@+id/spinner_group"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_weight="5"-->
-                <!--android:layout_height="40dp"-->
-                <!--app:layout_gravity="left|center"-->
-                <!--android:spinnerMode="dialog"-->
-                <!--android:prompt="@string/spinner_group"-->
-                <!--android:visibility="gone"/>-->
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linear_layout_term"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="6">
+                android:layout_weight="1"
+                android:layout_gravity="end"
+                android:layout_height="wrap_content"/>
 
             <ImageView
-                android:padding="12dp"
                 android:layout_width="0dp"
                 android:layout_weight="0.75"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_npwp_24dp" />
-
-            <EditText
-                android:id="@+id/editText_term"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:hint="@string/term"
-                android:textColorHint="@color/colorGray"
-                android:imeOptions="actionNext"
-                android:inputType="number"
-                app:layout_gravity="center_vertical"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linear_layout_valuta"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="6">
-
-            <ImageView
-                android:padding="12dp"
-                android:layout_width="0dp"
-                android:layout_weight="0.75"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_valuta_24dp" />
-
-            <Spinner
-                android:id="@+id/spinner_valuta"
-                android:layout_width="0dp"
-                android:layout_weight="5"
-                android:layout_height="40dp"
-                app:layout_gravity="left|center"
-                android:spinnerMode="dialog"
-                android:prompt="@string/select_one"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="6">
-
-            <ImageView
-                android:padding="12dp"
-                android:layout_width="0dp"
-                android:layout_weight="0.75"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_npwp_24dp" />
-
-            <EditText
-                android:id="@+id/editText_npwp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:hint="@string/npwp"
-                android:textColorHint="@color/colorGray"
-                android:imeOptions="actionNext"
-                android:inputType="number"
-                app:layout_gravity="center_vertical"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linear_layout_tax_ppn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="6">
-
-            <ImageView
-                android:padding="12dp"
-                android:layout_width="0dp"
-                android:layout_weight="0.75"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_group_24dp" />
-
-            <Spinner
-                android:id="@+id/spinner_tax_ppn"
-                android:layout_width="0dp"
-                android:layout_weight="5"
-                android:layout_height="40dp"
-                app:layout_gravity="left|center"
-                android:spinnerMode="dialog"
-                android:prompt="@string/select_one"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linear_layout_active"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="6">
-
-            <ImageView
-                android:padding="12dp"
-                android:layout_width="0dp"
-                android:layout_weight="0.75"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_group_24dp" />
-
-            <Spinner
-                android:id="@+id/spinner_active"
-                android:layout_width="0dp"
-                android:layout_weight="5"
-                android:layout_height="40dp"
-                app:layout_gravity="left|center"
-                android:spinnerMode="dialog"
-                android:prompt="@string/select_one"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="6">
-
-            <ImageView
-                android:padding="12dp"
-                android:layout_width="0dp"
-                android:layout_weight="0.75"
+                android:layout_gravity="end|center"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_email_24dp" />
 
             <EditText
                 android:id="@+id/editText_email"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
+                android:layout_height="match_parent"
+                android:layout_weight="4.25"
                 android:hint="@string/email"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
                 android:inputType="textCapWords|textEmailAddress"
-                app:layout_gravity="center_vertical"/>
+                android:layout_gravity="center|center_vertical"
+                android:textSize="@dimen/textView_transaction"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_tax_ppn"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:weightSum="6">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.75"
+                android:layout_height="wrap_content"
+                android:text="@string/tax"
+                android:layout_gravity="center"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_tax_ppn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                app:layout_gravity="left|center"
+                android:spinnerMode="dialog"
+                android:layout_gravity="center|center_vertical"
+                android:prompt="@string/select_one"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_active"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:weightSum="6">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.75"
+                android:layout_height="wrap_content"
+                android:text="@string/active"
+                android:layout_gravity="center"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_active"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                app:layout_gravity="left|center"
+                android:spinnerMode="dialog"
+                android:layout_gravity="center|center_vertical"
+                android:prompt="@string/select_one"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:weightSum="6">
 
-            <ImageView
-                android:padding="12dp"
+            <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.75"
+                android:layout_weight="1.75"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_website_24dp" />
+                android:text="@string/websites"
+                android:layout_gravity="center"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editText_website"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
+                android:layout_height="match_parent"
+                android:layout_weight="4.25"
                 android:hint="@string/websites"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
                 android:inputType="textCapWords|textWebEmailAddress"
-                app:layout_gravity="center_vertical"/>
+                android:layout_gravity="center|center_vertical"
+                android:textSize="@dimen/textView_transaction"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linear_layout_note"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:weightSum="6">
 
-            <ImageView
-                android:padding="12dp"
+            <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.75"
+                android:layout_weight="1.75"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_note_24dp" />
+                android:text="@string/notes"
+                android:layout_gravity="center"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editText_note"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
+                android:layout_height="match_parent"
+                android:layout_weight="4.25"
                 android:hint="@string/notes"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
+                android:background="@drawable/rounded_rectangle_gray"
                 android:inputType="textCapWords|textWebEmailAddress"
-                app:layout_gravity="center_vertical"/>
+                android:layout_gravity="center|center_vertical"
+                android:textSize="@dimen/textView_transaction"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

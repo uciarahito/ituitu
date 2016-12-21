@@ -50,7 +50,16 @@ import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class FormRequestSalesOrderActivity extends AppCompatActivity implements View.OnClickListener{
-
+    @BindView(R.id.imageTitleUp1) ImageView imageTitleUp1;
+    @BindView(R.id.imageTitleUp2) ImageView imageTitleUp2;
+    @BindView(R.id.imageTitleUp3) ImageView imageTitleUp3;
+    @BindView(R.id.imageTitleUp4) ImageView imageTitleUp4;
+    @BindView(R.id.imageTitle1)
+    ImageView imageViewTitle1;
+    @BindView(R.id.imageTitle2)
+    ImageView imageViewTitle2;
+    @BindView(R.id.imageTitle3) ImageView imageViewTitle3;
+    @BindView(R.id.imageTitle4) ImageView imageViewTitle4;
     @BindView(R.id.linear_layout_title1) LinearLayout linearLayoutTitle1;
     @BindView(R.id.linear_layout_content1) LinearLayout linearLayoutContent1;
     @BindView(R.id.linear_layout_container_so_customer_detail) LinearLayout linearLayoutContainer1;
@@ -110,6 +119,10 @@ public class FormRequestSalesOrderActivity extends AppCompatActivity implements 
     }
 
     private void initializeComponent(){
+        imageViewTitle1.setVisibility(View.VISIBLE);
+        imageViewTitle2.setVisibility(View.VISIBLE);
+        imageViewTitle3.setVisibility(View.VISIBLE);
+        imageViewTitle4.setVisibility(View.VISIBLE);
 //        editText_bruto.addTextChangedListener(new NumberTextWatcher(editText_bruto));
         linearLayoutTitle1.setOnClickListener(this);
         linearLayoutTitle2.setOnClickListener(this);
@@ -122,10 +135,14 @@ public class FormRequestSalesOrderActivity extends AppCompatActivity implements 
 
         if(v == linearLayoutTitle1){
             if(!content1){
+                imageViewTitle1.setVisibility(View.GONE);
+                imageTitleUp1.setVisibility(View.VISIBLE);
                 linearLayoutContent1.setVisibility(View.VISIBLE);
                 linearLayoutContainer1.setVisibility(View.VISIBLE);
                 content1=true;
             } else {
+                imageViewTitle1.setVisibility(View.VISIBLE);
+                imageTitleUp1.setVisibility(View.GONE);
                 linearLayoutContent1.setVisibility(View.GONE);
                 linearLayoutContainer1.setVisibility(View.GONE);
                 content1=false;
@@ -134,10 +151,14 @@ public class FormRequestSalesOrderActivity extends AppCompatActivity implements 
 
         if(v == linearLayoutTitle2){
             if(!content2){
+                imageViewTitle2.setVisibility(View.GONE);
+                imageTitleUp2.setVisibility(View.VISIBLE);
                 linearLayoutContent2.setVisibility(View.VISIBLE);
                 linearLayoutContainer2.setVisibility(View.VISIBLE);
                 content2=true;
             } else {
+                imageViewTitle2.setVisibility(View.VISIBLE);
+                imageTitleUp2.setVisibility(View.GONE);
                 linearLayoutContent2.setVisibility(View.GONE);
                 linearLayoutContainer2.setVisibility(View.GONE);
                 content2=false;
@@ -146,10 +167,14 @@ public class FormRequestSalesOrderActivity extends AppCompatActivity implements 
 
         if(v == linearLayoutTitle3){
             if(!content3){
+                imageViewTitle3.setVisibility(View.GONE);
+                imageTitleUp3.setVisibility(View.VISIBLE);
                 linearLayoutContent3.setVisibility(View.VISIBLE);
                 linearLayoutContainer3.setVisibility(View.VISIBLE);
                 content3=true;
             } else {
+                imageViewTitle3.setVisibility(View.VISIBLE);
+                imageTitleUp3.setVisibility(View.GONE);
                 linearLayoutContent3.setVisibility(View.GONE);
                 linearLayoutContainer3.setVisibility(View.GONE);
                 content3=false;
@@ -158,10 +183,14 @@ public class FormRequestSalesOrderActivity extends AppCompatActivity implements 
 
         if(v == linearLayoutTitle4){
             if(!content4){
+                imageViewTitle4.setVisibility(View.GONE);
+                imageTitleUp4.setVisibility(View.VISIBLE);
                 linearLayoutContent4.setVisibility(View.VISIBLE);
                 linearLayoutContainer4.setVisibility(View.VISIBLE);
                 content4=true;
             } else {
+                imageViewTitle4.setVisibility(View.VISIBLE);
+                imageTitleUp4.setVisibility(View.GONE);
                 linearLayoutContent4.setVisibility(View.GONE);
                 linearLayoutContainer4.setVisibility(View.GONE);
                 content4=false;

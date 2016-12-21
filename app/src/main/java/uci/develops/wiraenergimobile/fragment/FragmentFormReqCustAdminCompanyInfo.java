@@ -2,8 +2,6 @@ package uci.develops.wiraenergimobile.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,16 +27,16 @@ import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.library.SearchableSpinner;
 import uci.develops.wiraenergimobile.model.CustomerGroupModel;
 import uci.develops.wiraenergimobile.model.CustomerModel;
-import uci.develops.wiraenergimobile.response.ListCustomerGroupResponse;
 import uci.develops.wiraenergimobile.response.CustomerResponse;
+import uci.develops.wiraenergimobile.response.ListCustomerGroupResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 /**
  * Created by user on 10/22/2016.
  */
-public class FragmentFormCustomerCompanyInfo extends Fragment {
+public class FragmentFormReqCustAdminCompanyInfo extends Fragment {
     @BindView(R.id.editText_customer_code)
-    EditText editText_customer_code;
+    EditText editText_id;
     @BindView(R.id.editText_name)
     EditText editText_first_name;
     @BindView(R.id.editText_address)
@@ -96,7 +89,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
 
     private String decode = "", token = "";
 
-    public FragmentFormCustomerCompanyInfo() {
+    public FragmentFormReqCustAdminCompanyInfo() {
         // Required empty public constructor
     }
 
@@ -123,83 +116,14 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
     }
 
     private void initializeComponent(View view) {
+        editText_id.setText("");
+
         CustomerModel customerModel = new CustomerModel();
         editText_first_name.setText(customerModel.getFirst_name() == null ? "" : customerModel.getFirst_name());
         editText_email.setText(customerModel.getEmail() == null ? "" : customerModel.getEmail());
-
-        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("")) {
-            linear_layout_id.setVisibility(View.GONE);
-            linear_layout_term.setVisibility(View.GONE);
-            linear_layout_valuta.setVisibility(View.GONE);
-            linear_layout_tax_ppn.setVisibility(View.GONE);
-            linear_layout_active.setVisibility(View.GONE);
-            linear_layout_note.setVisibility(View.GONE);
-            if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "approve").equals("0")) {
-                readOnly();
-            }
-        } else if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer") |
-                new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")) {
-            linear_layout_id.setVisibility(View.VISIBLE);
-        }
-
-        /**
-         * format number utk 2 angka dibelakang koma
-         */
-        DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
-        DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
-        formatRp.setCurrencySymbol("");
-        formatRp.setMonetaryDecimalSeparator(',');
-        formatRp.setGroupingSeparator('.');
-        kursIndonesia.setDecimalFormatSymbols(formatRp);
-
-        String hargaChangeDot, hargaFinal;
-        String harga = "25.852.673,129";
-        hargaChangeDot = harga.replace(".", "");
-        hargaFinal = hargaChangeDot.replace(",", ".");
-
-        Double doubleView = Double.parseDouble(hargaFinal);
-        String formattedString = kursIndonesia.format(doubleView);
-
-        Toast.makeText(getActivity().getApplicationContext(), "Tessss  " + hargaChangeDot + " -- " +
-                hargaFinal + " -- " + formattedString, Toast.LENGTH_SHORT).show();
-
-        /**
-         * format number utk 4 angka dibelakang koma
-         */
-        DecimalFormat kursIndonesiaFour = (DecimalFormat) DecimalFormat.getCurrencyInstance();
-        DecimalFormatSymbols formatRpFour = new DecimalFormatSymbols();
-        kursIndonesiaFour.applyPattern("#,###,###,###,###.####");
-        formatRpFour.setCurrencySymbol("");
-        formatRpFour.setMonetaryDecimalSeparator(',');
-        formatRpFour.setGroupingSeparator('.');
-        kursIndonesiaFour.setDecimalFormatSymbols(formatRpFour);
-
-        String hargaChangeDot2, hargaFinal2;
-        String harga2 = "25.852.673,12909213";
-        hargaChangeDot2 = harga2.replace(".", "");
-        hargaFinal2 = hargaChangeDot2.replace(",", ".");
-
-        Double doubleView2 = Double.parseDouble(hargaFinal2);
-        String formattedString2 = kursIndonesiaFour.format(doubleView2);
-
-        Toast.makeText(getActivity().getApplicationContext(), "Tessss  " + hargaChangeDot2 + " -- " +
-                hargaFinal2 + " -- " + formattedString2, Toast.LENGTH_SHORT).show();
-
-//        editText_phone.addTextChangedListener(new NumberTextWatcher(editText_phone));
-//        editText_phone.addTextChangedListener(onTextChangedListener());
-
-//        String formatString = "#,###,###,###.##";
-//        DecimalFormat formatter = (DecimalFormat) DecimalFormat.getCurrencyInstance();
-//        DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
-//        formatRp.setCurrencySymbol("Rp. ");
-//        formatRp.setMonetaryDecimalSeparator(',');
-//        formatRp.setGroupingSeparator('.');
-//        formatter.setDecimalFormatSymbols(formatRp);
-//        String formattedString = formatter.format(formatString);
-//
-//        //setting text after format to EditText
-//        editText_phone.setText(formattedString);
-//        editText_phone.setSelection(editText_phone.getText().length());
+        linear_layout_id.setVisibility(View.VISIBLE);
+//        editText_phone.addTextChangedListener(new NumberTextWatcherForThousand(editText_phone));
+        editText_phone.addTextChangedListener(new NumberTextWatcher(editText_phone));
 
         List<String> valutas = new ArrayList<String>();
         valutas.add("Rupiah");
@@ -229,58 +153,6 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.spinner_item, city);
         autoComplete_city.setAdapter(cityAdapter);
     }
-
-//    private TextWatcher onTextChangedListener() {
-//        return new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                editText_phone.removeTextChangedListener(this);
-//
-////                DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
-////                DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
-////                formatRp.setCurrencySymbol("Rp. ");
-////                formatRp.setMonetaryDecimalSeparator(',');
-////                formatRp.setGroupingSeparator('.');
-////                kursIndonesia.setDecimalFormatSymbols(formatRp);
-//
-//                try {
-////                    String formatString = "#,###,###,###.##";
-//                    String originalString = s.toString();
-//
-//                    Long longval;
-//                    longval = Long.parseLong(originalString);
-//
-//                    DecimalFormat formatter = (DecimalFormat) DecimalFormat.getCurrencyInstance();
-////                    formatter.applyPattern("#,###,###,###.##");
-//                    DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
-//                    formatRp.setCurrencySymbol("Rp. ");
-//                    formatRp.setMonetaryDecimalSeparator(',');
-//                    formatRp.setGroupingSeparator('.');
-//                    formatter.setDecimalFormatSymbols(formatRp);
-//                    String formattedString = formatter.format(longval);
-////                    String formattedString = formatter.format(formatString);
-//
-//                    //setting text after format to EditText
-//                    editText_phone.setText(formattedString);
-//                    editText_phone.setSelection(editText_phone.getText().length());
-//                } catch (NumberFormatException nfe) {
-//                    nfe.printStackTrace();
-//                }
-//
-//                editText_phone.addTextChangedListener(this);
-//            }
-//        };
-//    }
 
     private void loadDataSpinnerGroup() {
         Call<ListCustomerGroupResponse> customerGroupResponseCall = RestClient.getRestClient().getAllCustomerGroup("Bearer " +
@@ -383,67 +255,60 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
     }
 
     private void loadData() {
-        Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer " + token, decode);
-        customerResponseCall.enqueue(new Callback<CustomerResponse>() {
-            @Override
-            public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
-                if (response.isSuccessful()) {
-                    if (response.body().getData().size() > 0) {
-                        CustomerModel customerModel = new CustomerModel();
-                        customerModel = response.body().getData().get(0);
-                        editText_customer_code.setText(customerModel.getCode() == null ? "" : customerModel.getCode());
-                        editText_first_name.setText(customerModel.getFirst_name() == null ? "" : customerModel.getFirst_name());
-                        editText_address.setText(customerModel.getAddress() == null ? "" : customerModel.getAddress());
-                        autoComplete_city.setText(customerModel.getCity() == null ? "" : customerModel.getCity());
-                        autoComplete_province.setText(customerModel.getProvince() == null ? "" : customerModel.getProvince());
-                        editText_phone.setText(customerModel.getPhone() == null ? "" : customerModel.getPhone());
-                        editText_mobile.setText(customerModel.getMobile() == null ? "" : customerModel.getMobile());
-                        editText_fax.setText(customerModel.getFax() == null ? "" : customerModel.getFax());
-                        editText_term.setText(customerModel.getTerm() == null ? "" : customerModel.getTerm());
-                        editText_npwp.setText(customerModel.getNpwp() == null ? "" : customerModel.getNpwp());
-                        editText_email.setText(customerModel.getEmail() == null ? "" : customerModel.getEmail());
-                        editText_website.setText(customerModel.getWebsite() == null ? "" : customerModel.getWebsite());
-                        editText_note.setText(customerModel.getNote() == null ? "" : customerModel.getNote());
-                        editText_zip_code.setText(customerModel.getPostcode() == null ? "" : customerModel.getPostcode());
+//        String decode_Admin = "";
 
-                        FormCustomerActivity.customerModel_temp.setCode(customerModel.getCode() == null ? "" : customerModel.getCode());
-                        FormCustomerActivity.customerModel_temp.setFirst_name(customerModel.getFirst_name() == null ? "" : customerModel.getFirst_name());
-                        FormCustomerActivity.customerModel_temp.setAddress(customerModel.getAddress() == null ? "" : customerModel.getAddress());
-                        FormCustomerActivity.customerModel_temp.setCity(customerModel.getCity() == null ? "" : customerModel.getCity());
-                        FormCustomerActivity.customerModel_temp.setPhone(customerModel.getPhone() == null ? "" : customerModel.getPhone());
-                        FormCustomerActivity.customerModel_temp.setMobile(customerModel.getMobile() == null ? "" : customerModel.getMobile());
-                        FormCustomerActivity.customerModel_temp.setFax(customerModel.getFax() == null ? "" : customerModel.getFax());
-                        FormCustomerActivity.customerModel_temp.setTerm(customerModel.getTerm() == null ? "" : customerModel.getTerm());
-                        FormCustomerActivity.customerModel_temp.setNpwp(customerModel.getNpwp() == null ? "" : customerModel.getNpwp());
-                        FormCustomerActivity.customerModel_temp.setEmail(customerModel.getEmail() == null ? "" : customerModel.getEmail());
-                        FormCustomerActivity.customerModel_temp.setWebsite(customerModel.getWebsite() == null ? "" : customerModel.getWebsite());
-                        FormCustomerActivity.customerModel_temp.setNote(customerModel.getNote() == null ? "" : customerModel.getNote());
-                        FormCustomerActivity.customerModel_temp.setPostcode(customerModel.getPostcode() == null ? "" : customerModel.getPostcode());
+        Toast.makeText(getActivity().getApplicationContext(), ""+decode, Toast.LENGTH_SHORT).show();
 
-                        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")) {
-                            if (customerModel.getApprove() == 1) {
-                                readOnly();
-                            }
+        if(!decode.equals("0")) {
+            Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer " + token, decode);
+            customerResponseCall.enqueue(new Callback<CustomerResponse>() {
+                @Override
+                public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
+                    if (response.isSuccessful()) {
+                        if (response.body().getData().size() > 0) {
+                            CustomerModel customerModel = new CustomerModel();
+                            customerModel = response.body().getData().get(0);
+                            editText_first_name.setText(customerModel.getFirst_name() == null ? "" : customerModel.getFirst_name());
+                            editText_address.setText(customerModel.getAddress() == null ? "" : customerModel.getAddress());
+                            autoComplete_city.setText(customerModel.getCity() == null ? "" : customerModel.getCity());
+                            autoComplete_province.setText(customerModel.getProvince() == null ? "" : customerModel.getProvince());
+                            editText_phone.setText(customerModel.getPhone() == null ? "" : customerModel.getPhone());
+                            editText_mobile.setText(customerModel.getMobile() == null ? "" : customerModel.getMobile());
+                            editText_fax.setText(customerModel.getFax() == null ? "" : customerModel.getFax());
+                            editText_term.setText(customerModel.getTerm() == null ? "" : customerModel.getTerm());
+                            editText_npwp.setText(customerModel.getNpwp() == null ? "" : customerModel.getNpwp());
+                            editText_email.setText(customerModel.getEmail() == null ? "" : customerModel.getEmail());
+                            editText_website.setText(customerModel.getWebsite() == null ? "" : customerModel.getWebsite());
+                            editText_note.setText(customerModel.getNote() == null ? "" : customerModel.getNote());
+                            editText_zip_code.setText(customerModel.getPostcode() == null ? "" : customerModel.getPostcode());
+
+                            FormCustomerActivity.customerModel_temp.setFirst_name(customerModel.getFirst_name() == null ? "" : customerModel.getFirst_name());
+                            FormCustomerActivity.customerModel_temp.setAddress(customerModel.getAddress() == null ? "" : customerModel.getAddress());
+                            FormCustomerActivity.customerModel_temp.setCity(customerModel.getCity() == null ? "" : customerModel.getCity());
+                            FormCustomerActivity.customerModel_temp.setPhone(customerModel.getPhone() == null ? "" : customerModel.getPhone());
+                            FormCustomerActivity.customerModel_temp.setMobile(customerModel.getMobile() == null ? "" : customerModel.getMobile());
+                            FormCustomerActivity.customerModel_temp.setFax(customerModel.getFax() == null ? "" : customerModel.getFax());
+                            FormCustomerActivity.customerModel_temp.setTerm(customerModel.getTerm() == null ? "" : customerModel.getTerm());
+                            FormCustomerActivity.customerModel_temp.setNpwp(customerModel.getNpwp() == null ? "" : customerModel.getNpwp());
+                            FormCustomerActivity.customerModel_temp.setEmail(customerModel.getEmail() == null ? "" : customerModel.getEmail());
+                            FormCustomerActivity.customerModel_temp.setWebsite(customerModel.getWebsite() == null ? "" : customerModel.getWebsite());
+                            FormCustomerActivity.customerModel_temp.setNote(customerModel.getNote() == null ? "" : customerModel.getNote());
+                            FormCustomerActivity.customerModel_temp.setPostcode(customerModel.getPostcode() == null ? "" : customerModel.getPostcode());
                         }
-                        if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
-                            if (customerModel.getApprove() == 1) {
-                                readOnly();
-                            }
-                        }
+
                     }
+                }
+
+                @Override
+                public void onFailure(Call<CustomerResponse> call, Throwable t) {
 
                 }
-            }
-
-            @Override
-            public void onFailure(Call<CustomerResponse> call, Throwable t) {
-
-            }
-        });
+            });
+        }
     }
 
     public void readOnly() {
-        editText_customer_code.setEnabled(false);
+        editText_id.setEnabled(false);
         editText_first_name.setEnabled(false);
         editText_address.setEnabled(false);
         autoComplete_city.setEnabled(false);

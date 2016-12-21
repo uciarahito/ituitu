@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:background="@color/ReceiverLayoutMessage"
+        android:background="@color/MediumSeaGreen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -25,7 +25,9 @@
         <Button
             android:id="@+id/button_keep_username"
             android:layout_margin="1dp"
-            android:background="@color/SkyBlue"
+            android:background="@color/Green"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             android:textAllCaps="false"
             android:text="Keep Username"
             android:layout_weight="1"
@@ -34,7 +36,9 @@
         <Button
             android:id="@+id/button_delete_username"
             android:layout_margin="1dp"
-            android:background="@color/SkyBlue"
+            android:background="@color/Green"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             android:textAllCaps="false"
             android:text="Delete Username"
             android:layout_weight="1"

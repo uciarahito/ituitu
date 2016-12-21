@@ -16,23 +16,38 @@ import uci.develops.wiraenergimobile.R;
 /**
  * Created by ArahitoPC on 11/27/2016.
  */
-public class FragmentProfileCustomer extends Fragment implements View.OnClickListener{
+public class FragmentProfileCustomer extends Fragment implements View.OnClickListener {
+    @BindView(R.id.imageTitleUp1) ImageView imageTitleUp1;
+    @BindView(R.id.imageTitleUp2) ImageView imageTitleUp2;
+    @BindView(R.id.imageTitleUp3) ImageView imageTitleUp3;
     @BindView(R.id.imageTitle1) ImageView imageViewTitle1;
-    @BindView(R.id.imageTitle2) ImageView imageViewTitle2;
-    @BindView(R.id.imageTitle3) ImageView imageViewTitle3;
-    @BindView(R.id.layoutTitle1) LinearLayout linearLayoutTitle1;
-    @BindView(R.id.layoutTitle2) LinearLayout linearLayoutTitle2;
-    @BindView(R.id.layoutTitle3) LinearLayout linearLayoutTitle3;
-    @BindView(R.id.layoutContent1) LinearLayout linearLayoutContent1;
-    @BindView(R.id.layoutContent2) LinearLayout linearLayoutContent2;
-    @BindView(R.id.layoutContent3) LinearLayout linearLayoutContent3;
-    @BindView(R.id.layout_container_profil_company_info) LinearLayout layout_container_profil_company_info;
-    @BindView(R.id.layout_container_profil_contact_info) LinearLayout layout_container_profil_contact_info;
-    @BindView(R.id.layout_container_profil_shipping_address) LinearLayout layout_container_profil_shipping_address;
+    @BindView(R.id.imageTitle2)
+    ImageView imageViewTitle2;
+    @BindView(R.id.imageTitle3)
+    ImageView imageViewTitle3;
+    @BindView(R.id.layoutTitle1)
+    LinearLayout linearLayoutTitle1;
+    @BindView(R.id.layoutTitle2)
+    LinearLayout linearLayoutTitle2;
+    @BindView(R.id.layoutTitle3)
+    LinearLayout linearLayoutTitle3;
+    @BindView(R.id.layoutContent1)
+    LinearLayout linearLayoutContent1;
+    @BindView(R.id.layoutContent2)
+    LinearLayout linearLayoutContent2;
+    @BindView(R.id.layoutContent3)
+    LinearLayout linearLayoutContent3;
+    @BindView(R.id.layout_container_profil_company_info)
+    LinearLayout layout_container_profil_company_info;
+    @BindView(R.id.layout_container_profil_contact_info)
+    LinearLayout layout_container_profil_contact_info;
+    @BindView(R.id.layout_container_profil_shipping_address)
+    LinearLayout layout_container_profil_shipping_address;
 
-    boolean content1=false, content2=false, content3=false;
+    boolean content1 = false, content2 = false, content3 = false;
 
-    public FragmentProfileCustomer(){}
+    public FragmentProfileCustomer() {
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,10 +65,13 @@ public class FragmentProfileCustomer extends Fragment implements View.OnClickLis
         return view;
     }
 
-    private void loadData(){
+    private void loadData() {
     }
 
-    private void initializeComponent(View view){
+    private void initializeComponent(View view) {
+        imageViewTitle1.setVisibility(View.VISIBLE);
+        imageViewTitle2.setVisibility(View.VISIBLE);
+        imageViewTitle3.setVisibility(View.VISIBLE);
         linearLayoutTitle1.setOnClickListener(this);
         linearLayoutTitle2.setOnClickListener(this);
         linearLayoutTitle3.setOnClickListener(this);
@@ -70,37 +88,50 @@ public class FragmentProfileCustomer extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        if(v == linearLayoutTitle1){
-            if(!content1){
+
+        if (v == linearLayoutTitle1) {
+            if (!content1) {
+                imageViewTitle1.setVisibility(View.GONE);
+                imageTitleUp1.setVisibility(View.VISIBLE);
                 linearLayoutContent1.setVisibility(View.VISIBLE);
                 layout_container_profil_company_info.setVisibility(View.VISIBLE);
-                content1=true;
+                content1 = true;
             } else {
+                imageViewTitle1.setVisibility(View.VISIBLE);
+                imageTitleUp1.setVisibility(View.GONE);
                 linearLayoutContent1.setVisibility(View.GONE);
                 layout_container_profil_company_info.setVisibility(View.GONE);
-                content1=false;
+                content1 = false;
             }
         }
-        if(v == linearLayoutTitle2){
-            if(!content2){
+        if (v == linearLayoutTitle2) {
+            if (!content2) {
+                imageViewTitle2.setVisibility(View.GONE);
+                imageTitleUp2.setVisibility(View.VISIBLE);
                 linearLayoutContent2.setVisibility(View.VISIBLE);
                 layout_container_profil_contact_info.setVisibility(View.VISIBLE);
-                content2=true;
+                content2 = true;
             } else {
+                imageViewTitle2.setVisibility(View.VISIBLE);
+                imageTitleUp2.setVisibility(View.GONE);
                 linearLayoutContent2.setVisibility(View.GONE);
                 layout_container_profil_contact_info.setVisibility(View.GONE);
-                content2=false;
+                content2 = false;
             }
         }
-        if(v == linearLayoutTitle3){
-            if(!content3){
+        if (v == linearLayoutTitle3) {
+            if (!content3) {
+                imageViewTitle3.setVisibility(View.GONE);
+                imageTitleUp3.setVisibility(View.VISIBLE);
                 linearLayoutContent3.setVisibility(View.VISIBLE);
                 layout_container_profil_shipping_address.setVisibility(View.VISIBLE);
-                content3=true;
+                content3 = true;
             } else {
+                imageViewTitle3.setVisibility(View.VISIBLE);
+                imageTitleUp3.setVisibility(View.GONE);
                 linearLayoutContent3.setVisibility(View.GONE);
                 layout_container_profil_shipping_address.setVisibility(View.GONE);
-                content3=false;
+                content3 = false;
             }
         }
     }

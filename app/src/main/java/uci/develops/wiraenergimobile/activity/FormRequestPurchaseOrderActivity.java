@@ -53,6 +53,8 @@ import uci.develops.wiraenergimobile.service.RestClient;
 
 public class FormRequestPurchaseOrderActivity extends AppCompatActivity implements View.OnClickListener{
 
+    @BindView(R.id.imageTitle1) ImageView imageViewTitle1;
+    @BindView(R.id.imageTitleUp1) ImageView imageTitleUp1;
     @BindView(R.id.linear_layout_title1) LinearLayout linearLayoutTitle1;
     @BindView(R.id.linear_layout_content1) LinearLayout linearLayoutContent1;
     @BindView(R.id.linear_layout_container_supplier_detail) LinearLayout linearLayoutContainer1;
@@ -108,6 +110,7 @@ public class FormRequestPurchaseOrderActivity extends AppCompatActivity implemen
     }
 
     private void initializeComponent(){
+        imageViewTitle1.setVisibility(View.VISIBLE);
         button_add_item.setOnClickListener(this);
         linearLayoutTitle1.setOnClickListener(this);
     }
@@ -120,10 +123,14 @@ public class FormRequestPurchaseOrderActivity extends AppCompatActivity implemen
 
         if(v == linearLayoutTitle1){
             if(!content1){
+                imageViewTitle1.setVisibility(View.GONE);
+                imageTitleUp1.setVisibility(View.VISIBLE);
                 linearLayoutContent1.setVisibility(View.VISIBLE);
                 linearLayoutContainer1.setVisibility(View.VISIBLE);
                 content1=true;
             } else {
+                imageViewTitle1.setVisibility(View.VISIBLE);
+                imageTitleUp1.setVisibility(View.GONE);
                 linearLayoutContent1.setVisibility(View.GONE);
                 linearLayoutContainer1.setVisibility(View.GONE);
                 content1=false;

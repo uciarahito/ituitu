@@ -46,6 +46,7 @@ public class ItemShippingAddressAdapter extends RecyclerView.Adapter<ItemShippin
     private Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.textView_pic) TextView textView_pic;
         @BindView(R.id.textView_name) TextView textView_name;
         @BindView(R.id.textView_phone) TextView textView_phone;
         @BindView(R.id.textView_mobile) TextView textView_mobile;
@@ -104,6 +105,7 @@ public class ItemShippingAddressAdapter extends RecyclerView.Adapter<ItemShippin
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final CustomerAddressModel customerAddressModel = customerAddressModelList.get(position);
+        holder.textView_pic.setText("" + customerAddressModel.getPic());
         holder.textView_name.setText("" + customerAddressModel.getName());
         holder.textView_phone.setText("" + customerAddressModel.getPhone());
         holder.textView_mobile.setText("" + customerAddressModel.getMobile());

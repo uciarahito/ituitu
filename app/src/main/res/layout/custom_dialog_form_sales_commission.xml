@@ -314,7 +314,9 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@color/SkyBlue"
+            android:background="@color/Green"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             android:text="Cancel"
             android:textAllCaps="false" />
 
@@ -324,7 +326,9 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@color/SkyBlue"
+            android:background="@color/Green"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             android:text="Save"
             android:textAllCaps="false" />
     </LinearLayout>
