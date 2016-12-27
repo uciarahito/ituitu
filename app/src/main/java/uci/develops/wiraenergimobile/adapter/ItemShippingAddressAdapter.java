@@ -2,13 +2,16 @@ package uci.develops.wiraenergimobile.adapter;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -29,7 +32,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
-import uci.develops.wiraenergimobile.activity.FormCustomerActivity;
 import uci.develops.wiraenergimobile.activity.HomeActivity;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerAddressModel;
@@ -44,6 +46,8 @@ import uci.develops.wiraenergimobile.service.RestClient;
 public class ItemShippingAddressAdapter extends RecyclerView.Adapter<ItemShippingAddressAdapter.MyViewHolder> {
     private List<CustomerAddressModel> customerAddressModelList;
     private Context context;
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
+//    public static String addressDialog = "", latitudeDialog = "", longitudeDialog = "";
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.textView_pic) TextView textView_pic;
@@ -80,6 +84,41 @@ public class ItemShippingAddressAdapter extends RecyclerView.Adapter<ItemShippin
                     imageView_delete.setEnabled(true);
                 }
             }
+
+            /*
+            mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    //If the broadcast has received with success
+                    //that means device is registered successfully
+                    // di sini ada data2 yang dikirim melalui fcm
+                    // ini action intentnya
+                    if (intent.getAction().equals("pushNotification")) {
+                        // ini valuenya
+                        // jadi tadi kita ngirim broadcast refresh_list_shipping
+                        // yang kita MAU, dia refresh kan
+                        // code REFRESH di class ini, loadData
+                        // paham?
+                        String broadcastNotification = intent.getStringExtra("type");
+                        if (broadcastNotification.equals("dismiss_dialog_maps")) {
+                            dialogMaps.dismiss();
+                            editText_map_cordinate.setText("" + addressDialog);
+//                        Toast.makeText(getContext(), "" + latitudeDialog, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "" + longitudeDialog, Toast.LENGTH_SHORT).show();
+                            editText_map_cordinate.setEnabled(true);
+                        }
+                    } else {
+                    }
+                }
+            };
+
+            // ini untuk mendaftarkan object broadcast receiver di fragment ini
+            // jadi ketika fragment ini aktif, dan ada broadcast dari mana pun (fcm, gcm, dialog, activity, dll)
+            // bakalan di proses
+            LocalBroadcastManager.getInstance(context).registerReceiver(mRegistrationBroadcastReceiver,
+                    new IntentFilter("pushNotification"));
+*/
         }
     }
 
@@ -206,25 +245,35 @@ public class ItemShippingAddressAdapter extends RecyclerView.Adapter<ItemShippin
         });
     }
 
+    Dialog dialogMaps;
+
+    void showDialogMaps() {
+        dialogMaps = new Dialog(context);
+        dialogMaps.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogMaps.setContentView(R.layout.custom_dialog_maps);
+        dialogMaps.setCancelable(true);
+        dialogMaps.show();
+    }
 
     private EditText editText_pic_name, editText_address_name, editText_address,
             editText_phone, editText_mobile, editText_map_cordinate;
     private Button button_save, button_cancel;
+    String latlong = "";
 
-    Dialog dialog_add_shipping;
+    Dialog dialog_edit_shipping;
     private void showDialogEditShipping(final CustomerAddressModel customerAddressModel) {
-        dialog_add_shipping = new Dialog(context);
-        dialog_add_shipping.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog_add_shipping.setContentView(R.layout.custom_dialog_form_shipping_address);
+        dialog_edit_shipping = new Dialog(context);
+        dialog_edit_shipping.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog_edit_shipping.setContentView(R.layout.custom_dialog_form_shipping_address);
 
-        editText_pic_name = ButterKnife.findById(dialog_add_shipping, R.id.editText_name);
-        editText_address_name = ButterKnife.findById(dialog_add_shipping, R.id.editText_address_name);
-        editText_address = ButterKnife.findById(dialog_add_shipping, R.id.editText_address);
-        editText_map_cordinate = ButterKnife.findById(dialog_add_shipping, R.id.editText_map_coordinate);
-        editText_phone = ButterKnife.findById(dialog_add_shipping, R.id.editText_phone);
-        editText_mobile = ButterKnife.findById(dialog_add_shipping, R.id.editText_mobile);
-        button_save = ButterKnife.findById(dialog_add_shipping, R.id.button_save);
-        button_cancel = ButterKnife.findById(dialog_add_shipping, R.id.button_cancel);
+        editText_pic_name = ButterKnife.findById(dialog_edit_shipping, R.id.editText_name);
+        editText_address_name = ButterKnife.findById(dialog_edit_shipping, R.id.editText_address_name);
+        editText_address = ButterKnife.findById(dialog_edit_shipping, R.id.editText_address);
+        editText_map_cordinate = ButterKnife.findById(dialog_edit_shipping, R.id.editText_map_coordinate);
+        editText_phone = ButterKnife.findById(dialog_edit_shipping, R.id.editText_phone);
+        editText_mobile = ButterKnife.findById(dialog_edit_shipping, R.id.editText_mobile);
+        button_save = ButterKnife.findById(dialog_edit_shipping, R.id.button_save);
+        button_cancel = ButterKnife.findById(dialog_edit_shipping, R.id.button_cancel);
 
         Call<CustomerAddressResponse> customerAddressResponseCall = RestClient.getRestClient().getCustomerAddressByDecode("Bearer " +
                         new SharedPreferenceManager().getPreferences(context, "token"),
@@ -237,9 +286,10 @@ public class ItemShippingAddressAdapter extends RecyclerView.Adapter<ItemShippin
                     editText_pic_name.setText("" + customerAddressModel.getPic());
                     editText_address_name.setText("" + customerAddressModel.getName());
                     editText_address.setText("" + customerAddressModel.getAddress());
-                    editText_map_cordinate.setText("" + customerAddressModel.getMap());
-                    editText_phone.setText("" + customerAddressModel.getPhone());
                     editText_mobile.setText("" + customerAddressModel.getMobile());
+                    editText_phone.setText("" + customerAddressModel.getPhone());
+                    editText_map_cordinate.setText("" + customerAddressModel.getMap());
+//                    editText_map_cordinate.setText("" + addressDialog);
 
                     if (new SharedPreferenceManager().getPreferences(context, "roles").equals("")) {
                         if (Integer.parseInt(new SharedPreferenceManager().getPreferences(context, "approve")) == 0) {
@@ -263,14 +313,23 @@ public class ItemShippingAddressAdapter extends RecyclerView.Adapter<ItemShippin
             }
         });
 
+        editText_map_cordinate.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                editText_map_cordinate.setEnabled(false);
+                showDialogMaps();
+                return false;
+            }
+        });
+
         DisplayMetrics displayMetrics = new DisplayMetrics();
         WindowManager windowmanager = (WindowManager) context.getSystemService(context.WINDOW_SERVICE);
         windowmanager.getDefaultDisplay().getMetrics(displayMetrics);
         int deviceWidth = displayMetrics.widthPixels;
         int deviceHeight = displayMetrics.heightPixels;
-        dialog_add_shipping.getWindow().setLayout(deviceWidth - 20, WindowManager.LayoutParams.WRAP_CONTENT);
-        dialog_add_shipping.setCancelable(true);
-        dialog_add_shipping.show();
+        dialog_edit_shipping.getWindow().setLayout(deviceWidth - 20, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog_edit_shipping.setCancelable(true);
+        dialog_edit_shipping.show();
 
         button_save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -278,6 +337,7 @@ public class ItemShippingAddressAdapter extends RecyclerView.Adapter<ItemShippin
                 boolean is_not_empty = false;
                 is_not_empty = isNotEmpty();
                 if (is_not_empty) {
+//                    latlong = latitudeDialog + "," + longitudeDialog;
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("decode", customerAddressModel.getDecode());
                     params.put("name", editText_address_name.getText().toString());
@@ -286,6 +346,7 @@ public class ItemShippingAddressAdapter extends RecyclerView.Adapter<ItemShippin
                     params.put("phone", editText_phone.getText().toString());
                     params.put("mobile", editText_mobile.getText().toString());
                     params.put("map", editText_map_cordinate.getText().toString());
+//                    params.put("map", latlong);
                     Call<ApproveResponse> addShippingAddressCall = RestClient.getRestClient().sendDataShippingInfoNew("Bearer " +
                                     new SharedPreferenceManager().getPreferences(context, "token"),
                             new SharedPreferenceManager().getPreferences(context, "customer_decode"), params);
@@ -305,7 +366,7 @@ public class ItemShippingAddressAdapter extends RecyclerView.Adapter<ItemShippin
 
                                 pushNotification.putExtra("type", "refresh_list_shipping");
                                 LocalBroadcastManager.getInstance(context).sendBroadcast(pushNotification);
-                                dialog_add_shipping.dismiss();
+                                dialog_edit_shipping.dismiss();
                             } else {
                                 Toast.makeText(context, "" + response.errorBody().toString(), Toast.LENGTH_SHORT).show();
                             }
@@ -325,7 +386,7 @@ public class ItemShippingAddressAdapter extends RecyclerView.Adapter<ItemShippin
         button_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog_add_shipping.dismiss();
+                dialog_edit_shipping.dismiss();
             }
         });
     }

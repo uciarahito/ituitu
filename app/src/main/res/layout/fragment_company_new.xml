@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:orientation="vertical">
 
@@ -70,6 +71,7 @@
                 android:layout_weight="1.75"
                 android:layout_height="wrap_content"
                 android:text="@string/customer_code"
+                android:gravity="end"
                 android:layout_gravity="center"
                 android:textStyle="bold" />
 
@@ -77,13 +79,16 @@
                 android:id="@+id/editText_customer_code"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4.25"
+                android:layout_weight="4"
                 android:hint="@string/customer_code"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
                 android:inputType="textCapWords|textPersonName"
+                android:paddingLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:layout_gravity="center|center_vertical"
                 android:textSize="@dimen/textView_transaction"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -96,6 +101,7 @@
                 android:layout_weight="1.75"
                 android:layout_height="wrap_content"
                 android:text="@string/customer_name"
+                android:gravity="end"
                 android:layout_gravity="center"
                 android:textStyle="bold" />
 
@@ -103,10 +109,12 @@
                 android:id="@+id/editText_name"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4.25"
+                android:layout_weight="4"
                 android:hint="@string/customer_name"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
+                android:paddingLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:inputType="textCapWords|textPersonName"
                 android:layout_gravity="center|center_vertical"
                 android:textSize="@dimen/textView_transaction"/>
@@ -123,6 +131,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/address"
                 android:layout_gravity="center"
+                android:gravity="end"
                 android:textStyle="bold"
                 android:id="@+id/textView3" />
 
@@ -130,10 +139,12 @@
                 android:id="@+id/editText_address"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4.25"
+                android:layout_weight="4"
                 android:hint="@string/address"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
+                android:paddingLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:inputType="textCapWords|textEmailAddress"
                 android:layout_gravity="center|center_vertical"
                 android:textSize="@dimen/textView_transaction"/>
@@ -150,15 +161,18 @@
                 android:layout_height="wrap_content"
                 android:text="@string/province"
                 android:layout_gravity="center"
+                android:gravity="end"
                 android:textStyle="bold" />
 
             <AutoCompleteTextView
                 android:id="@+id/autoComplete_province"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4.25"
+                android:layout_weight="4"
                 android:ems="10"
                 android:hint="@string/province"
+                android:paddingLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:layout_gravity="center|center_vertical"
                 android:textSize="@dimen/textView_transaction"
                 android:textColorHint="@color/colorGray">
@@ -178,15 +192,18 @@
                 android:layout_height="wrap_content"
                 android:text="@string/city"
                 android:layout_gravity="center"
+                android:gravity="end"
                 android:textStyle="bold" />
 
             <AutoCompleteTextView
                 android:id="@+id/autoComplete_city"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4.25"
+                android:layout_weight="4"
                 android:ems="10"
                 android:hint="@string/city"
+                android:paddingLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:layout_gravity="center|center_vertical"
                 android:textSize="@dimen/textView_transaction"
                 android:textColorHint="@color/colorGray">
@@ -206,16 +223,19 @@
                 android:layout_height="wrap_content"
                 android:text="@string/zip_code"
                 android:layout_gravity="center"
+                android:gravity="end"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editText_postcode"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4.25"
+                android:layout_weight="4"
                 android:hint="@string/zip_code"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
+                android:paddingLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:inputType="textCapWords|textPostalAddress"
                 android:layout_gravity="center|center_vertical"
                 android:textSize="@dimen/textView_transaction"/>
@@ -231,16 +251,33 @@
                 android:layout_weight="1.75"
                 android:layout_height="wrap_content"
                 android:text="@string/group"
+                android:gravity="end"
                 android:layout_gravity="center"
                 android:textStyle="bold" />
 
-            <uci.develops.wiraenergimobile.library.SearchableSpinner
-                android:id="@+id/search_spinner_group"
+            <EditText
+                android:id="@+id/editText_group"
                 android:layout_width="0dp"
-                android:layout_weight="3"
                 android:layout_height="match_parent"
-                app:hintText="@string/select_one"
-                android:layout_gravity="center|center_vertical" />
+                android:layout_weight="4"
+                android:hint="@string/group"
+                android:textColorHint="@color/colorGray"
+                android:imeOptions="actionNext"
+                android:paddingLeft="5dp"
+                android:layout_marginLeft="10dp"
+                android:inputType="textCapWords|textPersonName"
+                android:layout_gravity="center|center_vertical"
+                android:textSize="@dimen/textView_transaction"/>
+
+            <!--<uci.develops.wiraenergimobile.library.SearchableSpinner-->
+                <!--android:id="@+id/search_spinner_group"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="3"-->
+                <!--android:layout_height="match_parent"-->
+                <!--app:hintText="@string/select_one"-->
+                <!--android:paddingLeft="5dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_gravity="center|center_vertical" />-->
         </LinearLayout>
 
         <LinearLayout
@@ -255,16 +292,19 @@
                 android:layout_height="wrap_content"
                 android:text="@string/term"
                 android:layout_gravity="center"
+                android:gravity="end"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editText_term"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4.25"
+                android:layout_weight="4"
                 android:hint="@string/term"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
+                android:paddingLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:inputType="number"
                 android:layout_gravity="center|center_vertical"
                 android:textSize="@dimen/textView_transaction"/>
@@ -281,6 +321,7 @@
                 android:layout_weight="1.75"
                 android:layout_height="wrap_content"
                 android:text="@string/valuta"
+                android:gravity="end"
                 android:layout_gravity="center"
                 android:textStyle="bold" />
 
@@ -290,7 +331,9 @@
                 android:layout_weight="2"
                 android:layout_height="match_parent"
                 app:layout_gravity="left|center"
-                android:spinnerMode="dialog"
+                android:paddingLeft="5dp"
+                android:layout_marginLeft="10dp"
+                tools:listitem="@android:layout/simple_spinner_dropdown_item"
                 android:layout_gravity="center|center_vertical"
                 android:prompt="@string/select_one"/>
         </LinearLayout>
@@ -305,6 +348,7 @@
                 android:layout_weight="1.75"
                 android:layout_height="wrap_content"
                 android:text="@string/npwp"
+                android:gravity="end"
                 android:layout_gravity="center"
                 android:textStyle="bold" />
 
@@ -312,10 +356,12 @@
                 android:id="@+id/editText_npwp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4.25"
+                android:layout_weight="4"
                 android:hint="@string/npwp"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
+                android:paddingLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:inputType="number"
                 android:layout_gravity="center|center_vertical"
                 android:textSize="@dimen/textView_transaction"/>
@@ -343,11 +389,13 @@
                 android:id="@+id/editText_phone"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4.25"
+                android:layout_weight="4"
                 android:hint="@string/phone"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
                 android:inputType="numberDecimal"
+                android:paddingLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:digits="0123456789.,"
                 android:layout_gravity="center|center_vertical"
                 android:textSize="@dimen/textView_transaction"/>
@@ -375,10 +423,12 @@
                 android:id="@+id/editText_mobile"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4.25"
+                android:layout_weight="4"
                 android:hint="@string/mobile"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
+                android:paddingLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:inputType="phone"
                 android:layout_gravity="center|center_vertical"
                 android:textSize="@dimen/textView_transaction"/>
@@ -406,10 +456,12 @@
                 android:id="@+id/editText_fax"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4.25"
+                android:layout_weight="4"
                 android:hint="@string/fax"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
+                android:paddingLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:inputType="phone"
                 android:layout_gravity="center|center_vertical"
                 android:textSize="@dimen/textView_transaction"/>
@@ -437,10 +489,12 @@
                 android:id="@+id/editText_email"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4.25"
+                android:layout_weight="4"
                 android:hint="@string/email"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
+                android:paddingLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:inputType="textCapWords|textEmailAddress"
                 android:layout_gravity="center|center_vertical"
                 android:textSize="@dimen/textView_transaction"/>
@@ -457,18 +511,27 @@
                 android:layout_weight="1.75"
                 android:layout_height="wrap_content"
                 android:text="@string/tax"
+                android:gravity="end"
                 android:layout_gravity="center"
                 android:textStyle="bold" />
 
-            <Spinner
-                android:id="@+id/spinner_tax_ppn"
+            <TextView
+                android:id="@+id/textView_tax_ppn"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:gravity="end"
+                android:layout_gravity="center"
+                android:textStyle="bold"/>
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/switch_tax"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                app:layout_gravity="left|center"
-                android:spinnerMode="dialog"
-                android:layout_gravity="center|center_vertical"
-                android:prompt="@string/select_one"/>
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_weight="1"/>
         </LinearLayout>
 
         <LinearLayout
@@ -482,18 +545,29 @@
                 android:layout_weight="1.75"
                 android:layout_height="wrap_content"
                 android:text="@string/active"
+                android:gravity="end"
                 android:layout_gravity="center"
                 android:textStyle="bold" />
 
-            <Spinner
-                android:id="@+id/spinner_active"
+            <TextView
+                android:id="@+id/textView_active"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:gravity="end"
+                android:layout_gravity="center"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/switch_active"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                app:layout_gravity="left|center"
-                android:spinnerMode="dialog"
-                android:layout_gravity="center|center_vertical"
-                android:prompt="@string/select_one"/>
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_weight="1"/>
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -506,6 +580,7 @@
                 android:layout_weight="1.75"
                 android:layout_height="wrap_content"
                 android:text="@string/websites"
+                android:gravity="end"
                 android:layout_gravity="center"
                 android:textStyle="bold" />
 
@@ -513,10 +588,12 @@
                 android:id="@+id/editText_website"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4.25"
+                android:layout_weight="4"
                 android:hint="@string/websites"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
+                android:paddingLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:inputType="textCapWords|textWebEmailAddress"
                 android:layout_gravity="center|center_vertical"
                 android:textSize="@dimen/textView_transaction"/>
@@ -533,6 +610,7 @@
                 android:layout_weight="1.75"
                 android:layout_height="wrap_content"
                 android:text="@string/notes"
+                android:gravity="end"
                 android:layout_gravity="center"
                 android:textStyle="bold" />
 
@@ -540,10 +618,12 @@
                 android:id="@+id/editText_note"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4.25"
+                android:layout_weight="4"
                 android:hint="@string/notes"
                 android:textColorHint="@color/colorGray"
                 android:imeOptions="actionNext"
+                android:paddingLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:background="@drawable/rounded_rectangle_gray"
                 android:inputType="textCapWords|textWebEmailAddress"
                 android:layout_gravity="center|center_vertical"

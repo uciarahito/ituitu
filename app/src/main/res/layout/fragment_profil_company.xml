@@ -16,7 +16,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -27,17 +28,21 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1.75"
+                    android:layout_weight="1.9"
                     android:layout_height="wrap_content"
                     android:text="@string/customer_code"
+                    android:gravity="end"
                     android:layout_gravity="center"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:id="@+id/textView4" />
 
                 <TextView
                     android:id="@+id/textView_id"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4.25"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="left|center"
                     android:hint="@string/titiktitik"/>
             </LinearLayout>
@@ -49,9 +54,10 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1.75"
+                    android:layout_weight="1.9"
                     android:layout_height="wrap_content"
                     android:text="@string/customer_name"
+                    android:gravity="end"
                     android:layout_gravity="center"
                     android:textStyle="bold" />
 
@@ -59,7 +65,9 @@
                     android:id="@+id/textView_name"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4.25"
+                    android:paddingLeft="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="4"
                     android:gravity="left|center"
                     android:hint="....."/>
             </LinearLayout>
@@ -71,9 +79,10 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1.75"
+                    android:layout_weight="1.9"
                     android:layout_height="wrap_content"
                     android:text="@string/address"
+                    android:gravity="end"
                     android:layout_gravity="center"
                     android:textStyle="bold"
                     android:id="@+id/textView3" />
@@ -82,7 +91,9 @@
                     android:id="@+id/textView_address"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4.25"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="left|center"
                     android:hint="....."/>
             </LinearLayout>
@@ -94,9 +105,10 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1.75"
+                    android:layout_weight="1.9"
                     android:layout_height="wrap_content"
                     android:text="@string/province"
+                    android:gravity="end"
                     android:layout_gravity="center"
                     android:textStyle="bold" />
 
@@ -104,7 +116,9 @@
                     android:id="@+id/textView_province"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4.25"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="left|center"
                     android:hint="....."/>
 
@@ -117,9 +131,10 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1.75"
+                    android:layout_weight="1.9"
                     android:layout_height="wrap_content"
                     android:text="@string/city"
+                    android:gravity="end"
                     android:layout_gravity="center"
                     android:textStyle="bold" />
 
@@ -127,7 +142,9 @@
                     android:id="@+id/textView_city"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4.25"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="left|center"
                     android:hint="....."/>
 
@@ -140,9 +157,10 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1.75"
+                    android:layout_weight="1.9"
                     android:layout_height="wrap_content"
                     android:text="@string/zip_code"
+                    android:gravity="end"
                     android:layout_gravity="center"
                     android:textStyle="bold" />
 
@@ -150,7 +168,9 @@
                     android:id="@+id/textView_postcode"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4.25"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="left|center"
                     android:hint="....."/>
             </LinearLayout>
@@ -162,9 +182,10 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1.75"
+                    android:layout_weight="1.9"
                     android:layout_height="wrap_content"
                     android:text="@string/group"
+                    android:gravity="end"
                     android:layout_gravity="center"
                     android:textStyle="bold" />
 
@@ -172,7 +193,9 @@
                     android:id="@+id/textView_group"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4.25"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="left|center"
                     android:hint="....."/>
             </LinearLayout>
@@ -185,9 +208,10 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1.75"
+                    android:layout_weight="1.9"
                     android:layout_height="wrap_content"
                     android:text="@string/term"
+                    android:gravity="end"
                     android:layout_gravity="center"
                     android:textStyle="bold" />
 
@@ -195,7 +219,9 @@
                     android:id="@+id/textView_term"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4.25"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="left|center"
                     android:hint="....."/>
             </LinearLayout>
@@ -208,9 +234,10 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1.75"
+                    android:layout_weight="1.9"
                     android:layout_height="wrap_content"
                     android:text="@string/valuta"
+                    android:gravity="end"
                     android:layout_gravity="center"
                     android:textStyle="bold" />
 
@@ -218,7 +245,9 @@
                     android:id="@+id/textView_valuta"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4.25"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="left|center"
                     android:hint="....."/>
             </LinearLayout>
@@ -230,9 +259,10 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1.75"
+                    android:layout_weight="1.9"
                     android:layout_height="wrap_content"
                     android:text="@string/npwp"
+                    android:gravity="end"
                     android:layout_gravity="center"
                     android:textStyle="bold" />
 
@@ -240,7 +270,9 @@
                     android:id="@+id/textView_npwp"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4.25"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="left|center"
                     android:hint="....."/>
             </LinearLayout>
@@ -258,7 +290,7 @@
 
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_weight="0.75"
+                    android:layout_weight="0.9"
                     android:layout_gravity="end|center"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_phone_24dp" />
@@ -267,7 +299,9 @@
                     android:id="@+id/textView_phone"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4.24"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="left|center"
                     android:hint="....."/>
             </LinearLayout>
@@ -285,7 +319,7 @@
 
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_weight="0.75"
+                    android:layout_weight="0.9"
                     android:layout_gravity="end|center"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_mobile_24dp" />
@@ -294,7 +328,9 @@
                     android:id="@+id/textView_mobile"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4.25"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="left|center"
                     android:hint="....."/>
             </LinearLayout>
@@ -312,7 +348,7 @@
 
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_weight="0.75"
+                    android:layout_weight="0.9"
                     android:layout_gravity="end|center"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_fax_24dp" />
@@ -321,7 +357,9 @@
                     android:id="@+id/textView_fax"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4.25"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="left|center"
                     android:hint="....."/>
             </LinearLayout>
@@ -339,7 +377,7 @@
 
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_weight="0.75"
+                    android:layout_weight="0.9"
                     android:layout_gravity="end|center"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_email_24dp" />
@@ -348,7 +386,9 @@
                     android:id="@+id/textView_email"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4.25"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="left|center"
                     android:hint="....."/>
             </LinearLayout>
@@ -361,9 +401,10 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1.75"
+                    android:layout_weight="1.9"
                     android:layout_height="wrap_content"
                     android:text="@string/tax"
+                    android:gravity="end"
                     android:layout_gravity="center"
                     android:textStyle="bold" />
 
@@ -371,7 +412,9 @@
                     android:id="@+id/textView_tax_ppn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4.25"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="left|center"
                     android:hint="....."/>
             </LinearLayout>
@@ -384,9 +427,10 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1.75"
+                    android:layout_weight="1.9"
                     android:layout_height="wrap_content"
                     android:text="@string/active"
+                    android:gravity="end"
                     android:layout_gravity="center"
                     android:textStyle="bold" />
 
@@ -394,7 +438,9 @@
                     android:id="@+id/textView_active"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4.25"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="left|center"
                     android:hint="....."/>
             </LinearLayout>
@@ -406,9 +452,10 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1.75"
+                    android:layout_weight="1.9"
                     android:layout_height="wrap_content"
                     android:text="@string/websites"
+                    android:gravity="end"
                     android:layout_gravity="center"
                     android:textStyle="bold" />
 
@@ -416,7 +463,9 @@
                     android:id="@+id/textView_website"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4.25"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="left|center"
                     android:hint="....."/>
             </LinearLayout>
@@ -429,16 +478,19 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1.75"
+                    android:layout_weight="1.9"
                     android:layout_height="wrap_content"
                     android:text="@string/notes"
+                    android:gravity="end"
                     android:layout_gravity="center"
                     android:textStyle="bold" />
                 <TextView
                     android:id="@+id/textView_note"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4.25"
+                    android:layout_weight="4"
+                    android:paddingLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="left|center"
                     android:hint="....."/>
             </LinearLayout>

@@ -252,7 +252,5 @@
                 android:textColorHint="@color/colorGray"
                 android:textSize="@dimen/textView_transaction" />
         </LinearLayout>
-
-
     </LinearLayout>
 </LinearLayout>

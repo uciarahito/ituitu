@@ -2,14 +2,17 @@ package uci.develops.wiraenergimobile.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -65,12 +68,8 @@ public class FragmentFormReqCustAdminCompanyInfo extends Fragment {
     AutoCompleteTextView autoComplete_province;
     @BindView(R.id.spinner_valuta)
     Spinner spinner_valuta;
-    @BindView(R.id.spinner_tax_ppn)
-    Spinner spinner_tax_ppn;
-    @BindView(R.id.spinner_active)
-    Spinner spinner_active;
-    @BindView(R.id.search_spinner_group)
-    SearchableSpinner spinner_group;
+    @BindView(R.id.editText_group) EditText editText_group;
+//    @BindView(R.id.search_spinner_group) SearchableSpinner spinner_group;
     @BindView(R.id.linear_layout_id)
     LinearLayout linear_layout_id;
     @BindView(R.id.linear_layout_term)
@@ -84,10 +83,19 @@ public class FragmentFormReqCustAdminCompanyInfo extends Fragment {
     @BindView(R.id.linear_layout_note)
     LinearLayout linear_layout_note;
 
+    @BindView(R.id.switch_tax)
+    SwitchCompat switch_tax;
+    @BindView(R.id.switch_active) SwitchCompat switch_active;
+    @BindView(R.id.textView_tax_ppn)
+    TextView textView_tax_ppn;
+    @BindView(R.id.textView_active) TextView textView_active;
+
     String id = "", name = "", address = "", city = "", province = "", zip_code = "", phone = "", mobile = "", fax = "", term = "",
             valuta = "", group = "", npwp = "", tax_ppn = "", active = "", email = "", website = "", note = "";
 
     private String decode = "", token = "";
+    List<String> cityList;
+    List<String> provinceList;
 
     public FragmentFormReqCustAdminCompanyInfo() {
         // Required empty public constructor
@@ -133,14 +141,14 @@ public class FragmentFormReqCustAdminCompanyInfo extends Fragment {
         valutaAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner_valuta.setAdapter(valutaAdapter);
 
-        List<String> check_List = new ArrayList<String>();
-        check_List.add("No");
-        check_List.add("Yes");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
-                R.layout.spinner_item, check_List);
-        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        spinner_tax_ppn.setAdapter(dataAdapter);
-        spinner_active.setAdapter(dataAdapter);
+//        List<String> check_List = new ArrayList<String>();
+//        check_List.add("No");
+//        check_List.add("Yes");
+//        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
+//                R.layout.spinner_item, check_List);
+//        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+//        spinner_tax_ppn.setAdapter(dataAdapter);
+//        spinner_active.setAdapter(dataAdapter);
 
         loadDataSpinnerGroup();
 
@@ -152,6 +160,44 @@ public class FragmentFormReqCustAdminCompanyInfo extends Fragment {
 
         ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.spinner_item, city);
         autoComplete_city.setAdapter(cityAdapter);
+
+        switch_active.setSwitchPadding(40);
+        switch_active.setChecked(true);
+        switch_active.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    textView_active.setText("Yes");
+                } else {
+                    textView_active.setText("No");
+                }
+            }
+        });
+
+        if (switch_active.isChecked()){
+            textView_active.setText("Yes");
+        } else {
+            textView_active.setText("No");
+        }
+
+        switch_tax.setSwitchPadding(40);
+        switch_tax.setChecked(true);
+        switch_tax.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    textView_tax_ppn.setText("Yes");
+                } else {
+                    textView_tax_ppn.setText("No");
+                }
+            }
+        });
+
+        if (switch_tax.isChecked()){
+            textView_tax_ppn.setText("Yes");
+        } else {
+            textView_tax_ppn.setText("No");
+        }
     }
 
     private void loadDataSpinnerGroup() {
@@ -174,7 +220,7 @@ public class FragmentFormReqCustAdminCompanyInfo extends Fragment {
 //                        spinner_group.setAdapter(dataAdapter);
 
                         //using searcablespinner
-                        spinner_group.setAdapter(dataAdapter);
+//                        spinner_group.setAdapter(dataAdapter);
                     }
                 }
             }
@@ -197,10 +243,10 @@ public class FragmentFormReqCustAdminCompanyInfo extends Fragment {
         fax = editText_fax.getText().toString();
         term = editText_term.getText().toString();
         valuta = spinner_valuta.getSelectedItem().toString();
-        group = spinner_group.getSelectedItem().toString();
+//        group = spinner_group.getSelectedItem().toString();
         npwp = editText_npwp.getText().toString();
-        tax_ppn = spinner_tax_ppn.getSelectedItem().toString();
-        active = spinner_active.getSelectedItem().toString();
+        tax_ppn = textView_tax_ppn.getText().toString();
+        active = textView_active.getText().toString();
         email = editText_email.getText().toString();
         website = editText_website.getText().toString();
         note = editText_note.getText().toString();
@@ -243,7 +289,7 @@ public class FragmentFormReqCustAdminCompanyInfo extends Fragment {
         FormCustomerActivity.customerModel_temp.setFax(fax);
         FormCustomerActivity.customerModel_temp.setTerm(term);
         FormCustomerActivity.customerModel_temp.setValuta(valuta);
-        FormCustomerActivity.customerModel_temp.setGroup(spinner_group.getSelectedItem().toString());
+//        FormCustomerActivity.customerModel_temp.setGroup(spinner_group.getSelectedItem().toString());
         FormCustomerActivity.customerModel_temp.setNpwp(npwp);
         FormCustomerActivity.customerModel_temp.setTax(tax_ppn);
         FormCustomerActivity.customerModel_temp.setEmail(email);
@@ -295,7 +341,6 @@ public class FragmentFormReqCustAdminCompanyInfo extends Fragment {
                             FormCustomerActivity.customerModel_temp.setNote(customerModel.getNote() == null ? "" : customerModel.getNote());
                             FormCustomerActivity.customerModel_temp.setPostcode(customerModel.getPostcode() == null ? "" : customerModel.getPostcode());
                         }
-
                     }
                 }
 
@@ -317,12 +362,12 @@ public class FragmentFormReqCustAdminCompanyInfo extends Fragment {
         editText_phone.setEnabled(false);
         editText_mobile.setEnabled(false);
         editText_fax.setEnabled(false);
-        spinner_group.setEnabled(false);
+//        spinner_group.setEnabled(false);
         editText_term.setEnabled(false);
         spinner_valuta.setEnabled(false);
         editText_npwp.setEnabled(false);
-        spinner_tax_ppn.setEnabled(false);
-        spinner_active.setEnabled(false);
+        textView_tax_ppn.setEnabled(false);
+        textView_active.setEnabled(false);
         editText_email.setEnabled(false);
         editText_website.setEnabled(false);
         editText_note.setEnabled(false);

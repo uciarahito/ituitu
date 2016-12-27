@@ -5,14 +5,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -22,17 +20,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -43,7 +35,6 @@ import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.adapter.ItemShippingAddressAdapter;
 import uci.develops.wiraenergimobile.helper.DividerItemDecoration;
-import uci.develops.wiraenergimobile.helper.NumberTextWatcherForThousand;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerAddressModel;
 import uci.develops.wiraenergimobile.response.ApproveResponse;
@@ -85,7 +76,6 @@ public class FragmentFormCustomerShippingTo extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view;
-//        view = inflater.inflate(R.layout.fragment_form_customer_shipping_to, container, false);
         view = inflater.inflate(R.layout.fragment_shipping_new, container, false);
         ButterKnife.bind(this, view);
         decode = new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode");
@@ -155,21 +145,18 @@ public class FragmentFormCustomerShippingTo extends Fragment {
 
         if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("")) {
             if (Integer.parseInt(new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "approve")) == 0) {
-//                button_add_shipping.setEnabled(false);
                 button_add_shipping.setVisibility(View.GONE);
             }
         }
 
         if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")) {
             if (Integer.parseInt(new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "approve")) == 1) {
-//                button_add_shipping.setEnabled(false);
                 button_add_shipping.setVisibility(View.GONE);
             }
         }
 
         if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("customer")) {
             if (Integer.parseInt(new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "approve")) == 1) {
-//                button_add_shipping.setEnabled(false);
                 button_add_shipping.setVisibility(View.GONE);
             }
         }
@@ -205,7 +192,6 @@ public class FragmentFormCustomerShippingTo extends Fragment {
 
         editText_customer_code.setText("" + new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode"));
         editText_customer_code.setEnabled(false);
-        editText_phone.addTextChangedListener(onTextChangedListener());
 
         editText_map_cordinate.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -229,7 +215,7 @@ public class FragmentFormCustomerShippingTo extends Fragment {
             @Override
             public void onClick(View v) {
                 if (isNotEmpty()) {
-                    latlong = "@" + latitudeDialog + "," + longitudeDialog;
+                    latlong = latitudeDialog + "," + longitudeDialog;
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("address_name", editText_address.getText().toString());
                     params.put("address", editText_address.getText().toString());
@@ -266,48 +252,6 @@ public class FragmentFormCustomerShippingTo extends Fragment {
                 dialog_add_shipping.dismiss();
             }
         });
-    }
-
-    private TextWatcher onTextChangedListener() {
-        return new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                editText_phone.removeTextChangedListener(this);
-
-                try {
-                    String originalString = s.toString();
-
-                    Long longval;
-                    if (originalString.contains(",")) {
-                        originalString = originalString.replaceAll(".", "");
-                    }
-                    longval = Long.parseLong(originalString);
-
-                    DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
-//                    formatter.applyPattern("#,###,###,###");
-                    formatter.applyPattern("#.###.###.###");
-                    String formattedString = formatter.format(longval);
-
-                    //setting text after format to EditText
-                    editText_phone.setText(formattedString);
-                    editText_phone.setSelection(editText_phone.getText().length());
-                } catch (NumberFormatException nfe) {
-                    nfe.printStackTrace();
-                }
-
-                //editText_phone.addTextChangedListener(this);
-            }
-        };
     }
 
     public boolean isNotEmpty() {

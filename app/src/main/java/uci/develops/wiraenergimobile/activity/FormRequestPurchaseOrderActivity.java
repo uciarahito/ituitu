@@ -1,5 +1,6 @@
 package uci.develops.wiraenergimobile.activity;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +24,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
@@ -33,6 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -76,6 +79,22 @@ public class FormRequestPurchaseOrderActivity extends AppCompatActivity implemen
     @BindView(R.id.button_add_item) Button button_add_item;
     @BindView(R.id.recycle_view) RecyclerView recycle_view;
 
+    /**
+     * code utk supplier detail
+     */
+    @BindView(R.id.editText_po_number) EditText editText_po_number;
+    @BindView(R.id.editText_valuta) EditText editText_valuta;
+    @BindView(R.id.editText_supplier_name) EditText editText_supplier_name;
+    @BindView(R.id.editText_supplier_address) EditText editText_supplier_address;
+    @BindView(R.id.editText_po_date) EditText editText_po_date;
+    @BindView(R.id.editText_shipping_date) EditText editText_shipping_date;
+    @BindView(R.id.editText_payment_term) EditText editText_payment_term;
+    @BindView(R.id.editText_shipping_address) EditText editText_shipping_address;
+    @BindView(R.id.spinner_supplier) Spinner spinner_supplier;
+    @BindView(R.id.spinner_warehouse) Spinner spinner_warehouse;
+    DatePickerDialog datePickerDialogPODate, datePickerDialogShippingDate;
+    String check_List[];
+
     ItemPurchaseOrderAdapter itemPurchaseOrderAdapter;
     boolean content1=false;
 
@@ -113,6 +132,56 @@ public class FormRequestPurchaseOrderActivity extends AppCompatActivity implemen
         imageViewTitle1.setVisibility(View.VISIBLE);
         button_add_item.setOnClickListener(this);
         linearLayoutTitle1.setOnClickListener(this);
+
+        List<String> tests = new ArrayList<String>();
+        tests.add("Test 1");
+        tests.add("Test 2");
+        tests.add("Test 3");
+        ArrayAdapter<String> testAdapter = new ArrayAdapter<String>(FormRequestPurchaseOrderActivity.this,
+                R.layout.spinner_item, tests);
+        testAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinner_supplier.setAdapter(testAdapter);
+        spinner_warehouse.setAdapter(testAdapter);
+
+        editText_po_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //utk send date
+                final Calendar calendar = Calendar.getInstance();
+                int mYear = calendar.get(Calendar.YEAR); // current year
+                int mMonth = calendar.get(Calendar.MONTH); // current month
+                int mDay = calendar.get(Calendar.DAY_OF_MONTH); // current day
+                // date picker dialog
+                datePickerDialogPODate = new DatePickerDialog(FormRequestPurchaseOrderActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        // set day of month , month and year value in the edit text
+                        editText_po_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                    }
+                }, mYear, mMonth, mDay);
+                datePickerDialogPODate.show();
+            }
+        });
+
+        editText_shipping_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //utk send date
+                final Calendar calendarShippingDate = Calendar.getInstance();
+                int mYear = calendarShippingDate.get(Calendar.YEAR); // current year
+                int mMonth = calendarShippingDate.get(Calendar.MONTH); // current month
+                int mDay = calendarShippingDate.get(Calendar.DAY_OF_MONTH); // current day
+                // date picker dialog
+                datePickerDialogShippingDate = new DatePickerDialog(FormRequestPurchaseOrderActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        // set day of month , month and year value in the edit text
+                        editText_shipping_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                    }
+                }, mYear, mMonth, mDay);
+                datePickerDialogShippingDate.show();
+            }
+        });
     }
 
     @Override

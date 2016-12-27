@@ -78,12 +78,191 @@
                         android:layout_height="match_parent"
                         android:visibility="gone">
 
-                        <fragment
-                            android:id="@+id/fragment_so_customer_detail"
-                            android:name="uci.develops.wiraenergimobile.fragment.FragmentSORequestCustomerDetail"
+                        <!--<fragment-->
+                            <!--android:id="@+id/fragment_so_customer_detail"-->
+                            <!--android:name="uci.develops.wiraenergimobile.fragment.FragmentSORequestCustomerDetail"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--tools:layout="@layout/fragment_so_request_customer_detail" />-->
+
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            tools:layout="@layout/fragment_so_request_customer_detail" />
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/rounded_rectangle_gray"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:weightSum="6">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.5"
+                                    android:text="SO Code"
+                                    android:textStyle="bold" />
+
+                                <EditText
+                                    android:id="@+id/editText_so_code"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="4.5"
+                                    android:hint="SO Code"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="textCapWords|textPersonName"
+                                    android:textColorHint="@color/colorGray"
+                                    android:textSize="@dimen/textView_transaction" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:weightSum="6">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.5"
+                                    android:text="SO Date"
+                                    android:textStyle="bold" />
+
+                                <EditText
+                                    android:id="@+id/editText_so_date"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="4.5"
+                                    android:hint="SO Date"
+                                    android:imeOptions="actionNext"
+                                    android:textColorHint="@color/colorGray"
+                                    android:textSize="@dimen/textView_transaction" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:weightSum="6">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1.5"
+                                    android:text="Customer"
+                                    android:textStyle="bold" />
+
+                                <Spinner
+                                    android:id="@+id/spinner_customer_name"
+                                    tools:listitem="@android:layout/simple_spinner_dropdown_item"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="left|center"
+                                    android:layout_weight="4" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:weightSum="6">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.5"
+                                    android:text="QT Code"
+                                    android:textStyle="bold" />
+
+                                <EditText
+                                    android:id="@+id/editText_qt_code"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="4.5"
+                                    android:hint="QT Code"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="textCapWords|textPersonName"
+                                    android:textColorHint="@color/colorGray"
+                                    android:textSize="@dimen/textView_transaction" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:weightSum="6">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.5"
+                                    android:text="PO Code"
+                                    android:textStyle="bold" />
+
+                                <EditText
+                                    android:id="@+id/editText_po_code"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="4.5"
+                                    android:hint="PO Code"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="textCapWords|textPersonName"
+                                    android:textColorHint="@color/colorGray"
+                                    android:textSize="@dimen/textView_transaction" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:weightSum="6">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.5"
+                                    android:text="Delivery Date"
+                                    android:textStyle="bold" />
+
+                                <EditText
+                                    android:id="@+id/editText_delivery_date"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="4.5"
+                                    android:hint="Delivery Date"
+                                    android:imeOptions="actionNext"
+                                    android:textColorHint="@color/colorGray"
+                                    android:textSize="@dimen/textView_transaction" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:weightSum="6">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1.5"
+                                    android:text="Payment Term."
+                                    android:textStyle="bold" />
+
+                                <EditText
+                                    android:id="@+id/editText_payment_term"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:inputType="number"
+                                    android:textSize="@dimen/textView_transaction" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:text="Days"
+                                    android:textSize="@dimen/textView_transaction" />
+                            </LinearLayout>
+                        </LinearLayout>
+
                     </LinearLayout>
                 </LinearLayout>
 
@@ -292,12 +471,281 @@
                         android:layout_height="match_parent"
                         android:visibility="gone">
 
-                        <fragment
-                            android:id="@+id/fragment_so_item_so"
-                            android:name="uci.develops.wiraenergimobile.fragment.FragmentSOItemSO"
+                        <!--<fragment-->
+                            <!--android:id="@+id/fragment_so_item_so"-->
+                            <!--android:name="uci.develops.wiraenergimobile.fragment.FragmentSOItemSO"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--tools:layout="@layout/fragment_so_item_so"/>-->
+
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            tools:layout="@layout/fragment_so_item_so"/>
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:orientation="vertical"
+                            android:background="@drawable/rounded_rectangle_gray">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:weightSum="3">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="8dp"
+                                        android:text="@string/qty"
+                                        android:textStyle="bold" />
+
+                                    <EditText
+                                        android:id="@+id/editText_quantity"
+                                        android:layout_width="100dp"
+                                        android:layout_height="30dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:background="@drawable/rounded_rectangle_gray"
+                                        android:inputType="numberDecimal"
+                                        app:layout_gravity="center_vertical"
+                                        android:textSize="@dimen/textView_transaction"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="8dp"
+                                        android:text="@string/unit"
+                                        android:textStyle="bold" />
+
+                                    <Spinner
+                                        android:id="@+id/spinner_unit"
+                                        tools:listitem="@android:layout/simple_spinner_dropdown_item"
+                                        android:layout_width="100dp"
+                                        android:layout_height="30dp"
+                                        android:layout_gravity="left|center" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="8dp"
+                                        android:text="@string/item"
+                                        android:textStyle="bold" />
+
+                                    <Spinner
+                                        android:id="@+id/spinner_item"
+                                        android:layout_width="100dp"
+                                        android:layout_height="30dp"
+                                        tools:listitem="@android:layout/simple_spinner_dropdown_item"
+                                        android:layout_gravity="left|center" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="6dp"
+                                android:background="@drawable/drop_shadow"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginRight="5dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:weightSum="6">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.35"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:padding="8dp"
+                                        android:text="@string/disc"
+                                        android:textStyle="bold" />
+
+                                    <EditText
+                                        android:id="@+id/editText_disc_item"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="30dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:background="@drawable/rounded_rectangle_gray"
+                                        android:inputType="numberDecimal"
+                                        app:layout_gravity="center_vertical"
+                                        android:textSize="@dimen/textView_transaction"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2.25"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="8dp"
+                                        android:text="Disc. Amount"
+                                        android:textStyle="bold" />
+
+                                    <EditText
+                                        android:id="@+id/editText_disc_amount"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="30dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:background="@drawable/rounded_rectangle_gray"
+                                        android:inputType="numberDecimal"
+                                        app:layout_gravity="center_vertical"
+                                        android:textSize="@dimen/textView_transaction"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2.25"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="8dp"
+                                        android:text="Unit Price"
+                                        android:textStyle="bold" />
+
+                                    <EditText
+                                        android:id="@+id/editText_unit_price"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="30dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:background="@drawable/rounded_rectangle_gray"
+                                        android:inputType="numberDecimal"
+                                        app:layout_gravity="center_vertical"
+                                        android:textSize="@dimen/textView_transaction"/>
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="6dp"
+                                android:background="@drawable/drop_shadow"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginRight="5dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:weightSum="6">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="3"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="8dp"
+                                        android:text="Total Commission"
+                                        android:textStyle="bold" />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:weightSum="6">
+                                        <EditText
+                                            android:id="@+id/editText_total_commission"
+                                            android:layout_width="0dp"
+                                            android:layout_height="30dp"
+                                            android:layout_weight="4.5"
+                                            android:layout_marginLeft="10dp"
+                                            android:background="@drawable/rounded_rectangle_gray"
+                                            android:inputType="numberDecimal"
+                                            app:layout_gravity="center_vertical"
+                                            android:textSize="@dimen/textView_transaction"/>
+
+                                        <ImageView
+                                            android:id="@+id/imageViewTotalCommission"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:src="@drawable/ic_total_24dp"
+                                            android:layout_gravity="center" />
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="3"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="8dp"
+                                        android:text="Sub Total"
+                                        android:textStyle="bold" />
+
+                                    <EditText
+                                        android:id="@+id/editText_sub_total"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="30dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="15dp"
+                                        android:background="@drawable/rounded_rectangle_gray"
+                                        android:inputType="numberDecimal"
+                                        app:layout_gravity="center_vertical"
+                                        android:textSize="@dimen/textView_transaction"/>
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:weightSum="6">
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/ic_border_color_black_24dp"
+                                    android:layout_gravity="center" />
+
+                                <EditText
+                                    android:id="@+id/editText_note_item"
+                                    android:layout_width="0dp"
+                                    android:layout_height="60dp"
+                                    android:layout_weight="4.75"
+                                    android:background="@drawable/rounded_rectangle_gray"
+                                    android:hint="@string/note"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="text"
+                                    android:textColorHint="@color/colorGray"
+                                    android:textSize="@dimen/textView_transaction"/>
+                            </LinearLayout>
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 

@@ -300,57 +300,6 @@ public class FormRequestQuotationAdminActivity extends AppCompatActivity impleme
         });
     }
 
-//    private void loadDataSpinnerCustomerName() {
-//        customerModelList = new ArrayList<>();
-//        Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer "
-//                        + new SharedPreferenceManager().getPreferences(FormRequestQuotationAdminActivity.this, "token"),
-//                new SharedPreferenceManager().getPreferences(FormRequestQuotationAdminActivity.this, "customer_decode"));
-//        customerResponseCall.enqueue(new Callback<CustomerResponse>() {
-//            @Override
-//            public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
-//                if (response.isSuccessful()) {
-//                    if (response.body().getData().size() > 0) {
-//                        check_List = new String[response.body().getData().size()];
-//                        int index = 0;
-//                        for (CustomerModel customerModel : response.body().getData()) {
-//                            check_List[index] = customerModel.getFirst_name();
-//                            index++;
-//                        }
-//
-//                        customerModelList = response.body().getData();
-//
-//                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(FormRequestQuotationAdminActivity.this,
-//                                R.layout.spinner_item, check_List);
-//                        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-//                        spinner_customer_name.setAdapter(dataAdapter);
-//
-////                        spinner_customer_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-////                            @Override
-////                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-////                                Toast.makeText(FormRequestQuotationAdminActivity.this, "" + check_List[position], Toast.LENGTH_SHORT).show();
-//////                                editText_shipping_address.setText("" + customerAddressModels.get(position).getAddress());
-//////                                editText_shipping_PIC.setText("" + customerAddressModels.get(position).getPic());
-//////                                editText_shipping_phone.setText("" + customerAddressModels.get(position).getPhone());
-//////                                editText_shipping_mobile.setText("" + customerAddressModels.get(position).getMobile());
-////
-////                            }
-////
-////                            @Override
-////                            public void onNothingSelected(AdapterView<?> parent) {
-////
-////                            }
-////                        });
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<CustomerResponse> call, Throwable t) {
-//
-//            }
-//        });
-//    }
-
     //utk dialog add item
     private Spinner spinner_item, spinner_unit;
     private EditText editText_send_date, editText_quantity, editText_disc_item, editText_disc_amount, editText_unit_price, editText_sub_total;

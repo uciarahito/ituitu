@@ -16,12 +16,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
@@ -51,10 +55,12 @@ import uci.develops.wiraenergimobile.service.RestClient;
 
 public class ListCustomerActivity extends AppCompatActivity {
     @BindView(R.id.recycleListCustomer) RecyclerView recycleViewRequest;
+    @BindView(R.id.editText_search) EditText editText_search;
 
     List<CustomerModel> modelRequestList;
     CustomerAdapter customerAdapter;
 
+    // utk drawer
     private DrawerLayout mDrawerLayout;
     private String[] items;
 
@@ -67,6 +73,8 @@ public class ListCustomerActivity extends AppCompatActivity {
 
     private Map<String, List<String>> mExpandableListData;
 
+    public static List<CustomerModel> defaultDataCustomerList, newListCustomer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,12 +82,11 @@ public class ListCustomerActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        handleIntent(getIntent());
-        navDrawer();
 
-        if (savedInstanceState == null) {
-            selectFirstItemAsDefault();
-        }
+//        recycleViewRequest.setHasFixedSize(true);
+//        recycleViewRequest.setLayoutManager(new LinearLayoutManager(this));
+
+        //decode, code, first_name, last_name, group
 
         showProgressLoading();
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(ListCustomerActivity.this);
@@ -97,11 +104,13 @@ public class ListCustomerActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     if (response.body().getData().size() > 0) {
                         modelRequestList = response.body().getData();
+                        defaultDataCustomerList = new ArrayList<CustomerModel>();
                         List<CustomerModel> dataCustomer = new ArrayList<CustomerModel>();
                         for (CustomerModel customerModel : response.body().getData()) {
                             if (customerModel.getActive() == 1 && customerModel.getApprove() == 1) {
                                 hideProgressLoading();
                                 dataCustomer.add(customerModel);
+                                defaultDataCustomerList.add(customerModel);
                             }
                         }
                         if (dataCustomer.size() > 0) {
@@ -128,7 +137,64 @@ public class ListCustomerActivity extends AppCompatActivity {
                 Log.e("ListRequest", "" + t.getMessage());
             }
         });
+
+
+        editText_search.addTextChangedListener(searchWatcher);
+
+        navDrawer();
+
+        if (savedInstanceState == null) {
+            selectFirstItemAsDefault();
+        }
     }
+
+//    public void addTextListener(){
+//        editText_search.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
+//    }
+
+    private final TextWatcher searchWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String input = s.toString();
+                if (defaultDataCustomerList != null) {
+                    newListCustomer = new ArrayList<>();
+                    for (CustomerModel customerModel : defaultDataCustomerList) {
+                    if(customerModel.getDecode().contains(input) || customerModel.getCode().equals(input) ||
+                            customerModel.getFirst_name().equals(input) || customerModel.equals(input)){
+                        newListCustomer.add(customerModel);
+                    }
+//                        if (customerModel.getEmail().contains(input)) {
+//                            newListCustomer.add(customerModel);
+//                        }
+                    }
+                    customerAdapter.updateList(newListCustomer);
+                }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+        }
+    };
 
     ProgressDialog progress_loading;
     public void showProgressLoading() {
@@ -376,35 +442,8 @@ public class ListCustomerActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         // Inflate menu to add items to action bar if it is present.
         inflater.inflate(R.menu.menu_main, menu);
-        // Associate searchable configuration with the SearchView
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
 
         return true;
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent){
-        handleIntent(intent);
-    }
-
-    private void handleIntent(Intent intent){
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())){
-            String query = intent.getStringExtra(SearchManager.QUERY);
-        }
     }
 
     @Override

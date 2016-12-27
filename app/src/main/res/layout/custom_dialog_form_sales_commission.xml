@@ -28,13 +28,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/linear_layout_button"
-        android:layout_below="@+id/linear_layout_Top"
-        android:layout_marginBottom="10dp">
+        android:layout_below="@+id/linear_layout_Top">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:orientation="vertical">
@@ -53,7 +51,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editText_so_code"
+                    android:id="@+id/editText_so_code_commision"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
@@ -304,7 +302,6 @@
         android:id="@+id/linear_layout_button"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="20dp"
         android:layout_alignParentBottom="true"
         android:weightSum="2">
 

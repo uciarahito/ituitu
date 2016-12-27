@@ -1,7 +1,9 @@
 package uci.develops.wiraenergimobile.activity;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -10,13 +12,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
@@ -49,42 +55,102 @@ import uci.develops.wiraenergimobile.response.CustomerResponse;
 import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
-public class FormRequestSalesOrderActivity extends AppCompatActivity implements View.OnClickListener{
-    @BindView(R.id.imageTitleUp1) ImageView imageTitleUp1;
-    @BindView(R.id.imageTitleUp2) ImageView imageTitleUp2;
-    @BindView(R.id.imageTitleUp3) ImageView imageTitleUp3;
-    @BindView(R.id.imageTitleUp4) ImageView imageTitleUp4;
+public class FormRequestSalesOrderActivity extends AppCompatActivity implements View.OnClickListener {
+    @BindView(R.id.imageTitleUp1)
+    ImageView imageTitleUp1;
+    @BindView(R.id.imageTitleUp2)
+    ImageView imageTitleUp2;
+    @BindView(R.id.imageTitleUp3)
+    ImageView imageTitleUp3;
+    @BindView(R.id.imageTitleUp4)
+    ImageView imageTitleUp4;
     @BindView(R.id.imageTitle1)
     ImageView imageViewTitle1;
     @BindView(R.id.imageTitle2)
     ImageView imageViewTitle2;
-    @BindView(R.id.imageTitle3) ImageView imageViewTitle3;
-    @BindView(R.id.imageTitle4) ImageView imageViewTitle4;
-    @BindView(R.id.linear_layout_title1) LinearLayout linearLayoutTitle1;
-    @BindView(R.id.linear_layout_content1) LinearLayout linearLayoutContent1;
-    @BindView(R.id.linear_layout_container_so_customer_detail) LinearLayout linearLayoutContainer1;
-    @BindView(R.id.linear_layout_title2) LinearLayout linearLayoutTitle2;
-    @BindView(R.id.linear_layout_content2) LinearLayout linearLayoutContent2;
-    @BindView(R.id.linear_layout_container_so_shipping_address) LinearLayout linearLayoutContainer2;
-    @BindView(R.id.linear_layout_title3) LinearLayout linearLayoutTitle3;
-    @BindView(R.id.linear_layout_content3) LinearLayout linearLayoutContent3;
-    @BindView(R.id.linear_layout_container_so_payment_pic_address) LinearLayout linearLayoutContainer3;
-    @BindView(R.id.linear_layout_title4) LinearLayout linearLayoutTitle4;
-    @BindView(R.id.linear_layout_content4) LinearLayout linearLayoutContent4;
-    @BindView(R.id.linear_layout_container_so_item_so) LinearLayout linearLayoutContainer4;
-    @BindView(R.id.linear_layout_button_cancel) LinearLayout linear_layout_button_cancel;
-    @BindView(R.id.linear_layout_button_save) LinearLayout linear_layout_button_save;
-    @BindView(R.id.editText_bruto) EditText editText_bruto;
-    @BindView(R.id.editText_disc) EditText editText_disc;
-    @BindView(R.id.editText_disc_value) EditText editText_disc_value;
-    @BindView(R.id.editText_ppn) EditText editText_ppn;
-    @BindView(R.id.editText_ppn_value) EditText editText_ppn_value;
-    @BindView(R.id.editText_other_cost) EditText editText_other_cost;
-    @BindView(R.id.editText_netto) EditText editText_netto;
-    @BindView(R.id.editText_note) EditText editText_note;
-    @BindView(R.id.textView_terbilang) TextView textView_terbilang;
+    @BindView(R.id.imageTitle3)
+    ImageView imageViewTitle3;
+    @BindView(R.id.imageTitle4)
+    ImageView imageViewTitle4;
+    @BindView(R.id.linear_layout_title1)
+    LinearLayout linearLayoutTitle1;
+    @BindView(R.id.linear_layout_content1)
+    LinearLayout linearLayoutContent1;
+    @BindView(R.id.linear_layout_container_so_customer_detail)
+    LinearLayout linearLayoutContainer1;
+    @BindView(R.id.linear_layout_title2)
+    LinearLayout linearLayoutTitle2;
+    @BindView(R.id.linear_layout_content2)
+    LinearLayout linearLayoutContent2;
+    @BindView(R.id.linear_layout_container_so_shipping_address)
+    LinearLayout linearLayoutContainer2;
+    @BindView(R.id.linear_layout_title3)
+    LinearLayout linearLayoutTitle3;
+    @BindView(R.id.linear_layout_content3)
+    LinearLayout linearLayoutContent3;
+    @BindView(R.id.linear_layout_container_so_payment_pic_address)
+    LinearLayout linearLayoutContainer3;
+    @BindView(R.id.linear_layout_title4)
+    LinearLayout linearLayoutTitle4;
+    @BindView(R.id.linear_layout_content4)
+    LinearLayout linearLayoutContent4;
+    @BindView(R.id.linear_layout_container_so_item_so)
+    LinearLayout linearLayoutContainer4;
+    @BindView(R.id.linear_layout_button_cancel)
+    LinearLayout linear_layout_button_cancel;
+    @BindView(R.id.linear_layout_button_save)
+    LinearLayout linear_layout_button_save;
+    @BindView(R.id.editText_bruto)
+    EditText editText_bruto;
+    @BindView(R.id.editText_disc)
+    EditText editText_disc;
+    @BindView(R.id.editText_disc_value)
+    EditText editText_disc_value;
+    @BindView(R.id.editText_ppn)
+    EditText editText_ppn;
+    @BindView(R.id.editText_ppn_value)
+    EditText editText_ppn_value;
+    @BindView(R.id.editText_other_cost)
+    EditText editText_other_cost;
+    @BindView(R.id.editText_netto)
+    EditText editText_netto;
+    @BindView(R.id.editText_note)
+    EditText editText_note;
+    @BindView(R.id.textView_terbilang)
+    TextView textView_terbilang;
 
-    boolean content1=false, content2=false, content3=false, content4=false;
+    //code utk customer detail
+    @BindView(R.id.editText_so_code)
+    EditText editText_so_code;
+    @BindView(R.id.editText_so_date)
+    EditText editText_so_date;
+    @BindView(R.id.editText_qt_code)
+    EditText editText_qt_code;
+    @BindView(R.id.editText_po_code)
+    EditText editText_po_code;
+    @BindView(R.id.editText_delivery_date)
+    EditText editText_delivery_date;
+    @BindView(R.id.editText_payment_term)
+    EditText editText_payment_term;
+    @BindView(R.id.spinner_customer_name)
+    Spinner spinner_customer_name;
+    private DatePickerDialog datePickerDialogSODate, datePickerDialogDeliveryDate;
+    List<CustomerModel> customerModelList;
+    String check_List[];
+
+    //code utk item sales order
+    @BindView(R.id.editText_quantity) EditText editText_quantity;
+    @BindView(R.id.editText_disc_item) EditText editText_disc_item;
+    @BindView(R.id.editText_disc_amount) EditText editText_disc_amount;
+    @BindView(R.id.editText_unit_price) EditText editText_unit_price;
+    @BindView(R.id.editText_total_commission) EditText editText_total_commission;
+    @BindView(R.id.editText_sub_total) EditText editText_sub_total;
+    @BindView(R.id.editText_note_item) EditText editText_note_item;
+    @BindView(R.id.spinner_unit) Spinner spinner_unit;
+    @BindView(R.id.spinner_item) Spinner spinner_item;
+    @BindView(R.id.imageViewTotalCommission) ImageView imageViewTotalCommission;
+
+    boolean content1 = false, content2 = false, content3 = false, content4 = false;
 
     //utk nav drawer
     private DrawerLayout mDrawerLayout;
@@ -118,7 +184,7 @@ public class FormRequestSalesOrderActivity extends AppCompatActivity implements 
 
     }
 
-    private void initializeComponent(){
+    private void initializeComponent() {
         imageViewTitle1.setVisibility(View.VISIBLE);
         imageViewTitle2.setVisibility(View.VISIBLE);
         imageViewTitle3.setVisibility(View.VISIBLE);
@@ -128,74 +194,284 @@ public class FormRequestSalesOrderActivity extends AppCompatActivity implements 
         linearLayoutTitle2.setOnClickListener(this);
         linearLayoutTitle3.setOnClickListener(this);
         linearLayoutTitle4.setOnClickListener(this);
+
+        List<String> listItem = new ArrayList<String>();
+        listItem.add("Solar");
+        listItem.add("Bensin");
+        listItem.add("Pertamax");
+        listItem.add("Barrel");
+        ArrayAdapter<String> itemAdapter = new ArrayAdapter<String>(FormRequestSalesOrderActivity.this,
+                R.layout.spinner_item, listItem);
+        itemAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinner_item.setAdapter(itemAdapter);
+
+        List<String> listUnit = new ArrayList<String>();
+        listUnit.add("Liter");
+        listUnit.add("Kilo Liter");
+        listUnit.add("Mili Liter");
+        ArrayAdapter<String> unitAdapter = new ArrayAdapter<String>(FormRequestSalesOrderActivity.this,
+                R.layout.spinner_item, listUnit);
+        unitAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinner_unit.setAdapter(unitAdapter);
+
+        imageViewTotalCommission.setOnClickListener(this);
+        editText_so_date.setOnClickListener(this);
+        editText_delivery_date.setOnClickListener(this);
+        //        spinner_customer_name.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
 
-        if(v == linearLayoutTitle1){
-            if(!content1){
+        if (v == linearLayoutTitle1) {
+            if (!content1) {
                 imageViewTitle1.setVisibility(View.GONE);
                 imageTitleUp1.setVisibility(View.VISIBLE);
                 linearLayoutContent1.setVisibility(View.VISIBLE);
                 linearLayoutContainer1.setVisibility(View.VISIBLE);
-                content1=true;
+                content1 = true;
             } else {
                 imageViewTitle1.setVisibility(View.VISIBLE);
                 imageTitleUp1.setVisibility(View.GONE);
                 linearLayoutContent1.setVisibility(View.GONE);
                 linearLayoutContainer1.setVisibility(View.GONE);
-                content1=false;
+                content1 = false;
             }
         }
 
-        if(v == linearLayoutTitle2){
-            if(!content2){
+        if (v == linearLayoutTitle2) {
+            if (!content2) {
                 imageViewTitle2.setVisibility(View.GONE);
                 imageTitleUp2.setVisibility(View.VISIBLE);
                 linearLayoutContent2.setVisibility(View.VISIBLE);
                 linearLayoutContainer2.setVisibility(View.VISIBLE);
-                content2=true;
+                content2 = true;
             } else {
                 imageViewTitle2.setVisibility(View.VISIBLE);
                 imageTitleUp2.setVisibility(View.GONE);
                 linearLayoutContent2.setVisibility(View.GONE);
                 linearLayoutContainer2.setVisibility(View.GONE);
-                content2=false;
+                content2 = false;
             }
         }
 
-        if(v == linearLayoutTitle3){
-            if(!content3){
+        if (v == linearLayoutTitle3) {
+            if (!content3) {
                 imageViewTitle3.setVisibility(View.GONE);
                 imageTitleUp3.setVisibility(View.VISIBLE);
                 linearLayoutContent3.setVisibility(View.VISIBLE);
                 linearLayoutContainer3.setVisibility(View.VISIBLE);
-                content3=true;
+                content3 = true;
             } else {
                 imageViewTitle3.setVisibility(View.VISIBLE);
                 imageTitleUp3.setVisibility(View.GONE);
                 linearLayoutContent3.setVisibility(View.GONE);
                 linearLayoutContainer3.setVisibility(View.GONE);
-                content3=false;
+                content3 = false;
             }
         }
 
-        if(v == linearLayoutTitle4){
-            if(!content4){
+        if (v == linearLayoutTitle4) {
+            if (!content4) {
                 imageViewTitle4.setVisibility(View.GONE);
                 imageTitleUp4.setVisibility(View.VISIBLE);
                 linearLayoutContent4.setVisibility(View.VISIBLE);
                 linearLayoutContainer4.setVisibility(View.VISIBLE);
-                content4=true;
+                content4 = true;
             } else {
                 imageViewTitle4.setVisibility(View.VISIBLE);
                 imageTitleUp4.setVisibility(View.GONE);
                 linearLayoutContent4.setVisibility(View.GONE);
                 linearLayoutContainer4.setVisibility(View.GONE);
-                content4=false;
+                content4 = false;
             }
         }
+
+        if (v == editText_so_date) {
+            setDatePickerDialogSODate();
+        }
+
+        if (v == editText_delivery_date) {
+            setDatePickerDialogDeliveryDate();
+        }
+
+        if (v == imageViewTotalCommission){
+            showCustomDialogFormSalesCommission();
+        }
+
+        //        if (v == spinner_customer_name){
+//            loadDataSpinnerCustomerName();
+//        }
+    }
+
+    public void setDatePickerDialogSODate() {
+        //utk send date
+        final Calendar calendarSODate = Calendar.getInstance();
+        int mYear = calendarSODate.get(Calendar.YEAR); // current year
+        int mMonth = calendarSODate.get(Calendar.MONTH); // current month
+        int mDay = calendarSODate.get(Calendar.DAY_OF_MONTH); // current day
+        // date picker dialog
+        datePickerDialogSODate = new DatePickerDialog(FormRequestSalesOrderActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                // set day of month , month and year value in the edit text
+                editText_so_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+            }
+        }, mYear, mMonth, mDay);
+        datePickerDialogSODate.show();
+    }
+
+    public void setDatePickerDialogDeliveryDate() {
+        //utk send date
+        final Calendar calendarDeliveryDate = Calendar.getInstance();
+        int mYear = calendarDeliveryDate.get(Calendar.YEAR); // current year
+        int mMonth = calendarDeliveryDate.get(Calendar.MONTH); // current month
+        int mDay = calendarDeliveryDate.get(Calendar.DAY_OF_MONTH); // current day
+        // date picker dialog
+        datePickerDialogDeliveryDate = new DatePickerDialog(FormRequestSalesOrderActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                // set day of month , month and year value in the edit text
+                editText_delivery_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+            }
+        }, mYear, mMonth, mDay);
+        datePickerDialogDeliveryDate.show();
+    }
+
+    EditText editText_so_code_commision, editText_hpp, editText_min_margin, editText_min_price, editText_price, editText_max_comm;
+    TextView textView_total;
+    Button button_add_salesman, button_cancel, button_save;
+    boolean is_new_commision = false;
+    private void showCustomDialogFormSalesCommission() {
+        final Dialog dialog_form_sales_commission = new Dialog(FormRequestSalesOrderActivity.this);
+        dialog_form_sales_commission.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog_form_sales_commission.setContentView(R.layout.custom_dialog_form_sales_commission);
+
+        editText_so_code_commision = ButterKnife.findById(dialog_form_sales_commission, R.id.editText_so_code_commision);
+        editText_hpp = ButterKnife.findById(dialog_form_sales_commission, R.id.editText_hpp);
+        editText_min_margin = ButterKnife.findById(dialog_form_sales_commission, R.id.editText_min_margin);
+        editText_min_price = ButterKnife.findById(dialog_form_sales_commission, R.id.editText_min_price);
+        editText_price = ButterKnife.findById(dialog_form_sales_commission, R.id.editText_price);
+        editText_max_comm = ButterKnife.findById(dialog_form_sales_commission, R.id.editText_max_comm);
+        textView_total = ButterKnife.findById(dialog_form_sales_commission, R.id.textView_total);
+        button_add_salesman = ButterKnife.findById(dialog_form_sales_commission, R.id.button_add_salesman);
+        button_cancel = ButterKnife.findById(dialog_form_sales_commission, R.id.button_cancel);
+        button_save = ButterKnife.findById(dialog_form_sales_commission, R.id.button_save);
+
+        button_add_salesman.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                is_new_commision = true;
+//                dialog_form_sales_commission.dismiss();
+                showCustomDialogAddSalesman();
+            }
+        });
+
+        button_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog_form_sales_commission.dismiss();
+            }
+        });
+
+        button_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog_form_sales_commission.dismiss();
+            }
+        });
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager windowmanager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        windowmanager.getDefaultDisplay().getMetrics(displayMetrics);
+        int deviceWidth = displayMetrics.widthPixels;
+        int deviceHeight = displayMetrics.heightPixels;
+        dialog_form_sales_commission.getWindow().setLayout(deviceWidth - 20, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog_form_sales_commission.setCancelable(false);
+        dialog_form_sales_commission.show();
+    }
+
+    EditText editText_address, editText_phone, editText_mobile, editText_commission;
+    Spinner spinner_salesman;
+    private void showCustomDialogAddSalesman() {
+        final Dialog dialog_add_salesman = new Dialog(FormRequestSalesOrderActivity.this);
+        dialog_add_salesman.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog_add_salesman.setContentView(R.layout.custom_dialog_add_salesman);
+
+        editText_address = ButterKnife.findById(dialog_add_salesman, R.id.editText_address);
+        editText_phone = ButterKnife.findById(dialog_add_salesman, R.id.editText_phone);
+        editText_mobile = ButterKnife.findById(dialog_add_salesman, R.id.editText_mobile);
+        editText_commission = ButterKnife.findById(dialog_add_salesman, R.id.editText_commission);
+        spinner_salesman = ButterKnife.findById(dialog_add_salesman, R.id.spinner_salesman);
+        button_cancel = ButterKnife.findById(dialog_add_salesman, R.id.button_cancel);
+        button_save = ButterKnife.findById(dialog_add_salesman, R.id.button_save);
+
+        button_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog_add_salesman.dismiss();
+            }
+        });
+
+        button_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog_add_salesman.dismiss();
+            }
+        });
+
+        List<String> test_List = new ArrayList<String>();
+        test_List.add("Testing 1");
+        test_List.add("Testing 2");
+        test_List.add("Testing 3");
+        ArrayAdapter<String> testAdapter = new ArrayAdapter<String>(FormRequestSalesOrderActivity.this,
+                R.layout.spinner_item, test_List);
+        testAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinner_salesman.setAdapter(testAdapter);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager windowmanager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        windowmanager.getDefaultDisplay().getMetrics(displayMetrics);
+        int deviceWidth = displayMetrics.widthPixels;
+        int deviceHeight = displayMetrics.heightPixels;
+        dialog_add_salesman.getWindow().setLayout(deviceWidth - 20, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog_add_salesman.setCancelable(false);
+        dialog_add_salesman.show();
+    }
+
+    private void loadDataSpinnerCustomerName() {
+        customerModelList = new ArrayList<>();
+        Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer "
+                        + new SharedPreferenceManager().getPreferences(FormRequestSalesOrderActivity.this, "token"),
+                new SharedPreferenceManager().getPreferences(FormRequestSalesOrderActivity.this, "customer_decode"));
+        customerResponseCall.enqueue(new Callback<CustomerResponse>() {
+            @Override
+            public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getData().size() > 0) {
+                        check_List = new String[response.body().getData().size()];
+                        int index = 0;
+                        for (CustomerModel customerModel : response.body().getData()) {
+                            check_List[index] = customerModel.getFirst_name();
+                            index++;
+                        }
+
+                        customerModelList = response.body().getData();
+
+                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(FormRequestSalesOrderActivity.this,
+                                R.layout.spinner_item, check_List);
+                        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+                        spinner_customer_name.setAdapter(dataAdapter);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CustomerResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     ProgressDialog progress_loading;
@@ -366,9 +642,9 @@ public class FormRequestSalesOrderActivity extends AppCompatActivity implements 
                     selected_item = getResources().getStringArray(R.array.general)[groupPosition];
                 } else if (new SharedPreferenceManager().getPreferences(FormRequestSalesOrderActivity.this, "roles").equals("customer")) {
                     selected_item = getResources().getStringArray(R.array.general_customer)[groupPosition];
-                } else if (new SharedPreferenceManager().getPreferences(FormRequestSalesOrderActivity.this, "roles").equals("expedition")){
+                } else if (new SharedPreferenceManager().getPreferences(FormRequestSalesOrderActivity.this, "roles").equals("expedition")) {
                     selected_item = getResources().getStringArray(R.array.general_expedition)[groupPosition];
-                } else if (new SharedPreferenceManager().getPreferences(FormRequestSalesOrderActivity.this, "roles").equals("")){
+                } else if (new SharedPreferenceManager().getPreferences(FormRequestSalesOrderActivity.this, "roles").equals("")) {
                     selected_item = getResources().getStringArray(R.array.general_guest)[groupPosition];
                 }
 
