@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uci.develops.wiraenergimobile.R;
+import uci.develops.wiraenergimobile.adapter.ItemShippingAddressAdapter;
 import uci.develops.wiraenergimobile.helper.PlacesAutoCompleteAdapter;
 
 /**
@@ -292,9 +293,20 @@ public class MapViewFragment extends Fragment {
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
                 FragmentFormCustomerShippingTo.addressDialog = detailLocation;
-
                 FragmentFormCustomerShippingTo.latitudeDialog = ""+location.latitude;
                 FragmentFormCustomerShippingTo.longitudeDialog = ""+location.longitude;
+
+                ItemShippingAddressAdapter.addressDialog = detailLocation;
+                ItemShippingAddressAdapter.latitudeDialog = ""+location.latitude;
+                ItemShippingAddressAdapter.longitudeDialog = ""+location.longitude;
+
+//                LatLng inputLocation = null;
+//                inputLocation = getLocationFromAddress(ItemShippingAddressAdapter.mapAddress);
+//                if (inputLocation != null) {
+//                    String address = "";
+//                    address = getAddressFromLocation(inputLocation);
+//                    ItemShippingAddressAdapter.returnAddress = address;
+//                }
 
                 Intent pushNotification = new Intent("pushNotification");
                 pushNotification.putExtra("type", "dismiss_dialog_maps");

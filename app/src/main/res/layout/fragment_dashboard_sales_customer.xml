@@ -39,8 +39,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_stock_24dp"
-                        android:gravity="center_horizontal"
+                        android:drawableLeft="@drawable/list"
+                        android:gravity="center"
                         android:text="@string/sales_order"
                         android:textSize="@dimen/textView_text"
                         android:textStyle="bold" />
@@ -83,7 +83,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_stock_24dp"
+                        android:drawableLeft="@drawable/label"
                         android:gravity="center_horizontal"
                         android:text="@string/average_sales_price"
                         android:textSize="@dimen/textView_text"
@@ -98,7 +98,7 @@
                         android:id="@+id/textView_average_sales_price"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="20dp"
                         android:gravity="center_horizontal"
                         android:text="@string/total"
                         android:textSize="@dimen/textView_number"
@@ -135,7 +135,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_stock_24dp"
+                        android:drawableLeft="@drawable/trucking"
                         android:gravity="center_horizontal"
                         android:text="@string/delivey_order"
                         android:textSize="@dimen/textView_text"
@@ -179,7 +179,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_stock_24dp"
+                        android:drawableLeft="@drawable/trucking_month"
                         android:gravity="center_horizontal"
                         android:text="@string/this_month_delivery_order"
                         android:textSize="@dimen/tab_label"
@@ -194,7 +194,7 @@
                         android:id="@+id/textView_this_month_delivery_order"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="15dp"
                         android:gravity="center_horizontal"
                         android:text="@string/total"
                         android:textSize="@dimen/textView_number"
@@ -309,7 +309,7 @@
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/linechart_average_sales_margin"
                     android:layout_width="match_parent"
-                    android:layout_height="360dp" />
+                    android:layout_height="300dp" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
 

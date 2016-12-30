@@ -126,6 +126,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
     List<CityModel> cityModels;
     boolean status = false;
     int cekActive = 0;
+    String cekTax = "";
     Gson gson;
 
     public FragmentFormCustomerCompanyInfo() {
@@ -535,6 +536,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
             }
         });
 
+        // code for check switch before change switch active
         if (switch_active.isChecked()) {
             cekActive = 1;
             textView_active.setText("" + cekActive);
@@ -549,18 +551,23 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    textView_tax_ppn.setText("1");
+                    cekTax = "1";
+                    textView_tax_ppn.setText("" + cekTax);
                 } else {
-                    textView_tax_ppn.setText("0");
+                    cekTax = "0";
+                    textView_tax_ppn.setText("" + cekTax);
                 }
             }
         });
 
-        if (switch_tax.isChecked()) {
-            textView_tax_ppn.setText("1");
-        } else {
-            textView_tax_ppn.setText("0");
-        }
+//         code for check switch before change switch tax
+//        if (switch_tax.isChecked()) {
+//            cekTax = "1";
+//            textView_tax_ppn.setText(cekTax);
+//        } else {
+//            cekTax = "0";
+//            textView_tax_ppn.setText(cekTax);
+//        }
 
         editText_group.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -607,75 +614,8 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         });
     }
 
-    /*
-    String selectedGroup="";
-    static List<String> checkList;
-   static List<CustomerGroupModel> customerGroupModelList;
-    private void loadDataSpinnerGroup() {
-        Call<ListCustomerGroupResponse> customerGroupResponseCall = RestClient.getRestClient().getAllCustomerGroup("Bearer " +
-                new SharedPreferenceManager().getPreferences(getContext(), "token"));
-        customerGroupResponseCall.enqueue(new Callback<ListCustomerGroupResponse>() {
-            @Override
-            public void onResponse(Call<ListCustomerGroupResponse> call, Response<ListCustomerGroupResponse> response) {
-                if (response.isSuccessful()) {
-                    if (response.body().getData().size() > 0) {
-                        checkList = new ArrayList<>();
-                        customerGroupModelList = new ArrayList<CustomerGroupModel>();
-                        customerGroupModelList = response.body().getData();
-                        loadData();
-                        for (int i=0; i<customerGroupModelList.size(); i++) {
-                            checkList.add(((CustomerGroupModel)customerGroupModelList.get(i)).getName());
-                        }
-
-//                        for (CustomerGroupModel customerGroupModel : response.body().getData()) {
-//                            checkList.add(customerGroupModel.getName());
-//                        }
-
-                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
-                                R.layout.spinner_item, checkList);
-                        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-                        spinner_group.setAdapter(dataAdapter);
-
-                        spinner_group.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                for (CustomerGroupModel customerGroupModel : customerGroupModelList){
-                                    if (customerGroupModel.getName().equals(parent.getItemAtPosition(position))){
-                                        selectedGroup = customerGroupModel.getDecode();
-                                    }
-                                }
-                                //Toast.makeText(getContext(), "ID :" + selectedGroup, Toast.LENGTH_SHORT).show();
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> parent) {
-
-                            }
-                        });
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ListCustomerGroupResponse> call, Throwable t) {
-                Toast.makeText(getActivity().getApplicationContext(), "Data Group Kosong", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-    */
-
-    /*
-    String getGroup(String decode){
-        String name="";
-        for(CustomerGroupModel customerGroupModel : customerGroupModelList){
-            if(customerGroupModel.getDecode().equals(decode)){
-                name = customerGroupModel.getName();
-            }
-        }
-        return name;
-    }
-*/
     public boolean isNotEmpty() {
+        id = editText_customer_code.getText().toString();
         name = editText_first_name.getText().toString();
         address = editText_address.getText().toString();
         city = autoComplete_city.getText().toString();
@@ -703,6 +643,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         return result;
     }
 
+    // code for saving to server
     public CustomerModel getFormValue() {
         String selectedGroup="";
         for(CustomerGroupModel customerGroupModel : customerGroupModelList){
@@ -711,7 +652,16 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
             }
         }
 
+//        if (switch_tax.isChecked()) {
+//            tax_ppn = ;
+//            textView_tax_ppn.setText(cekTax);
+//        } else {
+//            cekTax = "0";
+//            textView_tax_ppn.setText(cekTax);
+//        }
+
         CustomerModel customerModel = new CustomerModel();
+        customerModel.setCode(id);
         customerModel.setFirst_name(name);
         customerModel.setLast_name(name);
         customerModel.setAddress(address);
@@ -725,12 +675,12 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         customerModel.setGroup(selectedGroup);
         customerModel.setNpwp(npwp);
         customerModel.setTax(tax_ppn);
-//        customerModel.setActive(""+active);
         customerModel.setEmail(email);
         customerModel.setWebsite(website);
         customerModel.setNote(note);
         customerModel.setPostcode(zip_code);
 
+        FormCustomerActivity.customerModel_temp.setCode(id);
         FormCustomerActivity.customerModel_temp.setFirst_name(name);
         FormCustomerActivity.customerModel_temp.setLast_name(name);
         FormCustomerActivity.customerModel_temp.setAddress(address);
@@ -744,7 +694,6 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         FormCustomerActivity.customerModel_temp.setGroup(selectedGroup);
         FormCustomerActivity.customerModel_temp.setNpwp(npwp);
         FormCustomerActivity.customerModel_temp.setTax(tax_ppn);
-        FormCustomerActivity.customerModel_temp.setTax(tax_ppn);
         FormCustomerActivity.customerModel_temp.setEmail(email);
         FormCustomerActivity.customerModel_temp.setWebsite(website);
         FormCustomerActivity.customerModel_temp.setNote(note);
@@ -753,6 +702,7 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
         return customerModel;
     }
 
+    // code for showing data from server
     private void loadData() {
         Call<CustomerResponse> customerResponseCall = RestClient.getRestClient().getCustomer("Bearer " + token, decode);
         customerResponseCall.enqueue(new Callback<CustomerResponse>() {
@@ -776,7 +726,10 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
                         editText_website.setText(customerModel.getWebsite() == null ? "" : customerModel.getWebsite());
                         editText_note.setText(customerModel.getNote() == null ? "" : customerModel.getNote());
                         editText_zip_code.setText(customerModel.getPostcode() == null ? "" : customerModel.getPostcode());
-//                        textView_tax_ppn.setText(customerModel.getTax() == null ? "" : customerModel.getTax());
+                        textView_tax_ppn.setText(customerModel.getTax() == null ? "" : customerModel.getTax());
+
+                        Toast.makeText(getContext(), "Tax: " + customerModel.getTax(), Toast.LENGTH_SHORT).show();
+
                         for(CustomerGroupModel customerGroupModel : customerGroupModelList){
                             if(customerGroupModel.getDecode().equals(customerModel.getGroup())){
                                 editText_group.setText(customerGroupModel.getName());
@@ -796,18 +749,21 @@ public class FragmentFormCustomerCompanyInfo extends Fragment {
                         FormCustomerActivity.customerModel_temp.setWebsite(customerModel.getWebsite() == null ? "" : customerModel.getWebsite());
                         FormCustomerActivity.customerModel_temp.setNote(customerModel.getNote() == null ? "" : customerModel.getNote());
                         FormCustomerActivity.customerModel_temp.setPostcode(customerModel.getPostcode() == null ? "" : customerModel.getPostcode());
-//                        FormCustomerActivity.customerModel_temp.setTax(customerModel.getTax() == null ? "" : customerModel.getTax());
-
-                        if (customerModel.getTax() == "1") {
-                            switch_tax.setChecked(true);
-                        } else {
-                            switch_tax.setChecked(false);
-                        }
+                        FormCustomerActivity.customerModel_temp.setTax(customerModel.getTax() == null ? "" : customerModel.getTax());
 
                         if (customerModel.getActive() == 1) {
                             switch_active.setChecked(true);
                         } else {
                             switch_active.setChecked(false);
+                        }
+
+                        String showTax = "";
+                        showTax = customerModel.getTax();
+//                        Toast.makeText(getContext(), "Taxxx" + showTax, Toast.LENGTH_SHORT).show();
+                        if (showTax.equals("1")) {
+                            switch_tax.setChecked(true);
+                        } else {
+                            switch_tax.setChecked(false);
                         }
 
                         if (new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "roles").equals("admin")) {

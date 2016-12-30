@@ -54,8 +54,10 @@ import uci.develops.wiraenergimobile.response.UserResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
 public class ListCustomerActivity extends AppCompatActivity {
-    @BindView(R.id.recycleListCustomer) RecyclerView recycleViewRequest;
-    @BindView(R.id.editText_search) EditText editText_search;
+    @BindView(R.id.recycleListCustomer)
+    RecyclerView recycleViewRequest;
+    @BindView(R.id.editText_search)
+    EditText editText_search;
 
     List<CustomerModel> modelRequestList;
     CustomerAdapter customerAdapter;
@@ -83,11 +85,6 @@ public class ListCustomerActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        recycleViewRequest.setHasFixedSize(true);
-//        recycleViewRequest.setLayoutManager(new LinearLayoutManager(this));
-
-        //decode, code, first_name, last_name, group
-
         showProgressLoading();
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(ListCustomerActivity.this);
         recycleViewRequest.setLayoutManager(mLayoutManager);
@@ -97,7 +94,7 @@ public class ListCustomerActivity extends AppCompatActivity {
         recycleViewRequest.setAdapter(customerAdapter);
 
         Call<RequestListCustomerResponse> requestListCustomerResponseCall = RestClient.getRestClient()
-                .getAllRequestCustomer("Bearer "+new SharedPreferenceManager().getPreferences(ListCustomerActivity.this, "token"));
+                .getAllRequestCustomer("Bearer " + new SharedPreferenceManager().getPreferences(ListCustomerActivity.this, "token"));
         requestListCustomerResponseCall.enqueue(new Callback<RequestListCustomerResponse>() {
             @Override
             public void onResponse(Call<RequestListCustomerResponse> call, Response<RequestListCustomerResponse> response) {
@@ -148,25 +145,6 @@ public class ListCustomerActivity extends AppCompatActivity {
         }
     }
 
-//    public void addTextListener(){
-//        editText_search.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
-//    }
-
     private final TextWatcher searchWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -176,19 +154,16 @@ public class ListCustomerActivity extends AppCompatActivity {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             String input = s.toString();
-                if (defaultDataCustomerList != null) {
-                    newListCustomer = new ArrayList<>();
-                    for (CustomerModel customerModel : defaultDataCustomerList) {
-                    if(customerModel.getDecode().contains(input) || customerModel.getCode().equals(input) ||
-                            customerModel.getFirst_name().equals(input) || customerModel.equals(input)){
+            if (defaultDataCustomerList != null) {
+                newListCustomer = new ArrayList<>();
+                for (CustomerModel customerModel : defaultDataCustomerList) {
+                    if (customerModel.getDecode().contains(input) || customerModel.getCode().equals(input) ||
+                            customerModel.getFirst_name().equals(input) || customerModel.equals(input)) {
                         newListCustomer.add(customerModel);
                     }
-//                        if (customerModel.getEmail().contains(input)) {
-//                            newListCustomer.add(customerModel);
-//                        }
-                    }
-                    customerAdapter.updateList(newListCustomer);
                 }
+                customerAdapter.updateList(newListCustomer);
+            }
         }
 
         @Override
@@ -197,6 +172,7 @@ public class ListCustomerActivity extends AppCompatActivity {
     };
 
     ProgressDialog progress_loading;
+
     public void showProgressLoading() {
         progress_loading = new ProgressDialog(ListCustomerActivity.this);
         progress_loading.setMessage("Please wait...");
@@ -217,7 +193,7 @@ public class ListCustomerActivity extends AppCompatActivity {
         }
     }
 
-    public void navDrawer(){
+    public void navDrawer() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
         mExpandableListView = (ExpandableListView) mDrawerLayout.findViewById(R.id.navList);
@@ -358,13 +334,13 @@ public class ListCustomerActivity extends AppCompatActivity {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 String selected_item = getResources().getStringArray(R.array.general)[groupPosition];
-                if(new SharedPreferenceManager().getPreferences(ListCustomerActivity.this, "roles").equals("admin")){
+                if (new SharedPreferenceManager().getPreferences(ListCustomerActivity.this, "roles").equals("admin")) {
                     selected_item = getResources().getStringArray(R.array.general)[groupPosition];
-                } else if(new SharedPreferenceManager().getPreferences(ListCustomerActivity.this, "roles").equals("customer")){
+                } else if (new SharedPreferenceManager().getPreferences(ListCustomerActivity.this, "roles").equals("customer")) {
                     selected_item = getResources().getStringArray(R.array.general_customer)[groupPosition];
-                } else if (new SharedPreferenceManager().getPreferences(ListCustomerActivity.this, "roles").equals("expedition")){
+                } else if (new SharedPreferenceManager().getPreferences(ListCustomerActivity.this, "roles").equals("expedition")) {
                     selected_item = getResources().getStringArray(R.array.general_expedition)[groupPosition];
-                } else if (new SharedPreferenceManager().getPreferences(ListCustomerActivity.this, "roles").equals("")){
+                } else if (new SharedPreferenceManager().getPreferences(ListCustomerActivity.this, "roles").equals("")) {
                     selected_item = getResources().getStringArray(R.array.general_guest)[groupPosition];
                 }
 
@@ -390,7 +366,7 @@ public class ListCustomerActivity extends AppCompatActivity {
         });
     }
 
-    private void logout(){
+    private void logout() {
         new SharedPreferenceManager().setPreferences(ListCustomerActivity.this, "is_login", "");
         new SharedPreferenceManager().setPreferences(ListCustomerActivity.this, "token", "");
         new SharedPreferenceManager().setPreferences(ListCustomerActivity.this, "customer_decode", "");

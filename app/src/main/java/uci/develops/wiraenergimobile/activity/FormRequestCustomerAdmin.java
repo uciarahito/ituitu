@@ -44,9 +44,13 @@ import retrofit2.Response;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.adapter.CustomExpandableListAdapter;
 import uci.develops.wiraenergimobile.adapter.CustomerDialogAdapter;
+import uci.develops.wiraenergimobile.fragment.FragmentFormCustomerContactInfo;
+import uci.develops.wiraenergimobile.fragment.FragmentFormReqCustAdminCompanyInfo;
+import uci.develops.wiraenergimobile.fragment.FragmentFormReqCustAdminContactInfo;
 import uci.develops.wiraenergimobile.fragment.navigation.NavigationManager;
 import uci.develops.wiraenergimobile.helper.Constant;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
+import uci.develops.wiraenergimobile.model.CustomerAddressModel;
 import uci.develops.wiraenergimobile.model.CustomerModel;
 import uci.develops.wiraenergimobile.model.ExpandableListDataSource;
 import uci.develops.wiraenergimobile.model.UserXModel;
@@ -101,10 +105,10 @@ public class FormRequestCustomerAdmin extends AppCompatActivity implements View.
         setSupportActionBar(toolbar);
 
         ButterKnife.bind(this);
-        customerModel_temp = new CustomerModel();
         initializeComponent();
-        navDrawer();
+        customerModel_temp = new CustomerModel();
 
+        navDrawer();
         if (savedInstanceState == null) {
             selectFirstItemAsDefault();
         }
@@ -132,6 +136,9 @@ public class FormRequestCustomerAdmin extends AppCompatActivity implements View.
         layout_button_reject.setOnClickListener(this);
     }
 
+    CustomerModel customerModel = new CustomerModel();
+    boolean is_not_empty = false;
+
     @Override
     public void onClick(View v) {
         if (v == layout_tab_company_info) {
@@ -139,67 +146,112 @@ public class FormRequestCustomerAdmin extends AppCompatActivity implements View.
             linearLayouts_fragment[1].setVisibility(View.GONE);
             linearLayouts_fragment[2].setVisibility(View.GONE);
 
+            FragmentFormReqCustAdminCompanyInfo fragmentFormReqCustAdminCompanyInfo = (FragmentFormReqCustAdminCompanyInfo) getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_company_info);
+            customerModel = fragmentFormReqCustAdminCompanyInfo.getFormValue();
+
             layout_tab_company_info.setBackgroundResource(R.drawable.rounded_rectangle_orange);
             layout_tab_contact_info.setBackgroundResource(R.drawable.rounded_rectangle_dark_gray);
             layout_tab_shipping_to.setBackgroundResource(R.drawable.rounded_rectangle_dark_gray);
         }
+
         if (v == layout_tab_contact_info) {
             linearLayouts_fragment[0].setVisibility(View.GONE);
             linearLayouts_fragment[1].setVisibility(View.VISIBLE);
             linearLayouts_fragment[2].setVisibility(View.GONE);
 
+            FragmentFormReqCustAdminContactInfo fragmentFormReqCustAdminContactInfo = (FragmentFormReqCustAdminContactInfo) getSupportFragmentManager().findFragmentById(R.id.fragment_form_customer_contact_info);
+            customerModel = fragmentFormReqCustAdminContactInfo.getFormValue();
+
             layout_tab_company_info.setBackgroundResource(R.drawable.rounded_rectangle_dark_gray);
             layout_tab_contact_info.setBackgroundResource(R.drawable.rounded_rectangle_orange);
             layout_tab_shipping_to.setBackgroundResource(R.drawable.rounded_rectangle_dark_gray);
         }
+
         if (v == layout_tab_shipping_to) {
             linearLayouts_fragment[0].setVisibility(View.GONE);
             linearLayouts_fragment[1].setVisibility(View.GONE);
             linearLayouts_fragment[2].setVisibility(View.VISIBLE);
 
+            is_not_empty = true;
+
             layout_tab_company_info.setBackgroundResource(R.drawable.rounded_rectangle_dark_gray);
             layout_tab_contact_info.setBackgroundResource(R.drawable.rounded_rectangle_dark_gray);
             layout_tab_shipping_to.setBackgroundResource(R.drawable.rounded_rectangle_orange);
         }
+
         if (v == layout_button_reject) {
             showCustomDialogCustomerUsername();
         }
+
         if (v == layout_button_approve) {
             showProgressLoading();
 
             Call<ApproveResponse> approveResponseCall = RestClient.getRestClient().customerApproveActive("Bearer " +
                             new SharedPreferenceManager().getPreferences(FormRequestCustomerAdmin.this, "token"),
-                    new SharedPreferenceManager().getPreferences(FormRequestCustomerAdmin.this, "customer_decode"));
+                    "" + FormRequestCustomerAdmin.customerModel_temp.getDecode());
             approveResponseCall.enqueue(new Callback<ApproveResponse>() {
                 @Override
                 public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                     if (response.isSuccessful()) {
-                        Call<UserResponse> userResponseCall = RestClient.getRestClient().getUser("Bearer " +
-                                        new SharedPreferenceManager().getPreferences(FormRequestCustomerAdmin.this, "token"),
-                                Integer.parseInt(new SharedPreferenceManager().getPreferences(FormRequestCustomerAdmin.this, "customer_user_id")));
-                        userResponseCall.enqueue(new Callback<UserResponse>() {
+                        /**
+                         * Company info
+                         */
+                        Call<ApproveResponse> approveResponseCallCompany = RestClient.getRestClient().sendDataCompanyInfo("Bearer " + new SharedPreferenceManager().getPreferences(FormRequestCustomerAdmin.this, "token"),
+                                "" + FormRequestCustomerAdmin.customerModel_temp.getDecode(), "" + FormRequestCustomerAdmin.customerModel_temp.getCode(), "" + FormRequestCustomerAdmin.customerModel_temp.getFirst_name(), "" + FormRequestCustomerAdmin.customerModel_temp.getLast_name(),
+                                "" + FormRequestCustomerAdmin.customerModel_temp.getAddress(), "" + FormRequestCustomerAdmin.customerModel_temp.getCity(), "" + FormRequestCustomerAdmin.customerModel_temp.getProvince(), "" + FormRequestCustomerAdmin.customerModel_temp.getPhone(),
+                                "" + FormRequestCustomerAdmin.customerModel_temp.getMobile(), "" + FormRequestCustomerAdmin.customerModel_temp.getFax(), "" + FormRequestCustomerAdmin.customerModel_temp.getTerm(), "" + FormRequestCustomerAdmin.customerModel_temp.getGroup(),
+                                "" + FormRequestCustomerAdmin.customerModel_temp.getValuta(), "" + FormRequestCustomerAdmin.customerModel_temp.getNpwp(), FormRequestCustomerAdmin.customerModel_temp.getTax().equals("1") ? "1" : "0", "" + FormRequestCustomerAdmin.customerModel_temp.getEmail(),
+                                "" + FormRequestCustomerAdmin.customerModel_temp.getWebsite(), "" + FormRequestCustomerAdmin.customerModel_temp.getNote(), "" + FormRequestCustomerAdmin.customerModel_temp.getPostcode());
+                        approveResponseCallCompany.enqueue(new Callback<ApproveResponse>() {
                             @Override
-                            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
                                 if (response.isSuccessful()) {
-                                    if (response.body().getData().getRegistration_key() != null) {
-                                        hideProgressLoading();
-                                        Toast.makeText(FormRequestCustomerAdmin.this, "Approve request successfull", Toast.LENGTH_SHORT).show();
-                                        Log.e("FormCustomer", "" + response.body().getData().getRegistration_key());
-                                        Constant.sendNotification(response.body().getData().getRegistration_key(), "Request anda telah di setujui", "approve_customer");
-                                        Intent intent = new Intent(FormRequestCustomerAdmin.this, HomeActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    }
+                                    Toast.makeText(FormRequestCustomerAdmin.this, "Successfully insert company info", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Log.e("FormReqCusAdmin", "" + response.errorBody().toString());
+                                    hideProgressLoading();
+                                    Toast.makeText(FormRequestCustomerAdmin.this, "" + response.errorBody().toString(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(FormRequestCustomerAdmin.this, "Not successfull company", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
                             @Override
-                            public void onFailure(Call<UserResponse> call, Throwable t) {
+                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
                                 hideProgressLoading();
+                                Log.e("FormReqCusAdmin", "Failure" + t.getMessage());
                             }
                         });
 
-                        Intent intent = new Intent(FormRequestCustomerAdmin.this, HomeActivity.class);
+                        /**
+                         * Contact info
+                         */
+                        Call<ApproveResponse> approveResponseCallContact = RestClient.getRestClient().sendDataContactInfo("Bearer " + new SharedPreferenceManager().getPreferences(FormRequestCustomerAdmin.this, "token"),
+                                "" + FormRequestCustomerAdmin.customerModel_temp.getDecode(), FormRequestCustomerAdmin.customerModel_temp.getName1(), FormRequestCustomerAdmin.customerModel_temp.getName2(), FormRequestCustomerAdmin.customerModel_temp.getName3(),
+                                FormRequestCustomerAdmin.customerModel_temp.getPhone1(), FormRequestCustomerAdmin.customerModel_temp.getPhone2(), FormRequestCustomerAdmin.customerModel_temp.getPhone3(), FormRequestCustomerAdmin.customerModel_temp.getMobile1(), FormRequestCustomerAdmin.customerModel_temp.getMobile2(), FormRequestCustomerAdmin.customerModel_temp.getMobile3(),
+                                FormRequestCustomerAdmin.customerModel_temp.getEmail1(), FormRequestCustomerAdmin.customerModel_temp.getEmail2(), FormRequestCustomerAdmin.customerModel_temp.getEmail3(), FormRequestCustomerAdmin.customerModel_temp.getJabatan1(), FormRequestCustomerAdmin.customerModel_temp.getJabatan2(), FormRequestCustomerAdmin.customerModel_temp.getJabatan3());
+                        approveResponseCallContact.enqueue(new Callback<ApproveResponse>() {
+                            @Override
+                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                                if (response.isSuccessful()) {
+                                    hideProgressLoading();
+                                    Toast.makeText(FormRequestCustomerAdmin.this, "Successfully insert contact info", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Log.e("FormCustomer", "" + response.errorBody().toString());
+                                    hideProgressLoading();
+                                    Toast.makeText(FormRequestCustomerAdmin.this, "" + response.errorBody().toString(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(FormRequestCustomerAdmin.this, "Not successfull contact", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
+                                hideProgressLoading();
+                                Log.e("FormCustomer", "Failure" + t.getMessage());
+
+                            }
+                        });
+
+                        Intent intent = new Intent(FormRequestCustomerAdmin.this, ListCustomerActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
@@ -214,10 +266,12 @@ public class FormRequestCustomerAdmin extends AppCompatActivity implements View.
                     Toast.makeText(FormRequestCustomerAdmin.this, "Unable to approve request", Toast.LENGTH_SHORT).show();
                 }
             });
+
         }
     }
 
     boolean is_new_customer = false;
+
     private void showCustomDialogCustomerUsername() {
         final Dialog dialog_customer_register_type = new Dialog(FormRequestCustomerAdmin.this);
         dialog_customer_register_type.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -238,7 +292,6 @@ public class FormRequestCustomerAdmin extends AppCompatActivity implements View.
         button_dialog_delete_username.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //showCustomDialogListCustomer();
                 /**
                  * Access delete username
                  */

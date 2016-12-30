@@ -25,6 +25,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +34,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import uci.develops.wiraenergimobile.R;
 
-public class FragmentDashboardHppMargin extends Fragment implements View.OnClickListener,
-        OnChartGestureListener, OnChartValueSelectedListener {
+public class FragmentDashboardHppMargin extends Fragment{
     @BindView(R.id.textView_average_price_all) TextView textView_average_price_all;
     @BindView(R.id.textView_average_price_per) TextView textView_average_price_per;
     @BindView(R.id.textView_average_margin) TextView textView_average_margin;
@@ -58,8 +58,9 @@ public class FragmentDashboardHppMargin extends Fragment implements View.OnClick
         View view;
         view = inflater.inflate(R.layout.fragment_dashboard_hpp_margin, container, false);
         ButterKnife.bind(this, view);
-        initializeComponent(view);
         loadDataLineChart();
+
+        initializeComponent(view);
         return view;
     }
 
@@ -75,11 +76,48 @@ public class FragmentDashboardHppMargin extends Fragment implements View.OnClick
 //        spinner_warehouse.setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View v) {
+    //code utk linechart
+    private void loadDataLineChart(){
+        ArrayList<Entry> entries = new ArrayList<>();
+        entries.add(new Entry(4.f, 0));
+        entries.add(new Entry(8f, 1));
+        entries.add(new Entry(6f, 2));
+        entries.add(new Entry(2f, 3));
+        entries.add(new Entry(18f, 4));
+        entries.add(new Entry(2f, 5));
+        entries.add(new Entry(5f, 6));
+        entries.add(new Entry(14f, 7));
+        entries.add(new Entry(8f, 8));
+        entries.add(new Entry(10f, 9));
+        entries.add(new Entry(17f, 10));
+        entries.add(new Entry(9f, 11));
 
+        LineDataSet dataset = new LineDataSet(entries, "# of Calls");
+
+        ArrayList<String> labels = new ArrayList<String>();
+        labels.add("Jan");
+        labels.add("Feb");
+        labels.add("Mar");
+        labels.add("Apr");
+        labels.add("May");
+        labels.add("Jun");
+        labels.add("Jul");
+        labels.add("Aug");
+        labels.add("Sep");
+        labels.add("Oct");
+        labels.add("Nov");
+        labels.add("Dec");
+
+        LineData data = new LineData(labels, dataset);
+        dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+//        dataset.setDrawCubic(true);
+        dataset.setDrawFilled(true);
+
+        mChart.setData(data);
+        mChart.animateY(5000);
     }
 
+    /*
     //code utk linechart
     private void loadDataLineChart(){
         //code utk lineChart
@@ -260,5 +298,7 @@ public class FragmentDashboardHppMargin extends Fragment implements View.OnClick
     public void onNothingSelected() {
         Log.i("Nothing selected", "Nothing selected.");
     }
+
+    */
 
 }

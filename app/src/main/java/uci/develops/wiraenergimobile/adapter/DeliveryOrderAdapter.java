@@ -18,7 +18,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import uci.develops.wiraenergimobile.R;
 import uci.develops.wiraenergimobile.activity.FormRequestDeliveryOrderActivity;
-import uci.develops.wiraenergimobile.activity.FormRequestPurchaseOrderActivity;
 
 /**
  * Created by ArahitoPC on 10/24/2016.
@@ -39,7 +38,7 @@ public class DeliveryOrderAdapter extends RecyclerView.Adapter<DeliveryOrderAdap
         @BindView(R.id.textView_do_date)
         TextView textView_do_date;
         @BindView(R.id.textView_send_date) TextView textView_send_date;
-        @BindView(R.id.textView_unit_delivery) TextView textView_unit_delivery;
+        @BindView(R.id.textView_qty_delivery) TextView textView_unit_delivery;
         @BindView(R.id.imageView_edit)
         ImageView imageView_edit;
         @BindView(R.id.imageView_delete)

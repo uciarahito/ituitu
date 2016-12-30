@@ -39,8 +39,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import uci.develops.wiraenergimobile.R;
 
-public class FragmentDashboardSalesCustomer extends Fragment implements
-        OnChartGestureListener, OnChartValueSelectedListener {
+public class FragmentDashboardSalesCustomer extends Fragment {
     @BindView(R.id.textView_sales_order) TextView textView_sales_order;
     @BindView(R.id.textView_average_sales_price) TextView textView_average_sales_price;
     @BindView(R.id.textView_delivey_order) TextView textView_delivey_order;
@@ -67,6 +66,7 @@ public class FragmentDashboardSalesCustomer extends Fragment implements
         ButterKnife.bind(this, view);
         loadDataBarChart();
         loadDataLineChart();
+
         return view;
     }
 
@@ -102,7 +102,7 @@ public class FragmentDashboardSalesCustomer extends Fragment implements
         theDataes.add("Dec");
 
         BarData theData = new BarData(theDataes, barDataSet);
-        barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        barDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
         barChart.setData(theData);
         barChart.animateY(3000);
 
@@ -118,6 +118,48 @@ public class FragmentDashboardSalesCustomer extends Fragment implements
         horizontalBarChart.setScaleEnabled(false);
     }
 
+    //code utk linechart
+    private void loadDataLineChart(){
+        ArrayList<Entry> entries = new ArrayList<>();
+        entries.add(new Entry(4.f, 0));
+        entries.add(new Entry(8f, 1));
+        entries.add(new Entry(6f, 2));
+        entries.add(new Entry(2f, 3));
+        entries.add(new Entry(18f, 4));
+        entries.add(new Entry(2f, 5));
+        entries.add(new Entry(5f, 6));
+        entries.add(new Entry(14f, 7));
+        entries.add(new Entry(8f, 8));
+        entries.add(new Entry(10f, 9));
+        entries.add(new Entry(17f, 10));
+        entries.add(new Entry(9f, 11));
+
+        LineDataSet dataset = new LineDataSet(entries, "# of Calls");
+
+        ArrayList<String> labels = new ArrayList<String>();
+        labels.add("Jan");
+        labels.add("Feb");
+        labels.add("Mar");
+        labels.add("Apr");
+        labels.add("May");
+        labels.add("Jun");
+        labels.add("Jul");
+        labels.add("Aug");
+        labels.add("Sep");
+        labels.add("Oct");
+        labels.add("Nov");
+        labels.add("Dec");
+
+        LineData data = new LineData(labels, dataset);
+        dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+//        dataset.setDrawCubic(true);
+        dataset.setDrawFilled(true);
+
+        mChart.setData(data);
+        mChart.animateY(5000);
+    }
+
+    /*
     //code utk linechart
     private void loadDataLineChart(){
         //code utk lineChart
@@ -299,5 +341,6 @@ public class FragmentDashboardSalesCustomer extends Fragment implements
     public void onNothingSelected() {
         Log.i("Nothing selected", "Nothing selected.");
     }
+    */
 
 }

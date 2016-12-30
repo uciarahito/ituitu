@@ -81,18 +81,21 @@ public class FragmentProfileCustomerCompanyInfo extends Fragment {
                         textView_id.setText(customerModel.getDecode() == null ? "" : customerModel.getDecode());
                         textView_name.setText(customerModel.getFirst_name() == null ? "" : customerModel.getFirst_name());
                         textView_address.setText(customerModel.getAddress() == null ? "" : customerModel.getAddress());
-                        textView_city.setText(customerModel.getCity() == null ? "" : customerModel.getCity());
-                        textView_province.setText(customerModel.getProvince() == null ? "" : customerModel.getProvince());
+                        textView_zip_code.setText(customerModel.getPostcode() == null ? "" : customerModel.getPostcode());
                         textView_phone.setText(customerModel.getPhone() == null ? "" : customerModel.getPhone());
                         textView_mobile.setText(customerModel.getMobile() == null ? "" : customerModel.getMobile());
                         textView_fax.setText(customerModel.getFax() == null ? "" : customerModel.getFax());
                         textView_term.setText(customerModel.getTerm() == null ? "" : customerModel.getTerm());
-                        textView_valuta.setText(customerModel.getValuta() == null ? "" : customerModel.getValuta());
                         textView_npwp.setText(customerModel.getNpwp() == null ? "" : customerModel.getNpwp());
                         textView_email.setText(customerModel.getEmail() == null ? "" : customerModel.getEmail());
                         textView_website.setText(customerModel.getWebsite() == null ? "" : customerModel.getWebsite());
                         textView_note.setText(customerModel.getNote() == null ? "" : customerModel.getNote());
-                        textView_zip_code.setText(customerModel.getPostcode() == null ? "" : customerModel.getPostcode());
+                        textView_city.setText(customerModel.getCity() == null ? "" : customerModel.getCity());
+                        textView_province.setText(customerModel.getProvince() == null ? "" : customerModel.getProvince());
+                        textView_valuta.setText(customerModel.getValuta() == null ? "" : customerModel.getValuta());
+                        textView_tax_ppn.setText(customerModel.getTax() == null ? "" : customerModel.getTax());
+                        textView_group.setText(customerModel.getGroup() == null ? "" : customerModel.getGroup());
+
                     }
                 }
             }

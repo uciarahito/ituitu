@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -70,56 +71,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         ButterKnife.bind(this);
         initializeComponent();
         loadData();
-
-//        try {
-//            JSONObject obj = new JSONObject(loadJSONFromAsset());
-//            JSONArray m_jArry = obj.getJSONArray("formules");
-//            ArrayList<HashMap<String, String>> formList = new ArrayList<HashMap<String, String>>();
-//            HashMap<String, String> m_li;
-//
-//            for (int i = 0; i < m_jArry.length(); i++) {
-//                JSONObject jo_inside = m_jArry.getJSONObject(i);
-//                Log.d("Details-->", jo_inside.getString("formule"));
-//                String formula_value = jo_inside.getString("formule");
-//                String url_value = jo_inside.getString("url");
-//
-//                //Add your values in your `ArrayList` as below:
-//                m_li = new HashMap<String, String>();
-//                m_li.put("formule", formula_value);
-//                m_li.put("url", url_value);
-//
-//                formList.add(m_li);
-//            }
-//
-//            Log.e("JSON", ""+loadJSONFromAsset());
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-
         isLogin();
-
-        //jsonya udah tampil ban, tinggal konversinya
-        // method yang di atas masih error
-
     }
-
-//    public String loadJSONFromAsset() {
-//        String json = null;
-//        try {
-//            InputStream is = getAssets().open("city.json");
-//            int size = is.available();
-//            byte[] buffer = new byte[size];
-//            is.read(buffer);
-//            is.close();
-//            json = new String(buffer, "UTF-8");
-//        } catch (IOException ex) {
-//            Log.e("Exeption", "exception");
-//            ex.printStackTrace();
-//            return null;
-//        }
-//        Toast.makeText(this, ""+json, Toast.LENGTH_SHORT).show();
-//        return json;
-//    }
 
     private void isLogin() {
         try {
@@ -191,9 +144,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 textView_error_password.setVisibility(View.GONE);
                 empty_password = false;
             }
+            showProgressLoading();
 
             if (!empty_email && !empty_password) {
-                showProgressLoading();
 
                 registration_key = generateUnique_id();
                 Call<LoginResponse> loginResponseCall = RestClient.getRestClient().Login(email, password, registration_key);

@@ -12,6 +12,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,6 +21,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -38,6 +40,7 @@ import uci.develops.wiraenergimobile.helper.DividerItemDecoration;
 import uci.develops.wiraenergimobile.helper.SharedPreferenceManager;
 import uci.develops.wiraenergimobile.model.CustomerAddressModel;
 import uci.develops.wiraenergimobile.response.ApproveResponse;
+import uci.develops.wiraenergimobile.response.CustomerAddressResponse;
 import uci.develops.wiraenergimobile.response.ListCustomerAddressResponse;
 import uci.develops.wiraenergimobile.service.RestClient;
 
@@ -104,11 +107,13 @@ public class FragmentFormCustomerShippingTo extends Fragment {
                         loadData();
                     } else if (broadcastNotification.equals("whatever")) {
                     } else if (broadcastNotification.equals("dismiss_dialog_maps")) {
-                        dialogMaps.dismiss();
-                        editText_map_cordinate.setText("" + addressDialog);
-//                        Toast.makeText(getContext(), "" + latitudeDialog, Toast.LENGTH_SHORT).show();
-//                        Toast.makeText(getContext(), "" + longitudeDialog, Toast.LENGTH_SHORT).show();
-                        editText_map_cordinate.setEnabled(true);
+                        try {
+                            dialogMaps.dismiss();
+                            editText_map_cordinate.setText("" + addressDialog);
+                            editText_map_cordinate.setEnabled(true);
+                        } catch (Exception e){
+
+                        }
                     }
                 } else {
                 }
@@ -124,8 +129,56 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         return view;
     }
 
-    Dialog dialogMaps;
+    public interface ClickListener {
+        void onClick(View view, int position);
 
+        void onLongClick(View view, int position);
+    }
+
+    public static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+
+        private GestureDetector gestureDetector;
+        private FragmentFormCustomerCompanyInfo.ClickListener clickListener;
+
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final FragmentFormCustomerCompanyInfo.ClickListener clickListener) {
+            this.clickListener = clickListener;
+            gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    return true;
+                }
+
+                @Override
+                public void onLongPress(MotionEvent e) {
+                    View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
+                    if (child != null && clickListener != null) {
+                        clickListener.onLongClick(child, recyclerView.getChildAdapterPosition(child));
+                    }
+                }
+            });
+        }
+
+        @Override
+        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            View child = rv.findChildViewUnder(e.getX(), e.getY());
+            if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
+                clickListener.onClick(child, rv.getChildAdapterPosition(child));
+            }
+            return false;
+        }
+
+        @Override
+        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+        }
+
+        @Override
+        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+        }
+    }
+
+    Dialog dialogMaps;
     void showDialogMaps() {
         dialogMaps = new Dialog(getContext());
         dialogMaps.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -172,6 +225,7 @@ public class FragmentFormCustomerShippingTo extends Fragment {
     //utk dialog add shipping
     private EditText editText_customer_code, editText_pic_name, editText_address_name, editText_address, editText_phone, editText_mobile, editText_map_cordinate;
     private Button button_save, button_cancel;
+    private LinearLayout linear_layout_map;
     Dialog dialog_add_shipping;
     String latlong = "";
 
@@ -189,13 +243,18 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         editText_mobile = ButterKnife.findById(dialog_add_shipping, R.id.editText_mobile);
         button_save = ButterKnife.findById(dialog_add_shipping, R.id.button_save);
         button_cancel = ButterKnife.findById(dialog_add_shipping, R.id.button_cancel);
+        linear_layout_map = ButterKnife.findById(dialog_add_shipping, R.id.linear_layout_map);
 
         editText_customer_code.setText("" + new SharedPreferenceManager().getPreferences(getActivity().getApplicationContext(), "customer_decode"));
         editText_customer_code.setEnabled(false);
 
+        // in web has been hidden
+        linear_layout_map.setVisibility(View.GONE);
+
         editText_map_cordinate.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                Toast.makeText(getContext(), "Clicked", Toast.LENGTH_SHORT).show();
                 editText_map_cordinate.setEnabled(false);
                 showDialogMaps();
                 return false;
@@ -211,41 +270,43 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         dialog_add_shipping.setCancelable(true);
         dialog_add_shipping.show();
 
-        button_save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isNotEmpty()) {
-                    latlong = latitudeDialog + "," + longitudeDialog;
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("address_name", editText_address.getText().toString());
-                    params.put("address", editText_address.getText().toString());
-                    params.put("pic", editText_pic_name.getText().toString());
-                    params.put("phone", editText_phone.getText().toString());
-                    params.put("mobile", editText_mobile.getText().toString());
+            button_save.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (isNotEmpty()) {
+                        latlong = latitudeDialog + "" + longitudeDialog;
+//                        latlong = latitudeDialog + "," + longitudeDialog;
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("name", editText_address_name.getText().toString());
+                        params.put("address", editText_address.getText().toString());
+                        params.put("pic", editText_pic_name.getText().toString());
+                        params.put("phone", editText_phone.getText().toString());
+                        params.put("mobile", editText_mobile.getText().toString());
 //                    params.put("map", editText_map_cordinate.getText().toString());
-                    params.put("map", latlong);
-                    Call<ApproveResponse> addShippingAddressCall = RestClient.getRestClient().createCustomerAddress("Bearer " + token, decode, params);
-                    addShippingAddressCall.enqueue(new Callback<ApproveResponse>() {
-                        @Override
-                        public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
-                            if (response.isSuccessful()) {
-                                Toast.makeText(getContext(), "Sukses", Toast.LENGTH_SHORT).show();
-                                loadData();
-                                dialog_add_shipping.dismiss();
+                        params.put("map", latlong);
+
+                        Call<ApproveResponse> addShippingAddressCall = RestClient.getRestClient().createCustomerAddress("Bearer " + token, decode, params);
+                        addShippingAddressCall.enqueue(new Callback<ApproveResponse>() {
+                            @Override
+                            public void onResponse(Call<ApproveResponse> call, Response<ApproveResponse> response) {
+                                if (response.isSuccessful()) {
+                                    Toast.makeText(getContext(), "Sukses", Toast.LENGTH_SHORT).show();
+                                    loadData();
+                                    Toast.makeText(getContext(), "Ceeeeeeeekkkkk", Toast.LENGTH_SHORT).show();
+                                    dialog_add_shipping.dismiss();
+                                }
                             }
-                        }
 
-                        @Override
-                        public void onFailure(Call<ApproveResponse> call, Throwable t) {
+                            @Override
+                            public void onFailure(Call<ApproveResponse> call, Throwable t) {
 
-                        }
-                    });
-                } else {
-                    Toast.makeText(getContext(), "All field are required", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } else {
+                        Toast.makeText(getContext(), "All field are required", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
-
+            });
         button_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -264,7 +325,7 @@ public class FragmentFormCustomerShippingTo extends Fragment {
         map = editText_map_cordinate.getText().toString();
 
         boolean result = false;
-        if (!customer_code.equals("") && !pic_name.equals("") && !address_name.equals("") && !address.equals("") && !phone.equals("") && !mobile.equals("")) {
+        if (!pic_name.equals("") && !address_name.equals("") && !address.equals("") && !phone.equals("") && !mobile.equals("")) {
 
             result = true;
         }

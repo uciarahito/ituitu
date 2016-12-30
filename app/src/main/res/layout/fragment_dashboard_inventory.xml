@@ -38,8 +38,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_stock_24dp"
                         android:gravity="center_horizontal"
+                        android:drawableLeft="@drawable/warehouse"
                         android:text="@string/stock_all_warehouse"
                         android:textSize="@dimen/tab_label"
                         android:textStyle="bold" />
@@ -82,7 +82,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_stock_24dp"
+                        android:drawableLeft="@drawable/per_warehouse"
                         android:gravity="center_horizontal"
                         android:text="@string/stock_per_warehouse"
                         android:textSize="@dimen/tab_label"
@@ -150,7 +150,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_stock_24dp"
+                        android:drawableLeft="@drawable/purchase"
                         android:gravity="center_horizontal"
                         android:text="@string/last_purchase"
                         android:textSize="@dimen/tab_label"
@@ -194,7 +194,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_stock_24dp"
+                        android:drawableLeft="@drawable/shopping"
                         android:gravity="center_horizontal"
                         android:text="@string/last_purchase_from"
                         android:textSize="@dimen/textView_text"

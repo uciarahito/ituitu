@@ -253,22 +253,33 @@
     <string name="name">Name</string>
     <string name="pic_name">PIC Name</string>
     <string name="eta">ETA</string>
-
-
-
     <string name="maps">Map Coordinate</string>
 
-
-
-
-
+    <string name="code">Code</string>
+    <string name="customer">Customer</string>
+    <string name="do_date">DO Date</string>
+    <string name="invoice_code">Invoice Code</string>
+    <string name="invoice_date">Invoice Date</string>
+    <string name="invoice_due_date">Invoice Due Date</string>
+    <string name="invoice_amount">Invoice Amount</string>
+    <string name="invoice_term">Invoice Term (Days)</string>
+    <string name="invoice">INVOICE</string>
+    <string name="payment">PAYMENT</string>
+    <string name="payment_date">Payment Date</string>
+    <string name="payment_amount">Payment Amount</string>
+    <string name="do_code">DO Code</string>
+    <string name="expedition">Expedition</string>
+    <string name="delivery_date">Delivery Date</string>
+    <string name="delivery_qty">Delivery Qty</string>
+    <string name="list_payment">List Payment</string>
+    <string name="termin">Term</string>
 
 
     <string name="spinner_group">List of Group</string>
 
     <string name="qty_no">QT No:</string>
     <string name="qty_date">QT Date:</string>
-    <string name="customer">Customer:</string>
+
 
     <string name="due_date">Due Date:</string>
 
